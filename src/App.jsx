@@ -1,6 +1,8 @@
+import RouterApp from "./router/RouterApp"
+
 function App() {
   return (
-    <h1 className = "main">"Hello world!"</h1>
+    <RouterApp />
   )
 }
 
