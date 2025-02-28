@@ -1,8 +1,8 @@
-import RouterApp from "./router/RouterApp"
+import RouterApp from "./router/RouterApp.jsx";
 
 function App() {
   return (
-    <RouterApp />
+    <RouterApp/>
   )
 }
 
