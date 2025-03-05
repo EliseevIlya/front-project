@@ -1,0 +1,9 @@
+.confirmationpage {
+    position: relative;
+    padding: 20px;
+}
+
+.confirmationinstallation-text {
+    text-align: center;
+    color:#FF8000;
+}

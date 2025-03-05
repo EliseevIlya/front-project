@@ -7,26 +7,27 @@ body {
     height: 100vh;
 }
 
-.headerloginpage {
+.org_loginpageheader {
     background-color: #ffffff;
     color: #318EA8; 
     text-align: center; 
     padding: 30px;
 }
 
-.divloginpage {
+.org_loginpage {
     background-color: #ffffff;
     border-radius: 8px;
-    padding: 15px;
+    padding: 10px;
 }
 
-.input-containerloginpage {
+.input-container {
     border-radius: 10px;
     display: flex;
-    align-items: center; 
+    align-items: center;
+    gap: 10px;
 }
 
-.input-containerloginpage h4 {
+.input-container h4 {
     border-radius: 10px;
     font-size: 18px;
     color: #318EA8;
@@ -51,6 +52,7 @@ input[type="text"]::placeholder {
 }
 
 button {
+    margin-bottom: 15px;
     border-radius: 10px;
     padding: 15px 25px;
     font-size: 18px;
@@ -59,21 +61,22 @@ button {
     color: white;
     cursor: pointer;
     width: 100%; 
-    box-sizing: border-box; 
+    box-sizing: border-box;
+     
 }
 
 button:hover {
     background-color: #FF8000; 
 }
 
-.footerloginpage {
+.footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 25px;
 }
 
-.footerloginpage h6 {
+.footer h6 {
     border-radius: 10px;
     font-size: 16px;
     color: #318EA8; 
@@ -82,11 +85,11 @@ button:hover {
     text-align: center;
 }
 
-.footerloginpage h6:hover {
+.footer h6:hover {
     text-decoration: underline;
 }
 
-.footerloginpage button {
+.footer button {
     border-radius: 10px;
     width: auto; 
     padding: 15px 25px;
@@ -96,10 +99,23 @@ button:hover {
     background-color: #FF8000; 
 }
 
-.footerloginpage button:hover {
+.footer button:hover {
     background-color: #318EA8; 
 }
 
 .button button:hover {
     background-color: #318EA8; 
+}
+
+.label-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 25px;
+}
+
+.sub-text {
+    font-size: 12px;
+    color: #318EA8;
+    margin-top: 4px;
 }
