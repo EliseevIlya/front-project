@@ -1,12 +1,12 @@
 import "./style.css";
 
-function Washingservice() {
+function Installationservice() {
     return (
         <div className="servicepage">
             <header className="servicepage-header">Выберите услугу</header>
-            <div className="washingmaindiv">
+            <div className="installationmaindiv">
                 <h1 className="service-title">МОЙКА</h1>
-                <div className="washingservicediv">
+                <div className="installationservicediv">
                     <div className="left-column">
                         <div className="washingdiv">
                             <label className="choose-city">Выберите город:</label>
@@ -48,12 +48,12 @@ function Washingservice() {
                         </div>
                     </div>
                 </div>
-                <div className="washingbutton-container">
-                    <button className="washingbutton">Оставить заявку</button>
+                <div className="installationbutton-container">
+                    <button className="installationbutton">Оставить заявку</button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Washingservice;
+export default Installationservice;

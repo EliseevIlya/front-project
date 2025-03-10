@@ -63,9 +63,6 @@ button {
     box-sizing: border-box; 
 }
 
-button:hover {
-    background-color: #FF8000; 
-}
 
 .footer {
     display: flex;

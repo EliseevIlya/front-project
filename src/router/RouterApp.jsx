@@ -12,6 +12,7 @@ import Enteraccpage from "../pages/enteraccpage/enteraccpage.jsx";
 import Servicepage from "../pages/servicepage/servicepage.jsx";
 import Washingservice from "../pages/washingservice/washingservice.jsx";
 import Confirmdeletion from "../pages/confirmdeletion/confirmdeletion.jsx";
+import Installationservice from "../pages/installationservice/installationservice.jsx";
 
 
 export default function RouterApp(){
@@ -30,6 +31,7 @@ export default function RouterApp(){
                 <Route path="/servicepage" element={<Servicepage />}/>
                 <Route path="/washingservice" element={<Washingservice />}/>
                 <Route path="/confirmdeletion" element={<Confirmdeletion />}/>
+                <Route path="/installationservice" element={<Installationservice />}/>
             </Routes>
     )
 }

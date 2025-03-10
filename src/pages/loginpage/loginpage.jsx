@@ -1,6 +1,10 @@
+import { useState } from "react";
 import "./style.css";
 
 function Loginpage() {
+    const [email, setEmail] = useState("");
+    const [code, setCode] = useState("");
+
     return (
         <div className="divloginpage"> 
             <header className="headerloginpage">
@@ -8,13 +12,23 @@ function Loginpage() {
             </header>
             <div className="input-containerloginpage">
                 <h4>E-MAIL:</h4>
-                <input type="text" placeholder="Введите e-mail"></input>
+                <input 
+                    type="text" 
+                    placeholder="Введите e-mail" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}
+                />
             </div>
-            <div className = "button">
+            <div className="button">
                 <button>ПОЛУЧИТЬ КОД</button>
             </div>
             <div className="input-containerloginpage">
-                <input type="text" placeholder="Введите код"></input>
+                <input 
+                    type="text" 
+                    placeholder="Введите код" 
+                    value={code} 
+                    onChange={(e) => setCode(e.target.value)}
+                />
             </div>
             <div className="footerloginpage">
                 <h6>СОЗДАТЬ АККАУНТ</h6>
