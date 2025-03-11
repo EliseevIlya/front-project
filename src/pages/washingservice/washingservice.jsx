@@ -3,7 +3,7 @@ import "./style.css";
 function Washingservice() {
     return (
         <div className="servicepage">
-            <header className="servicepage-header">Выберите услугу</header>
+            <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
             <div className="washingmaindiv">
                 <h1 className="service-title">МОЙКА</h1>
                 <div className="washingservicediv">

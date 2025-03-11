@@ -3,7 +3,7 @@ import "./style.css";
 function Installationservice() {
     return (
         <div className="servicepage">
-            <header className="servicepage-header">Выберите услугу</header>
+            <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
             <div className="installationmaindiv">
                 <h1 className="service-title">МОЙКА</h1>
                 <div className="installationservicediv">

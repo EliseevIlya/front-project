@@ -7,3 +7,11 @@
     text-align: center;
     color:#FF8000;
 }
+
+.confirmation-buttoninstallation{
+    background-color: #FF8000;
+}
+
+.confirmation-buttoninstallation:hover{
+    background-color: #b45f0a;
+}

@@ -12,7 +12,7 @@ function Confirmationwashingpage() {
                 </h3>
             </div>
             <div>
-                <button className="confirmation-button">//место для картинки//</button>
+                <button className="confirmation-buttonwashing">ОК</button>
             </div>
         </div>
     );

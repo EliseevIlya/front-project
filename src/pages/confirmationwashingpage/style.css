@@ -8,3 +8,11 @@
     color:#293C9B;
 }
 
+.confirmation-buttonwashing{
+    background-color: #293C9B;
+}
+
+.confirmation-buttonwashing:hover {
+    background-color: #192970
+}
+

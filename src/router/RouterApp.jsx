@@ -13,6 +13,8 @@ import Servicepage from "../pages/servicepage/servicepage.jsx";
 import Washingservice from "../pages/washingservice/washingservice.jsx";
 import Confirmdeletion from "../pages/confirmdeletion/confirmdeletion.jsx";
 import Installationservice from "../pages/installationservice/installationservice.jsx";
+import PioneerForms from "../pages/pioneerforms/pioneerforms.jsx";
+
 
 
 export default function RouterApp(){
@@ -32,6 +34,7 @@ export default function RouterApp(){
                 <Route path="/washingservice" element={<Washingservice />}/>
                 <Route path="/confirmdeletion" element={<Confirmdeletion />}/>
                 <Route path="/installationservice" element={<Installationservice />}/>
+                <Route path="/pioneerforms" element={<PioneerForms />}/>
             </Routes>
     )
 }

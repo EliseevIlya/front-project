@@ -2,14 +2,14 @@ import "./style.css"
 
 function Servicepage(){
     return (
-        <div className="servicepage">
-        <header className="servicepage-header">ВЫБЕРИТЕ УСЛУГУ</header>
-        <div className="buttons-container">
+        <div className="maindiv">
+      <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
+        <div className="buttons-containerservice">
             <button className="washing">МОЙКА</button>
-        
+
             <button className="installation">ШИНОМОНТАЖ</button>
             </div>
-        </div>  
+        </div> 
     )
 }
 

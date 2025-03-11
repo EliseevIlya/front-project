@@ -1,13 +1,15 @@
 .servicepage {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: #b3d9ea;
+    background-color: #318ea8;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh; 
+    height: 100vh;
+    width: 100vw;
     padding: 20px;
-    box-sizing: border-box; 
-}
+}  
+
+
 
 .installationmaindiv {
     display: flex;
