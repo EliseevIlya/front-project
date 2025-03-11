@@ -1,0 +1,177 @@
+body {
+    font-family: Impact, sans-serif;
+    text-align: center;
+    background: #318ea8;
+    margin: 0;
+    padding: 20px;
+}
+
+.headerservices {
+    margin-top: -5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.textServices {
+    margin-right: 35vw;
+    font-weight: lighter;
+    font-size: 4vw;
+    color: white;
+}
+
+.exitbuttonservices {
+    margin-top: -7vh;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 2vw;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+}
+
+.exitbuttonservices:hover {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    cursor: pointer;
+    font-size: 2vw;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+}
+
+.companyinfo:disabled{
+    font-size: 2vw;
+    background: none;
+    width: 100%;
+    margin-left: 5vw;
+    color: white;
+    border: none;
+    }
+
+.servicesTable {
+    margin-top: 5vh;
+    background-color: rgba(55, 155, 168, 0);
+    border-radius: 20px;
+    border: none;
+    overflow: hidden;
+}
+
+.tableServ {
+    width: 75%;
+    border-collapse: collapse;
+    margin-left: 15vw;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1.5vw;
+    font-weight: lighter;
+    font-family: Impact, sans-serif;
+}
+
+th {
+    background-color: darkorange;
+    color: white;
+}
+
+tr {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.servicesTable input {
+    width: 10vw;
+    height: 3vh;
+}
+
+.buttonServices {
+    background-color: darkorange;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 5vh;
+}
+
+.buttonServices:hover {
+    background-color: white;
+    color: darkorange;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 5vh;
+}
+
+/* Стили для формы добавления новой услуги */
+.newServiceForm {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3vh;
+    margin-left: 12vw;
+    margin-bottom: 1vh;
+    gap: 1vw
+}
+
+.newServiceForm input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1.5vw;
+    width: 15vw;
+    height: 3vh;
+    text-align: center;
+}
+
+.newServiceForm input:focus {
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 0 1px darkorange;
+    border-radius: 20px;
+    font-size: 1.5vw;
+    width: 15vw;
+    height: 3vh;
+    text-align: center;
+}
+
+.deletebuttonServices {
+    width: 3vw;
+    height: 3vw;
+    margin-left: 0.5vw;
+    font-size: 1.5vw;
+    font-weight: lighter;
+    border-radius: 30px;
+    text-align: center;
+    border: none;
+    color: white;
+    background: darkred;
+    cursor: pointer;
+}
+
+.deletebuttonServices:hover {
+    width: 3vw;
+    height: 3vw;
+    margin-left: 0.5vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    background: red;
+    cursor: pointer;
+}
+
+
+
