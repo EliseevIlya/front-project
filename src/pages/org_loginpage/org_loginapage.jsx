@@ -1,17 +1,20 @@
 import { useState } from "react";
 import "./style.css";
 
-function Loginpage() {
+function Org_loginpage() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
 
     return (
-        <div className="divloginpage"> 
-            <header className="headerloginpage">
-                <h1>ВОЙТИ В АККАУНТ</h1>
+        <div className="org_loginpage">
+            <header className="org_loginpageheader">
+                <h1>ОРГАНИЗАЦИЯ - ПАРТНЕР</h1>
             </header>
-            <div className="input-containerloginpage">
-                <h4>E-MAIL:</h4>
+            <div className="input-containerorg">
+                <div className="label-containerorg">
+                    <h4>E-MAIL :</h4>
+                    <h6 className="sub-text">(контактного лица)</h6>
+                </div>
                 <input 
                     type="text" 
                     placeholder="Введите e-mail" 
@@ -22,7 +25,7 @@ function Loginpage() {
             <div className="button">
                 <button>ПОЛУЧИТЬ КОД</button>
             </div>
-            <div className="input-containerloginpage">
+            <div className="input-containerorg">
                 <input 
                     type="text" 
                     placeholder="Введите код" 
@@ -30,12 +33,12 @@ function Loginpage() {
                     onChange={(e) => setCode(e.target.value)}
                 />
             </div>
-            <div className="footerloginpage">
-                <h6>СОЗДАТЬ АККАУНТ</h6>
+            <div className="footer">
+                <h6>СТАТЬ ПАРТНЕРОМ</h6>
                 <button>ВОЙТИ</button>
             </div>
         </div>
     );
 }
 
-export default Loginpage;
+export default Org_loginpage;

@@ -1,0 +1,49 @@
+.header{
+    font-size: calc((3vw + 3vh)/2);
+    color: #ffffff;
+    margin-top: 3%;
+    width: 100%;
+    text-align: center;
+}
+
+.buttons-containerservice {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20vw; 
+    background-color: #318EA8;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.washing, .installation {
+    font-family: Impact, sans-serif;
+    width: 30vw;
+    height: 30vw; 
+    max-width: 500px; 
+    max-height: 500px; 
+    font-size: calc((3vw + 3vh)/2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.washing {
+    background-color: #293C9B;
+}
+
+.installation {
+    background-color: #BD7727;
+}
+
+.washing:hover {
+    background-color: #011266;
+}
+
+.installation:hover {
+    background-color: #e67300;
+}

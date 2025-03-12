@@ -1,0 +1,17 @@
+.confirmationpage {
+    position: relative;
+    padding: 20px;
+}
+
+.confirmationinstallation-text {
+    text-align: center;
+    color:#FF8000;
+}
+
+.confirmation-buttoninstallation{
+    background-color: #FF8000;
+}
+
+.confirmation-buttoninstallation:hover{
+    background-color: #b45f0a;
+}

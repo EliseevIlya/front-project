@@ -1,0 +1,55 @@
+.enteracc {
+    width: 500px; 
+    height: 300px;
+    background-color: #318EA8; 
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+.enteraccpage {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #293C9B; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-enterpage, .password-enterpage {
+    font-size: 30px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.login-textfield, .password-textfield {
+    width: 250px;
+    padding: 10px;
+    border: 2px solid #FF8000;
+    border-radius: 10px;
+    background: white;
+    font-size: 16px;
+    outline: none;
+    display: block;
+    margin: 10px auto;
+}
+
+.enter-enterpage {
+    width: 270px;
+    padding: 12px;
+    background-color: #FF8000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px; 
+}
+
+.enter-enterpage:hover {
+    background-color: #e67300;
+}
