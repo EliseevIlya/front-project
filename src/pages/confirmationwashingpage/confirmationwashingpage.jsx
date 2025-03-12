@@ -1,6 +1,10 @@
 import "./style.css"
-
+import { useNavigate } from "react-router";
 function Confirmationwashingpage() {
+    const navigate = useNavigate()
+    const onConfirmation= ()=>{
+        navigate("/user")
+    }
     return (
         <div className="confirmationpage">
             <header>
@@ -12,7 +16,7 @@ function Confirmationwashingpage() {
                 </h3>
             </div>
             <div>
-                <button className="confirmation-buttonwashing">ОК</button>
+                <button className="confirmation-buttonwashing" onClick={()=>{onConfirmation()}}>ОК</button>
             </div>
         </div>
     );

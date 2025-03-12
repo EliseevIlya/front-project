@@ -1,6 +1,24 @@
 import "./style.css";
+import { useState } from "react";
+import Modal from 'react-modal'
+import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 
 function Washingservice() {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    
+    const openModal = () => {
+      setModalIsOpen(true);
+    };
+    
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
+    const Confirmation = (
+        <div>
+            {<Confirmationwashingpage />}
+            <button onClick={()=>{closeModal()}}>Отмена</button>
+        </div>
+    )
     return (
         <div className="servicepage">
             <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
@@ -49,9 +67,14 @@ function Washingservice() {
                     </div>
                 </div>
                 <div className="washingbutton-container">
-                    <button className="washingbutton">Оставить заявку</button>
+                    <button className="washingbutton"onClick={()=>{openModal()}}>Оставить заявку</button>
                 </div>
             </div>
+            <div>
+                 <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                     {Confirmation}
+                </Modal>
+             </div>
         </div>
     );
 }

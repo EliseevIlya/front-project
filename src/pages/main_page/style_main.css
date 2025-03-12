@@ -4,21 +4,21 @@ body {
     background: #318ea8;
 }
 
-.text {
+.Main .text {
     margin-top: 1vh;
     margin-bottom: 1vh;
     color: white;
     font-size: calc((10vw + 10vh)/2);
 }
 
-.podtext {
+.Main .podtext {
     margin-top: 1vh;
     margin-bottom: 10vh;
     color: white;
     font-size: calc((3vw + 3vh)/2);
 }
 
-button {
+.Main button {
     font-family: Impact, sans-serif;
     background: white;
     color: #318ea8;
@@ -29,7 +29,7 @@ button {
     font-size: calc((3vw + 3vh)/2) ;
 }
 
-button:hover {
+.Main button:hover {
     font-family: Impact, sans-serif;
     background: #318ea8;
     color: #ffffff;

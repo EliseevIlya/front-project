@@ -66,7 +66,7 @@ function UserAcc_page() {
                     </button>
                 </div>
                 <div className="applications">
-                    <button className="viewbutton" onClick={() => navigate("/apps_page")}>Заявки</button>
+                    <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
                 </div>
             </div>
         </div>
