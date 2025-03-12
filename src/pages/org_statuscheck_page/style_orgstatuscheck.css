@@ -1,0 +1,360 @@
+html{
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Impact, sans-serif;
+    text-align: center;
+    background: #318ea8;
+}
+
+.headersorgSC {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .textSC{
+        font-weight: lighter;
+        font-size: calc((4vw + 4vh)/2);
+        color: white;
+        margin-right: 5vw;
+        margin-top: -7vh;
+    }
+    .deletebuttonSC {
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 0, 0, 0.5);
+        cursor: pointer;
+        font-size: 2vw;
+        width: 10vw;
+        height: 5vh;
+        border-radius: 5px;
+        margin-bottom: 15vh;
+    }
+    .deletebuttonSC:hover {
+        border: none;
+        background-color: rgb(255, 0, 0);
+        color: white;
+        cursor: pointer;
+        font-size: 2vw;
+        width: 10vw;
+        height: 5vh;
+        border-radius: 20px;
+    }
+    .exitbuttonSC {
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        font-size: calc((3vw + 3vh)/2);
+        width: 10vw;
+        height: 5vh;
+        border-radius: 5px;
+        margin-bottom: 15vh;
+    }
+    .exitbuttonSC:hover {
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: white;
+        cursor: pointer;
+        font-size: calc((3vw + 3vh)/2);
+        width: 10vw;
+        height: 5vh;
+        border-radius: 5px;
+        margin-bottom: 15vh;
+    }
+}
+
+.statusplate {
+    margin-top: -10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    label{
+        color: white;
+        font-size: calc((2vw + 2vh)/2);
+    }
+    input[type="text"]{
+        margin-left: 0.5vw;
+        background-color: darkcyan;
+        color: white;
+        border: white solid 1px;
+        outline: none;
+        font-size: calc((2vw + 2vh)/2);
+        font-family: Impact, sans-serif;
+        text-align: center;
+        width: 10vw;
+        height: 5vh;
+    }
+}
+
+.status{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10vw;
+}
+
+.reasonbutton{
+    width: 7vw;
+    height: 5vh;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: greenyellow;
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.reasonbutton:hover{
+    width: 7vw;
+    height: 5vh;
+    border: none;
+    background-color: greenyellow;
+    color: rgb(0, 0, 0);
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.dates {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-right: 14.3vw;
+}
+
+.daterequest, .dateresponse {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.registrationSC {
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    margin: 0 auto;
+}
+
+.orginfoSC, .contactinfoSC {
+    background: #318ea8;
+    border: none;
+    color: rgba(255, 255, 255, 0.49);
+    text-align: left;
+}
+
+.orginfoSC {
+    margin-left: 10vw;
+}
+.contactinfoSC {
+    margin-left: 10vw;
+}
+
+h2 {
+    margin-bottom: 2vh;
+    font-size: calc((2vw + 2vh)/2);
+    font-weight: lighter;
+}
+
+.orginfoitemSC, .contactinfoSC > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+
+
+label {
+    font-size: calc((2vw + 2vh)/2);
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 4vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+}
+
+input[type="text"]:focus {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 4vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+}
+
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 10vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+}
+
+textarea:focus {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 10vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+}
+
+.buttonplateSC {
+    display: grid;
+    justify-content: start;
+}
+
+.editbuttonSC {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkorange;
+    border: none;
+    border-radius: 20px;
+    margin-top: -7vh;
+}
+
+.editbuttonSC:hover {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkblue;
+    border: none;
+    border-radius: 20px;
+}
+
+.repeatbuttonSC {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkorange;
+    border: none;
+    border-radius: 20px;
+    margin-top: -7vh;
+}
+
+.repeatbuttonSC:hover {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkblue;
+    border: none;
+    border-radius: 20px;
+}
+
+.accbuttonSC {
+    margin-right: 10vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkorange;
+    border: none;
+    border-radius: 20px;
+    margin-top: -7vh;
+}
+
+.accbuttonSC:hover {
+    margin-right: 10vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkblue;
+    border: none;
+    border-radius: 20px;
+}
+
+.accbuttonSC:disabled {
+    margin-right: 10vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkcyan;
+    border: white 1px solid;
+    border-radius: 20px;
+}
+
+.modalSC {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalSC-content {
+    background: #fff;
+    padding: 2vh;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 20vw;
+    text-align: center;
+    position: relative;
+}
+
+.closemodalSC {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5vw;
+    cursor: pointer;
+    color: #333;
+}
+
+.closemodalSC:hover {
+    color: red;
+}
+
+.reason-textarea {
+    width: 90%;
+    height: 15vh;
+    padding: 2vh;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    font-size: 1vw;
+    background-color: #f5f5f5;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,178 @@
+body {
+    font-family: Impact, sans-serif;
+    text-align: center;
+    background: #318ea8;
+}
+
+.headersorg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    .textorg{
+        margin-right: 40vw;
+        font-size: calc((4vw + 4vh)/2);
+        color: white;
+        margin-top: -5vh;
+        font-weight: lighter;
+    }
+    .exitbutton {
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        font-size: calc((3vw + 3vh)/2);
+        width: 10vw;
+        height: 5vh;
+        border-radius: 5px;
+        margin-bottom: 15vh;
+        margin-left: 2vw;
+    }
+    .exitbutton:hover {
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: white;
+        cursor: pointer;
+        font-size: calc((3vw + 3vh)/2);
+        width: 10vw;
+        height: 5vh;
+        border-radius: 5px;
+        margin-bottom: 15vh;
+        margin-left: 2vw;
+    }
+}
+
+.registration {
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    margin: 0 auto;
+}
+
+.orginfo, .contactinfo {
+    background: #318ea8;
+    border: none;
+    color: rgba(255, 255, 255, 0.49);
+    text-align: left;
+}
+
+.contactinfoitem {
+    margin-left: 5vw;
+}
+
+.orginfo {
+    margin-left: 10vw;
+}
+.contactinfo {
+    margin-left: 5vw;
+    h2 {
+        margin-left: 5vw;
+    }
+}
+ h2 {
+    margin-bottom: 2vh;
+    font-size: calc((3vw + 3vh)/2);
+}
+
+.orginfoitem, .contactinfo > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+
+
+label {
+    font-size: calc((2vw + 2vh)/2);
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 4vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+}
+
+input[type="text"]:focus {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 4vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+}
+
+.confirmplate {
+    text-align: left;
+    grid-template-columns: 30% 70%;
+    width: 30vw;
+    height: 5vh;
+    gap: 1vh;
+    margin-left: 7.5vw;
+    margin-top: 18vh;
+    label{
+        font-size: calc((1.5vw + 1.5vh)/2);
+    }
+    .custom{
+        margin-left: 0.5vw;
+        width: 1vw;
+        height: 1vw;
+        border-radius: 2px;
+        border: none;
+    }
+    .custom:hover{
+        margin-left: 0.5vw;
+        width: 1vw;
+        height: 1vw;
+        border-radius: 2px;
+        border: none;
+        outline: none;
+        box-shadow: 0 0 15px darkorange;
+    }
+}
+
+.crappbutton {
+    border: none;
+    background-color: darkorange;
+    color: white;
+    font-size: 2vw;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 15vw;
+    height: 6vh;
+    margin-left: 13.7vw;
+}
+
+.crappbutton:hover {
+    border: none;
+    font-size: 2vw;
+    background-color: white;
+    color: darkorange;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 15vw;
+    height: 6vh;
+    margin-left: 13.7vw;
+}
+
+.crappbutton:disabled {
+    border: 1px solid white;
+    font-size: 2vw;
+    background-color: darkcyan;
+    color: #ffffff;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 15vw;
+    height: 6vh;
+    margin-left: 13.7vw;
+}
