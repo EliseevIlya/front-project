@@ -1,0 +1,18 @@
+.confirmationpage {
+    position: relative;
+    padding: 20px;
+}
+
+.confirmationwashing-text {
+    text-align: center;
+    color:#293C9B;
+}
+
+.confirmation-buttonwashing{
+    background-color: #293C9B;
+}
+
+.confirmation-buttonwashing:hover {
+    background-color: #192970
+}
+
