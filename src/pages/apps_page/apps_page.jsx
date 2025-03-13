@@ -56,9 +56,9 @@ function Apps_page() {
     return (
         <>
             <div className="headersApps">
-                <button className="exitbuttonApps" onClick={() => navigate("/user_acc_page")}>Личный кабинет</button>
+                <button className="exitbuttonApps" onClick={() => navigate("/user")}>Личный кабинет</button>
                 <h1 className="textApp">ЗАЯВКИ</h1>
-                <button className="createbuttonApps">Создать</button>
+                <button className="createbuttonApps" onClick={()=>{navigate("/service")}}>Создать</button>
             </div>
 
             <div className="apps-container">

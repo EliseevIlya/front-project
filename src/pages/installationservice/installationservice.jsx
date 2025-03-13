@@ -1,6 +1,24 @@
+import Confirmationinstallationpage from "../confirmationinstallationpage/confirmationinstallationpage";
 import "./style.css";
+import { useState } from "react";
+import Modal from 'react-modal'
 
 function Installationservice() {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    
+    const openModal = () => {
+      setModalIsOpen(true);
+    };
+    
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
+    const Confirmation = (
+        <div>
+            {<Confirmationinstallationpage />}
+            <button onClick={()=>{closeModal()}}>Отмена</button>
+        </div>
+    )
     return (
         <div className="servicepage">
             <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
@@ -49,8 +67,13 @@ function Installationservice() {
                     </div>
                 </div>
                 <div className="installationbutton-container">
-                    <button className="installationbutton">Оставить заявку</button>
+                    <button className="installationbutton" onClick={()=>{openModal()}}>Оставить заявку</button>
                 </div>
+            </div>
+            <div>
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                    {Confirmation}
+            </Modal>
             </div>
         </div>
     );

@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router";
 import Createaccpage from "../pages/createaccpage/createaccpage.jsx"
-import Loginpage from "../pages/loginpage/loginpage.jsx";
 import Org_loginpage from "../pages/org_loginpage/org_loginapage.jsx";
 import Deleteaccpage from "../pages/deleteaccpage/deleteaccpage.jsx";
 import Deleteparthpage from "../pages/deletepartnership/deletepartnership.jsx";
@@ -30,9 +29,7 @@ import CreateServices_page from "../pages/create_services_page/createservices_pa
 export default function RouterApp(){
     return(
             <Routes>
-                <Route path="/loginpage" element={<Loginpage />}/>
                 <Route path="/createaccpage" element={<Createaccpage />}/>
-
                 <Route path="/org_loginpage" element={<Org_loginpage />}/>
                 <Route path="/deleteaccpage" element={<Deleteaccpage />}/>
                 <Route path="/deleteparthpage" element={<Deleteparthpage />}/>
@@ -41,17 +38,17 @@ export default function RouterApp(){
                 <Route path="/confirmationwashingpage" element={<Confirmationwashingpage />}/>
                 <Route path="/confirmationinstallationpage" element={<Confirmationinstallationpage />}/>
                 <Route path="/enteraccpage" element={<Enteraccpage />}/>
-                <Route path="/servicepage" element={<Servicepage />}/>
-                <Route path="/washingservice" element={<Washingservice />}/>
                 <Route path="/confirmdeletion" element={<Confirmdeletion />}/>
-                <Route path="/installationservice" element={<Installationservice />}/>
-                <Route path="/pioneerforms" element={<PioneerForms />}/>
+                <Route path="/service" element={<Servicepage />}/>
+                <Route path="/service/washing" element={<Washingservice />}/>
+                <Route path="/service/installation" element={<Installationservice />}/>
+                <Route path="/org/forms" element={<PioneerForms />}/>
                 <Route path="/" element={<Main_page />}/>
-                <Route path="/user_acc_page" element={<UserAcc_page />}/>
-                <Route path="/apps_page" element={<Apps_page />}/>
-                <Route path="/org_reg_page" element={<OrgReg_page />}/>
-                <Route path="/org_statuscheck_page" element={<OrgStatusCheck_page />}/>
-                <Route path="/create_services_page" element={<CreateServices_page />}/>
+                <Route path="/user" element={<UserAcc_page />}/>
+                <Route path="/user/request" element={<Apps_page />}/>
+                <Route path="/org/reg" element={<OrgReg_page />}/>
+                <Route path="/org/statuscheck" element={<OrgStatusCheck_page />}/>
+                <Route path="/create/services" element={<CreateServices_page />}/>
                 <Route path="/org_statusedit_page" element={<OrgStatusEdit_page />}/>
                 <Route path="/admin_acc_page" element={<AdminAcc_page />}/>
                 <Route path="/userstable_page" element={<UsersTable_page />}/>

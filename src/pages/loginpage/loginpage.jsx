@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./style.css";
+import { useNavigate } from "react-router";
 
 function Loginpage() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
-
+    const navigate = useNavigate(); 
     return (
         <div className="divloginpage"> 
             <header className="headerloginpage">
@@ -32,7 +33,7 @@ function Loginpage() {
             </div>
             <div className="footerloginpage">
                 <h6>СОЗДАТЬ АККАУНТ</h6>
-                <button>ВОЙТИ</button>
+                <button onClick={()=>{navigate("/user/request")}}>ВОЙТИ</button>
             </div>
         </div>
     );
