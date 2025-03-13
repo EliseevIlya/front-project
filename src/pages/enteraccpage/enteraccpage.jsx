@@ -6,8 +6,8 @@ function Enteraccpage() {
     const [password, setPassword] = useState("");
 
     return (
-        <div className="enteraccpage">
-            <div className="enteraccpage">
+        <div className="overlay">
+            <div className="enteracc">
                 <h3 className="login-enterpage">ЛОГИН</h3>
                 <input 
                     className="login-textfield" 
