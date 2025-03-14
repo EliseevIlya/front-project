@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./style.css";
-import { useState } from "react";
 import Modal from 'react-modal'
 import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 
