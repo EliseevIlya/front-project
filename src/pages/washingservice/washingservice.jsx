@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import "./style.css";
+import { useState } from "react";
+import Modal from 'react-modal'
+import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 
 function Washingservice() {
-    const [selectedServices, setSelectedServices] = useState([""]); 
-
-    const services = ["Услуга 1 - 200 руб. (20 мин.)", "Услуга 2 - 300 руб. (30 мин.)", "Услуга 3 - 400 руб. (40 мин.)"];
-
-    const handleServiceChange = (index, value) => {
-        const newServices = [...selectedServices];
-        newServices[index] = value;
-
-        if (index === selectedServices.length - 1 && value !== "") {
-            newServices.push("");
-        }
-
-        setSelectedServices(newServices);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    
+    const openModal = () => {
+      setModalIsOpen(true);
     };
-
-    const handleRemoveService = (index) => {
-        const newServices = selectedServices.filter((_, i) => i !== index);
-        setSelectedServices(newServices.length > 0 ? newServices : [""]); 
+    
+    const closeModal = () => {
+      setModalIsOpen(false);
     };
-
+    const Confirmation = (
+        <div>
+            {<Confirmationwashingpage />}
+            <button onClick={()=>{closeModal()}}>Отмена</button>
+        </div>
+    )
     return (
         <div className="servicepage">
             <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
@@ -87,9 +85,14 @@ function Washingservice() {
                     </div>
                 </div>
                 <div className="washingbutton-container">
-                    <button className="washingbutton">Оставить заявку</button>
+                    <button className="washingbutton"onClick={()=>{openModal()}}>Оставить заявку</button>
                 </div>
             </div>
+            <div>
+                 <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                     {Confirmation}
+                </Modal>
+             </div>
         </div>
     );
 }

@@ -1,0 +1,131 @@
+.usersTableBody {
+    background-color: rgba(190, 228, 253, 0.5);
+}
+
+.headersTable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.textTable {
+    margin-top: -5vh;
+    margin-right: 33vw;
+    font-size: calc((4vw + 4vh)/2);
+    color: #318ea8;
+    font-weight: lighter;
+}
+
+.exitbuttonTable {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(49, 142, 168);
+    cursor: pointer;
+    font-size: 2vw;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+    margin-bottom: 15vh;
+}
+
+.exitbuttonTable:hover {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: #006075;
+    cursor: pointer;
+    font-size: 2vw;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+    margin-bottom: 15vh;
+}
+
+.bodytable {
+    display: flex;
+    justify-content: center;
+    margin-top: -5vh;
+}
+
+.usersTable {
+    width: 90%;
+    border-collapse: collapse;
+    background-color: rgba(49, 142, 168, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.usersTable th, .usersTable td {
+    padding: 10px;
+    text-align: center;
+}
+
+.usersTable th {
+    background-color: darkorange;
+    color: white;
+    font-weight: lighter;
+    font-size: 1.5vw;
+}
+
+td {
+    color: black;
+    font-weight: lighter;
+    font-size: 1vw;
+}
+
+.usersTable tr:nth-child(even) {
+    background-color: #318ea8;
+}
+
+.utbitem:disabled {
+    padding: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: 1.5vw;
+    width: 10vw;
+}
+
+.blockButton {
+    background-color: darkred;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2vw;
+}
+
+.blockButton:hover {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2vw;
+}
+
+.loadMoreButton {
+    width: 25%;
+    height: 10%;
+    font-size: 1vw;
+    background-color: darkorange;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.loadMoreButton:hover {
+    width: 25%;
+    height: 10%;
+    font-size: 1vw;
+    background-color: darkorange;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+}
+

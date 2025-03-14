@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router";
 import Createaccpage from "../pages/createaccpage/createaccpage.jsx"
-import Loginpage from "../pages/loginpage/loginpage.jsx";
 import Org_loginpage from "../pages/org_loginpage/org_loginapage.jsx";
 import Deleteaccpage from "../pages/deleteaccpage/deleteaccpage.jsx";
 import Deleteparthpage from "../pages/deletepartnership/deletepartnership.jsx";
@@ -14,13 +13,22 @@ import Washingservice from "../pages/washingservice/washingservice.jsx";
 import Confirmdeletion from "../pages/confirmdeletion/confirmdeletion.jsx";
 import Installationservice from "../pages/installationservice/installationservice.jsx";
 import PioneerForms from "../pages/pioneerforms/pioneerforms.jsx";
-
+import Main_page from "../pages/main_page/main_page.jsx";
+import UserAcc_page from "../pages/user_acc_page/useracc_page.jsx";
+import OrgReg_page from "../pages/org_reg_page/orgreg_page.jsx";
+import OrgStatusCheck_page from "../pages/org_statuscheck_page/orgstatuscheck_page.jsx";
+import Apps_page from "../pages/apps_page/apps_page.jsx";
+import AdminAcc_page from "../pages/admin_acc_page/adminacc_page.jsx";
+import OrgStatusEdit_page from "../pages/org_statusedit_page/orgstatusedit_page.jsx";
+import UsersTable_page from "../pages/users_table_page/userstable_page.jsx";
+import React from "react";
+import OrgTable_page from "../pages/org_table_page/orgtable_page.jsx";
+import CreateServices_page from "../pages/create_services_page/createservices_page.jsx";
 
 
 export default function RouterApp(){
     return(
             <Routes>
-                <Route path="/loginpage" element={<Loginpage />}/>
                 <Route path="/createaccpage" element={<Createaccpage />}/>
                 <Route path="/org_loginpage" element={<Org_loginpage />}/>
                 <Route path="/deleteaccpage" element={<Deleteaccpage />}/>
@@ -30,11 +38,21 @@ export default function RouterApp(){
                 <Route path="/confirmationwashingpage" element={<Confirmationwashingpage />}/>
                 <Route path="/confirmationinstallationpage" element={<Confirmationinstallationpage />}/>
                 <Route path="/enteraccpage" element={<Enteraccpage />}/>
-                <Route path="/servicepage" element={<Servicepage />}/>
-                <Route path="/washingservice" element={<Washingservice />}/>
                 <Route path="/confirmdeletion" element={<Confirmdeletion />}/>
-                <Route path="/installationservice" element={<Installationservice />}/>
-                <Route path="/pioneerforms" element={<PioneerForms />}/>
+                <Route path="/service" element={<Servicepage />}/>
+                <Route path="/service/washing" element={<Washingservice />}/>
+                <Route path="/service/installation" element={<Installationservice />}/>
+                <Route path="/org/forms" element={<PioneerForms />}/>
+                <Route path="/" element={<Main_page />}/>
+                <Route path="/user" element={<UserAcc_page />}/>
+                <Route path="/user/request" element={<Apps_page />}/>
+                <Route path="/org/reg" element={<OrgReg_page />}/>
+                <Route path="/org/statuscheck" element={<OrgStatusCheck_page />}/>
+                <Route path="/create/services" element={<CreateServices_page />}/>
+                <Route path="/org_statusedit_page" element={<OrgStatusEdit_page />}/>
+                <Route path="/admin_acc_page" element={<AdminAcc_page />}/>
+                <Route path="/userstable_page" element={<UsersTable_page />}/>
+                <Route path="/orgtable_page" element={<OrgTable_page />}/>
             </Routes>
     )
 }

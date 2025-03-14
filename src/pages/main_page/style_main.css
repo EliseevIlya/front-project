@@ -4,21 +4,21 @@ body {
     background: #318ea8;
 }
 
-h1 {
+.Main .text {
     margin-top: 1vh;
     margin-bottom: 1vh;
     color: white;
-    font-size: 15vh;
+    font-size: calc((10vw + 10vh)/2);
 }
 
-h2 {
+.Main .podtext {
     margin-top: 1vh;
     margin-bottom: 10vh;
     color: white;
-    font-size: 5vh;
+    font-size: calc((3vw + 3vh)/2);
 }
 
-button {
+.Main button {
     font-family: Impact, sans-serif;
     background: white;
     color: #318ea8;
@@ -26,5 +26,16 @@ button {
     border-radius: 20px;
     width: 40vw;
     height: 15vh;
-    font-size: 5vh ;
+    font-size: calc((3vw + 3vh)/2) ;
+}
+
+.Main button:hover {
+    font-family: Impact, sans-serif;
+    background: #318ea8;
+    color: #ffffff;
+    border: 0.5vh solid white;
+    border-radius: 20px;
+    width: 40vw;
+    height: 15vh;
+    font-size: calc((3vw + 3vh)/2) ;
 }
