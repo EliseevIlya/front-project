@@ -1,9 +1,0 @@
-services:
-  frontend:
-    image: nginx:alpine
-    container_name: papo-frontend
-    ports:
-      - "8090:80" # Проброс порта 80 контейнера на порт 80 хоста
-    volumes:
-      - ./dist:/usr/share/nginx/html:ro # Монтирование папки dist с собранным приложением
-    restart: always
