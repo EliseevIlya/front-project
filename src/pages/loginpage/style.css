@@ -1,10 +1,22 @@
-body {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: #a1a1a1;
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+
+.divloginpage {
+    font-family: Impact, sans-serif;
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .headerloginpage {
@@ -14,13 +26,8 @@ body {
     padding: 30px;
 }
 
-.divloginpage {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 15px;
-}
-
 .input-containerloginpage {
+    padding-bottom: 15px;
     border-radius: 10px;
     display: flex;
     align-items: center; 
@@ -28,7 +35,7 @@ body {
 
 .input-containerloginpage h4 {
     border-radius: 10px;
-    font-size: 18px;
+    font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
     margin: 0 15px 0 0; 
     text-align: left; 
@@ -38,7 +45,7 @@ input[type="text"] {
     border-radius: 10px;
     flex: 1; 
     padding: 15px;
-    font-size: 18px;
+    font-size: calc((1.3vw + 1.3vh)/2);
     border: 1px solid #318EA8;
     background-color: #318EA8; 
     color: #ffffff; 
@@ -51,9 +58,10 @@ input[type="text"]::placeholder {
 }
 
 button {
+    margin-bottom: 15px;
     border-radius: 10px;
     padding: 15px 25px;
-    font-size: 18px;
+    font-size: calc((1.3vw + 1.3vh)/2);
     border: none;
     background-color: #FF8000; 
     color: white;
@@ -75,7 +83,7 @@ button:hover {
 
 .footerloginpage h6 {
     border-radius: 10px;
-    font-size: 16px;
+    font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8; 
     cursor: pointer;
     margin: 0;
@@ -90,7 +98,7 @@ button:hover {
     border-radius: 10px;
     width: auto; 
     padding: 15px 25px;
-    font-size: 18px;
+    font-size: calc((1.3vw + 1.3vh)/2);
     box-sizing: border-box; 
     margin: 0; 
     background-color: #FF8000; 
