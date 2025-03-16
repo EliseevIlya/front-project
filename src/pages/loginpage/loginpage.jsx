@@ -7,7 +7,6 @@ function Loginpage() {
     const [code, setCode] = useState("");
     const navigate = useNavigate(); 
     return (
-
         <div className="divloginpage"> 
             <header className="headerloginpage">
                 <h1>ВОЙТИ В АККАУНТ</h1>

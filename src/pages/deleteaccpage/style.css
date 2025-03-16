@@ -1,15 +1,41 @@
+.deleteacc {
+    text-align: center;
+}
+
+.warning-text {
+    color: #318EA8;
+    font-weight: bold;
+}
+
 .footer_deleteaccpage {
-    gap: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 50px; 
+    margin-top: 20px;
+}
+
+.cancel-button {
+    background-color: #318EA8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .delete-button {
-    padding: 12 24px;
     background-color: gray;
     color: white;
     border: none;
-    border-radius: 10px;
-    font-size: calc((1.3vw + 1.3vh)/2);
+    padding: 12px 24px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.cancel-button:hover {
+    background-color: #e67300;
 }
 
 .delete-button:hover {

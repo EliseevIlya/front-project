@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router";
 import "./style.css"
 
@@ -19,20 +18,9 @@ function Confirmationinstallationpage() {
             </div>
             <div>
                 <button className="confirmation-buttoninstallation" onClick={()=>{onConfirmation()}}>ОК</button>
-
             </div>
         </div>
     );
 }
 
-function App() {
-    const [isModalOpen, setModalOpen] = useState(true);
-
-    return (
-        <div>
-            <ConfirmationModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
-        </div>
-    );
-}
-
-export default App;
+export default Confirmationinstallationpage;

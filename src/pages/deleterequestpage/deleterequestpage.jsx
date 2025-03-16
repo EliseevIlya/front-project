@@ -2,7 +2,6 @@ import "./style.css"
 
 function Deleterequest() {
     return (
-        <div className="overlay">
         <div className="deleteacc">
             <header>
                 <h1 className="h1_deleteaccpage">ВНИМАНИЕ!</h1>
@@ -16,7 +15,6 @@ function Deleterequest() {
                 <button className="cancel-button">ОТМЕНА</button>
                 <button className="delete-button">УДАЛИТЬ</button>
             </div>
-        </div>
         </div>
     );
 }

@@ -2,7 +2,6 @@ import "./style.css"
 
 function Deleteaccpage() {
     return (
-        <div className="overlay">
         <div className="deleteacc">
             <header>
                 <h1 className="h1_deleteaccpage">ВНИМАНИЕ!</h1>
@@ -15,7 +14,6 @@ function Deleteaccpage() {
             <div className="footer_deleteaccpage">
                 <button className="cancel-button">ОК</button>
             </div>
-        </div>
         </div>
     );
 }
