@@ -1,46 +1,81 @@
 import { useState } from "react";
 import "./style.css";
+import { useNavigate } from "react-router";
 
-function OrgLoginPage() {
+function Loginpage() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(true); 
+    const navigate = useNavigate();
+
+    const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (isValidEmail.test(emailValue)) {
+            setEmail(emailValue);
+            setErrorMessage(""); 
+        } else {
+            setEmail(emailValue);
+            setErrorMessage("Пожалуйста, введите корректный email.");
+        }
+    };
+
+    const handleSubmit = () => {
+        if (errorMessage || !email || !code) {
+            setErrorMessage("Пожалуйста, заполните все поля корректно.");
+            return;
+        }
+        navigate("/"); 
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false); 
+        window.location.reload(); 
+    };
+
+    if (!isModalOpen) {
+        return null; 
+    }
 
     return (
         <div className="overlay">
-            <div className="org_loginpage">
-                <header className="org_loginpageheader">
+            <div className="orgloginpage">
+                <button className="orgclose-button" onClick={handleCloseModal}>×</button>
+                <header className="headerorgpage"> 
                     <h1>ОРГАНИЗАЦИЯ - ПАРТНЕР</h1>
                 </header>
-                <div className="input-containerorg">
-                    <div className="label-containerorg">
-                        <h4>E-MAIL :</h4>
-                        <h6 className="sub-text">(контактного лица)</h6>
-                    </div>
+                <div className="input-group">
+                    <h4>E-MAIL :</h4>
                     <input 
+                        className="inputorg"
                         type="text" 
                         placeholder="Введите e-mail" 
                         value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange} 
                     />
                 </div>
-                <div className="button">
-                    <button>ПОЛУЧИТЬ КОД</button>
+                <div>
+                    <button className="orgbutton">ПОЛУЧИТЬ КОД</button>
                 </div>
-                <div className="input-containerorg">
+                <div className="input-group">
                     <input 
+                        className="inputorg"
                         type="text" 
                         placeholder="Введите код" 
                         value={code} 
                         onChange={(e) => setCode(e.target.value)}
                     />
                 </div>
-                <div className="footer">
-                    <h6>СТАТЬ ПАРТНЕРОМ</h6>
-                    <button>ВОЙТИ</button>
+                {errorMessage && <div className="orgerror-message">{errorMessage}</div>} 
+                <div className="orgfooter">
+                    <h6 onClick={() => navigate("/org/reg")} >СТАТЬ ПАРТНЕРОМ</h6>
+                    <button className="orgfooterbutton" onClick={() => navigate ("/org/statuscheck")}>ВОЙТИ</button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default OrgLoginPage;
+export default Loginpage;

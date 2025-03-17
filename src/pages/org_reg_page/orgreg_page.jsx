@@ -103,7 +103,7 @@ function OrgReg_page() {
                                 onChange={handleCheckboxChange}
                             />
                         </label>
-                        <button className="crappbutton" disabled={!isFormValid} onClick={() => navigate("/org_statuscheck_page")}>
+                        <button className="crappbutton" onClick={() => navigate("/org/statuscheck")}>
                             Подать заявку
                         </button>
                     </div>

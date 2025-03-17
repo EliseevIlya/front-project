@@ -55,7 +55,7 @@ function CreateServices_page() {
     return (
         <>
             <div className="headerservices">
-                <button className="exitbuttonservices" onClick={() => navigate("/org_statuscheck_page")}>Вернуться к заявке</button>
+                <button className="exitbuttonservices" onClick={() => navigate("/org/statuscheck")}>Вернуться к заявке</button>
                 <h1 className="textServices">Личный кабинет</h1>
             </div>
             <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>

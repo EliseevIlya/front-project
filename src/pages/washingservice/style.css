@@ -4,9 +4,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     width: 100vw;
     padding: 20px;
+    overflow: hidden;
 }
 
 .washingmaindiv {
@@ -14,11 +16,11 @@
     flex-direction: column;
     align-items: center;
     background-color: #1d3085;
-    padding: 20px;
     border-radius: 10px;
-    width: 90%;
-    max-width: 900px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 95%;
+    max-width: 1000px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 3%;
     margin: auto;
 }
 
@@ -32,13 +34,13 @@
 .washingservicediv {
     background-color: #1d3085;
     color: white;
-    padding: 20px;
     border-radius: 10px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+    gap: 40px;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .left-column, .right-column {
@@ -46,6 +48,7 @@
     flex-direction: column;
     width: 30%;
     align-items: center;
+    gap: 20px;
 }
 
 .center-column {
@@ -53,14 +56,15 @@
     flex-direction: column;
     width: 30%;
     align-items: center;
-    max-height: 200px;
+    max-height: 350px;
     overflow-y: auto;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 .service-dropdown {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 10px;
     width: 100%;
 }
@@ -84,8 +88,7 @@
     background: darkred;
 }
 
-
-select {
+.washingselect {
     width: 100%;
     padding: 8px;
     border: 2px solid #ccc;
@@ -93,12 +96,11 @@ select {
     font-size: 1rem;
 }
 
-
 .servgdiv {
-    font-size: calc((1.5vw + 1.5vh) / 2);
+    font-size: calc((2vw + 2vh) / 2);
     color: #ffffff;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
 }
 
@@ -112,15 +114,16 @@ input[type="text"], select {
 
 .checkbox-group {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .washingbutton-container {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
     background-color: #1d3085;
+    padding: 10px;
 }
 
 .washingbutton {
@@ -137,15 +140,18 @@ input[type="text"], select {
     background-color: darkorange;
 }
 
+.servdiv input[type="number"] {
+    width: 75%;
+    font-size: calc((1.8vw + 1.8vh) / 2);
+    text-align: center;
+    border-radius: 15px;
+    background-color: #ffffff;
+    padding: 5px;
+}
+
 .cost {
     display: block;
     font-size: calc((1.5vw + 1.5vh) / 2);
-}
-
-.servdiv input[type="number"] {
-    width: 70%;
-    font-size: calc((1.8vw + 1.8vh) / 2);
-    text-align: center;
 }
 
 @media (max-width: 768px) {

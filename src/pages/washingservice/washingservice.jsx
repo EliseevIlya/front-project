@@ -1,24 +1,32 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import "./style.css";
-import Modal from 'react-modal'
-import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 
 function Washingservice() {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    
-    const openModal = () => {
-      setModalIsOpen(true);
+    const [selectedServices, setSelectedServices] = useState([""]);
+    const services = ["Услуга 1 - 200 руб. (20 мин.)", "Услуга 2 - 300 руб. (30 мин.)", "Услуга 3 - 400 руб. (40 мин.)"];
+    const navigate = useNavigate(); 
+
+    const handleServiceChange = (index, value) => {
+        const newServices = [...selectedServices];
+        newServices[index] = value;
+
+        if (index === selectedServices.length - 1 && value !== "") {
+            newServices.push("");
+        }
+
+        setSelectedServices(newServices);
     };
-    
-    const closeModal = () => {
-      setModalIsOpen(false);
+
+    const handleRemoveService = (index) => {
+        const newServices = selectedServices.filter((_, i) => i !== index);
+        setSelectedServices(newServices.length > 0 ? newServices : [""]);
     };
-    const Confirmation = (
-        <div>
-            {<Confirmationwashingpage />}
-            <button onClick={()=>{closeModal()}}>Отмена</button>
-        </div>
-    )
+
+    const handleSubmit = () => {
+        navigate("/user/request"); 
+    };
+
     return (
         <div className="servicepage">
             <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
@@ -28,13 +36,13 @@ function Washingservice() {
                     <div className="left-column">
                         <div className="servdiv">
                             <label className="choose-city">Выберите город:</label>
-                            <select>
+                            <select className="washingselect">
                                 <option>Самара</option>
                             </select>
                         </div>
                         <div className="servdiv">
                             <label className="choose-org">Организация:</label>
-                            <select>
+                            <select className="washingselect">
                                 <option>АВАНГАРД ул. Пушкина 6</option>
                             </select>
                         </div>
@@ -49,6 +57,7 @@ function Washingservice() {
                             {selectedServices.map((service, index) => (
                                 <div key={index} className="service-dropdown">
                                     <select
+                                        className="washingselect"
                                         value={service}
                                         onChange={(e) => handleServiceChange(index, e.target.value)}
                                     >
@@ -71,27 +80,24 @@ function Washingservice() {
                     <div className="right-column">
                         <div className="servdiv">
                             <label className="choose-time">Выберите время на сегодня:</label>
-                            <select>
+                            <select className="washingselect">
                                 <option>10:00 - 11:40</option>
                             </select>
                         </div>
                         <div className="servdiv">
                             <label className="choose-time">Выберите время на завтра:</label>
-                            <select>
+                            <select className="washingselect">
                                 <option>10:00 - 11:40</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="washingbutton-container">
-                    <button className="washingbutton"onClick={()=>{openModal()}}>Оставить заявку</button>
+                    <button className="washingbutton" onClick={handleSubmit}>
+                        Оставить заявку
+                    </button>
                 </div>
             </div>
-            <div>
-                 <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-                     {Confirmation}
-                </Modal>
-             </div>
         </div>
     );
 }

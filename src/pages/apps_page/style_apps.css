@@ -1,9 +1,3 @@
-body {
-    font-family: Impact, sans-serif;
-    text-align: center;
-    background: #318ea8;
-}
-
 .headersApps {
     display: flex;
     justify-content: space-between;

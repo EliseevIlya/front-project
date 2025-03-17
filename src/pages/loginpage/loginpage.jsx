@@ -5,36 +5,72 @@ import { useNavigate } from "react-router";
 function Loginpage() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
-    const navigate = useNavigate(); 
-    return (
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(true); 
+    const navigate = useNavigate();
 
-        <div className="divloginpage"> 
-            <header className="headerloginpage">
-                <h1>ВОЙТИ В АККАУНТ</h1>
-            </header>
-            <div className="input-containerloginpage">
-                <h4>E-MAIL:</h4>
-                <input 
-                    type="text" 
-                    placeholder="Введите e-mail" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="button">
-                <button>ПОЛУЧИТЬ КОД</button>
-            </div>
-            <div className="input-containerloginpage">
-                <input 
-                    type="text" 
-                    placeholder="Введите код" 
-                    value={code} 
-                    onChange={(e) => setCode(e.target.value)}
-                />
-            </div>
-            <div className="footerloginpage">
-                <h6>СОЗДАТЬ АККАУНТ</h6>
-                <button onClick={()=>{navigate("/user/request")}}>ВОЙТИ</button>
+    const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (isValidEmail.test(emailValue)) {
+            setEmail(emailValue);
+            setErrorMessage(""); 
+        } else {
+            setEmail(emailValue);
+            setErrorMessage("Пожалуйста, введите корректный email.");
+        }
+    };
+
+    const handleSubmit = () => {
+        if (errorMessage || !email || !code) {
+            setErrorMessage("Пожалуйста, заполните все поля корректно.");
+            return;
+        }
+        navigate("/user"); 
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false); 
+        window.location.reload(); 
+    };
+
+    if (!isModalOpen) {
+        return null; 
+    }
+
+    return (
+        <div className="overlay">
+            <div className="divloginpage">
+                <div className="header-container">
+                    <h1 className="headerloginpage">ВОЙТИ В АККАУНТ</h1>
+                    <button className="loginpageclosebutton" onClick={handleCloseModal}>×</button>
+                </div>
+                <div className="input-group">
+                    <h4>E-MAIL :</h4>
+                    <input className="inputloginpage"
+                        type="text" 
+                        placeholder="Введите e-mail" 
+                        value={email} 
+                        onChange={handleEmailChange}
+                    />
+                </div>
+                <div>
+                    <button className="loginpagebutton">ПОЛУЧИТЬ КОД</button>
+                </div>
+                <div className="input-group">
+                    <input className="inputloginpage"
+                        type="text" 
+                        placeholder="Введите код" 
+                        value={code} 
+                        onChange={(e) => setCode(e.target.value)}
+                    />
+                </div>
+                {errorMessage && <div className="loginpageerror-message">{errorMessage}</div>}
+                <div className="footerloginpage">
+                    <h6 onClick={() => navigate("/createaccpage")} >СОЗДАТЬ АККАУНТ</h6>
+                    <button className="loginpagebutton" onClick={handleSubmit}>ВОЙТИ</button>
+                </div>
             </div>
         </div>
     );

@@ -67,7 +67,7 @@ function OrgStatusCheck_page() {
                         ) : (
                             <button className="editbuttonSC" onClick={toggleEditMode}>Изменить</button>
                         )}
-                        <button className="accbuttonSC" disabled>Личный кабинет</button>
+                        <button className="accbuttonSC" onClick={() => navigate ("/create/services")}>Личный кабинет</button>
                     </div>
                 </div>
             </div>

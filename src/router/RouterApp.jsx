@@ -40,7 +40,7 @@ export default function RouterApp(){
                 <Route path="/enteraccpage" element={<Enteraccpage />}/>
                 <Route path="/confirmdeletion" element={<Confirmdeletion />}/>
                 <Route path="/service" element={<Servicepage />}/>
-                <Route path="/service/washing" element={<Washingservice />}/>
+                <Route path="/service/washing" element={<Washingservice />} />
                 <Route path="/service/installation" element={<Installationservice />}/>
                 <Route path="/org/forms" element={<PioneerForms />}/>
                 <Route path="/" element={<Main_page />}/>
@@ -49,7 +49,7 @@ export default function RouterApp(){
                 <Route path="/org/reg" element={<OrgReg_page />}/>
                 <Route path="/org/statuscheck" element={<OrgStatusCheck_page />}/>
                 <Route path="/create/services" element={<CreateServices_page />}/>
-                <Route path="/org_statusedit_page" element={<OrgStatusEdit_page />}/>
+                <Route path="/org_statusedit" element={<OrgStatusEdit_page />}/>
                 <Route path="/admin_acc_page" element={<AdminAcc_page />}/>
                 <Route path="/userstable_page" element={<UsersTable_page />}/>
                 <Route path="/orgtable_page" element={<OrgTable_page />}/>
