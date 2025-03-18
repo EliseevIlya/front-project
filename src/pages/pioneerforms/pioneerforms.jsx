@@ -13,24 +13,22 @@ function PioneerForms() {
     { id: 1, status: "new", date: "10.03.2025", org: "Компания A" },
     { id: 2, status: "in_progress", date: "08.03.2025", org: "Компания B" },
     { id: 3, status: "completed", date: "05.03.2025", org: "Компания C" },
-    { id: 4, status: "rejected", date: "02.03.2025", org: "Компания D" }
-    
-  
+    { id: 4, status: "rejected", date: "02.03.2025", org: "Компания D" },
   ];
 
   const [selectedStatus, setSelectedStatus] = useState("new");
 
   return (
-    <div className="maindiv">
-      <h1 className="title">ФОРМЫ ПОДКЛЮЧЕНИЯ ОРГАНИЗАЦИИ К PIONEER</h1>
-      <div className="content">
+    <div className="maindivorgform">
+      <h1 className="titleorgform">ФОРМЫ ПОДКЛЮЧЕНИЯ ОРГАНИЗАЦИИ К PIONEER</h1>
+      <div className="contentorgform">
         <div className="table-containerfilter">
           <h2>Фильтры по значению статуса</h2>
-          <div className="filter">
+          <div className="filterorgform">
             {statuses.map(({ id, label }) => (
               <button
                 key={id}
-                className={`filter-button ${selectedStatus === id ? "active" : ""}`}
+                className={`filter-buttonorgform ${selectedStatus === id ? "active" : ""}`}
                 onClick={() => setSelectedStatus(id)}
               >
                 {label}
@@ -38,9 +36,9 @@ function PioneerForms() {
             ))}
           </div>
         </div>
-        <div className="table-containertable">
+        <div className="table-containertableorgform">
           <h2>Список форм в выбранном статусе</h2>
-          <table className="styled-table">
+          <table className="styled-tableorgform">
             <thead>
               <tr>
                 <th>Рег №</th>
