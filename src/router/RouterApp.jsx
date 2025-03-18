@@ -3,7 +3,6 @@ import Createaccpage from "../pages/createaccpage/createaccpage.jsx"
 import Org_loginpage from "../pages/org_loginpage/org_loginapage.jsx";
 import Deleteaccpage from "../pages/deleteaccpage/deleteaccpage.jsx";
 import Deleteparthpage from "../pages/deletepartnership/deletepartnership.jsx";
-import Deleteuseraccpage from "../pages/deleteuseraccpage/deleteuseraccpage.jsx";
 import Deleterequest from "../pages/deleterequestpage/deleterequestpage.jsx";
 import Confirmationwashingpage from "../pages/confirmationwashingpage/confirmationwashingpage.jsx";
 import Confirmationinstallationpage from "../pages/confirmationinstallationpage/confirmationinstallationpage.jsx";
@@ -33,7 +32,6 @@ export default function RouterApp(){
                 <Route path="/org_loginpage" element={<Org_loginpage />}/>
                 <Route path="/deleteaccpage" element={<Deleteaccpage />}/>
                 <Route path="/deleteparthpage" element={<Deleteparthpage />}/>
-                <Route path="/deleteuseraccpage" element={<Deleteuseraccpage />}/>
                 <Route path="/deleterequest" element={<Deleterequest />}/>
                 <Route path="/confirmationwashingpage" element={<Confirmationwashingpage />}/>
                 <Route path="/confirmationinstallationpage" element={<Confirmationinstallationpage />}/>

@@ -11,6 +11,7 @@
 }
 
 .divloginpage {
+    font-weight: lighter;
     font-family: Impact, sans-serif;
     width: 400px;
     background-color: #ffffff;
@@ -43,7 +44,7 @@
     font-size: calc((2vw + 2vh)/2);
 }
 
-.orgclose-button, .loginpageclosebutton, .createaccclosebutton {
+.orgclose-button, .loginpageclosebutton, .createaccclosebutton, .enteraccclosebutton{
     position: fixed;
     top: 20px;
     right: 20px;
@@ -60,7 +61,7 @@
     justify-content: center;
 }
 
-.orgclose-button:hover, .loginpageclosebutton:hover, .createaccclosebutton:hover {
+.orgclose-button:hover, .loginpageclosebutton:hover, .createaccclosebutton:hover, .enteraccclosebutton:hover {
     color: #FF8000;
 }
 
