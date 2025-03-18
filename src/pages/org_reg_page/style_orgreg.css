@@ -139,6 +139,17 @@ input[type="text"]:focus {
         outline: none;
         box-shadow: 0 0 15px darkorange;
     }
+    a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: underline;
+        font-weight: lighter;
+        margin-left: 0.1vw;
+    }
+
+     a:hover {
+        text-decoration: underline;
+        color: darkorange;
+    }
 }
 
 .crappbutton {

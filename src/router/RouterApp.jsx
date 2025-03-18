@@ -23,6 +23,7 @@ import UsersTable_page from "../pages/users_table_page/userstable_page.jsx";
 import React from "react";
 import OrgTable_page from "../pages/org_table_page/orgtable_page.jsx";
 import CreateServices_page from "../pages/create_services_page/createservices_page.jsx";
+import OrgInfo_page from "../pages/org_info_page/orginfo_page.jsx";
 
 
 export default function RouterApp(){
@@ -46,6 +47,7 @@ export default function RouterApp(){
                 <Route path="/user/request" element={<Apps_page />}/>
                 <Route path="/org/reg" element={<OrgReg_page />}/>
                 <Route path="/org/statuscheck" element={<OrgStatusCheck_page />}/>
+                <Route path="/org_info_page" element={<OrgInfo_page />}/>
                 <Route path="/create/services" element={<CreateServices_page />}/>
                 <Route path="/org_statusedit" element={<OrgStatusEdit_page />}/>
                 <Route path="/admin_acc_page" element={<AdminAcc_page />}/>

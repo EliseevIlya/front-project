@@ -48,11 +48,21 @@ body {
 .companyinfo:disabled{
     font-size: 2vw;
     background: none;
-    width: 100%;
+    width: 50%;
     margin-left: 5vw;
     color: white;
     border: none;
     }
+
+.infoButton {
+    width: 20vw;
+    height: 5vh;
+}
+
+.infoButton:hover {
+    color: darkorange;
+    background: white;
+}
 
 .servicesTable {
     margin-top: 5vh;

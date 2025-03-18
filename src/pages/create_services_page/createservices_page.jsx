@@ -1,6 +1,6 @@
 import "./style_createservices.css";
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CreateServices_page() {
     const [services, setServices] = useState([]);
@@ -11,17 +11,20 @@ function CreateServices_page() {
         time: ''
     });
     const [editingService, setEditingService] = useState(null); // Состояние для редактируемой услуги
+    const [errors, setErrors] = useState({
+        name: '',
+        cost: '',
+        time: ''
+    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         if (editingService !== null) {
-            // Если редактируем существующую услугу
             const updatedServices = services.map(service =>
                 service.id === editingService ? { ...service, [name]: value } : service
             );
             setServices(updatedServices);
         } else {
-            // Если добавляем новую услугу
             setNewService({
                 ...newService,
                 [name]: value
@@ -29,12 +32,36 @@ function CreateServices_page() {
         }
     };
 
+    const validateService = () => {
+        const errors = {};
+
+        // Валидация поля "name"
+        if (!newService.name) {
+            errors.name = "Название услуги не может быть пустым.";
+        }
+
+        // Валидация поля "cost" (стоимость) - должно быть числом
+        if (!newService.cost) {
+            errors.cost = "Стоимость не может быть пустой.";
+        } else if (isNaN(newService.cost)) {
+            errors.cost = "Стоимость должна быть числом.";
+        }
+
+        // Валидация поля "time" (время) - должно быть числом
+        if (!newService.time) {
+            errors.time = "Время не может быть пустым.";
+        } else if (isNaN(newService.time)) {
+            errors.time = "Время должно быть числом.";
+        }
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0; // Если ошибок нет, возвращаем true
+    };
+
     const addService = () => {
-        if (newService.name && newService.cost && newService.time) {
+        if (validateService()) {
             setServices([...services, { ...newService, id: services.length + 1 }]);
             setNewService({ sphere: 'Мойка', name: '', cost: '', time: '' }); // сброс полей
-        } else {
-            alert("Пожалуйста, заполните все поля.");
         }
     };
 
@@ -55,10 +82,14 @@ function CreateServices_page() {
     return (
         <>
             <div className="headerservices">
-                <button className="exitbuttonservices" onClick={() => navigate("/org/statuscheck")}>Вернуться к заявке</button>
+                <button className="exitbuttonservices" onClick={() => navigate("/org/statuscheck")}>Вернуться к заявке
+                </button>
                 <h1 className="textServices">Личный кабинет</h1>
             </div>
             <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>
+            <button className="infoButton" onClick={() => navigate("/org_info_page")}>Подробная
+                информация
+            </button>
             <div className="servicesTable">
                 <table className="tableServ">
                     <thead>
@@ -72,79 +103,113 @@ function CreateServices_page() {
                     </tr>
                     </thead>
                     <tbody>
-                    {services.map(service => (
-                        <tr key={service.id}>
-                            <td>{service.id}</td>
-                            <td>
-                                {editingService === service.id ? (
-                                    <select
-                                        name="sphere"
-                                        value={service.sphere}
-                                        onChange={handleInputChange}
-                                    >
-                                        <option value="Мойка">Мойка</option>
-                                        <option value="Шиномонтаж">Шиномонтаж</option>
-                                    </select>
-                                ) : (
-                                    service.sphere
-                                )}
-                            </td>
-                            <td>
-                                {editingService === service.id ? (
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={service.name}
-                                        onChange={handleInputChange}
-                                    />
-                                ) : (
-                                    service.name
-                                )}
-                            </td>
-                            <td>
-                                {editingService === service.id ? (
-                                    <input
-                                        type="text"
-                                        name="cost"
-                                        value={service.cost}
-                                        onChange={handleInputChange}
-                                    />
-                                ) : (
-                                    service.cost
-                                )}
-                            </td>
-                            <td>
-                                {editingService === service.id ? (
-                                    <input
-                                        type="text"
-                                        name="time"
-                                        value={service.time}
-                                        onChange={handleInputChange}
-                                    />
-                                ) : (
-                                    service.time
-                                )}
-                            </td>
-                            <td>
-                                {editingService === service.id ? (
-                                    <button className="buttonServices" onClick={stopEditing}>Сохранить</button>
-                                ) : (
-                                    <button className="buttonServices" onClick={() => startEditing(service.id)}>Изменить</button>
-                                )}
-                                <button className="deletebuttonServices" onClick={() => deleteService(service.id)}>x</button>
-                            </td>
+                    {services.length === 0 ? (
+                        <tr>
+                            <td colSpan="6" style={{textAlign: "center"}}>Нет доступных услуг</td>
                         </tr>
-                    ))}
+                    ) : (
+                        services.map(service => (
+                            <tr key={service.id}>
+                                <td>{service.id}</td>
+                                <td>
+                                    {editingService === service.id ? (
+                                        <select
+                                            name="sphere"
+                                            value={service.sphere}
+                                            onChange={handleInputChange}
+                                        >
+                                            <option value="Мойка">Мойка</option>
+                                            <option value="Шиномонтаж">Шиномонтаж</option>
+                                        </select>
+                                    ) : (
+                                        service.sphere
+                                    )}
+                                </td>
+                                <td>
+                                    {editingService === service.id ? (
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={service.name}
+                                            onChange={handleInputChange}
+                                        />
+                                    ) : (
+                                        service.name
+                                    )}
+                                </td>
+                                <td>
+                                    {editingService === service.id ? (
+                                        <input
+                                            type="text"
+                                            name="cost"
+                                            value={service.cost}
+                                            onChange={handleInputChange}
+                                        />
+                                    ) : (
+                                        service.cost
+                                    )}
+                                </td>
+                                <td>
+                                    {editingService === service.id ? (
+                                        <input
+                                            type="text"
+                                            name="time"
+                                            value={service.time}
+                                            onChange={handleInputChange}
+                                        />
+                                    ) : (
+                                        service.time
+                                    )}
+                                </td>
+                                <td>
+                                    {editingService === service.id ? (
+                                        <button className="buttonServices" onClick={stopEditing}>Сохранить</button>
+                                    ) : (
+                                        <button className="buttonServices"
+                                                onClick={() => startEditing(service.id)}>Изменить</button>
+                                    )}
+                                    <button className="deletebuttonServices"
+                                            onClick={() => deleteService(service.id)}>x
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
                     </tbody>
                 </table>
+
                 <div className="newServiceForm">
                     <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
                         <option value="Мойка">Мойка</option>
                         <option value="Шиномонтаж">Шиномонтаж</option>
                     </select>
-                    <input type="text" name="name" placeholder="Название" value={newService.name} onChange={handleInputChange} />
-                    <input type="text" name="cost" placeholder="Стоимость(руб.)" value={newService.cost} onChange={handleInputChange} />
-                    <input type="text" name="time" placeholder="Время(мин)" value={newService.time} onChange={handleInputChange} />
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Название"
+                        value={newService.name}
+                        onChange={handleInputChange}
+                    />
+                    {errors.name && <p className="error">{errors.name}</p>}
+
+                    <input
+                        type="text"
+                        name="cost"
+                        placeholder="Стоимость(руб.)"
+                        value={newService.cost}
+                        onChange={handleInputChange}
+                    />
+                    {errors.cost && <p className="error">{errors.cost}</p>}
+
+                    <input
+                        type="text"
+                        name="time"
+                        placeholder="Время(мин)"
+                        value={newService.time}
+                        onChange={handleInputChange}
+                    />
+                    {errors.time && <p className="error">{errors.time}</p>}
+
                     <button className="buttonServices" onClick={addService}>Добавить</button>
                 </div>
             </div>

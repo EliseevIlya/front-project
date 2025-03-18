@@ -89,10 +89,6 @@ function OrgStatusEdit_page() {
                             <input type="text" disabled/>
                         </div>
                     ))}
-                    <div className="contactinfoitemSC">
-                        <label>Доп. информация:</label>
-                        <textarea disabled></textarea>
-                    </div>
                     <div className="buttonplateSC">
                         <button
                             className="accbuttonSC"
