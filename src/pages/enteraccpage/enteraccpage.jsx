@@ -1,16 +1,54 @@
 import { useState } from "react";
 import "./style.css";
-import { useNavigate } from "react-router-dom"; // исправлен импорт
+import { useNavigate } from "react-router-dom";
 
 function Enteraccpage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(true); // Добавлено состояние модального окна
+    const [loginError, setLoginError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
     const closeModal = () => {
         setIsModalOpen(false);
-        window.location.reload(); 
+        window.location.reload();
+    };
+
+    const validateLogin = (login) => {
+        const loginRegex = /[a-zA-Z]/; // проверка на наличие хотя бы одной буквы
+        if (login.length < 5 || !loginRegex.test(login)) {
+            setLoginError("Логин должен содержать минимум 5 символов, включая хотя бы одну букву.");
+        } else {
+            setLoginError("");
+        }
+    };
+
+    const validatePassword = (password) => {
+        const passwordRegex = /[a-zA-Z]/; // проверка на наличие хотя бы одной буквы
+        if (password.length < 5 || !passwordRegex.test(password)) {
+            setPasswordError("Пароль должен содержать минимум 5 символов, включая хотя бы одну букву.");
+        } else {
+            setPasswordError("");
+        }
+    };
+
+    const handleLoginChange = (e) => {
+        const value = e.target.value;
+        setLogin(value);
+        validateLogin(value);
+    };
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        validatePassword(value);
+    };
+
+    const handleSubmit = () => {
+        if (!loginError && !passwordError && login && password) {
+            navigate("/admin_acc_page");
+        }
     };
 
     if (!isModalOpen) {
@@ -26,21 +64,25 @@ function Enteraccpage() {
                 </div>
 
                 <h3 className="login-enterpage">ЛОГИН :</h3>
-                <input 
-                    className="login-textfield" 
+                <input
+                    className="login-textfield"
                     placeholder="Введите логин"
                     value={login}
-                    onChange={(e) => setLogin(e.target.value)}
+                    onChange={handleLoginChange}
                 />
+                {loginError && <div className="error">{loginError}</div>}
+
                 <h3 className="password-enterpage">ПАРОЛЬ :</h3>
-                <input 
+                <input
                     type="password"
-                    className="password-textfield" 
+                    className="password-textfield"
                     placeholder="Введите пароль"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordChange}
                 />
-                <button className="enter-enterpage" onClick={() => navigate("/admin_acc_page")}>ВОЙТИ</button>
+                {passwordError && <div className="error">{passwordError}</div>}
+
+                <button className="enter-enterpage" onClick={handleSubmit} disabled={loginError || passwordError || !login || !password}>ВОЙТИ</button>
             </div>
         </div>
     );

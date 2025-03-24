@@ -42,6 +42,7 @@
     color: #318EA8;
     text-align: left;
     margin-bottom: 10px;
+    font-weight: lighter;
 }
 
 .login-textfield, .password-textfield {
