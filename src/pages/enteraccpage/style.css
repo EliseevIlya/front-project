@@ -34,6 +34,7 @@
     text-align: center;
     margin: 0;
     font-size: calc((2vw + 2vh)/2);
+    font-weight: lighter;
 }
 
 .login-enterpage, .password-enterpage {
@@ -41,6 +42,8 @@
     color: #318EA8;
     text-align: left;
     margin-bottom: 10px;           
+    font-weight: lighter;
+
 }
 
 

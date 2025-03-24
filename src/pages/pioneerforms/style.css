@@ -1,6 +1,5 @@
 .maindivorgform {
   font-family: Impact, sans-serif;
-  background-color: #318ea8;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -11,177 +10,120 @@
   box-sizing: border-box;
 }
 
-.headersPioner {
-  margin-bottom: 8vh;
+.headersform {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  position: relative;
   width: 100%;
-  height: 30%;
-}
-
-.titleorgform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-left: 0;
-  color: white;
+  padding: 10px;
 }
 
 .exitbutton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
   border: none;
-  background-color: rgba(255, 255, 255, 0);
-  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  font-size: calc((3vw + 3vh)/2);
-  width: 10vw;
-  height: 5vh;
-  border-radius: 5px;
-  margin-bottom: 15vh;
 }
 
-.exitbutton:hover {
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
+.titleorgform {
+  font-size: 3vw;
   color: white;
-  cursor: pointer;
-  font-size: calc((3vw + 3vh)/2);
-  width: 10vw;
-  height: 5vh;
-  border-radius: 5px;
-  margin-bottom: 15vh;
+  font-weight: lighter;
+  text-align: center;
+  margin: 0;
+
 }
+
 
 .contentorgform {
-  padding-top: 5%;
-  background-color: #318ea8;
   display: flex;
-  flex-direction: row;
-  gap: 30px;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 1400px;
-  justify-content: space-between; /* Выравнивание элементов по краям */
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.filterorgform {
-  background-color: #00008BFF;
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px; /* Уменьшаем ширину фильтра */
-  text-align: left;
-  height: auto; /* Убираем фиксированную высоту и скролл */
-  box-sizing: border-box;
-}
-
-.filterorgform h2 {
-  font-family: Impact, sans-serif;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #318ea8;
-}
-
-.filter-buttonorgform {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  background-color: white;
-  color: black;
-  font-size: calc((2vw + 2vh)/3);
-  margin-bottom: 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  text-align: center;
-}
-
-.filter-buttonorgform:hover,
-.filter-buttonorgform.active {
-  background-color: #318ea8;
-  color: white;
-}
-
-.table-containerorgform {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-}
-
-.table-containerfilterorgform, .table-containertableorgform {
-  background-color: #318ea8;
   padding: 20px;
-  border-radius: 12px;
-  color: black;
-  text-align: center;
-  height: fit-content;
-  max-height: 70vh;
-  overflow-y: auto;
-  box-sizing: border-box;
 }
 
 .table-containerfilter {
-  width: 300px; /* Фильтр имеет фиксированную ширину */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.table-containertable {
-  width: 100%; /* Таблица занимает оставшееся пространство */
-  max-width: 1000px;
-  border: 2px solid #318ea8;
+
+.filterorgform {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1vw;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
 }
 
-.table-container h2 {
-  font-family: Impact, sans-serif;
-  font-size: calc((2vw + 2vh)/2);
-  margin-bottom: 12px;
-  color: black;
+.filter-buttonorgform {
+  padding: 10px 20px;
+  font-size: 1vw;
+  width: 10vw;
+  background-color: darkcyan;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s ease-out; /* Добавили анимацию для трансформации */
+  flex-grow: 1; /* Растягиваем кнопки одинаково */
+  text-align: center; /* Центрируем текст внутри кнопки */
 }
 
-table {
+.filter-buttonorgform:hover {
+  background-color: darkorange;
+  opacity: 0.5;
+}
+
+.filter-buttonorgform.active {
+  background-color: darkorange;
+  color: white;
+}
+
+.filter-buttonorgform:active {
+  transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
+  transition: transform 0.1s ease-in; /* Плавное уменьшение при нажатии */
+}
+
+
+.table-containertableorgform {
+  width: 75%;
+}
+
+.styled-tableorgform {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
+  table-layout: fixed;
+  margin-top: 10px;
 }
 
-th, td {
-  border: 1px solid gray;
-  padding: 14px;
+.styled-tableorgform th, .styled-tableorgform td {
+  padding: 12px;
   text-align: center;
-  font-size: calc((2vw + 2vh)/2);
+  border: 1px solid #ddd;
 }
 
-th {
-  background-color: #ffffff;
+.styled-tableorgform th {
+  background-color: rgb(255, 140, 0);
+  font-weight: lighter;
 }
 
-tr {
-  background-color: #ffffff;
+.styled-tableorgform tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-tr:nth-child(even) {
-  background-color: #ffffff;
+.styled-tableorgform tr:hover {
+  background-color: #f1f1f1;
 }
 
 .no-data {
-  color: black;
-  font-size: calc((2vw + 2vh)/2);
   text-align: center;
-}
-
-@media (max-width: 768px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-  }
-  .table-containertable {
-    width: 100%;
-  }
-  .filter {
-    width: 100%;
-    max-width: none;
-  }
+  font-style: italic;
+  color: #888;
+  padding: 10px;
 }
