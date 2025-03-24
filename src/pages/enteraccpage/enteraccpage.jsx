@@ -14,7 +14,7 @@ function Enteraccpage() {
     };
 
     if (!isModalOpen) {
-        return null; // Если окно закрыто, ничего не рендерим
+        return null; 
     }
 
     return (
@@ -24,22 +24,26 @@ function Enteraccpage() {
                     <h3 className="header-title">ВОЙТИ В АККАУНТ АДМИНИСТРАТОРА</h3>
                     <button className="enteraccclosebutton" onClick={closeModal}>×</button> 
                 </div>
-
+                <div className="input-group">
                 <h3 className="login-enterpage">ЛОГИН :</h3>
-                <input 
+                <input
+                    type="text"
                     className="login-textfield" 
                     placeholder="Введите логин"
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                 />
+                </div>
+                <div className="input-group">
                 <h3 className="password-enterpage">ПАРОЛЬ :</h3>
                 <input 
-                    type="password"
+                    type="text"
                     className="password-textfield" 
                     placeholder="Введите пароль"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                </div>
                 <button className="enter-enterpage" onClick={() => navigate("/admin_acc_page")}>ВОЙТИ</button>
             </div>
         </div>

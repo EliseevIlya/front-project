@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./style.css";
+import { useNavigate } from "react-router";
 
 function PioneerForms() {
   const statuses = [
@@ -17,10 +18,15 @@ function PioneerForms() {
   ];
 
   const [selectedStatus, setSelectedStatus] = useState("new");
+  const navigate = useNavigate();
 
   return (
     <div className="maindivorgform">
-      <h1 className="titleorgform">ФОРМЫ ПОДКЛЮЧЕНИЯ ОРГАНИЗАЦИИ К PIONEER</h1>
+      <div className="headersPioneer">
+        <div className="headtextPioneer">
+          <h1 className="titleorgform">ФОРМЫ ПОДКЛЮЧЕНИЯ ОРГАНИЗАЦИИ К PIONEER</h1>
+        </div>
+      </div>
       <div className="contentorgform">
         <div className="table-containerfilter">
           <h2>Фильтры по значению статуса</h2>
@@ -44,6 +50,7 @@ function PioneerForms() {
                 <th>Рег №</th>
                 <th>Дата Создания</th>
                 <th>Краткое наим-е организации</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -55,11 +62,14 @@ function PioneerForms() {
                       <td>{f.id}</td>
                       <td>{f.date}</td>
                       <td>{f.org}</td>
+                      <td>
+                        <a href={`/org_statusedit?id=${f.id}`} className="edit-button">Перейти</a>
+                      </td>
                     </tr>
                   ))
               ) : (
                 <tr>
-                  <td colSpan="3" className="no-data">Нет данных</td>
+                  <td colSpan="4" className="no-data">Нет данных</td>
                 </tr>
               )}
             </tbody>

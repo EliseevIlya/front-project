@@ -27,7 +27,7 @@ function OrgStatusEdit_page() {
             alert(`Заявка отклонена по причине: ${reason}`);
             setShowPopup(false);
             setReason("");
-            navigate("/admin_acc_page"); 
+            navigate("/org/forms"); 
         }
     };
 
