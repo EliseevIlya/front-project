@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./style.css";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router";
+
+
 
 function PioneerForms() {
   const statuses = [
@@ -18,6 +21,7 @@ function PioneerForms() {
   ];
 
   const [selectedStatus, setSelectedStatus] = useState("new");
+  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
@@ -27,6 +31,7 @@ function PioneerForms() {
   };
 
   return (
+
       <div className="background-container">
         <div className="maindivorgform">
           <div className="headersform">
@@ -60,7 +65,7 @@ function PioneerForms() {
                 <tr>
                   <th>№ Заявки</th>
                   <th>Дата Создания</th>
-                  <th>Краткое наим-е организации</th>
+
                 </tr>
                 </thead>
                 <tbody>

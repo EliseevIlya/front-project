@@ -27,6 +27,18 @@
     text-align: center;
 }
 
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group h4 {
+    font-size: calc((1.3vw + 1.3vh)/2);
+    color: #318EA8;
+    margin-bottom: 5px;
+}
+
 .header-container {
     display: flex;
     justify-content: center;

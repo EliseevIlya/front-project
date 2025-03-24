@@ -92,8 +92,6 @@ function Createaccpage() {
             }));
             return;
         }
-
-
         navigate("/user");
     };
 

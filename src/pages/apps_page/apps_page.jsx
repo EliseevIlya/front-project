@@ -79,9 +79,9 @@ function Apps_page() {
                             <p><strong className="carddata">Стоимость:</strong> {app.cost}</p>
                         </div>
                     ))}
-                    <div></div>
-                    <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
+
                 </div>
+                <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
             </div>
 
             {selectedApp && (

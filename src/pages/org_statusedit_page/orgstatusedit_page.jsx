@@ -39,8 +39,7 @@ function OrgStatusEdit_page() {
 
     const handlePopupSubmit = () => {
         if (reason.length >= 10) {
-            setShowPopup(false); // Закрываем модальное окно
-            navigate("/org/forms"); // Переходим на страницу форм заявок
+
         }
     };
 
