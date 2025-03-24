@@ -283,8 +283,7 @@ textarea:focus {
     cursor: pointer;
     width: 10vw;
     height: 5vh;
-    font-size: 1.5vw;
-    transition: all 0.2s ease; /* Плавный переход для всех свойств */
+    font-size: 2vw;
 }
 
 .popup-buttons button:hover {
@@ -302,13 +301,6 @@ textarea:focus {
     color: white;
     border: white 1px solid;
 }
-
-/* Анимация при нажатии */
-.popup-buttons button:active {
-    transform: scale(0.95); /* Немного уменьшает кнопку */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляет легкую тень */
-}
-
 
 .close {
     position: absolute;

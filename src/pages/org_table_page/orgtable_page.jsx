@@ -22,9 +22,7 @@ function OrgTable_page() {
     return (
         <>
             <div className="headersTable">
-                <button className="exitbutton" title="Вернуться в кабинет" onClick={() => navigate("/admin_acc_page")}>
-                    <img src="/src/icons/exitblack.png" alt="Exit"/>
-                </button>
+                <button className="exitbuttonTable" onClick={() => navigate("/admin_acc_page")}>Выйти</button>
                 <h1 className="textTable">СПИСОК ОРГАНИЗАЦИЙ</h1>
             </div>
 
