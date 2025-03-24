@@ -59,15 +59,10 @@ function Apps_page() {
     return (
         <>
             <div className="headersApps">
-                <button className="accbuttonApps"  title="Личный кабинет" onClick={() => navigate("/user")}>
-                    <img src="/src/icons/profile.png" alt="Личный кабинет"/>
-                </button>
+                <button className="exitbuttonApps" onClick={() => navigate("/user")}>Личный кабинет</button>
                 <h1 className="textApp">ЗАЯВКИ</h1>
-                <button className="createbuttonApps" title="Добавить заявку" onClick={() => navigate("/service")}>
-                    <img src="/src/icons/create.png" alt="Создать"/>
-                </button>
+                <button className="createbuttonApps" onClick={() => navigate("/service")}>Создать</button>
             </div>
-
 
             <div className="apps-container">
                 <div className="cards-grid">
@@ -79,7 +74,6 @@ function Apps_page() {
                             <p><strong className="carddata">Стоимость:</strong> {app.cost}</p>
                         </div>
                     ))}
-
                 </div>
                 <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
             </div>

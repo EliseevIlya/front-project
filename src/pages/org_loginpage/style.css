@@ -4,14 +4,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.divloginpage {
-    font-weight: lighter;
+.orgloginpage {
     font-family: Impact, sans-serif;
     width: 400px;
     background-color: #ffffff;
@@ -20,7 +19,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.loginpageerror-message {
+.orgerror-message {
     color: red;
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
@@ -50,163 +49,77 @@
 }
 
 .headerorgpage {
+    color: #318EA8;
     flex-grow: 1;
     text-align: center;
     margin: 0;
-    font-size: calc((1.9vw + 1.9vh)/2);
-    font-weight: lighter;
+    font-size: calc((1.3vw + 1.3vh)/2);
 }
 
-.orgclose-button, .loginpageclosebutton, .createaccclosebutton, .enteraccclosebutton{
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    background: #318EA8;
-    border: none;
-    font-size: calc((1.2vw + 1.2vh)/2);
-    cursor: pointer;
-    color: #ffffff;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.orgclose-button:hover, .loginpageclosebutton:hover, .createaccclosebutton:hover, .enteraccclosebutton:hover {
-    color: #FF8000;
-}
-
-
-.inputloginpage[type="text"]::placeholder {
+.inputorg[type="text"]::placeholder {
     font-size: calc((1.1vw + 1.1vh)/2);
-    color: #ffffff;
+    color: #ffffff; 
     opacity: 0.5;
 }
 
-.loginpagebutton {
+.orgbutton {
     margin-bottom: 15px;
     border-radius: 10px;
     padding: 15px 25px;
     font-size: calc((1.3vw + 1.3vh)/2);
     border: none;
-    background-color: #FF8000;
+    background-color: #FF8000; 
     color: white;
     cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
-.loginpagebutton:hover {
-    background-color: #318EA8;
-}
-
-.loginpagebutton.disabled-button {
-    background-color: #cccccc !important;
-    color: #666666 !important;
-    cursor: not-allowed;
-}
-
-
-.inputloginpage[type="text"] {
+.inputorg[type="text"] {
     border-radius: 10px;
-    flex: 1;
+    flex: 1; 
     padding: 15px;
     border: 1px solid #318EA8;
-    background-color: #318EA8;
+    background-color: #318EA8; 
     box-sizing: border-box;
     width: 100%;
-    max-width: 100%;
+    max-width: 100%; 
 }
 
-.inputloginpage[type="text"]:disabled {
-    border-radius: 10px;
-    flex: 1;
-    padding: 15px;
-    border: 1px solid darkgrey;
-    background-color: darkgrey;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-}
-
-.inputloginpage[type="text"]:focus {
-    border-radius: 10px;
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #318EA8;
-    background-color: #318EA8;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-}
-
-.footerloginpage {
+.orgfooter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 25px;
 }
 
-.footerloginpage h6 {
+.orgfooter h6 {
     border-radius: 10px;
     font-size: calc((1.3vw + 1.3vh)/2);
-    color: #318EA8;
+    color: #318EA8; 
     cursor: pointer;
     margin: 0;
     text-align: center;
 }
 
-.footerloginpage button {
+.orgfooterbutton {
     border-radius: 10px;
-    width: auto;
+    width: auto; 
     padding: 15px 25px;
     font-size: calc((1.3vw + 1.3vh)/2);
-    box-sizing: border-box;
-    margin: 0;
-    background-color: #FF8000;
+    box-sizing: border-box; 
+    margin: 0; 
+    background-color: #FF8000; 
 }
 
-.footerloginpage button:hover {
-    background-color: #318EA8;
+.orgfooterbutton:hover {
+    background-color: #318EA8; 
 }
 
-.footerloginpage h6:hover {
+.orgfooter h6:hover {
     text-decoration: underline;
 }
 
-.loginpagebutton:hover {
-    background-color: #318EA8;
-}
-
-.loginpage-info {
-    font-size: calc((1.1vw + 1.1vh) / 2);
-    color: #666666;
-    margin-top: 5px;
-    text-align: center;
-}
-
-.loginpageclosebutton {
-    position: absolute;
-    top: 10px;  /* Отступ от верхнего края белой области */
-    right: 10px;  /* Отступ от правого края белой области */
-    width: 30px;
-    height: 30px;
-    background: #318EA8;
-    border: none;
-    font-size: calc((1.2vw + 1.2vh)/2);
-    cursor: pointer;
-    color: #ffffff;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;  /* Поверх текста заголовка */
-}
-
-.loginpageclosebutton:hover {
-    background-color: #FF8000;
-    color: #ffffff;
+.orgbutton:hover {
+    background-color: #318EA8; 
 }

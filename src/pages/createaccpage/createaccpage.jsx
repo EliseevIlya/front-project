@@ -17,8 +17,6 @@ function Createaccpage() {
         form: ""
     });
 
-    const [isCodeEnabled, setIsCodeEnabled] = useState(false);
-
     const navigate = useNavigate();
 
     const validateEmail = (emailValue) => {
@@ -48,14 +46,7 @@ function Createaccpage() {
             ...prev,
             email: validateEmail(emailValue)
         }));
-
-        if (validateEmail(emailValue) === "" && termsAccepted) {
-            setIsCodeEnabled(true);
-        } else {
-            setIsCodeEnabled(false);
-        }
     };
-
 
     const handleSurnameChange = (e) => {
         const surnameValue = e.target.value;
@@ -116,37 +107,37 @@ function Createaccpage() {
                     <div className="input-group">
                         <h4>E-MAIL :</h4>
                         <input className="inputcreateacc"
-                               type="text"
-                               placeholder="Введите e-mail"
-                               value={email}
-                               onChange={handleEmailChange}
+                            type="text"
+                            placeholder="Введите e-mail"
+                            value={email}
+                            onChange={handleEmailChange}
                         />
                     </div>
                     <div className="input-group">
                         <h4>ФАМИЛИЯ:</h4>
                         <input className="inputcreateacc"
-                               type="text"
-                               placeholder="Введите фамилию"
-                               value={surname}
-                               onChange={handleSurnameChange}
+                            type="text"
+                            placeholder="Введите фамилию"
+                            value={surname}
+                            onChange={handleSurnameChange}
                         />
                     </div>
                     <div className="input-group">
                         <h4>ИМЯ:</h4>
                         <input className="inputcreateacc"
-                               type="text"
-                               placeholder="Введите имя"
-                               value={name}
-                               onChange={handleNameChange}
+                            type="text"
+                            placeholder="Введите имя"
+                            value={name}
+                            onChange={handleNameChange}
                         />
                     </div>
                     <div className="input-group">
                         <h4>НОМЕР ТЕЛЕФОНА:</h4>
                         <input className="inputcreateacc"
-                               type="text"
-                               placeholder="Введите номер"
-                               value={phone}
-                               onChange={handlePhoneChange}
+                            type="text"
+                            placeholder="Введите номер"
+                            value={phone}
+                            onChange={handlePhoneChange}
                         />
                     </div>
                 </div>
@@ -155,34 +146,23 @@ function Createaccpage() {
                         type="checkbox"
                         id="terms"
                         checked={termsAccepted}
-                        onChange={(e) => {
-                            setTermsAccepted(e.target.checked);
-                            if (validateEmail(email) === "" && e.target.checked) {
-                                setIsCodeEnabled(true); // Если email и условия корректны, активируем кнопку
-                            } else {
-                                setIsCodeEnabled(false);
-                            }
-                        }}
+                        onChange={(e) => setTermsAccepted(e.target.checked)}
                     />
-                    <label htmlFor="terms">Я принимаю <a href="https://policies.google.com/privacy?hl=ru"
-                                                         target="_blank" rel="noopener noreferrer">пользовательское
-                        соглашение</a></label>
+                    <label htmlFor="terms">Я принимаю <a href="#" target="_blank" rel="noopener noreferrer">пользовательское соглашение</a></label>
                 </div>
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
-                    <button className="createaccbutton" disabled={!isCodeEnabled}>ПОЛУЧИТЬ КОД</button>
+                    <button className="createaccbutton">ПОЛУЧИТЬ КОД</button>
                     <input className="inputcreateacc"
-                           type="text"
-                           placeholder="Введите код"
-                           value={code}
-                           onChange={(e) => setCode(e.target.value)}
-                           disabled={!isCodeEnabled}
+                        type="text"
+                        placeholder="Введите код"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
                     />
                     <button className="createaccbutton" onClick={handleCreateAccount}>СОЗДАТЬ АККАУНТ</button>
                 </div>
             </div>
         </div>
-
     );
 }
 

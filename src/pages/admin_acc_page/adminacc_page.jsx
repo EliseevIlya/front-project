@@ -15,9 +15,7 @@ function AdminAcc_page() {
         <div>
             <div className="headersAdmin">
                 <div className="headexit">
-                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
-                        <img src="/src/icons/exit.png" alt="Exit"/>
-                    </button>
+                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>Выйти</button>
                 </div>
                 <div className="headtextAdmin">
                     <div className="headnameAdmin">

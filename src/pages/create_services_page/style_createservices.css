@@ -7,6 +7,7 @@ body {
 }
 
 .headerservices {
+    margin-top: -5vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,30 +48,19 @@ body {
 .companyinfo:disabled{
     font-size: 2vw;
     background: none;
-    width: 50%;
+    width: 100%;
     margin-left: 5vw;
     color: white;
     border: none;
     }
-
-.infoButton {
-    width: 20vw;
-    height: 5vh;
-}
-
-.infoButton:hover {
-    color: darkorange;
-    background: white;
-}
 
 .servicesTable {
     margin-top: 5vh;
     background-color: rgba(55, 155, 168, 0);
     border-radius: 20px;
     border: none;
-    max-width: 90vw; /* ограничиваем максимальную ширину контейнера */
+    overflow: hidden;
 }
-
 
 .tableServ {
     width: 75%;
@@ -85,12 +75,7 @@ th, td {
     font-size: 1.5vw;
     font-weight: lighter;
     font-family: Impact, sans-serif;
-    max-width: 10vw; /* ограничиваем ширину столбцов */
-    overflow: hidden;
-    text-overflow: ellipsis; /* добавляет троеточие, если текст не влезает */
-    white-space: nowrap;
 }
-
 
 th {
     background-color: darkorange;
@@ -101,14 +86,14 @@ tr {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.tableinput, .tableselect {
-    width: 8vw; /* фиксированная ширина для предотвращения переполнения */
-    box-sizing: border-box;
+.servicesTable input {
+    width: 10vw;
+    height: 3vh;
 }
 
-
 .buttonServices {
-    background: none;
+    background-color: darkorange;
+    color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 20px;
@@ -116,7 +101,18 @@ tr {
     font-size: 1.5vw;
     width: 10vw;
     height: 5vh;
-    margin-right: 8vw;
+}
+
+.buttonServices:hover {
+    background-color: white;
+    color: darkorange;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 5vh;
 }
 
 /* Стили для формы добавления новой услуги */
@@ -124,7 +120,7 @@ tr {
     display: flex;
     flex-direction: row;
     margin-top: 3vh;
-    margin-left: 10vw;
+    margin-left: 12vw;
     margin-bottom: 1vh;
     gap: 1vw
 }
@@ -134,7 +130,7 @@ tr {
     border: 1px solid #ccc;
     border-radius: 20px;
     font-size: 1.5vw;
-    width: 8vw;
+    width: 15vw;
     height: 3vh;
     text-align: center;
 }
@@ -145,23 +141,37 @@ tr {
     box-shadow: 0 0 0 1px darkorange;
     border-radius: 20px;
     font-size: 1.5vw;
-    width: 8vw;
+    width: 15vw;
     height: 3vh;
     text-align: center;
 }
 
 .deletebuttonServices {
-    width: 1vw;
-    height: 1vw;
+    width: 3vw;
+    height: 3vw;
+    margin-left: 0.5vw;
     font-size: 1.5vw;
     font-weight: lighter;
+    border-radius: 30px;
+    text-align: center;
     border: none;
     color: white;
-    background: none;
+    background: darkred;
     cursor: pointer;
-    margin-left: -10vw;
 }
 
+.deletebuttonServices:hover {
+    width: 3vw;
+    height: 3vw;
+    margin-left: 0.5vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    background: red;
+    cursor: pointer;
+}
 
 
 

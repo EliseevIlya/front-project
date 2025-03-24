@@ -22,8 +22,9 @@ body {
     }
     .deletebuttonSC {
         border: none;
+        background-color: rgba(255, 255, 255, 0);
+        color: rgba(255, 0, 0, 0.5);
         cursor: pointer;
-        background: none;
         font-size: 2vw;
         width: 10vw;
         height: 5vh;
@@ -32,7 +33,7 @@ body {
     }
     .deletebuttonSC:hover {
         border: none;
-        background: none;
+        background-color: rgb(255, 0, 0);
         color: white;
         cursor: pointer;
         font-size: 2vw;
@@ -192,9 +193,81 @@ input[type="text"]:focus {
     box-shadow: 0 0 5px darkorange;
 }
 
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 10vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+}
+
+textarea:focus {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 30vw;
+    height: 10vh;
+    outline: none;
+    text-align: left;
+    padding-left: 1vw;
+    color: darkorange;
+    font-size: calc((2vw + 2vh)/2);
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+}
+
 .buttonplateSC {
     display: grid;
     justify-content: start;
+}
+
+.editbuttonSC {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkorange;
+    border: none;
+    border-radius: 20px;
+    margin-top: -7vh;
+}
+
+.editbuttonSC:hover {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkblue;
+    border: none;
+    border-radius: 20px;
+}
+
+.repeatbuttonSC {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkorange;
+    border: none;
+    border-radius: 20px;
+    margin-top: -7vh;
+}
+
+.repeatbuttonSC:hover {
+    margin-right: 30vw;
+    font-size: 1.5vw;
+    width: 10vw;
+    height: 7vh;
+    color: white;
+    background: darkblue;
+    border: none;
+    border-radius: 20px;
 }
 
 .accbuttonSC {
@@ -206,7 +279,7 @@ input[type="text"]:focus {
     background: darkorange;
     border: none;
     border-radius: 20px;
-    margin-top: 7vh;
+    margin-top: -7vh;
 }
 
 .accbuttonSC:hover {
