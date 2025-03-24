@@ -1,9 +1,44 @@
-.confirmationpage {
-    position: relative;
+.deleteacc {
+    font-family: Impact, sans-serif;
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.confirmdeletion-text {
-    text-align: center;
-    color:#293C9B;
+.h1_deleteaccpage {
+    color: #726F6F;
+    font-size: calc((2vw + vh)/2);
+    margin-bottom: 10px;
+}
+
+.warning-text {
+    font-size: calc((1.5vw + 1.5vh)/2);
+    color: #318EA8;
+    margin-bottom: 20px;
+}
+
+.footer_deleteaccpage {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.cancel-button {
+    padding: 12 24px;
+    background-color: #FF8000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: calc((1.3vw + 1.3vh)/2);
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #318EA8;
 }

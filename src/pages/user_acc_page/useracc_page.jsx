@@ -1,13 +1,11 @@
 import { useState } from "react";
 import "./style_useracc.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Deleteaccpage from "../deleteaccpage/deleteaccpage";
 
 function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
-
-    const toggleEdit = () => {
-        setIsEditing((prev) => !prev);
-    };
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
 
     const navigate = useNavigate();
 
@@ -15,7 +13,9 @@ function UserAcc_page() {
         <div>
             <div className="headers">
                 <div className="headexit">
-                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>Выйти</button>
+                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
+                        <img src="/src/icons/exit.png" alt="Exit" />
+                    </button>
                 </div>
                 <div className="headtext">
                     <div className="headname">
@@ -26,7 +26,9 @@ function UserAcc_page() {
                     </div>
                 </div>
                 <div className="headdelete">
-                    <button className="deletebutton" title="Удалить аккаунт">Удалить</button>
+                    <button className="deletebutton"  title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
+                        <img src="src/icons/close.png" alt="Delete" />
+                    </button>
                 </div>
             </div>
 
@@ -61,7 +63,7 @@ function UserAcc_page() {
 
             <div className="buttonplate">
                 <div className="editsave">
-                    <button className="editbutton" onClick={toggleEdit}>
+                    <button className="editbutton" onClick={() => setIsEditing((prev) => !prev)}>
                         {isEditing ? "Сохранить" : "Изменить"}
                     </button>
                 </div>
@@ -69,6 +71,8 @@ function UserAcc_page() {
                     <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
                 </div>
             </div>
+
+            {isDeleteModalOpen && <Deleteaccpage onClose={() => setIsDeleteModalOpen(false)} />}
         </div>
     );
 }

@@ -1,10 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./style_orgstatuscheck.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Deleteparthpage from "../deletepartnership/deletepartnership";
 
 function OrgStatusCheck_page() {
     const [isEditing, setIsEditing] = useState(false);
-    const [showReasonForm, setShowReasonForm] = useState(false); // состояние для формы "Причина"
+    const [showReasonForm, setShowReasonForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [status, setStatus] = useState("Отклонена");
+
+    const navigate = useNavigate();
 
     const toggleEditMode = () => {
         setIsEditing(!isEditing);
@@ -14,27 +19,34 @@ function OrgStatusCheck_page() {
         setShowReasonForm(!showReasonForm);
     };
 
-    const navigate = useNavigate();
+    const validStatuses = ["Новая", "В работе", "Исполнена", "Отклонена"];
+    const isStatusValid = validStatuses.includes(status);
 
     return (
         <>
             <div className="headersorgSC">
-                <button className="exitbuttonSC" onClick={() => navigate("/")}>Выйти</button>
+                <button className="exitbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Exit"/>
+                </button>
                 <h1 className="textSC">ПРОВЕРКА ЗАЯВКИ</h1>
-                <button className="deletebuttonSC">Удалить</button>
+                <button className="deletebuttonSC" title="Удалить аккаунт" onClick={() => setShowDeleteModal(true)}>
+                    <img src="/src/icons/close.png" alt="Delete"/>
+                </button>
             </div>
 
             <div className="statusplate">
                 <div className="status">
-                    <label>Текущий статус:<input type="text" defaultValue="Новая" disabled/></label>
-                    <button className="reasonbutton" onClick={toggleReasonForm}>Причина</button>
+                    <label>Текущий статус: <input type="text" value={status} disabled/></label>
+                    {status === "Отклонена" && isStatusValid && (
+                        <button className="reasonbutton" onClick={toggleReasonForm}>Причина</button>
+                    )}
                 </div>
                 <div className="dates">
                     <div className="daterequest">
-                        <label>Дата составления:<input type="text" defaultValue="6.03.2025" disabled/></label>
+                        <label>Дата составления: <input type="text" defaultValue="6.03.2025" disabled /></label>
                     </div>
                     <div className="dateresponse">
-                        <label>Дата рассмотрения:<input type="text" defaultValue="10.03.2025" disabled/></label>
+                        <label>Дата рассмотрения: <input type="text" defaultValue="10.03.2025" disabled /></label>
                     </div>
                 </div>
             </div>
@@ -42,37 +54,27 @@ function OrgStatusCheck_page() {
             <div className="registrationSC">
                 <div className="orginfoSC">
                     <h2>Информация об организации:</h2>
-                    {['Полное название', 'Сокращенное', 'ИНН', 'КПП', 'ОГРН', 'Город', 'Адрес'].map((label, index) => (
+                    {["Полное название", "Сокращенное", "ИНН", "КПП", "ОГРН", "Город", "Адрес"].map((label, index) => (
                         <div className="orginfoitemSC" key={index}>
                             <label>{label}:</label>
-                            <input type="text" disabled={!isEditing} />
+                            <input type="text" disabled />
                         </div>
                     ))}
                 </div>
                 <div className="contactinfoSC">
                     <h2>Контактное лицо:</h2>
-                    {['Фамилия', 'Имя', 'Email', 'Номер тел.'].map((label, index) => (
+                    {["Фамилия", "Имя", "Email", "Номер тел."].map((label, index) => (
                         <div className="contactinfoitemSC" key={index}>
                             <label>{label}:</label>
-                            <input type="text" disabled={!isEditing} />
+                            <input type="text" disabled />
                         </div>
                     ))}
-                    <div className="contactinfoitemSC">
-                        <label>Доп. информация:</label>
-                        <textarea disabled={!isEditing}></textarea>
-                    </div>
                     <div className="buttonplateSC">
-                        {isEditing ? (
-                            <button className="repeatbuttonSC" onClick={toggleEditMode}>Пересоздать заявку</button>
-                        ) : (
-                            <button className="editbuttonSC" onClick={toggleEditMode}>Изменить</button>
-                        )}
-                        <button className="accbuttonSC" disabled>Личный кабинет</button>
+                        <button className="accbuttonSC" onClick={() => navigate("/create/services")}>Личный кабинет</button>
                     </div>
                 </div>
             </div>
 
-            {/* Модальное окно с формой причины */}
             {showReasonForm && (
                 <div className="modalSC">
                     <div className="modalSC-content">
@@ -81,6 +83,10 @@ function OrgStatusCheck_page() {
                         <textarea className="reason-textarea" disabled></textarea>
                     </div>
                 </div>
+            )}
+
+            {showDeleteModal && (
+                <Deleteparthpage onClose={() => setShowDeleteModal(false)} />
             )}
         </>
     );

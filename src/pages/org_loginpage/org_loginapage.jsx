@@ -1,44 +1,102 @@
 import { useState } from "react";
 import "./style.css";
+import { useNavigate } from "react-router";
 
-function Org_loginpage() {
+function OrgLoginPage() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isCodeEnabled, setIsCodeEnabled] = useState(false);
+    const navigate = useNavigate();
+
+    const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (isValidEmail.test(emailValue)) {
+            setEmail(emailValue);
+            setErrorMessage("");
+        } else {
+            setEmail(emailValue);
+            setErrorMessage("Пожалуйста, введите корректный email.");
+        }
+    };
+
+    const handleGetCode = () => {
+        if (!email || errorMessage) {
+            setErrorMessage("Введите корректный email перед получением кода.");
+            return;
+        }
+        setIsCodeEnabled(true);
+    };
+
+    const handleSubmit = () => {
+        if (errorMessage || !email || !code) {
+            setErrorMessage("Пожалуйста, заполните все поля корректно.");
+            return;
+        }
+        navigate("/org/statuscheck");
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        window.location.reload();
+    };
+
+    if (!isModalOpen) {
+        return null;
+    }
 
     return (
-        <div className="org_loginpage">
-            <header className="org_loginpageheader">
-                <h1>ОРГАНИЗАЦИЯ - ПАРТНЕР</h1>
-            </header>
-            <div className="input-containerorg">
-                <div className="label-containerorg">
-                    <h4>E-MAIL :</h4>
-                    <h6 className="sub-text">(контактного лица)</h6>
+        <div className="overlay">
+            <div className="divloginpage">
+                <div className="header-container">
+                    <h1 className="headerorgpage">ОРГАНИЗАЦИЯ - ПАРТНЕР</h1>
+                    <button className="loginpageclosebutton" onClick={handleCloseModal}>×</button>
                 </div>
-                <input 
-                    type="text" 
-                    placeholder="Введите e-mail" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="button">
-                <button>ПОЛУЧИТЬ КОД</button>
-            </div>
-            <div className="input-containerorg">
-                <input 
-                    type="text" 
-                    placeholder="Введите код" 
-                    value={code} 
-                    onChange={(e) => setCode(e.target.value)}
-                />
-            </div>
-            <div className="footer">
-                <h6>СТАТЬ ПАРТНЕРОМ</h6>
-                <button>ВОЙТИ</button>
+                <div className="input-group">
+                    <h4>E-MAIL :</h4>
+                    <input
+                        className="inputloginpage"
+                        type="text"
+                        placeholder="Введите e-mail"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                </div>
+                <div>
+                    <button
+                        className="loginpagebutton"
+                        onClick={handleGetCode}
+                        disabled={!email || errorMessage}
+                    >
+                        ПОЛУЧИТЬ КОД
+                    </button>
+                </div>
+                <div className="input-group">
+                    <input
+                        className="inputloginpage"
+                        type="text"
+                        placeholder="Введите код"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        disabled={!isCodeEnabled}
+                    />
+                    {isCodeEnabled && (
+                        <p className="loginpage-info">
+                            Если вы не получили код, пожалуйста, проверьте папку "Спам"!
+                        </p>
+                    )}
+                </div>
+                {errorMessage && <div className="loginpageerror-message">{errorMessage}</div>}
+                <div className="footerloginpage">
+                    <h6 onClick={() => navigate("/org/reg")}>СТАТЬ ПАРТНЕРОМ</h6>
+                    <button className="loginpagebutton" onClick={handleSubmit}>ВОЙТИ</button>
+                </div>
             </div>
         </div>
     );
 }
 
-export default Org_loginpage;
+export default OrgLoginPage;

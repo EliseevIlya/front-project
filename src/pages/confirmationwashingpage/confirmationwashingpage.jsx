@@ -22,4 +22,14 @@ function Confirmationwashingpage() {
     );
 }
 
-export default Confirmationwashingpage;
+function App() {
+    const [isModalOpen, setModalOpen] = useState(true);
+
+    return (
+        <div>
+            <ConfirmationModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+        </div>
+    );
+}
+
+export default App;
