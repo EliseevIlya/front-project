@@ -19,44 +19,82 @@ function OrgInfo_page() {
         additionalInfo: "",
     });
 
-    const [isEditing, setIsEditing] = useState(false); // Состояние редактирования
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Состояние кнопки "Личный кабинет"
-    const [isSaveDisabled, setIsSaveDisabled] = useState(true); // Состояние кнопки "Сохранить"
+    const [isEditing, setIsEditing] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+    const [errors, setErrors] = useState({}); // Для хранения ошибок валидации
 
     const navigate = useNavigate();
 
-    // Проверка, все ли обязательные поля заполнены
+    // Валидация полей
+    const validateField = (name, value) => {
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        switch (name) {
+            case "fullName":
+            case "shortName":
+            case "city":
+            case "address":
+            case "lastName":
+            case "firstName":
+                return /^[А-Яа-я]{2,}$/.test(value);
+            case "inn":
+                return /^\d{10}$/.test(value);
+            case "kpp":
+                return /^\d{9}$/.test(value);
+            case "ogrn":
+                return /^\d{13}$/.test(value);
+            case "email":
+                return isValidEmail.test(value);
+            case "phone":
+                return /^[78]\d{10}$/.test(value);
+            default:
+                return true;
+        }
+    };
+
+    // Проверка всех обязательных полей
     useEffect(() => {
         const { fullName, shortName, inn, kpp, ogrn, city, address, lastName, firstName, email, phone } = formData;
         const isAllFieldsFilled = fullName && shortName && inn && kpp && ogrn && city && address && lastName && firstName && email && phone;
-        setIsSaveDisabled(!isAllFieldsFilled); // Если какое-либо из обязательных полей не заполнено, кнопка "Сохранить" будет заблокирована
+        setIsSaveDisabled(!isAllFieldsFilled);
     }, [formData]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        // Валидация при изменении поля
+        if (!validateField(name, value)) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                [name]: "Некорректное значение"
+            }));
+        } else {
+            setErrors(prevErrors => {
+                const { [name]: removedError, ...rest } = prevErrors;
+                return rest;
+            });
+        }
     };
 
     const handleEditClick = () => {
-        setIsEditing(true); // Включаем редактирование
-        setIsButtonDisabled(true); // Блокируем кнопку "Личный кабинет"
+        setIsEditing(true);
+        setIsButtonDisabled(true);
     };
 
     const handleSaveClick = () => {
-        setIsEditing(false); // Выключаем редактирование
-        setIsButtonDisabled(false); // Разблокируем кнопку "Личный кабинет"
+        setIsEditing(false);
+        setIsButtonDisabled(false);
     };
 
     return (
         <>
             <div className="info_headersorg">
-                <button
-                    className="info_exitbutton"
-                    title="Выйти на главную"
-                    onClick={() => navigate("/create/services")}
-                    disabled={isButtonDisabled} // Блокируем кнопку при редактировании
-                >
-                    Личный кабинет
+                <button  className="info_exitbutton"
+                         title="Личный кабинет"
+                         onClick={() => navigate("/create/services")}
+                         disabled={isButtonDisabled}>
+                    <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="info_textorg">ИНФОРМАЦИЯ</h1>
             </div>
@@ -71,8 +109,9 @@ function OrgInfo_page() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
-                            disabled={!isEditing} // Делаем поля неактивными, если не редактируем
+                            disabled={!isEditing}
                         />
+                        {errors.fullName && <span className="error">{errors.fullName}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>Сокращенное:</label>
@@ -83,6 +122,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.shortName && <span className="error">{errors.shortName}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>ИНН:</label>
@@ -93,6 +133,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.inn && <span className="error">{errors.inn}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>КПП:</label>
@@ -103,6 +144,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.kpp && <span className="error">{errors.kpp}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>ОГРН:</label>
@@ -113,6 +155,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.ogrn && <span className="error">{errors.ogrn}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>Город:</label>
@@ -123,6 +166,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.city && <span className="error">{errors.city}</span>}
                     </div>
                     <div className="info_orginfoitem">
                         <label>Адрес:</label>
@@ -133,6 +177,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.address && <span className="error">{errors.address}</span>}
                     </div>
                 </div>
 
@@ -147,6 +192,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.lastName && <span className="error">{errors.lastName}</span>}
                     </div>
                     <div className="info_contactinfoitem">
                         <label>Имя:</label>
@@ -157,6 +203,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.firstName && <span className="error">{errors.firstName}</span>}
                     </div>
                     <div className="info_contactinfoitem">
                         <label>Email:</label>
@@ -167,6 +214,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.email && <span className="error">{errors.email}</span>}
                     </div>
                     <div className="info_contactinfoitem">
                         <label>Номер тел.:</label>
@@ -177,6 +225,7 @@ function OrgInfo_page() {
                             onChange={handleInputChange}
                             disabled={!isEditing}
                         />
+                        {errors.phone && <span className="error">{errors.phone}</span>}
                     </div>
                     <div className="info_contactinfoitem">
                         <label>Дополнительная информация:</label>
@@ -192,7 +241,7 @@ function OrgInfo_page() {
                             <button
                                 className="info_editbutton"
                                 onClick={handleSaveClick}
-                                disabled={isSaveDisabled} // Блокируем кнопку "Сохранить", если не все обязательные поля заполнены
+                                disabled={isSaveDisabled}
                             >
                                 Сохранить
                             </button>

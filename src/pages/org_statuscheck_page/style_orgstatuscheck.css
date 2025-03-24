@@ -22,9 +22,8 @@ body {
     }
     .deletebuttonSC {
         border: none;
-        background-color: rgba(255, 255, 255, 0);
-        color: rgba(255, 0, 0, 0.5);
         cursor: pointer;
+        background: none;
         font-size: 2vw;
         width: 10vw;
         height: 5vh;
@@ -33,7 +32,7 @@ body {
     }
     .deletebuttonSC:hover {
         border: none;
-        background-color: rgb(255, 0, 0);
+        background: none;
         color: white;
         cursor: pointer;
         font-size: 2vw;

@@ -30,6 +30,7 @@ function OrgReg_page() {
     const navigate = useNavigate();
 
     const validateField = (name, value) => {
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         switch (name) {
             case "fullName":
             case "shortName":
@@ -37,17 +38,17 @@ function OrgReg_page() {
             case "address":
             case "lastName":
             case "firstName":
-                return value.length >= 2; // Минимум 2 символа
+                return /^[А-Яа-я]{2,}$/.test(value); // Две или более русские буквы
             case "inn":
-                return /^\d{10}(\d{2})?$/.test(value); // 10 или 12 цифр
+                return /^\d{10}$/.test(value); // 10 цифр
             case "kpp":
                 return /^\d{9}$/.test(value); // 9 цифр
             case "ogrn":
                 return /^\d{13}$/.test(value); // 13 цифр
             case "email":
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Проверка на email
+                return isValidEmail.test(value); // Email проверка
             case "phone":
-                return /^\+?\d{1,3}[-\s]?\(?\d{1,4}\)?[-\s]?\d{1,4}[-\s]?\d{1,4}$/.test(value); // Телефон
+                return /^[78]\d{10}$/.test(value); // 11 цифр, начинающихся на 7 или 8
             default:
                 return true;
         }
@@ -63,7 +64,9 @@ function OrgReg_page() {
     return (
         <>
             <div className="headersorg">
-                <button className="exitbutton" title="Выйти на главную" onClick={() => navigate("/")}>Выйти</button>
+                <button className="exitbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Exit" />
+                </button>
                 <h1 className="textorg">СОЗДАНИЕ ЗАЯВКИ</h1>
             </div>
 
@@ -77,6 +80,7 @@ function OrgReg_page() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
+                            placeholder="ООО Ромашка"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -86,6 +90,7 @@ function OrgReg_page() {
                             name="shortName"
                             value={formData.shortName}
                             onChange={handleInputChange}
+                            placeholder="Ромашка"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -95,6 +100,7 @@ function OrgReg_page() {
                             name="inn"
                             value={formData.inn}
                             onChange={handleInputChange}
+                            placeholder="1234567890"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -104,6 +110,7 @@ function OrgReg_page() {
                             name="kpp"
                             value={formData.kpp}
                             onChange={handleInputChange}
+                            placeholder="123456789"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -113,6 +120,7 @@ function OrgReg_page() {
                             name="ogrn"
                             value={formData.ogrn}
                             onChange={handleInputChange}
+                            placeholder="1234567890123"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -122,6 +130,7 @@ function OrgReg_page() {
                             name="city"
                             value={formData.city}
                             onChange={handleInputChange}
+                            placeholder="Москва"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -131,6 +140,7 @@ function OrgReg_page() {
                             name="address"
                             value={formData.address}
                             onChange={handleInputChange}
+                            placeholder="ул. Ленина, д. 10"
                         />
                     </div>
                 </div>
@@ -144,6 +154,7 @@ function OrgReg_page() {
                             name="lastName"
                             value={formData.lastName}
                             onChange={handleInputChange}
+                            placeholder="Иванов"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -153,6 +164,7 @@ function OrgReg_page() {
                             name="firstName"
                             value={formData.firstName}
                             onChange={handleInputChange}
+                            placeholder="Иван"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -162,6 +174,7 @@ function OrgReg_page() {
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
+                            placeholder="example@mail.com"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -171,13 +184,14 @@ function OrgReg_page() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
+                            placeholder="71234567890"
                         />
                     </div>
                     <div className="confirmplate">
                         <label>
                             Принимаю
                             <a href="https://policies.google.com/privacy?hl=ru" target="_blank" rel="noopener noreferrer">
-                                 условия политики конфиденциальности
+                                условия политики конфиденциальности
                             </a>
                             <input
                                 type="checkbox"

@@ -82,7 +82,8 @@ function CreateServices_page() {
     return (
         <>
             <div className="headerservices">
-                <button className="exitbuttonservices" onClick={() => navigate("/org/statuscheck")}>Вернуться к заявке
+                <button className="exitbutton" title="Вернуться к заявке" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textServices">Личный кабинет</h1>
             </div>
@@ -117,6 +118,7 @@ function CreateServices_page() {
                                             name="sphere"
                                             value={service.sphere}
                                             onChange={handleInputChange}
+                                            className="tableselect"
                                         >
                                             <option value="Мойка">Мойка</option>
                                             <option value="Шиномонтаж">Шиномонтаж</option>
@@ -132,6 +134,7 @@ function CreateServices_page() {
                                             name="name"
                                             value={service.name}
                                             onChange={handleInputChange}
+                                            className="tableinput"
                                         />
                                     ) : (
                                         service.name
@@ -144,6 +147,7 @@ function CreateServices_page() {
                                             name="cost"
                                             value={service.cost}
                                             onChange={handleInputChange}
+                                            className="tableinput"
                                         />
                                     ) : (
                                         service.cost
@@ -156,6 +160,7 @@ function CreateServices_page() {
                                             name="time"
                                             value={service.time}
                                             onChange={handleInputChange}
+                                            className="tableinput"
                                         />
                                     ) : (
                                         service.time
@@ -163,13 +168,18 @@ function CreateServices_page() {
                                 </td>
                                 <td>
                                     {editingService === service.id ? (
-                                        <button className="buttonServices" onClick={stopEditing}>Сохранить</button>
+                                        <button className="buttonServices" onClick={stopEditing}>
+                                            <img src='/src/icons/save.png' alt='Save' />
+                                        </button>
                                     ) : (
-                                        <button className="buttonServices"
-                                                onClick={() => startEditing(service.id)}>Изменить</button>
+                                        <button className="buttonServices" onClick={() => startEditing(service.id)}>
+                                            <img src='/src/icons/edit.png' alt='Edit' />
+                                        </button>
                                     )}
-                                    <button className="deletebuttonServices"
-                                            onClick={() => deleteService(service.id)}>x
+
+                                    <button className="deletebuttonServices" title="Удалить услугу"
+                                            onClick={() => deleteService(service.id)}>
+                                        <img src="/src/icons/close.png" alt="Delete"/>
                                     </button>
                                 </td>
                             </tr>
@@ -179,7 +189,7 @@ function CreateServices_page() {
                 </table>
 
                 <div className="newServiceForm">
-                    <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
+                <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
                         <option value="Мойка">Мойка</option>
                         <option value="Шиномонтаж">Шиномонтаж</option>
                     </select>
@@ -210,7 +220,9 @@ function CreateServices_page() {
                     />
                     {errors.time && <p className="error">{errors.time}</p>}
 
-                    <button className="buttonServices" onClick={addService}>Добавить</button>
+                    <button className="buttonServices" title="Добавить услугу" onClick={addService}>
+                        <img src="/src/icons/create.png" alt="Создать"/>
+                    </button>
                 </div>
             </div>
         </>

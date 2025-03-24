@@ -22,7 +22,7 @@ function Enteraccpage() {
             <div className="enteracc">
                 <div className="header-container">
                     <h3 className="header-title">ВОЙТИ В АККАУНТ АДМИНИСТРАТОРА</h3>
-                    <button className="enteraccclosebutton" onClick={closeModal}>×</button> 
+                    <button className="loginpageclosebutton" onClick={closeModal}>×</button>
                 </div>
 
                 <h3 className="login-enterpage">ЛОГИН :</h3>

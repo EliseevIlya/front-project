@@ -24,6 +24,7 @@ import React from "react";
 import OrgTable_page from "../pages/org_table_page/orgtable_page.jsx";
 import CreateServices_page from "../pages/create_services_page/createservices_page.jsx";
 import OrgInfo_page from "../pages/org_info_page/orginfo_page.jsx";
+import NotFoundPage from "../pages/erorr_page/404_page.jsx";
 
 
 export default function RouterApp(){
@@ -53,6 +54,7 @@ export default function RouterApp(){
                 <Route path="/admin_acc_page" element={<AdminAcc_page />}/>
                 <Route path="/userstable_page" element={<UsersTable_page />}/>
                 <Route path="/orgtable_page" element={<OrgTable_page />}/>
+                <Route path="/error_page" element={<NotFoundPage />}/>
             </Routes>
     )
 }

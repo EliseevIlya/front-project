@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Deleterequest from "../deleterequestpage/deleterequestpage";
 
-const initialApps = Array.from({ length: 5 }, (_, i) => ({
+const initialApps = Array.from({ length: 3 }, (_, i) => ({
     id: i + 1,
     date: "",
     time: "",
@@ -25,7 +25,7 @@ function Apps_page() {
     const loadMoreApps = () => {
         const maxId = apps.length > 0 ? Math.max(...apps.map(app => app.id)) : 0;
 
-        const newApps = Array.from({ length: 5 }, (_, i) => ({
+        const newApps = Array.from({ length: 3 }, (_, i) => ({
             id: maxId + i + 1,
             date: "",
             time: "",
@@ -59,10 +59,15 @@ function Apps_page() {
     return (
         <>
             <div className="headersApps">
-                <button className="exitbuttonApps" onClick={() => navigate("/user")}>Личный кабинет</button>
+                <button className="accbuttonApps"  title="Личный кабинет" onClick={() => navigate("/user")}>
+                    <img src="/src/icons/profile.png" alt="Личный кабинет"/>
+                </button>
                 <h1 className="textApp">ЗАЯВКИ</h1>
-                <button className="createbuttonApps" onClick={() => navigate("/service")}>Создать</button>
+                <button className="createbuttonApps" title="Добавить заявку" onClick={() => navigate("/service")}>
+                    <img src="/src/icons/create.png" alt="Создать"/>
+                </button>
             </div>
+
 
             <div className="apps-container">
                 <div className="cards-grid">
@@ -74,6 +79,7 @@ function Apps_page() {
                             <p><strong className="carddata">Стоимость:</strong> {app.cost}</p>
                         </div>
                     ))}
+                    <div></div>
                     <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
                 </div>
             </div>
