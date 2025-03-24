@@ -74,8 +74,12 @@ function Apps_page() {
                             <p><strong className="carddata">Стоимость:</strong> {app.cost}</p>
                         </div>
                     ))}
+<<<<<<< HEAD
+=======
+                    <div></div>
+                    <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
                 </div>
-                <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
             </div>
 
             {selectedApp && (

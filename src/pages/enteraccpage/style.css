@@ -40,73 +40,30 @@
     font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
     text-align: left;
+<<<<<<< HEAD
     margin-bottom: 10px;           
+=======
+    margin-bottom: 10px;
+    font-weight: lighter;
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
 }
 
-
-
 .login-textfield, .password-textfield {
+    width: 100%;
     border-radius: 10px;
-    flex: 1; 
     padding: 15px;
+    font-size: calc((1.2vw + 1.2vh)/2);
     border: 1px solid #318EA8;
-    background-color: #318EA8; 
+    background-color: #318EA8;
+    color: #ffffff;
     box-sizing: border-box;
-    width: 100%; 
-    max-width: 100%;
-    color: white;
+    margin-bottom: 15px;
 }
 
 .login-textfield::placeholder, .password-textfield::placeholder {
     font-size: calc((1.1vw + 1.1vh)/2);
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.7);
     opacity: 0.5;
-}
-
-.login-textfield:focus, .password-textfield:focus {
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
-    outline: none;
-}
-
-textarea {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;  
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-}
-
-.login-textfield:focus {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
-}
-
-.password-textfield:focus {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
 }
 
 .enter-enterpage {

@@ -14,7 +14,7 @@ function Enteraccpage() {
     };
 
     if (!isModalOpen) {
-        return null; 
+        return null; // Если окно закрыто, ничего не рендерим
     }
 
     return (
@@ -24,6 +24,7 @@ function Enteraccpage() {
                     <h3 className="header-title">ВОЙТИ В АККАУНТ АДМИНИСТРАТОРА</h3>
                     <button className="enteraccclosebutton" onClick={closeModal}>×</button> 
                 </div>
+<<<<<<< HEAD
                 <div className="input-group">
                 <h3 className="login-enterpage">ЛОГИН :</h3>
                 <input
@@ -45,6 +46,29 @@ function Enteraccpage() {
                 />
                 </div>
                 <button className="enter-enterpage" onClick={() => navigate("/admin_acc_page")}>ВОЙТИ</button>
+=======
+
+                <h3 className="login-enterpage">ЛОГИН :</h3>
+                <input
+                    className="login-textfield"
+                    placeholder="Введите логин"
+                    value={login}
+                    onChange={handleLoginChange}
+                />
+                {loginError && <div className="error">{loginError}</div>}
+
+                <h3 className="password-enterpage">ПАРОЛЬ :</h3>
+                <input
+                    type="password"
+                    className="password-textfield"
+                    placeholder="Введите пароль"
+                    value={password}
+                    onChange={handlePasswordChange}
+                />
+                {passwordError && <div className="error">{passwordError}</div>}
+
+                <button className="enter-enterpage" onClick={handleSubmit} disabled={loginError || passwordError || !login || !password}>ВОЙТИ</button>
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
             </div>
         </div>
     );

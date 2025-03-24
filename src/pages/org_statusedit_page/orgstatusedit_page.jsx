@@ -24,10 +24,15 @@ function OrgStatusEdit_page() {
 
     const handlePopupSubmit = () => {
         if (reason.length >= 10) {
+<<<<<<< HEAD
             alert(`Заявка отклонена по причине: ${reason}`);
             setShowPopup(false);
             setReason("");
             navigate("/org/forms"); 
+=======
+            setShowPopup(false); // Закрываем модальное окно
+            navigate("/org/forms"); // Переходим на страницу форм заявок
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
         }
     };
 
