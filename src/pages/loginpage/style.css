@@ -178,10 +178,10 @@
 
 .loginpageclosebutton {
     position: absolute;
-    top: 10px;  /* Отступ от верхнего края белой области */
-    right: 10px;  /* Отступ от правого края белой области */
-    width: 30px;
-    height: 30px;
+    top: 10px;
+    right: 10px;
+    width: 2vh;
+    height: 2vh;
     background: #318EA8;
     border: none;
     font-size: calc((1.2vw + 1.2vh)/2);
@@ -191,7 +191,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;  /* Поверх текста заголовка */
+    z-index: 1;
 }
 
 .loginpageclosebutton:hover {
