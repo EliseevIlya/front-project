@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./style_orgstatusedit.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function OrgStatusEdit_page() {
     const [status, setStatus] = useState("Новая");
     const [showPopup, setShowPopup] = useState(false);
     const [reason, setReason] = useState("");
+    const navigate = useNavigate();
 
     const handleStatusChange = (event) => {
         setStatus(event.target.value);
@@ -14,6 +15,8 @@ function OrgStatusEdit_page() {
     const handleSubmit = () => {
         if (status === "Отклонена") {
             setShowPopup(true);
+        } else if (status === "Исполнена") {
+            navigate("/org/forms");
         } else {
             alert("Заявка отправлена!");
         }
@@ -21,9 +24,15 @@ function OrgStatusEdit_page() {
 
     const handlePopupSubmit = () => {
         if (reason.length >= 10) {
+<<<<<<< HEAD
             alert(`Заявка отклонена по причине: ${reason}`);
             setShowPopup(false);
             setReason("");
+            navigate("/org/forms"); 
+=======
+            setShowPopup(false); // Закрываем модальное окно
+            navigate("/org/forms"); // Переходим на страницу форм заявок
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
         }
     };
 
@@ -31,9 +40,6 @@ function OrgStatusEdit_page() {
         setShowPopup(false);
         setReason("");
     };
-
-    const navigate = useNavigate();
-
 
     return (
         <>

@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,26 +14,45 @@
     font-family: Impact, sans-serif;
     width: 400px;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #318EA8;
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: calc((2vw + 2vh)/2);
 }
 
 .login-enterpage, .password-enterpage {
     font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
-    text-align: center;
+    text-align: left;
+<<<<<<< HEAD
+    margin-bottom: 10px;           
+=======
     margin-bottom: 10px;
+    font-weight: lighter;
+>>>>>>> parent of 4f9b9c9 (Merge pull request #39 from teampapo/akiyanara)
 }
 
 .login-textfield, .password-textfield {
     width: 100%;
     border-radius: 10px;
-    padding: 12px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: calc((1.2vw + 1.2vh)/2);
     border: 1px solid #318EA8;
     background-color: #318EA8;
     color: #ffffff;
@@ -42,12 +61,14 @@
 }
 
 .login-textfield::placeholder, .password-textfield::placeholder {
+    font-size: calc((1.1vw + 1.1vh)/2);
     color: rgba(255, 255, 255, 0.7);
+    opacity: 0.5;
 }
 
 .enter-enterpage {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background-color: #FF8000;
     color: white;
     border: none;
@@ -55,6 +76,7 @@
     font-size: calc((1.3vw + 1.3vh)/2);
     cursor: pointer;
     margin-top: 10px;
+    box-sizing: border-box;
 }
 
 .enter-enterpage:hover {

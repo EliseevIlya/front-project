@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./style_orgstatuscheck.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Deleteparthpage from "../deletepartnership/deletepartnership";
 
 function OrgStatusCheck_page() {
     const [isEditing, setIsEditing] = useState(false);
-    const [showReasonForm, setShowReasonForm] = useState(false); // состояние для формы "Причина"
+    const [showReasonForm, setShowReasonForm] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false); 
 
     const toggleEditMode = () => {
         setIsEditing(!isEditing);
@@ -21,20 +23,20 @@ function OrgStatusCheck_page() {
             <div className="headersorgSC">
                 <button className="exitbuttonSC" onClick={() => navigate("/")}>Выйти</button>
                 <h1 className="textSC">ПРОВЕРКА ЗАЯВКИ</h1>
-                <button className="deletebuttonSC">Удалить</button>
+                <button className="deletebuttonSC" onClick={() => setShowDeleteModal(true)}>Удалить</button>
             </div>
 
             <div className="statusplate">
                 <div className="status">
-                    <label>Текущий статус:<input type="text" defaultValue="Новая" disabled/></label>
+                    <label>Текущий статус:<input type="text" defaultValue="Новая" disabled /></label>
                     <button className="reasonbutton" onClick={toggleReasonForm}>Причина</button>
                 </div>
                 <div className="dates">
                     <div className="daterequest">
-                        <label>Дата составления:<input type="text" defaultValue="6.03.2025" disabled/></label>
+                        <label>Дата составления:<input type="text" defaultValue="6.03.2025" disabled /></label>
                     </div>
                     <div className="dateresponse">
-                        <label>Дата рассмотрения:<input type="text" defaultValue="10.03.2025" disabled/></label>
+                        <label>Дата рассмотрения:<input type="text" defaultValue="10.03.2025" disabled /></label>
                     </div>
                 </div>
             </div>
@@ -67,12 +69,11 @@ function OrgStatusCheck_page() {
                         ) : (
                             <button className="editbuttonSC" onClick={toggleEditMode}>Изменить</button>
                         )}
-                        <button className="accbuttonSC" disabled>Личный кабинет</button>
+                        <button className="accbuttonSC" onClick={() => navigate("/create/services")}>Личный кабинет</button>
                     </div>
                 </div>
             </div>
 
-            {/* Модальное окно с формой причины */}
             {showReasonForm && (
                 <div className="modalSC">
                     <div className="modalSC-content">
@@ -81,6 +82,10 @@ function OrgStatusCheck_page() {
                         <textarea className="reason-textarea" disabled></textarea>
                     </div>
                 </div>
+            )}
+
+            {showDeleteModal && (
+                <Deleteparthpage onClose={() => setShowDeleteModal(false)} />
             )}
         </>
     );
