@@ -21,7 +21,7 @@
 }
 
 .loginpageerror-message {
-    color: red;
+    color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
