@@ -13,7 +13,9 @@ function UserAcc_page() {
         <div>
             <div className="headers">
                 <div className="headexit">
-                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>Выйти</button>
+                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
+                        <img src="/src/icons/exit.png" alt="Exit" />
+                    </button>
                 </div>
                 <div className="headtext">
                     <div className="headname">
@@ -24,12 +26,8 @@ function UserAcc_page() {
                     </div>
                 </div>
                 <div className="headdelete">
-                    <button 
-                        className="deletebutton" 
-                        title="Удалить аккаунт"
-                        onClick={() => setIsDeleteModalOpen(true)}
-                    >
-                        Удалить
+                    <button className="deletebutton"  title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
+                        <img src="src/icons/close.png" alt="Delete" />
                     </button>
                 </div>
             </div>
@@ -74,7 +72,7 @@ function UserAcc_page() {
                 </div>
             </div>
 
-            {isDeleteModalOpen && <Deleteaccpage onClose={() => setIsDeleteModalOpen(false)} />}  
+            {isDeleteModalOpen && <Deleteaccpage onClose={() => setIsDeleteModalOpen(false)} />}
         </div>
     );
 }
