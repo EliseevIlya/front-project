@@ -21,7 +21,7 @@ function PioneerForms() {
   ];
 
   const [selectedStatus, setSelectedStatus] = useState("new");
-  const navigate = useNavigate();
+
 
   const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ function PioneerForms() {
                 <tr>
                   <th>№ Заявки</th>
                   <th>Дата Создания</th>
-
+                  <th>Краткое наим-е организации</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import {useState} from "react";
 import "./style.css";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Enteraccpage() {
     const [login, setLogin] = useState("");
@@ -52,7 +52,7 @@ function Enteraccpage() {
     };
 
     if (!isModalOpen) {
-        return null; 
+        return null;
     }
 
     return (
@@ -63,8 +63,29 @@ function Enteraccpage() {
                     <button className="loginpageclosebutton" onClick={closeModal}>×</button>
                 </div>
                 <div className="input-group">
-                <h3 className="login-enterpage">ЛОГИН :</h3>
+                    <h3 className="login-enterpage">ЛОГИН :</h3>
+                    <input
+                        className="login-textfield"
+                        placeholder="Введите логин"
+                        value={login}
+                        onChange={handleLoginChange}
+                    />
+                    {loginError && <div className="error">{loginError}</div>}
 
+                    <h3 className="password-enterpage">ПАРОЛЬ :</h3>
+                    <input
+                        type="password"
+                        className="password-textfield"
+                        placeholder="Введите пароль"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    {passwordError && <div className="error">{passwordError}</div>}
+
+                    <button className="enter-enterpage" onClick={handleSubmit}
+                            disabled={loginError || passwordError || !login || !password}>ВОЙТИ
+                    </button>
+                </div>
             </div>
         </div>
     );
