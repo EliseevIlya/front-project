@@ -11,10 +11,10 @@
         color: white;
     }
 
-    .exitbuttonApps {
+    .accbuttonApps {
         border: none;
-        background-color: rgba(255, 255, 255, 0);
-        color: rgba(255, 255, 255, 0.5);
+        background: none;
+        color: rgb(255, 255, 255);
         cursor: pointer;
         font-size: calc((3vw + 3vh)/2);
         width: 10vw;
@@ -23,10 +23,11 @@
         margin-bottom: 15vh;
 
     }
-    .exitbuttonApps:hover {
+    .accbuttonApps:hover {
         border: none;
-        background-color: rgba(255, 255, 255, 0);
+        background: none;
         color: white;
+        opacity: 50%;
         cursor: pointer;
         font-size: calc((3vw + 3vh)/2);
         width: 10vw;
@@ -38,7 +39,7 @@
 
     .createbuttonApps {
         border: none;
-        background-color: darkorange;
+        background: none;
         color: rgb(255, 255, 255);
         cursor: pointer;
         font-size: calc((3vw + 3vh)/2);
@@ -50,8 +51,9 @@
     }
     .createbuttonApps:hover {
         border: none;
-        background-color: rgb(255, 255, 255);
-        color: darkorange;
+        background: none;
+        color: white;
+        opacity: 50%;
         cursor: pointer;
         font-size: calc((3vw + 3vh)/2);
         width: 10vw;
@@ -112,6 +114,7 @@
     background-color: white;
     border: none;
     border-radius: 20px;
+    margin: 40px;
 }
 
 .load-more:hover {
