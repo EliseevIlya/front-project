@@ -128,3 +128,10 @@ textarea {
 .enter-enterpage:hover {
     background-color: #318EA8;
 }
+
+.logerror {
+    color: rgb(255, 0, 0);
+    font-size: 0.8vw;
+    margin-top: 1vh;
+    text-align: center;
+}
