@@ -44,7 +44,7 @@ function OrgReg_page() {
     const navigate = useNavigate();
 
     const validateField = (name, value) => {
-        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
         switch (name) {
             case "fullName":
             case "shortName":

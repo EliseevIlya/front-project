@@ -112,7 +112,7 @@ function CreateServices_page() {
                         services.map(service => (
                             <tr key={service.id}>
                                 <td>{service.id}</td>
-                                <td>
+                                <td className="tdsphere">
                                     {editingService === service.id ? (
                                         <select
                                             name="sphere"
@@ -168,11 +168,11 @@ function CreateServices_page() {
                                 </td>
                                 <td>
                                     {editingService === service.id ? (
-                                        <button className="buttonServices" onClick={stopEditing}>
+                                        <button className="editbuttonServices" onClick={stopEditing}>
                                             <img src='/src/icons/save.png' alt='Save' />
                                         </button>
                                     ) : (
-                                        <button className="buttonServices" onClick={() => startEditing(service.id)}>
+                                        <button className="editbuttonServices" onClick={() => startEditing(service.id)}>
                                             <img src='/src/icons/edit.png' alt='Edit' />
                                         </button>
                                     )}
@@ -189,36 +189,46 @@ function CreateServices_page() {
                 </table>
 
                 <div className="newServiceForm">
-                <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
+                    <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
                         <option value="Мойка">Мойка</option>
                         <option value="Шиномонтаж">Шиномонтаж</option>
                     </select>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Название"
-                        value={newService.name}
-                        onChange={handleInputChange}
-                    />
-                    {errors.name && <p className="error">{errors.name}</p>}
+                    <div className="input-group">
+                        <input
+                            className="inputserviceinfo"
+                            type="text"
+                            name="name"
+                            placeholder="Название"
+                            value={newService.name}
+                            onChange={handleInputChange}
+                        />
+                        {errors.name && <p className="error">{errors.name}</p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="cost"
-                        placeholder="Стоимость(руб.)"
-                        value={newService.cost}
-                        onChange={handleInputChange}
-                    />
-                    {errors.cost && <p className="error">{errors.cost}</p>}
+                    <div className="input-group">
+                        <input
+                            className="inputserviceinfo"
+                            type="text"
+                            name="cost"
+                            placeholder="Стоимость (руб.)"
+                            value={newService.cost}
+                            onChange={handleInputChange}
+                        />
+                        {errors.cost && <p className="error">{errors.cost}</p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="time"
-                        placeholder="Время(мин)"
-                        value={newService.time}
-                        onChange={handleInputChange}
-                    />
-                    {errors.time && <p className="error">{errors.time}</p>}
+                    <div className="input-group">
+                        <input
+                            className="inputserviceinfo"
+                            type="text"
+                            name="time"
+                            placeholder="Время (мин)"
+                            value={newService.time}
+                            onChange={handleInputChange}
+                        />
+                        {errors.time && <p className="error">{errors.time}</p>}
+                    </div>
+
 
                     <button className="buttonServices" title="Добавить услугу" onClick={addService}>
                         <img src="/src/icons/create.png" alt="Создать"/>
