@@ -46,18 +46,15 @@
 
 }
 
-
-
 .login-textfield, .password-textfield {
     border-radius: 10px;
     flex: 1; 
-    padding: 15px;
+    padding: 20px;
     border: 1px solid #318EA8;
     background-color: #318EA8; 
     box-sizing: border-box;
     width: 100%; 
     max-width: 100%;
-    color: white;
 }
 
 .login-textfield::placeholder, .password-textfield::placeholder {
@@ -70,6 +67,13 @@
     border: 1px solid darkorange;
     box-shadow: 0 0 5px darkorange;
     outline: none;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #318EA8;
+    background-color: #318EA8;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
 
 textarea {
@@ -82,34 +86,6 @@ textarea {
     padding-left: 1vw;
     color: darkorange;
     font-size: calc((2vw + 2vh)/2);
-}
-
-.login-textfield:focus {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
-}
-
-.password-textfield:focus {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
 }
 
 .enter-enterpage {
@@ -129,9 +105,18 @@ textarea {
     background-color: #318EA8;
 }
 
+
 .logerror {
     color: rgb(255, 0, 0);
     font-size: 0.8vw;
     margin-top: 1vh;
     text-align: center;
 }
+
+.error {
+    color: rgb(0, 0, 0);
+    font-size: calc((1.3vw + 1.3vh)/2);
+    margin-bottom: 15px;
+    text-align: center;
+}
+

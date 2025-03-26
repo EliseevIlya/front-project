@@ -18,13 +18,27 @@ function OrgReg_page() {
         acceptedPolicy: false,
     });
 
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({}); 
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+
+        if (touched[name] || value !== "") {
+            const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
+            setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+        }
     };
 
     const handleCheckboxChange = (e) => {
         setFormData({ ...formData, acceptedPolicy: e.target.checked });
+        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true })); 
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            acceptedPolicy: e.target.checked ? "" : "Необходимо принять условия",
+        }));
     };
 
     const navigate = useNavigate();
@@ -38,23 +52,83 @@ function OrgReg_page() {
             case "address":
             case "lastName":
             case "firstName":
-                return /^[А-Яа-я]{2,}$/.test(value); // Две или более русские буквы
+                return /^[А-Яа-я]{2,}$/.test(value);
             case "inn":
-                return /^\d{10}$/.test(value); // 10 цифр
+                return /^\d{10}$/.test(value);
             case "kpp":
-                return /^\d{9}$/.test(value); // 9 цифр
+                return /^\d{9}$/.test(value);
             case "ogrn":
-                return /^\d{13}$/.test(value); // 13 цифр
+                return /^\d{13}$/.test(value);
             case "email":
-                return isValidEmail.test(value); // Email проверка
+                return isValidEmail.test(value);
             case "phone":
-                return /^[78]\d{10}$/.test(value); // 11 цифр, начинающихся на 7 или 8
+                return /^[78]\d{10}$/.test(value);
             default:
                 return true;
         }
     };
 
-    const isFormValid = Object.keys(formData).every((key) => {
+    const getErrorMessage = (name) => {
+        switch (name) {
+            case "fullName":
+                return "Полное название должно содержать минимум 2 русские буквы";
+            case "shortName":
+                return "Сокращенное название должно содержать минимум 2 русские буквы";
+            case "city":
+                return "Город должен содержать минимум 2 русские буквы";
+            case "address":
+                return "Адрес должен содержать минимум 2 русские буквы";
+            case "lastName":
+                return "Фамилия должна содержать минимум 2 русские буквы";
+            case "firstName":
+                return "Имя должно содержать минимум 2 русские буквы";
+            case "inn":
+                return "ИНН должен содержать ровно 10 цифр";
+            case "kpp":
+                return "КПП должен содержать ровно 9 цифр";
+            case "ogrn":
+                return "ОГРН должен содержать ровно 13 цифр";
+            case "email":
+                return "Введите корректный email";
+            case "phone":
+                return "Телефон должен начинаться с 7 или 8 и содержать 11 цифр";
+            case "acceptedPolicy":
+                return "Необходимо принять условия";
+            default:
+                return "";
+        }
+    };
+
+    const fieldOrder = [
+        "fullName",
+        "shortName",
+        "inn",
+        "kpp",
+        "ogrn",
+        "city",
+        "address",
+        "lastName",
+        "firstName",
+        "email",
+        "phone",
+        "acceptedPolicy",
+    ];
+
+    const getFirstError = () => {
+        for (const field of fieldOrder) {
+            if (touched[field]) {
+                if (field === "acceptedPolicy" && !formData[field]) {
+                    return getErrorMessage(field);
+                }
+                if (!validateField(field, formData[field])) {
+                    return getErrorMessage(field);
+                }
+            }
+        }
+        return "";
+    };
+
+    const isFormValid = fieldOrder.every((key) => {
         if (key === "acceptedPolicy") {
             return formData[key];
         }
@@ -200,6 +274,7 @@ function OrgReg_page() {
                                 onChange={handleCheckboxChange}
                             />
                         </label>
+                        {getFirstError() && <span className="error">{getFirstError()}</span>}
                         <button
                             className="crappbutton"
                             onClick={() => navigate("/org/statuscheck")}
