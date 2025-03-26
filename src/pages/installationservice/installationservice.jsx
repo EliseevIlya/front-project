@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import Confirmationinstallationpage from "../confirmationinstallationpage/confirmationinstallationpage"; // Modal component for installation service
 
 function Installationservice() {
     const [selectedServices, setSelectedServices] = useState([""]);
+    const [isModalOpen, setModalOpen] = useState(false); // Modal state for showing the confirmation modal
     const services = ["Услуга 1 - 200 руб. (20 мин.)", "Услуга 2 - 300 руб. (30 мин.)", "Услуга 3 - 400 руб. (40 мин.)"];
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleServiceChange = (index, value) => {
         const newServices = [...selectedServices];
@@ -24,7 +26,7 @@ function Installationservice() {
     };
 
     const handleSubmit = () => {
-        navigate("/user/request"); 
+        setModalOpen(true); // Show the modal when the button is clicked
     };
 
     return (
@@ -98,6 +100,7 @@ function Installationservice() {
                     </button>
                 </div>
             </div>
+            <Confirmationinstallationpage isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
         </div>
     );
 }

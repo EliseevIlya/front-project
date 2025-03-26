@@ -1,4 +1,4 @@
-.overlay {
+.modal-overlayconfirm {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.installationcontent {
+.modal-contentconfirm {
     font-family: Impact, sans-serif;
     font-size: calc((1.2vw + 1.2vh)/2);
     background: white;
@@ -20,15 +20,15 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.installationcontent h1{
+.modal-content h1{
     color: #318ea8;
 }
 
-.confirmation-text {
+.confirmationinstallation-text {
     color: #FF8000;
 }
 
-.confirmation-button {
+.confirmation-buttoninstallation {
     background-color: #FF8000;
     border: none;
     padding: 10px 20px;
@@ -37,6 +37,6 @@
     border-radius: 5px;
 }
 
-.confirmation-button:hover {
-    background-color: #b45f0a;
+.confirmation-buttoninstallation:hover {
+    background-color: darkorange;
 }

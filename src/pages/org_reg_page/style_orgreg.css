@@ -130,7 +130,7 @@ input[type="text"]:focus {
 
 .crappbutton {
     border: none;
-    background-color: darkorange;
+    background-color: orange;
     color: white;
     font-size: calc((1.5vw + 1.5vh)/2);
     border-radius: 15px;
@@ -142,9 +142,9 @@ input[type="text"]:focus {
 
 .crappbutton:hover {
     border: none;
-    font-size: 2vw;
     background-color: white;
     color: darkorange;
+    font-size: calc((1.5vw + 1.5vh)/2);
     border-radius: 15px;
     cursor: pointer;
     width: 15vw;
