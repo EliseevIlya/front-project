@@ -26,6 +26,7 @@
     background-color: #ffffff;
     color: #318EA8;
     text-align: center;
+    font-size: calc((3vw + 3vh) / 2);
 }
 
 .input-group {

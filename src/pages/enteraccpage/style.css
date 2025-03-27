@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Impact, sans-serif;
 }
 
 .enteracc {
@@ -105,7 +106,7 @@ textarea {
     background-color: #318EA8;
 }
 
-.error {
+.enteraccerror-message {
     color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
