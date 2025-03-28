@@ -4,16 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Deleteparthpage from "../deletepartnership/deletepartnership";
 
 function OrgStatusCheck_page() {
-    const [isEditing, setIsEditing] = useState(false);
     const [showReasonForm, setShowReasonForm] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [status, setStatus] = useState("Отклонена");
 
     const navigate = useNavigate();
 
-    const toggleEditMode = () => {
-        setIsEditing(!isEditing);
-    };
 
     const toggleReasonForm = () => {
         setShowReasonForm(!showReasonForm);
@@ -70,7 +66,7 @@ function OrgStatusCheck_page() {
                         </div>
                     ))}
                     <div className="buttonplateSC">
-                        <button className="accbuttonSC" onClick={() => navigate("/create/services")}>Личный кабинет</button>
+                        <button className="accbuttonSCheck" onClick={() => navigate("/create/services")}>Личный кабинет</button>
                     </div>
                 </div>
             </div>

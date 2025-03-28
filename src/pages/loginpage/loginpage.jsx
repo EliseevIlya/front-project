@@ -12,7 +12,7 @@ function Loginpage() {
 
     const handleEmailChange = (e) => {
         const emailValue = e.target.value;
-        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
 
         if (isValidEmail.test(emailValue)) {
             setEmail(emailValue);

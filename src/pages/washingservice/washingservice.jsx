@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
 import "./style.css";
+import { useNavigate } from "react-router";
+import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 
 function Washingservice() {
     const [selectedServices, setSelectedServices] = useState([""]);
+    const [isModalOpen, setModalOpen] = useState(false);
     const services = ["Услуга 1 - 200 руб. (20 мин.)", "Услуга 2 - 300 руб. (30 мин.)", "Услуга 3 - 400 руб. (40 мин.)"];
     const navigate = useNavigate(); 
 
@@ -21,10 +23,6 @@ function Washingservice() {
     const handleRemoveService = (index) => {
         const newServices = selectedServices.filter((_, i) => i !== index);
         setSelectedServices(newServices.length > 0 ? newServices : [""]);
-    };
-
-    const handleSubmit = () => {
-        navigate("/user/request"); 
     };
 
     return (
@@ -93,11 +91,12 @@ function Washingservice() {
                     </div>
                 </div>
                 <div className="washingbutton-container">
-                    <button className="washingbutton" onClick={handleSubmit}>
+                    <button className="washingbutton" onClick={() => setModalOpen(true)}>
                         Оставить заявку
                     </button>
                 </div>
             </div>
+            <Confirmationwashingpage isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
         </div>
     );
 }

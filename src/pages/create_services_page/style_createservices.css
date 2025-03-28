@@ -15,7 +15,8 @@ body {
 }
 
 .textServices {
-    margin-right: 35vw;
+    margin-left: 35vw;
+    margin-bottom: 5vh;
     font-weight: lighter;
     font-size: 4vw;
     color: white;
@@ -54,7 +55,8 @@ body {
     }
 
 .infoButton {
-    width: 20vw;
+    margin-right: 5vw;
+    width: 15vw;
     height: 5vh;
 }
 
@@ -80,15 +82,17 @@ body {
 
 th, td {
     padding: 10px;
-    text-align: center;
+    align-items: center;
     border: 1px solid #ddd;
     font-size: 1.5vw;
     font-weight: lighter;
     font-family: Impact, sans-serif;
-    max-width: 10vw; /* ограничиваем ширину столбцов */
+    max-width: 15vw; /* ограничиваем ширину столбцов */
     overflow: hidden;
-    text-overflow: ellipsis; /* добавляет троеточие, если текст не влезает */
-    white-space: nowrap;
+}
+
+.tdsphere {
+    max-width: 10vw;
 }
 
 
@@ -101,11 +105,26 @@ tr {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.tableinput, .tableselect {
-    width: 8vw; /* фиксированная ширина для предотвращения переполнения */
+.tableselect {
+    width: 12vw;
     box-sizing: border-box;
+    font-size: 1.5vw !important;
+    padding: 0 !important;
 }
 
+.tableinput {
+   width: 8vw !important;
+}
+
+.tableselect:disabled {
+    width: 12vw;
+    box-sizing: border-box;
+    font-size: 1.5vw !important;
+}
+
+.tableinput:disabled {
+    width: 8vw !important;
+}
 
 .buttonServices {
     background: none;
@@ -117,6 +136,7 @@ tr {
     width: 10vw;
     height: 5vh;
     margin-right: 8vw;
+    margin-top: 0vh;
 }
 
 /* Стили для формы добавления новой услуги */
@@ -124,30 +144,9 @@ tr {
     display: flex;
     flex-direction: row;
     margin-top: 3vh;
-    margin-left: 10vw;
+    margin-left: 15vw;
     margin-bottom: 1vh;
     gap: 1vw
-}
-
-.newServiceForm input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 1.5vw;
-    width: 8vw;
-    height: 3vh;
-    text-align: center;
-}
-
-.newServiceForm input:focus {
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 0 1px darkorange;
-    border-radius: 20px;
-    font-size: 1.5vw;
-    width: 8vw;
-    height: 3vh;
-    text-align: center;
 }
 
 .deletebuttonServices {
@@ -159,7 +158,45 @@ tr {
     color: white;
     background: none;
     cursor: pointer;
-    margin-left: -10vw;
+}
+
+.editbuttonServices {
+    width: 1vw;
+    height: 1vw;
+    font-size: 1.5vw;
+    font-weight: lighter;
+    border: none;
+    color: white;
+    background: none;
+    cursor: pointer;
+    margin-right: 5vw;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    .inputserviceinfo {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        font-size: 1.5vw;
+        width: 15vw;
+        height: 5vh;
+        text-align: left;
+    }
+    .inputserviceinfo:focus {
+        border: 1px solid #ccc;
+        box-shadow: 0 0 0 1px darkorange;
+        width: 15vw;
+        height: 5vh;
+    }
+}
+
+.error {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1vw;
+    margin-top: 1vh;
 }
 
 

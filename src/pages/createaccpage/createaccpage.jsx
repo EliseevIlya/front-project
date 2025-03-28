@@ -22,7 +22,7 @@ function Createaccpage() {
     const navigate = useNavigate();
 
     const validateEmail = (emailValue) => {
-        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
         return isValidEmail.test(emailValue) ? "" : "Некорректный email.";
     };
 
@@ -92,8 +92,6 @@ function Createaccpage() {
             }));
             return;
         }
-
-
         navigate("/user");
     };
 

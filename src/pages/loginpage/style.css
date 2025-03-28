@@ -21,7 +21,7 @@
 }
 
 .loginpageerror-message {
-    color: red;
+    color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
@@ -43,6 +43,18 @@
     margin: 0;
     font-size: calc((2vw + 2vh)/2);
     font-weight: lighter;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group h4 {
+    font-size: calc((1.3vw + 1.3vh)/2);
+    color: #318EA8;
+    margin-bottom: 5px;
 }
 
 .orgclose-button, .loginpageclosebutton, .createaccclosebutton, .enteraccclosebutton{
@@ -178,10 +190,10 @@
 
 .loginpageclosebutton {
     position: absolute;
-    top: 10px;  /* Отступ от верхнего края белой области */
-    right: 10px;  /* Отступ от правого края белой области */
-    width: 30px;
-    height: 30px;
+    top: 10px;
+    right: 10px;
+    width: 2vh;
+    height: 2vh;
     background: #318EA8;
     border: none;
     font-size: calc((1.2vw + 1.2vh)/2);
@@ -191,7 +203,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;  /* Поверх текста заголовка */
+    z-index: 1;
 }
 
 .loginpageclosebutton:hover {

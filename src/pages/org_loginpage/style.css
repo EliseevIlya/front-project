@@ -21,10 +21,22 @@
 }
 
 .loginpageerror-message {
-    color: red;
+    color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group h4 {
+    font-size: calc((1.3vw + 1.3vh)/2);
+    color: #318EA8;
+    margin-bottom: 5px;
 }
 
 .header-container {
