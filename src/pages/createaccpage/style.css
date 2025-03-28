@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: lighter;
 }
 
 .createacc {
@@ -23,8 +24,8 @@
 
 .headcreatepage {
     background-color: #ffffff;
-    color: #318EA8; 
-    text-align: center; 
+    color: #318EA8;
+    text-align: center;
 }
 
 .input-group {
@@ -37,23 +38,38 @@
     font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
     margin-bottom: 5px;
+    font-weight: lighter;
 }
 
 .inputcreateacc[type="text"] {
-    border-radius: 10px;
-    flex: 1; 
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+    outline: none;
+    flex: 1;
     padding: 15px;
     border: 1px solid #318EA8;
-    background-color: #318EA8; 
+    background-color: #318EA8;
     box-sizing: border-box;
-    width: 100%; 
-    max-width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    max-width: 100%;
+}
+
+.inputcreateacc[type="text"]:focus {
+    border: 1px solid darkorange;
+    box-shadow: 0 0 5px darkorange;
+    outline: none;
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #318EA8;
+    background-color: #318EA8;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
 
 .inputcreateacc[type="text"]::placeholder {
     font-size: calc((1.1vw + 1.1vh)/2);
-    color: #ffffff; 
+    color: #ffffff;
     opacity: 0.5;
 }
 
@@ -118,6 +134,29 @@ button {
     flex-grow: 1;
 }
 
-.createaccerror-message{
-    color: red;
+.createaccerror-message {
+    color: rgb(0, 0, 0);
+    font-size: calc((1.3vw + 1.3vh)/2);
+    margin-bottom: 15px;
+    text-align: center;
+
+}
+
+.createaccclosebutton {
+    background: none !important;
+    color: white;
+    font-size: 1.5vw;
+}
+
+button:disabled {
+    background-color: darkgrey;
+}
+
+button:disabled:hover {
+    background-color: darkgrey;
+    cursor: not-allowed;
+}
+
+.inputcreateacc:disabled {
+    background-color: grey;
 }

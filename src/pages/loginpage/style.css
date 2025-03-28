@@ -21,7 +21,7 @@
 }
 
 .loginpageerror-message {
-    color: red;
+    color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
@@ -42,6 +42,19 @@
     text-align: center;
     margin: 0;
     font-size: calc((2vw + 2vh)/2);
+    font-weight: lighter;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-group h4 {
+    font-size: calc((1.3vw + 1.3vh)/2);
+    color: #318EA8;
+    margin-bottom: 5px;
 }
 
 .orgclose-button, .loginpageclosebutton, .createaccclosebutton, .enteraccclosebutton{
@@ -78,12 +91,24 @@
     padding: 15px 25px;
     font-size: calc((1.3vw + 1.3vh)/2);
     border: none;
-    background-color: #FF8000; 
+    background-color: #FF8000;
     color: white;
     cursor: pointer;
-    width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.loginpagebutton:hover {
+    background-color: #318EA8;
+}
+
+.loginpagebutton.disabled-button {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed;
+}
+
 
 .inputloginpage[type="text"] {
     border-radius: 10px;
@@ -94,6 +119,28 @@
     box-sizing: border-box;
     width: 100%; 
     max-width: 100%; 
+}
+
+.inputloginpage[type="text"]:disabled {
+    border-radius: 10px;
+    flex: 1;
+    padding: 15px;
+    border: 1px solid darkgrey;
+    background-color: darkgrey;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+.inputloginpage[type="text"]:focus {
+    border-radius: 10px;
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #318EA8;
+    background-color: #318EA8;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
 
 .footerloginpage {
@@ -132,4 +179,34 @@
 
 .loginpagebutton:hover {
     background-color: #318EA8; 
+}
+
+.loginpage-info {
+    font-size: calc((1.1vw + 1.1vh) / 2);
+    color: #666666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.loginpageclosebutton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 2vh;
+    height: 2vh;
+    background: #318EA8;
+    border: none;
+    font-size: calc((1.2vw + 1.2vh)/2);
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.loginpageclosebutton:hover {
+    background-color: #FF8000;
+    color: #ffffff;
 }
