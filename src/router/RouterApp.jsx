@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import RouterAdminApp from "./RouterAdminApp.jsx";
 import RouterNoAuthUserApp from "./NoAuthUser.jsx";
+import RouterOrgApp from "./RouterOrgApp.jsx";
+import RouterUserApp from "./RouterUserApp.jsx"
 
 
 
@@ -16,6 +18,9 @@ export default function RouterApp(){
             break
         }
         case"users":{
+            return(
+                <RouterUserApp />
+            )
             break
         }
         case"admin":{
@@ -25,6 +30,9 @@ export default function RouterApp(){
             break
         }
         case "org":{
+            return(
+                <RouterOrgApp />
+            )
             break
         }
         case "all":{
