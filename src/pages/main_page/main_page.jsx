@@ -18,7 +18,7 @@ function MainPage() {
 
   const openAdminModal = () => setModalAdminIsOpen(true); 
   const closeAdminModal = () => setModalAdminIsOpen(false);
-
+  
   return (
     <>
       <div className="Main">

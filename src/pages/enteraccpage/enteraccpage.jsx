@@ -82,6 +82,7 @@ function Enteraccpage() {
                     />
                     {passwordError && <div className="enteraccerror-message">{passwordError}</div>}
 
+
                     <button className="enter-enterpage" onClick={handleSubmit}
                             disabled={loginError || passwordError || !login || !password}>ВОЙТИ
                     </button>
