@@ -1,3 +1,7 @@
+html{
+    overflow-y: hidden;
+}
+
 body {
     font-family: Impact, sans-serif;
     text-align: center;
@@ -29,40 +33,37 @@ body {
     width: 10vw;
     height: 5vh;
     border-radius: 5px;
-    margin-bottom: 15vh;
+    margin-bottom: 10vh;
     margin-left: 2vw;
 }
 
 .info_exitbutton:hover {
     border: none;
     background-color: rgba(255, 255, 255, 0);
+    opacity: 0.5;
     color: white;
     cursor: pointer;
     font-size: calc((3vw + 3vh)/2);
     width: 10vw;
     height: 5vh;
     border-radius: 5px;
-    margin-bottom: 15vh;
     margin-left: 2vw;
 }
 
 .info_exitbutton:disabled {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
+    background: none;
     color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    font-size: calc((3vw + 3vh)/2);
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15vh;
-    margin-left: 2vw;
+}
+
+.info_exitbutton:disabled:hover {
+    background: none;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .info_registration {
     display: grid;
     grid-template-columns: 50vw 50vw;
-    margin: 0 auto;
+    margin-top: -5vh;
 }
 
 .info_orginfo, .info_contactinfo {
@@ -183,20 +184,19 @@ input[type="text"]:focus {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 13vw;
-    margin-top: -12vh;
+    margin-left: 12.5vw;
+    margin-top: -10vh;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .info_editbutton:hover {
-    border: none;
-    font-size: 2vw;
     background-color: white;
     color: darkorange;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 15vw;
-    height: 6vh;
-    margin-left: 13vw;
+}
+
+.info_editbutton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }
 
 
@@ -209,31 +209,31 @@ input[type="text"]:focus {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 13vw;
-    margin-top: -12vh;
+    margin-left: 12.5vw;
+    margin-top: -10vh;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .info_savebutton:hover {
-    border: none;
-    font-size: 2vw;
     background-color: white;
     color: darkorange;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 15vw;
-    height: 6vh;
-    margin-left: 13vw;
 }
 
 .info_savebutton:disabled {
-    border: none;
-    font-size: 2vw;
-    background-color: darkcyan;
-    color: white;
+    background-color: darkcyan !important;
+    color: white !important;
     border-radius: 15px;
-    border: white 1px solid;
-    cursor: pointer;
-    width: 15vw;
-    height: 6vh;
-    margin-left: 13vw;
+    border: white 1px solid !important;
+}
+
+.info_savebutton:disabled:hover {
+    background-color: darkcyan !important;
+    color: white !important;
+    border-radius: 15px;
+    border: white 1px solid !important;
+}
+
+.info_savebutton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }

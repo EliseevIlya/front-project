@@ -10,7 +10,6 @@ function OrgStatusCheck_page() {
 
     const navigate = useNavigate();
 
-
     const toggleReasonForm = () => {
         setShowReasonForm(!showReasonForm);
     };
@@ -25,7 +24,7 @@ function OrgStatusCheck_page() {
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textSC">ПРОВЕРКА ЗАЯВКИ</h1>
-                <button className="deletebuttonSC" title="Удалить аккаунт" onClick={() => setShowDeleteModal(true)}>
+                <button className="deletebuttonSC" title="Удалить заявку" onClick={() => setShowDeleteModal(true)}>
                     <img src="/src/icons/close.png" alt="Delete"/>
                 </button>
             </div>
@@ -66,7 +65,13 @@ function OrgStatusCheck_page() {
                         </div>
                     ))}
                     <div className="buttonplateSC">
-                        <button className="accbuttonSCheck" onClick={() => navigate("/create/services")}>Личный кабинет</button>
+                        <button
+                            className="accbuttonSCheck"
+                            onClick={() => navigate("/create/services")}
+                            disabled={status !== "Исполнена"} // Блокировка кнопки, если статус не "Исполнена"
+                        >
+                            Личный кабинет
+                        </button>
                     </div>
                 </div>
             </div>

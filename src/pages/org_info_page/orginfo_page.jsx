@@ -83,8 +83,33 @@ function OrgInfo_page() {
     };
 
     const handleSaveClick = () => {
-        setIsEditing(false);
-        setIsButtonDisabled(false);
+        // Проверка на корректность всех полей
+        const isValid = Object.keys(formData).every((key) => {
+            return validateField(key, formData[key]);
+        });
+
+        if (isValid) {
+            // Если все поля корректны, можно сохранить
+            setIsEditing(false);
+            setIsButtonDisabled(false);
+            // Здесь можно добавить логику для сохранения данных, например, отправку на сервер
+        } else {
+            // Если есть некорректные поля, можно установить ошибки
+            const newErrors = {};
+            Object.keys(formData).forEach((key) => {
+                if (!validateField(key, formData[key])) {
+                    newErrors[key] = "Некорректное значение";
+                }
+            });
+            setErrors(newErrors);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        const char = String.fromCharCode(e.which);
+        if (!/^\d$/.test(char)) {
+            e.preventDefault();
+        }
     };
 
     return (
@@ -110,6 +135,9 @@ function OrgInfo_page() {
                             value={formData.fullName}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="ООО Ромашка"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.fullName && <span className="error">{errors.fullName}</span>}
                     </div>
@@ -121,6 +149,9 @@ function OrgInfo_page() {
                             value={formData.shortName}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="Ромашка"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.shortName && <span className="error">{errors.shortName}</span>}
                     </div>
@@ -131,7 +162,12 @@ function OrgInfo_page() {
                             name="inn"
                             value={formData.inn}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
                             disabled={!isEditing}
+                            placeholder="1234567890"
+                            className="inputinfo"
+                            autoComplete="off"
+                            maxLength="10"
                         />
                         {errors.inn && <span className="error">{errors.inn}</span>}
                     </div>
@@ -142,7 +178,12 @@ function OrgInfo_page() {
                             name="kpp"
                             value={formData.kpp}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
                             disabled={!isEditing}
+                            placeholder="123456789"
+                            className="inputinfo"
+                            autoComplete="off"
+                            maxLength="9"
                         />
                         {errors.kpp && <span className="error">{errors.kpp}</span>}
                     </div>
@@ -153,7 +194,12 @@ function OrgInfo_page() {
                             name="ogrn"
                             value={formData.ogrn}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
                             disabled={!isEditing}
+                            placeholder="1234567890123"
+                            className="inputinfo"
+                            autoComplete="off"
+                            maxLength="13"
                         />
                         {errors.ogrn && <span className="error">{errors.ogrn}</span>}
                     </div>
@@ -165,6 +211,9 @@ function OrgInfo_page() {
                             value={formData.city}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="Москва"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.city && <span className="error">{errors.city}</span>}
                     </div>
@@ -176,6 +225,9 @@ function OrgInfo_page() {
                             value={formData.address}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="ул. Ленина, д. 10"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.address && <span className="error">{errors.address}</span>}
                     </div>
@@ -191,6 +243,9 @@ function OrgInfo_page() {
                             value={formData.lastName}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="Иванов"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.lastName && <span className="error">{errors.lastName}</span>}
                     </div>
@@ -202,6 +257,9 @@ function OrgInfo_page() {
                             value={formData.firstName}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="Иван"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.firstName && <span className="error">{errors.firstName}</span>}
                     </div>
@@ -213,6 +271,9 @@ function OrgInfo_page() {
                             value={formData.email}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            placeholder="example@mail.com"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                         {errors.email && <span className="error">{errors.email}</span>}
                     </div>
@@ -224,6 +285,11 @@ function OrgInfo_page() {
                             value={formData.phone}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            onKeyPress={handleKeyPress}
+                            placeholder="71234567890"
+                            className="inputinfo"
+                            autoComplete="off"
+                            maxLength="11"
                         />
                         {errors.phone && <span className="error">{errors.phone}</span>}
                     </div>
@@ -234,12 +300,14 @@ function OrgInfo_page() {
                             value={formData.additionalInfo}
                             onChange={handleInputChange}
                             disabled={!isEditing}
+                            className="inputcode"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="info_confirmplate">
                         {isEditing ? (
                             <button
-                                className="info_editbutton"
+                                className="info_savebutton"
                                 onClick={handleSaveClick}
                                 disabled={isSaveDisabled}
                             >

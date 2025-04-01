@@ -37,6 +37,7 @@ body {
     .deletebuttonSC:hover {
         border: none;
         background: none;
+        opacity: 0.5;
         color: white;
         cursor: pointer;
         font-size: 2vw;
@@ -106,6 +107,7 @@ body {
     color: greenyellow;
     font-size: 1.5vw;
     text-align: center;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .reasonbutton:hover{
@@ -116,6 +118,11 @@ body {
     color: rgb(0, 0, 0);
     font-size: 1.5vw;
     text-align: center;
+}
+
+.reasonbutton:active{
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }
 
 .dates {
@@ -211,6 +218,7 @@ input[type="text"]:focus {
     border: none;
     border-radius: 20px;
     margin-top: 7vh;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .accbuttonSCheck:hover {
@@ -219,7 +227,6 @@ input[type="text"]:focus {
 }
 
 .accbuttonSCheck:disabled {
-
     color: white;
     background-color: darkcyan;
     border: white 1px solid;

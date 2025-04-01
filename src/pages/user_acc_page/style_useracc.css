@@ -18,27 +18,39 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8vw;
+    width: 5vw;
 }
 
 .exitbutton,
 .deletebutton {
+    border: none;
     background: none;
-    width: 100%;
-    height: 5vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.exitbutton:hover,
+.deletebutton:hover {
+    border: none;
+    background: none;
+    color: rgb(255, 255, 255);
+    opacity: 50%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.exitbutton {
+    margin-left: -1vw;
 }
 
 .deletebutton {
-    margin-top: -10vh;
+    margin-top: -8vh;
 }
 
-.exitbutton img,
-.deletebutton img {
-    width: 2vw;
-    height: 2vw;
+img {
+    width: 2vw !important;
+    height: 2vw !important;
 }
 
 .headtext {
@@ -53,15 +65,15 @@ body {
     margin: 0;
     font-size: calc((5vw + 5vh)/2);
     color: white;
+    font-weight: lighter;
 }
 
 .headpodtext h2 {
     margin: 0;
     font-size: calc((3vw + 3vh)/2);
     color: white;
+    font-weight: lighter;
 }
-
-
 
 .info {
     display: grid;
@@ -210,6 +222,7 @@ body {
     font-size: calc((2vw + 3vh)/2);
     background: white;
     color: #318ea8;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .editbutton:hover {
@@ -223,6 +236,11 @@ body {
     color: white;
 }
 
+.editbutton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
+}
+
 .viewbutton {
     width: 15vw;
     height: 10vh;
@@ -232,6 +250,7 @@ body {
     font-size: calc((2vw + 3vh)/2);
     background: white;
     color: #318ea8;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .viewbutton:hover {
@@ -242,6 +261,11 @@ body {
     font-size: calc((2vw + 3vh)/2);
     background: darkorange;
     color: white;
+}
+
+.viewbutton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }
 
 

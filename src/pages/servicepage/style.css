@@ -80,8 +80,8 @@
 }
 
 .service-image {
-    width: 15vw;
-    height: 15vw;
+    width: 15vw !important;
+    height: 15vw !important;
     object-fit: contain;
     transition: transform 0.4s;
 }

@@ -15,11 +15,13 @@ function OrgReg_page() {
         firstName: "",
         email: "",
         phone: "",
+        code: "",
         acceptedPolicy: false,
     });
 
     const [errors, setErrors] = useState({});
-    const [touched, setTouched] = useState({}); 
+    const [touched, setTouched] = useState({});
+    const [codeRequested, setCodeRequested] = useState(false); // Новое состояние для отслеживания запроса кода
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -34,7 +36,7 @@ function OrgReg_page() {
 
     const handleCheckboxChange = (e) => {
         setFormData({ ...formData, acceptedPolicy: e.target.checked });
-        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true })); 
+        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
         setErrors((prevErrors) => ({
             ...prevErrors,
             acceptedPolicy: e.target.checked ? "" : "Необходимо принять условия",
@@ -63,6 +65,8 @@ function OrgReg_page() {
                 return isValidEmail.test(value);
             case "phone":
                 return /^[78]\d{10}$/.test(value);
+            case "code":
+                return /^\d{6}$/.test(value);
             default:
                 return true;
         }
@@ -92,6 +96,8 @@ function OrgReg_page() {
                 return "Введите корректный email";
             case "phone":
                 return "Телефон должен начинаться с 7 или 8 и содержать 11 цифр";
+            case "code":
+                return "Код должен содержать ровно 6 цифр";
             case "acceptedPolicy":
                 return "Необходимо принять условия";
             default:
@@ -111,6 +117,7 @@ function OrgReg_page() {
         "firstName",
         "email",
         "phone",
+        "code",
         "acceptedPolicy",
     ];
 
@@ -135,6 +142,13 @@ function OrgReg_page() {
         return validateField(key, formData[key]);
     });
 
+    const handleKeyPress = (e) => {
+        const char = String.fromCharCode(e.which);
+        if (!/^\d$/.test(char)) {
+            e.preventDefault();
+        }
+    };
+
     return (
         <>
             <div className="headersorg">
@@ -155,6 +169,8 @@ function OrgReg_page() {
                             value={formData.fullName}
                             onChange={handleInputChange}
                             placeholder="ООО Ромашка"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -165,6 +181,8 @@ function OrgReg_page() {
                             value={formData.shortName}
                             onChange={handleInputChange}
                             placeholder="Ромашка"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -175,6 +193,8 @@ function OrgReg_page() {
                             value={formData.inn}
                             onChange={handleInputChange}
                             placeholder="1234567890"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -185,6 +205,8 @@ function OrgReg_page() {
                             value={formData.kpp}
                             onChange={handleInputChange}
                             placeholder="123456789"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -195,6 +217,8 @@ function OrgReg_page() {
                             value={formData.ogrn}
                             onChange={handleInputChange}
                             placeholder="1234567890123"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -205,6 +229,8 @@ function OrgReg_page() {
                             value={formData.city}
                             onChange={handleInputChange}
                             placeholder="Москва"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="orginfoitem">
@@ -215,6 +241,8 @@ function OrgReg_page() {
                             value={formData.address}
                             onChange={handleInputChange}
                             placeholder="ул. Ленина, д. 10"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                 </div>
@@ -229,6 +257,8 @@ function OrgReg_page() {
                             value={formData.lastName}
                             onChange={handleInputChange}
                             placeholder="Иванов"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -239,6 +269,8 @@ function OrgReg_page() {
                             value={formData.firstName}
                             onChange={handleInputChange}
                             placeholder="Иван"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -249,6 +281,8 @@ function OrgReg_page() {
                             value={formData.email}
                             onChange={handleInputChange}
                             placeholder="example@mail.com"
+                            className="inputinfo"
+                            autoComplete="off"
                         />
                     </div>
                     <div className="contactinfoitem">
@@ -258,7 +292,37 @@ function OrgReg_page() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
                             placeholder="71234567890"
+                            className="inputinfo"
+                            autoComplete="off"
+                            maxLength="11"
+                        />
+                    </div>
+                    <div className="contactinfoitem">
+                        <button
+                            className="getCodeButton"
+                            onClick={() => {
+                                console.log("Код отправлен на номер:", formData.phone);
+                                setCodeRequested(true); // Устанавливаем состояние, что код был запрошен
+                            }}
+                            disabled={!validateField("email", formData.email)} // Блокировка кнопки, если email некорректный
+                        >
+                            Получить код
+                        </button>
+                    </div>
+                    <div className="contactinfoitem">
+                        <label>Код:</label>
+                        <input
+                            type="text"
+                            name="code"
+                            value={formData.code}
+                            onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Введите код"
+                            className="inputcode"
+                            autoComplete="off"
+                            disabled={!codeRequested} // Блокировка поля, если код не был запрошен
                         />
                     </div>
                     <div className="confirmplate">

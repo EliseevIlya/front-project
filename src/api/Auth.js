@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const api = "http://217.107.34.217:9919";
+const api = "http://localhost:8080";
+//const api = "http://217.107.34.217:9919";
 
 export function registercustomer(){
     const body={
@@ -64,8 +65,7 @@ export function registeradmin(){
 }
 export function sendcode(email) {
     const headers ={
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Credentials':true
+        "Content-Type": "application/json"
     }
     console.log(headers)
     return axios.post(`${api}/auth/sign_in/send_code?email=${email}`,
@@ -77,6 +77,7 @@ export function sendcode(email) {
             withCredentials: true // Если сервер требует куки
         })
         .then((res) => {
+            console.log(res)
             if (res.status === 200) {
                 console.log('Код успешно отправлен');
                 return true; // Успешная отправка
