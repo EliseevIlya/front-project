@@ -139,7 +139,7 @@ function Washingservice() {
                                 options={cities}
                                 className="washingselect"
                                 placeholder="Выберите"
-                                onChange={setCity} 
+                                onChange={setCity}
                             />
                         </div>
                         <div className="servdiv">
