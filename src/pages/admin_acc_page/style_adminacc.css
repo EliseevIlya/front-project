@@ -155,17 +155,18 @@
     font-size: calc((2vw + 3vh)/2);
     background: white;
     color: #318ea8;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .editbuttonAdmin:hover {
-    width: 15vw;
-    height: 10vh;
-    margin-left: 7vw;
-    border: none;
-    border-radius: 20px;
-    font-size: calc((2vw + 3vh)/2);
     background: darkorange;
     color: white;
+}
+
+.editbuttonAdmin:disabled {
+    background-color: darkcyan;
+    color: white;
+    border: white 1px solid;
 }
 
 

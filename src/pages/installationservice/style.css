@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .servicepage {
     font-family: Impact, sans-serif;
     background-color: #318ea8;
@@ -15,158 +9,147 @@
     width: 100vw;
     padding: 20px;
     overflow: hidden;
-}  
+}
 
-.installationmaindiv {
+.tyremaindiv {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FF8000;
+    background-color: #bf7c25;
     border-radius: 10px;
-    width: 95%;
-    max-width: 1000px;
+    width: 50vw;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     padding: 3%;
     margin: auto;
+    margin-top: 1vh;
+}
+
+.headerS {
+    display: grid;
+    grid-template-columns: 10vw 90vw;
+    padding: 10px;
+}
+
+.exitbuttonS {
+    background: none;
+    margin-right: 80vw;
+}
+
+.exitbuttonS:hover {
+    opacity: 0.5;
+}
+
+.titleS {
+    font-size: calc((4vw + 4vh) / 2);
+    color: white;
+    font-weight: lighter;
+    margin-right: 12vw;
 }
 
 .service-title {
     font-size: calc((3vw + 3vh) / 2);
     text-align: center;
     color: #ffffff;
+    margin-top: -3vh;
+    font-weight: lighter;
+}
+
+.choose{
+    color: white;
+}
+
+.tyreservicediv {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.installationservicediv {
-    background-color: #FF8000;
-    color: white;
-    border-radius: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding: 20px;
+.left-column, .center-column, .right-column {
+    flex: 1;
+    margin-right: 10px;
 }
 
-.left-column, .right-column {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    align-items: center;
-    gap: 20px;
+.left-column:last-child, .center-column:last-child, .right-column:last-child {
+    margin-right: 0;
 }
 
-.center-column {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    align-items: center;
-    max-height: 350px;
-    overflow-y: auto;
-    padding-right: 15px;
+.servdiv {
+    margin-bottom: 15px;
 }
 
 .service-dropdown {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    width: 100%;
 }
 
 .remove-button {
-    background: #ff0000;
-    color: white;
+    margin-left: 10px; /* Отступ между выпадающим списком и кнопкой удаления */
+    background: none;
     border: none;
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
+    color: red;
     cursor: pointer;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px; 
-}
-
-.remove-button:hover {
-    background: darkred;
-}
-
-.installationselect {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: white;
-}
-
-.servdiv {
-    font-size: calc((2vw + 2vh) / 2);
-    color: #000000;
-    width: 100%;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-input[type="text"], select {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: calc((1.5vw + 1.5vh) / 2);
-}
-
-.checkbox-group {
-    display: flex;
-    gap: 15px;
-}
-
-.installationbutton-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    background-color: #FF8000;
-    padding: 10px;
-}
-
-.installationbutton {
-    padding: 10px 20px;
-    font-size: calc((1.5vw + 1.5vh) / 2);
-    border: none;
-    background-color: #1d3085;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.installationbutton:hover {
-    background-color: darkblue;
-}
-
-.servdiv input[type="number"] {
-    width: 75%;
-    font-size: calc((1.8vw + 1.8vh) / 2);
-    text-align: center;
-    border-radius: 15px;
-    background-color: #ffffff;
-    padding: 5px;
 }
 
 .cost {
-    display: block;
-    font-size: calc((1.5vw + 1.5vh) / 2);
+    font-weight: bold;
 }
 
+.tyrebutton-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;/
+}
+
+.itog-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20vw;
+}
+
+.itog {
+    margin-right: 1vw;
+    color:white;
+    font-size: 2vw;
+}
+
+.summa {
+    background: none;
+    color: white;
+    font-weight: lighter;
+    font-size: 2vw;
+    width: 6vw;
+}
+
+.tyrebutton {
+    padding: 10px 20px;
+    background-color: darkbluerk;
+    color: white;
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 5vw;
+}
+
+.tyrebutton:hover {
+    background-color: white;
+    color:darkblue;
+}
+
+.tyrebutton:disabled,
+.tyrebutton:disabled:hover {
+    background-color: grey;
+    color: white;
+}
 
 @media (max-width: 768px) {
-    .installationservicediv {
+    .tyreservicediv {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }
 
     .left-column, .center-column, .right-column {
@@ -186,16 +169,35 @@ input[type="text"], select {
 
 @media (max-width: 480px) {
     .service-title {
-        font-size: calc((1.5vw + 1.5vh) / 2);
+        font-size: 1.8rem;
     }
 
     .servdiv {
-        font-size: calc((1.5vw + 1.5vh) / 2);
+        font-size: 1rem;
     }
 
     button {
         width: 100%;
-        font-size: calc((1.5vw + 1.5vh) / 2);
-        padding: 10px;
+        font-size: 1rem;
+        padding: 8px;
     }
+}
+
+.tyreselect {
+    width: 15vw;
+    height: 5vh !important;
+    background-color: white;
+    color: black !important;
+    border: none;
+    border-radius: 20px;
+}
+
+.tyreselect:focus {
+    background-color: white;
+    color: black !important;
+}
+
+.optionS {
+    background-color: white;
+    color: black !important;
 }
