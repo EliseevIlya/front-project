@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = process.env.API;
+const api = "http://217.107.34.217:9919";
 
 export function registercustomer(){
     const body={
@@ -13,7 +13,7 @@ export function registercustomer(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -22,7 +22,6 @@ export function registercustomer(){
         }
     })
 }
-
 export function registerorg(){
     const body={
 
@@ -34,7 +33,7 @@ export function registerorg(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -54,7 +53,7 @@ export function registeradmin(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -63,26 +62,42 @@ export function registeradmin(){
         }       
     })
 }
-export function sendcode(){
-    const body={
-
+export function sendcode(email) {
+    const headers ={
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Credentials':true
     }
-    const headers={
-
-    }
-    axios.post(`${api}/auth/sign_in/send_code`,body,headers)
-    .then(()=>{
-
-    })
-    .catch(()=>{
-        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
-        if (error.response) {
-            console.log(`Ошибка: ${error.response.data.message}`);
-        } else {
-            console.log('Произошла ошибка при подключении к серверу.');
-        }       
-    })
+    console.log(headers)
+    return axios.post(`${api}/auth/sign_in/send_code?email=${email}`,
+        {}, // Пустой объект в body, если сервер требует тело запроса
+        {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true // Если сервер требует куки
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                console.log('Код успешно отправлен');
+                return true; // Успешная отправка
+            } else {
+                console.error(`Ошибка: сервер вернул статус ${res.status}`);
+                return false; // Неуспешный статус
+            }
+        })
+        .catch((error) => {
+            console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+            if (error.response) {
+                console.log(`Ошибка: ${error.response.data.message}`);
+            } else {
+                console.log(error.request);
+                console.log('Произошла ошибка при подключении к серверу.');
+            }
+            return false; // Ошибка запроса
+        });
 }
+
+
 
 export function authcustomer(){
     const body={

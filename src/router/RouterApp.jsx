@@ -4,39 +4,37 @@ import RouterAdminApp from "./RouterAdminApp.jsx";
 import RouterNoAuthUserApp from "./NoAuthUser.jsx";
 import RouterOrgApp from "./RouterOrgApp.jsx";
 import RouterUserApp from "./RouterUserApp.jsx"
+import AllRouterrApp from "./AllROuter.jsx";
 
 
 
 export default function RouterApp(){
-    const [role,setRole]=useState("no-users")
-    
+    const [role,setRole]=useState("all")
     switch(role){
         case "no-users":{
             return(
                 <RouterNoAuthUserApp />
             )
-            break
         }
         case"users":{
             return(
                 <RouterUserApp />
             )
-            break
         }
         case"admin":{
             return(
                 <RouterAdminApp />
             )
-            break
         }
         case "org":{
             return(
                 <RouterOrgApp />
             )
-            break
         }
         case "all":{
-            break
+            return(
+                <AllRouterrApp ></AllRouterrApp>
+            )
         }
         
     }

@@ -1,3 +1,5 @@
+import Main_page from "../pages/main_page/main_page.jsx";
+import {Route, Routes} from "react-router";
 export default function RouterNoAuthUserApp(props){
     console.log(props.auth)
     const NoAuthUserUrl = [
