@@ -58,6 +58,7 @@ body {
     margin-right: 5vw;
     width: 15vw;
     height: 5vh;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .infoButton:hover {
@@ -70,7 +71,7 @@ body {
     background-color: rgba(55, 155, 168, 0);
     border-radius: 20px;
     border: none;
-    max-width: 90vw; /* ограничиваем максимальную ширину контейнера */
+    max-width: 90vw;
 }
 
 
@@ -139,6 +140,10 @@ tr {
     margin-top: 0vh;
 }
 
+.buttonServices:hover {
+    opacity: 0.5;
+}
+
 /* Стили для формы добавления новой услуги */
 .newServiceForm {
     display: flex;
@@ -160,6 +165,10 @@ tr {
     cursor: pointer;
 }
 
+.deletebuttonServices:hover {
+    opacity: 0.5;
+}
+
 .editbuttonServices {
     width: 1vw;
     height: 1vw;
@@ -170,6 +179,10 @@ tr {
     background: none;
     cursor: pointer;
     margin-right: 5vw;
+}
+
+.editbuttonServices:hover {
+    opacity: 0.5;
 }
 
 .input-group {
