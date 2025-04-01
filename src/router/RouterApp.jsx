@@ -4,7 +4,7 @@ import RouterAdminApp from "./RouterAdminApp.jsx";
 import RouterNoAuthUserApp from "./NoAuthUser.jsx";
 import RouterOrgApp from "./RouterOrgApp.jsx";
 import RouterUserApp from "./RouterUserApp.jsx"
-import AllRouterrApp from "./AllROuter.jsx";
+import AllRouterrApp from "./AllRouter.jsx";
 
 
 
