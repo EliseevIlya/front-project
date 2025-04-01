@@ -70,7 +70,7 @@ function Enteraccpage() {
                         value={login}
                         onChange={handleLoginChange}
                     />
-                    {loginError && <div className="logerror">{loginError}</div>}
+                    {loginError && <div className="enteraccerror-message">{loginError}</div>}
 
                     <h3 className="password-enterpage">ПАРОЛЬ :</h3>
                     <input
@@ -80,7 +80,8 @@ function Enteraccpage() {
                         value={password}
                         onChange={handlePasswordChange}
                     />
-                    {passwordError && <div className="logerror">{passwordError}</div>}
+                    {passwordError && <div className="enteraccerror-message">{passwordError}</div>}
+
 
                     <button className="enter-enterpage" onClick={handleSubmit}
                             disabled={loginError || passwordError || !login || !password}>ВОЙТИ

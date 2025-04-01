@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Impact, sans-serif;
 }
 
 .enteracc {
@@ -104,16 +105,8 @@ textarea {
 .enter-enterpage:hover {
     background-color: #318EA8;
 }
+.enteraccerror-message {
 
-
-.logerror {
-    color: rgb(255, 0, 0);
-    font-size: 0.8vw;
-    margin-top: 1vh;
-    text-align: center;
-}
-
-.error {
     color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
