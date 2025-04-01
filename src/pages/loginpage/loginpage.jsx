@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
+import {sendcode} from "../../api/Auth.js";
 
 function Loginpage() {
     const [email, setEmail] = useState("");
@@ -23,13 +24,21 @@ function Loginpage() {
         }
     };
 
-    const handleGetCode = () => {
-        if (!email || errorMessage) {
+    const handleGetCode = async () => {
+        if (!email || errorMessage || isCodeEnabled) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
-        setIsCodeEnabled(true);
+
+        const success = await sendcode(email);
+        if (success) {
+            setIsCodeEnabled(true); // Устанавливаем только если код успешно отправлен
+        } else {
+            setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
+        }
     };
+
+
 
     const handleSubmit = () => {
         if (errorMessage || !email || !code) {

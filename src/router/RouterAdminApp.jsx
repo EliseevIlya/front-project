@@ -4,7 +4,7 @@ import Main_page from "../pages/main_page/main_page.jsx";
 import OrgStatusEdit_page from "../pages/org_statusedit_page/orgstatusedit_page.jsx";
 import AdminAcc_page from "../pages/admin_acc_page/adminacc_page.jsx";
 import UsersTable_page from "../pages/users_table_page/userstable_page.jsx";
-import NotFoundPage from "../pages/erorr_page/404_page.jsx"
+import NotFoundPage from "../pages/404erorr_page/404_page.jsx"
 import OrgTable_page from "../pages/org_table_page/orgtable_page.jsx"
 import { Routes } from "react-router";
 import { Route } from "react-router";
