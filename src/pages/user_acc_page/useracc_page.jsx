@@ -7,7 +7,6 @@ import { getCustomer } from "../../api/Customer";
  function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
-    const navigate = useNavigate();
     useEffect(()=>{
         getCustomer(localStorage.getItem("jwt"));
     })
