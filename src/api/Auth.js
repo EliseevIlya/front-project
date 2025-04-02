@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const api = "http://localhost:8581";
 
+const api = "http://localhost:8080";
+//const api = "http://217.107.34.217:9919";
 export function registercustomer(surname,name,patronic,phone,addInfo,email){
     console.log(email)
     const body={
@@ -38,9 +39,30 @@ export function registercustomer(surname,name,patronic,phone,addInfo,email){
         }
     })
 }
-export function registerorg(){
-    const body={
 
+export function registerorg(fullNameregisterorg, shortNameregisterorg, innregisterorg, kppregisterorg, ogrnregisterorg, responsiblePersonSurnameregisterorg, responsiblePersonNameregisterorg, responsiblePersonPatronymicregisterorg, responsiblePersonEmailregisterorg, responsiblePersonPhoneNumberregisterorg, addInforegisterorg,
+    subjectNameregisterorg, cityNameregisterorg, streetNameregisterorg, houseNumberregisterorg, addInfoadressregisterorg, addressTyperegisterorg, emailregisterorg){
+    const body={
+    fullName:fullNameregisterorg,
+    shortName:shortNameregisterorg,
+    inn:innregisterorg,
+    kpp:kppregisterorg,
+    ogrn:ogrnregisterorg,
+    responsiblePersonSurname:responsiblePersonSurnameregisterorg,
+    responsiblePersonName:responsiblePersonNameregisterorg,
+    responsiblePersonPatronymic:responsiblePersonPatronymicregisterorg,
+    responsiblePersonEmail:responsiblePersonEmailregisterorg,
+    responsiblePersonPhoneNumber:responsiblePersonPhoneNumberregisterorg,
+    addInfo:addInforegisterorg,
+    address: {
+    subjectName:subjectNameregisterorg,
+    cityName:cityNameregisterorg,
+    streetName:streetNameregisterorg,
+    houseNumber:houseNumberregisterorg,
+    addInfo:addInfoadressregisterorg,
+    addressType:addressTyperegisterorg
+    },
+    email:emailregisterorg
     }
     const headers={
 
@@ -58,9 +80,19 @@ export function registerorg(){
         }
     })
 }
-export function registeradmin(){
-    const body={
 
+export function registeradmin(surnameregisteradmin, nameregisteradmin, patronymicregisteradmin, departmentregisteradmin, positionregisteradmin, phoneNumberregisteradmin, 
+    addInforegisteradmin, emailregisteradmin, passwordregisteradmin){
+    const body={
+    surname:surnameregisteradmin,
+    name:nameregisteradmin,
+    patronymic:patronymicregisteradmin,
+    department:departmentregisteradmin,
+    position:positionregisteradmin,
+    phoneNumber:phoneNumberregisteradmin,
+    addInfo:addInforegisteradmin,
+    email:emailregisteradmin,
+    password:passwordregisteradmin
     }
     const headers={
 
@@ -78,21 +110,21 @@ export function registeradmin(){
         }       
     })
 }
+
 export function sendcode(email) {
     const headers ={
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Credentials':true
+
+        "Content-Type": "application/json"
     }
-    console.log(headers)
     return axios.post(`${api}/auth/sign_in/send_code?email=${email}`,
-        {}, // Пустой объект в body, если сервер требует тело запроса
+        {}, 
         {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
-            withCredentials: true // Если сервер требует куки
         })
         .then((res) => {
+            console.log(res)
             if (res.status === 200) {
                 console.log('Код успешно отправлен');
                 console.log(res)
@@ -114,13 +146,12 @@ export function sendcode(email) {
         });
 }
 
-
-
 export function authcustomer(email,code){
     const body={
         email: email,
         code:code
     }
+console.log(body)
     const headers={
 
     }
@@ -178,9 +209,11 @@ export function authorg(email,code){
     })
 }
 
-export function authadmin(){
+export function authadmin(emailauthadmin, passwordauthadmin, codeauthadmin){
     const body={
-
+    email:emailauthadmin,
+    password:passwordauthadmin,
+    code:codeauthadmin
     }
     const headers={
 

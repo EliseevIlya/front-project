@@ -60,11 +60,11 @@ function Apps_page() {
         <>
             <div className="headersApps">
                 <button className="accbuttonApps"  title="Личный кабинет" onClick={() => navigate("/user")}>
-                    <img src="/src/icons/profile.png" alt="Личный кабинет"/>
+                    <img  src="/src/icons/profile.png" alt="Личный кабинет"/>
                 </button>
                 <h1 className="textApp">ЗАЯВКИ</h1>
                 <button className="createbuttonApps" title="Добавить заявку" onClick={() => navigate("/service")}>
-                    <img src="/src/icons/create.png" alt="Создать"/>
+                    <img  src="/src/icons/create.png" alt="Создать"/>
                 </button>
             </div>
 

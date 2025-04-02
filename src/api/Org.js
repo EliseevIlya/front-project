@@ -59,10 +59,32 @@ export function getOrganizationServices(){
     })
 }
 
-export function updateOrganization(){
+export function updateOrganization(fullNameupdateOrganization, shortNameupdateOrganization, innupdateOrganization, kppupdateOrganization, ogrnupdateOrganization, responsiblePersonSurnameupdateOrganization,
+    responsiblePersonNameupdateOrganization, responsiblePersonPatronymicupdateOrganization, responsiblePersonEmailupdateOrganization, responsiblePersonPhoneNumberupdateOrganization,
+    addInfoupdateOrganization, subjectNameupdateOrganization, cityNameupdateOrganization, streetNameupdateOrganization, houseNumberupdateOrganization, addInfoupdateOrganization, 
+    addressTypeupdateOrganization, emailupdateOrganization){
     const body={
-
-    }
+        fullName:fullNameupdateOrganization,
+        shortName:shortNameupdateOrganization,
+        inn:innupdateOrganization,
+        kpp:kppupdateOrganization,
+        ogrn:ogrnupdateOrganization,
+        responsiblePersonSurname:responsiblePersonSurnameupdateOrganization,
+        responsiblePersonName:responsiblePersonNameupdateOrganization,
+        responsiblePersonPatronymic:responsiblePersonPatronymicupdateOrganization,
+        responsiblePersonEmail:responsiblePersonEmailupdateOrganization,
+        responsiblePersonPhoneNumber:responsiblePersonPhoneNumberupdateOrganization,
+        addInfo:addInfoupdateOrganization,
+        address:{
+            subjectName:subjectNameupdateOrganization,
+            cityName:cityNameupdateOrganization,
+            streetName:streetNameupdateOrganization,
+            houseNumber:houseNumberupdateOrganization,
+            addInfo:addInfoupdateOrganization,
+            addressType:addressTypeupdateOrganization
+            },
+        email:emailupdateOrganization
+        }
     const headers={
 
     }

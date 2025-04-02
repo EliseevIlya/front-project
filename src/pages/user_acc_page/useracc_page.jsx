@@ -11,6 +11,75 @@ import { getCustomer } from "../../api/Customer";
     useEffect(()=>{
         getCustomer(localStorage.getItem("jwt"));
     })
+
+
+    // State variables for form fields
+    const [email, setEmail] = useState("");
+    const [surname, setSurname] = useState("");
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
+
+    // Validation functions
+    const validateEmail = (emailValue) => {
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
+        return isValidEmail.test(emailValue);
+    };
+
+    const validateSurname = (surnameValue) => {
+        const isValidSurname = /^[А-ЯЁа-яё\-]+$/;
+        return isValidSurname.test(surnameValue);
+    };
+
+    const validateName = (nameValue) => {
+        const isValidName = /^[А-ЯЁа-яё\-]+$/;
+        return isValidName.test(nameValue);
+    };
+
+    const validatePhone = (phoneValue) => {
+        const isValidPhone = /^(\7|8)\d{10}$/;
+        return isValidPhone.test(phoneValue);
+    };
+
+    // Handlers for input changes
+    const handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        setEmail(emailValue);
+    };
+
+    const handleSurnameChange = (e) => {
+        const surnameValue = e.target.value;
+        setSurname(surnameValue);
+    };
+
+    const handleNameChange = (e) => {
+        const nameValue = e.target.value;
+        setName(nameValue);
+    };
+
+    const handlePhoneChange = (e) => {
+        const phoneValue = e.target.value.replace(/\D/g, "").slice(0, 11);
+        setPhone(phoneValue);
+    };
+
+    // Function to check if all required fields are filled and valid
+    const areRequiredFieldsValid = () => {
+        const isEmailValid = validateEmail(email);
+        const isSurnameValid = validateSurname(surname);
+        const isNameValid = validateName(name);
+        const isPhoneValid = validatePhone(phone);
+
+        if (!isEmailValid || !isSurnameValid || !isNameValid || !isPhoneValid) {
+            setErrorMessage("Заполните все обязательные поля корректно!");
+            return false;
+        }
+
+        setErrorMessage("");
+        return true;
+    };
+
     return (
         <div>
             <div className="headers">
@@ -28,7 +97,7 @@ import { getCustomer } from "../../api/Customer";
                     </div>
                 </div>
                 <div className="headdelete">
-                    <button className="deletebutton"  title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
+                    <button className="deletebutton" title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
                         <img src="src/icons/close.png" alt="Delete" />
                     </button>
                 </div>
@@ -38,37 +107,75 @@ import { getCustomer } from "../../api/Customer";
                 <div className="info">
                     <div className="infoitem">
                         <label>ФАМИЛИЯ*:</label>
-                        <input type="text" defaultValue="ИВАНОВ" disabled={!isEditing} />
+                        <input
+                            type="text"
+                            placeholder="ИВАНОВ"
+                            disabled={!isEditing}
+                            value={surname}
+                            onChange={handleSurnameChange}
+                        />
                     </div>
                     <div className="infoitem">
                         <label>ИМЯ*:</label>
-                        <input type="text" defaultValue="ИВАН" disabled={!isEditing} />
+                        <input
+                            type="text"
+                            placeholder="ИВАН"
+                            disabled={!isEditing}
+                            value={name}
+                            onChange={handleNameChange}
+                        />
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" defaultValue="ИВАНОВИЧ" disabled={!isEditing} />
+                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>НОМЕР ТЕЛ.*:</label>
-                        <input type="text" defaultValue="79990001110" disabled={!isEditing} />
+                        <input
+                            type="text"
+                            placeholder="79990001110"
+                            disabled={!isEditing}
+                            value={phone}
+                            onChange={handlePhoneChange}
+                        />
                     </div>
                     <div className="infoitem">
                         <label>EMAIL*:</label>
-                        <input type="text" defaultValue="ivanov@mail.ru" disabled={!isEditing} />
+                        <input
+                            type="text"
+                            placeholder="ivanov@mail.ru"
+                            disabled={!isEditing}
+                            value={email}
+                            onChange={handleEmailChange}
+                        />
                     </div>
                 </div>
                 <div className="dopinfoitem">
                     <label>ДОП. ИНФОРМАЦИЯ:</label>
-                    <textarea defaultValue="Дополнительная информация..." disabled={!isEditing}></textarea>
+                    <textarea placeholder="Дополнительная информация..." disabled={!isEditing}></textarea>
                 </div>
             </div>
 
             <div className="buttonplate">
                 <div className="editsave">
-                    <button className="editbutton" onClick={() => setIsEditing((prev) => !prev)}>
+                    <button
+                        className="editbutton"
+                        onClick={() => {
+                            if (isEditing) {
+                                // Save changes
+                                if (areRequiredFieldsValid()) {
+                                    setIsEditing(false);
+                                }
+                            } else {
+                                // Start editing
+                                setIsEditing(true);
+                            }
+                        }}
+                    >
                         {isEditing ? "Сохранить" : "Изменить"}
                     </button>
                 </div>
+                {errorMessage && <span className="error">{errorMessage}</span>}
                 <div className="applications">
                     <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
                 </div>

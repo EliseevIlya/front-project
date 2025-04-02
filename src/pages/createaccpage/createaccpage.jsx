@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { registercustomer, sendcode } from "../../api/Auth";
 
+
 function Createaccpage() {
     const [email, setEmail] = useState("");
     const [surname, setSurname] = useState("");
@@ -20,6 +21,7 @@ function Createaccpage() {
     });
 
     const [isCodeEnabled, setIsCodeEnabled] = useState(false);
+    const [isCodeInputEnabled, setIsCodeInputEnabled] = useState(false);
 
     const navigate = useNavigate();
 
@@ -39,8 +41,8 @@ function Createaccpage() {
     };
 
     const validatePhone = (phoneValue) => {
-        const isValidPhone = /^(\+7|8)\d{10}$/;
-        return isValidPhone.test(phoneValue) ? "" : "Формат: +7XXXXXXXXXX или 8XXXXXXXXXX.";
+        const isValidPhone = /^(\8|7)\d{10}$/;
+        return isValidPhone.test(phoneValue) ? "" : "Формат: 7XXXXXXXXXX или 8XXXXXXXXXX";
     };
 
     const handleEmailChange = (e) => {
@@ -57,7 +59,6 @@ function Createaccpage() {
             setIsCodeEnabled(false);
         }
     };
-
 
     const handleSurnameChange = (e) => {
         const surnameValue = e.target.value;
@@ -78,12 +79,31 @@ function Createaccpage() {
     };
 
     const handlePhoneChange = (e) => {
-        const phoneValue = e.target.value;
+        const phoneValue = e.target.value.replace(/\D/g, "").slice(0, 11);
         setPhone(phoneValue);
         setErrorMessage((prev) => ({
             ...prev,
             phone: validatePhone(phoneValue)
         }));
+    };
+
+    const handleCodeChange = (e) => {
+        const codeValue = e.target.value.replace(/\D/g, "");
+        setCode(codeValue);
+    };
+
+    const handleGetCode = async () => {
+        if (!email || errorMessage || isCodeEnabled) {
+            setErrorMessage("Введите корректный email перед получением кода.");
+            return;
+        }
+
+        const success = await sendcode(email);
+        if (success) {
+            setIsCodeEnabled(true); // Устанавливаем только если код успешно отправлен
+        } else {
+            setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
+        }
     };
 
     const handleCreateAccount = async () => {
@@ -190,21 +210,23 @@ function Createaccpage() {
                             }
                         }}
                     />
-                    <label htmlFor="terms">Я принимаю <a href="https://policies.google.com/privacy?hl=ru"
+                    <label htmlFor="terms" className="texthref">Я принимаю <a href="https://policies.google.com/privacy?hl=ru"
                                                          target="_blank" rel="noopener noreferrer">пользовательское
                         соглашение</a></label>
                 </div>
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
+
                     <button className="createaccbutton" onClick={handleGetCode}>ПОЛУЧИТЬ КОД</button>
+
                     <input className="inputcreateacc"
                            type="text"
                            placeholder="Введите код"
                            value={code}
-                           onChange={(e) => setCode(e.target.value)}
-                           disabled={!isCodeEnabled}
-                    />
-                    <button className="createaccbutton" onClick={handleCreateAccount}>СОЗДАТЬ АККАУНТ</button>
+                           onChange={handleCodeChange}
+                           disabled={!isCodeInputEnabled}/>
+                    <button className="createaccbutton" onClick={handleCreateAccount} disabled={!code}>СОЗДАТЬ АККАУНТ
+                    </button>
                 </div>
             </div>
         </div>

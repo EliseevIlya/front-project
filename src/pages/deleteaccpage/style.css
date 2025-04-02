@@ -2,16 +2,56 @@
     gap: 50px;
 }
 
-.delete-button {
-    padding: 12 24px;
-    background-color: gray;
+.deleteacc {
+    background-color: darkred;
+    width: 25vw;
+    height: 20vh;
+    border-radius: 20px;
     color: white;
+    font-weight: lighter;
+}
+.delete-button {
+    padding: 12px;
+    background-color: white;
+    color: darkred;
     border: none;
+    width: 75%;
     border-radius: 10px;
     font-size: calc((1.3vw + 1.3vh)/2);
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .delete-button:hover {
-    background-color: darkgray;
+    background-color: white;
+    color: darkred;
+    opacity: 0.5;
+}
+
+.delete-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
+}
+
+.cancel-button {
+    padding: 12px;
+    background-color: white;
+    color: darkred;
+    border: none;
+    width: 75%;
+    border-radius: 10px;
+    font-size: calc((1.3vw + 1.3vh)/2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s ease-out;
+}
+
+.cancel-button:hover {
+    background-color: white;
+    color: darkred;
+    opacity: 0.5;
+}
+
+.cancel-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }
