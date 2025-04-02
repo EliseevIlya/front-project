@@ -10,33 +10,38 @@
     align-items: center;
 }
 
-.modal-contentconfirm {
+.modal-contentconfirmtyre {
+    font-weight: lighter;
     font-family: Impact, sans-serif;
     font-size: calc((1.2vw + 1.2vh)/2);
-    background: white;
+    background: darkgoldenrod !important;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white !important;
 }
 
 .modal-content h1{
     color: #318ea8;
 }
 
-.confirmationinstallation-text {
-    color: #FF8000;
+.confirmationtyre-text {
+    font-weight: lighter;
+    color: #ffffff;
 }
 
-.confirmation-buttoninstallation {
-    background-color: #FF8000;
+.confirmation-buttontyre {
+    background-color: darkblue;
     border: none;
     padding: 10px 20px;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
-.confirmation-buttoninstallation:hover {
-    background-color: darkorange;
+.confirmation-buttontyre:hover {
+    background-color: #ffffff;
+    color: darkblue;
 }

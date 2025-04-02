@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import RouterAdminApp from "./RouterAdminApp.jsx";
 import RouterNoAuthUserApp from "./NoAuthUser.jsx";
@@ -36,6 +35,5 @@ export default function RouterApp(){
                 <AllRouterrApp ></AllRouterrApp>
             )
         }
-        
     }
 }

@@ -17,7 +17,7 @@ function Confirmationwashingpage({ isOpen, onClose }) {
             <div className="modal-contentconfirm">
                 <h1>ПОДТВЕРЖДЕНИЕ ЗАПИСИ</h1>
                 <h3 className="confirmationwashing-text">
-                    ЖДЕМ ВАС СЕГОДНЯ В 10:00 - 11:40 ПО АДРЕСУ:
+                    ЖДЕМ ВАС СЕГОДНЯ В // ПО АДРЕСУ:
                 </h3>
                 <button className="confirmation-buttonwashing" onClick={onConfirmation}>ОК</button>
         </div>

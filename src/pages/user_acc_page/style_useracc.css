@@ -21,7 +21,7 @@ body {
     width: 5vw;
 }
 
-.exitbutton,
+.exitbuttonuser,
 .deletebutton {
     border: none;
     background: none;
@@ -30,8 +30,8 @@ body {
     border-radius: 5px;
 }
 
-.exitbutton:hover,
-.deletebutton:hover {
+.exitbuttonuser:hover,
+.deletebutton:hover{
     border: none;
     background: none;
     color: rgb(255, 255, 255);
@@ -40,12 +40,29 @@ body {
     border-radius: 5px;
 }
 
-.exitbutton {
-    margin-left: -1vw;
+.exitbuttonuser {
+    margin-top: -7vh;
 }
 
 .deletebutton {
     margin-top: -8vh;
+}
+
+.homebuttonuser{
+    font-family: Impact, sans-serif;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.homebuttonuser:hover{
+    opacity: 50%;
 }
 
 img {

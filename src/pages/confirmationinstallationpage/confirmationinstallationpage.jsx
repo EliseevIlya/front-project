@@ -14,12 +14,12 @@ function Confirmationinstallationpage({ isOpen, onClose }) {
 
     return (
         <div className="modal-overlayconfirm">
-            <div className="modal-contentconfirm">
+            <div className="modal-contentconfirmtyre">
                 <h1>ПОДТВЕРЖДЕНИЕ ЗАПИСИ</h1>
-                <h3 className="confirmationinstallation-text">
-                    ЖДЕМ ВАС СЕГОДНЯ В 10:00 - 11:40 ПО АДРЕСУ:
+                <h3 className="confirmationtyre-text">
+                    ЖДЕМ ВАС СЕГОДНЯ В // ПО АДРЕСУ:
                 </h3>
-                <button className="confirmation-buttoninstallation" onClick={onConfirmation}>ОК</button>
+                <button className="confirmation-buttontyre" onClick={onConfirmation}>ОК</button>
         </div>
         </div>
     );
