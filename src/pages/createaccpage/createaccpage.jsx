@@ -123,24 +123,6 @@ function Createaccpage() {
 
     };
 
-    const handleGetCode = async () => {
-            if (!email) {
-                setErrorMessage((prev) => ({
-                    ...prev,
-                    form: "Пожалуйста, заполните все поля и примите условия."
-                }));
-                return;
-            }
-            console.log("click")
-            const success = await sendcode(email);
-            if (success) {
-            } else {
-                setErrorMessage((prev) => ({
-                    ...prev,
-                    form: "Пожалуйста, заполните все поля и примите условия."
-                }));
-            }
-        };
     const getFirstError = () => {
         // Порядок проверки ошибок
         if (errorMessage.email) return errorMessage.email;
