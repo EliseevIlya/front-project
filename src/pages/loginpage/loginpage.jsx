@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
-import {sendcode} from "../../api/Auth.js";
+import {authcustomer, sendcode} from "../../api/Auth.js";
 
 function Loginpage() {
     const [email, setEmail] = useState("");
@@ -40,12 +40,14 @@ function Loginpage() {
 
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (errorMessage || !email || !code) {
             setErrorMessage("Пожалуйста, заполните все поля корректно.");
             return;
         }
-        navigate("/user");
+         await authcustomer(email,code);
+         navigate("/user");
+         localStorage.setItem("role","users");
     };
 
     const handleCloseModal = () => {
@@ -94,7 +96,7 @@ function Loginpage() {
 
                 {errorMessage && <div className="loginpageerror-message">{errorMessage}</div>}
                 <div className="footerloginpage">
-                    <h6 onClick={() => navigate("/createaccpage")}>СОЗДАТЬ АККАУНТ</h6>
+                    <h6 onClick={() => navigate("/create_acc")}>СОЗДАТЬ АККАУНТ</h6>
                     <button className="loginpagebutton" onClick={handleSubmit}>ВОЙТИ</button>
                 </div>
             </div>

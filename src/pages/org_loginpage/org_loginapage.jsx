@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
+import { authorg } from "../../api/Auth";
+import { sendcode} from "../../api/Auth.js";
 
 function OrgLoginPage() {
     const [email, setEmail] = useState("");
@@ -23,21 +25,30 @@ function OrgLoginPage() {
         }
     };
 
-    const handleGetCode = () => {
-        if (!email || errorMessage) {
+    const handleGetCode = async () => {
+        if (!email || errorMessage || isCodeEnabled) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
-        setIsCodeEnabled(true);
+
+        const success = await sendcode(email);
+        if (success) {
+            setIsCodeEnabled(true); // Устанавливаем только если код успешно отправлен
+        } else {
+            setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
+        }
     };
 
-    const handleSubmit = () => {
+const handleSubmit = async () => {
         if (errorMessage || !email || !code) {
             setErrorMessage("Пожалуйста, заполните все поля корректно.");
             return;
         }
-        navigate("/org/statuscheck");
+         await authorg(email,code);
+         localStorage.setItem("role","org");
+         navigate("/org/statuscheck");
     };
+
 
     const handleCloseModal = () => {
         setIsModalOpen(false);

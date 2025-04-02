@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style_useracc.css";
 import { useNavigate } from "react-router-dom";
 import Deleteaccpage from "../deleteaccpage/deleteaccpage";
+import { getCustomer } from "../../api/Customer";
 
-function UserAcc_page() {
+ function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
+    const navigate = useNavigate();
+    useEffect(()=>{
+        getCustomer(localStorage.getItem("jwt"));
+    })
+
 
     // State variables for form fields
     const [email, setEmail] = useState("");
