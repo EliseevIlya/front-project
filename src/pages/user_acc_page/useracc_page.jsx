@@ -12,7 +12,6 @@ import { getCustomer } from "../../api/Customer";
         getCustomer(localStorage.getItem("jwt"));
     })
 
-
     // State variables for form fields
     const [email, setEmail] = useState("");
     const [surname, setSurname] = useState("");
@@ -20,7 +19,6 @@ import { getCustomer } from "../../api/Customer";
     const [phone, setPhone] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const navigate = useNavigate();
 
     // Validation functions
     const validateEmail = (emailValue) => {

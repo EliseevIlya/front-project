@@ -104,6 +104,14 @@
     margin-top: 20px;/
 }
 
+.services-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+}
+
 .itog-container {
     display: flex;
     align-items: center;
@@ -118,6 +126,7 @@
 
 .summa {
     background: none;
+    border: none;
     color: white;
     font-weight: lighter;
     font-size: 2vw;
