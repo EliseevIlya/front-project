@@ -1,16 +1,29 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = "http://localhost:8581";
+const api = globalAPI;
+console.log("API",api); // "http://localhost:8080"
 
-export function getCustomer(jwt){
+
+export function getCustomer(jwt,setEmail,setSurname,setName,setPhone,setAddInfo,setPatronymic){
     const header={
         Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/customer`,{
-        Authorization: `Bearer ${jwt}`
+
+    axios.get(`${api}/api/customer/`, {
+        headers: header
     })
     .then((res)=>{
         console.log(res)
+        const data = res.data;
+        setEmail(data.email);
+        setSurname(data.surname);
+        setName(data.name);
+        setPhone(data.phoneNumber);
+        setAddInfo(data.addInfo);
+        setPatronymic(data.patronymic);
+
+        return res.data;
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);

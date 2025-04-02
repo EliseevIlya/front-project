@@ -1,7 +1,8 @@
 import axios from "axios";
+import { globalAPI } from "./config.js";
 
-
-const api = "http://localhost:8080";
+const api = globalAPI;
+console.log(api); // "http://localhost:8080"
 //const api = "http://217.107.34.217:9919";
 export function registercustomer(surname,name,patronic,phone,addInfo,email){
     console.log(email)
@@ -16,7 +17,7 @@ export function registercustomer(surname,name,patronic,phone,addInfo,email){
     const headers={
 
     }
-    axios.post(`${api}/auth/sign_up/customer`,body,headers)
+    return  axios.post(`${api}/auth/sign_up/customer`,body,headers)
     .then((res)=>{
         if (res.status === 200) {
             console.log('Код успешно отправлен');

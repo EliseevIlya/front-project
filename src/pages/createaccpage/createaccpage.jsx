@@ -93,7 +93,7 @@ function Createaccpage() {
     };
 
     const handleGetCode = async () => {
-        if (!email || errorMessage || isCodeEnabled) {
+        if (!email ) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
@@ -104,6 +104,7 @@ function Createaccpage() {
         } else {
             setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
         }
+        setIsCodeInputEnabled(true)
     };
 
     const handleCreateAccount = async () => {
@@ -114,7 +115,8 @@ function Createaccpage() {
             }));
             return;
         }
-        const success = await registercustomer(surname,name,phone,code,"",email);
+        const success = await registercustomer(surname,name,"",phone,"",email);
+                console.log("SUCCESS",success);
                 if (success) {
                     navigate("/");
                 } else {
@@ -199,7 +201,7 @@ function Createaccpage() {
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
 
-                    <button className="createaccbutton" onClick={handleGetCode}>ПОЛУЧИТЬ КОД</button>
+                    <button className="createaccbutton" onClick={handleGetCode} disabled={!isCodeEnabled}>ПОЛУЧИТЬ КОД</button>
 
                     <input className="inputcreateacc"
                            type="text"
