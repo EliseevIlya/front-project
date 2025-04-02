@@ -79,6 +79,13 @@ function CreateServices_page() {
 
     const navigate = useNavigate();
 
+    const handleKeyPress = (e) => {
+        const char = String.fromCharCode(e.which);
+        if (!/^\d$/.test(char)) {
+            e.preventDefault();
+        }
+    };
+
     return (
         <>
             <div className="headerservices">
@@ -88,9 +95,7 @@ function CreateServices_page() {
                 <h1 className="textServices">Личный кабинет</h1>
             </div>
             <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>
-            <button className="infoButton" onClick={() => navigate("/org_info_page")}>Подробная
-                информация
-            </button>
+            <button className="infoButton" onClick={() => navigate("/org_info_page")}>Подробная информация</button>
             <div className="servicesTable">
                 <table className="tableServ">
                     <thead>
@@ -147,6 +152,7 @@ function CreateServices_page() {
                                             name="cost"
                                             value={service.cost}
                                             onChange={handleInputChange}
+                                            onKeyPress={handleKeyPress} // Добавляем обработчик для поля стоимости
                                             className="tableinput"
                                         />
                                     ) : (
@@ -160,6 +166,7 @@ function CreateServices_page() {
                                             name="time"
                                             value={service.time}
                                             onChange={handleInputChange}
+                                            onKeyPress={handleKeyPress} // Добавляем обработчик для поля времени
                                             className="tableinput"
                                         />
                                     ) : (
@@ -179,7 +186,7 @@ function CreateServices_page() {
 
                                     <button className="deletebuttonServices" title="Удалить услугу"
                                             onClick={() => deleteService(service.id)}>
-                                        <img src="/src/icons/close.png" alt="Delete"/>
+                                        <img src="/src/icons/closeblack.png" alt="Delete"/>
                                     </button>
                                 </td>
                             </tr>
@@ -201,6 +208,7 @@ function CreateServices_page() {
                             placeholder="Название"
                             value={newService.name}
                             onChange={handleInputChange}
+                            autoComplete="off"
                         />
                         {errors.name && <p className="error">{errors.name}</p>}
                     </div>
@@ -213,6 +221,9 @@ function CreateServices_page() {
                             placeholder="Стоимость (руб.)"
                             value={newService.cost}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
+                            maxLength="5"
+                            autoComplete="off"
                         />
                         {errors.cost && <p className="error">{errors.cost}</p>}
                     </div>
@@ -225,10 +236,12 @@ function CreateServices_page() {
                             placeholder="Время (мин)"
                             value={newService.time}
                             onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
+                            maxLength="3"
+                            autoComplete="off"
                         />
                         {errors.time && <p className="error">{errors.time}</p>}
                     </div>
-
 
                     <button className="buttonServices" title="Добавить услугу" onClick={addService}>
                         <img src="/src/icons/create.png" alt="Создать"/>

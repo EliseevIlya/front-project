@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const api = "http://localhost:8080"
+
+const api = "http://localhost:8080";
+//const api = "http://217.107.34.217:9919";
 
 export function registercustomer(surnameregistercustomer,nameregistercustomer, patronymicregistercustomer, phoneNumberregistercustomer, addInforegistercustomer, emailregistercustomer){
     const body={
@@ -101,7 +103,8 @@ export function registeradmin(surnameregisteradmin, nameregisteradmin, patronymi
 
 export function sendcode(email) {
     const headers ={
-        "Content-Type": "application/json",
+
+        "Content-Type": "application/json"
     }
     return axios.post(`${api}/auth/sign_in/send_code?email=${email}`,
         {}, 

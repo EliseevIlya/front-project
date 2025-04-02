@@ -85,6 +85,10 @@
     opacity: 0.5;
 }
 
+.inputloginpage[type="text"]{
+    color: white !important ;
+}
+
 .loginpagebutton {
     margin-bottom: 15px;
     border-radius: 10px;

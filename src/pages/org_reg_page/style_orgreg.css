@@ -62,7 +62,7 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"] {
+.inputinfo {
     border: 1px solid #ccc;
     border-radius: 20px;
     width: 30vw;
@@ -70,22 +70,42 @@ input[type="text"] {
     outline: none;
     text-align: left;
     padding-left: 1vw;
-    color: darkorange;
+    color: black !important;
     font-size: calc((2vw + 2vh)/2);
 }
 
-input[type="text"]:focus {
-    border: 1px solid #ccc;
+.inputinfo:focus {
     border-radius: 20px;
     width: 30vw;
     height: 4vh;
     outline: none;
     text-align: left;
     padding-left: 1vw;
-    color: darkorange;
+    color: black;
     font-size: calc((2vw + 2vh)/2);
     border: 1px solid darkorange;
     box-shadow: 0 0 5px darkorange;
+}
+
+.inputcode {
+    text-align: center !important;
+    color: black !important;
+}
+
+.getCodeButton {
+    width: 10vw;
+    border-radius: 20px;
+    margin-left: 10vw;
+    transition: background-color 0.3s, transform 0.1s ease-out;
+}
+
+.getCodeButton:hover {
+    background: darkcyan;
+}
+
+.getCodeButton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }
 
 .confirmplate {
@@ -95,7 +115,7 @@ input[type="text"]:focus {
     height: 5vh;
     gap: 1vh;
     margin-left: 7.5vw;
-    margin-top: 18vh;
+    margin-top: 10vh;
     label{
         font-size: calc((1.5vw + 1.5vh)/2);
     }
@@ -137,7 +157,8 @@ input[type="text"]:focus {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 13.7vw;
+    margin-left: 12.5vw;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .crappbutton:hover {
@@ -149,7 +170,6 @@ input[type="text"]:focus {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 13.7vw;
 }
 
 .crappbutton:disabled {
@@ -161,5 +181,9 @@ input[type="text"]:focus {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 13.7vw;
+}
+
+.crappbutton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-in;
 }

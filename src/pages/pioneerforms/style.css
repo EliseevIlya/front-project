@@ -86,8 +86,8 @@
 }
 
 .filter-buttonorgform:active {
-  transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
-  transition: transform 0.1s ease-in; /* Плавное уменьшение при нажатии */
+  transform: scale(0.95);
+  transition: transform 0.1s ease-in;
 }
 
 
