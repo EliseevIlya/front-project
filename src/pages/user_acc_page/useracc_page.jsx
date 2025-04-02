@@ -186,7 +186,7 @@ import { getCustomer } from "../../api/Customer";
             )}
             {errorMessage && <span className="error">{errorMessage}</span>}
             <div className="applications">
-                <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
+                <button className="viewbutton" onClick={() => navigate("/apps")}>Заявки</button>
             </div>
         </div>
 

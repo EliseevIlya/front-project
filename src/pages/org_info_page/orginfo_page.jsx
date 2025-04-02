@@ -117,7 +117,7 @@ function OrgInfo_page() {
             <div className="info_headersorg">
                 <button  className="info_exitbutton"
                          title="Личный кабинет"
-                         onClick={() => navigate("/create/services")}
+                         onClick={() => navigate("/create_services")}
                          disabled={isButtonDisabled}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>

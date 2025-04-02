@@ -38,40 +38,40 @@
     font-weight: lighter;
 }
 
-.login-enterpage, .password-enterpage {
+.login-enterpage, .password-enterpage, .code-enterpage {
     color: #318EA8;
     text-align: left;
     margin-bottom: 10px;           
     font-weight: lighter;
 }
 
-.password-enterpage{
+.password-enterpage, .code-enterpage {
     margin-top: 1vh;
 }
 
-.login-textfield, .password-textfield {
+.login-textfield, .password-textfield, .code-textfield {
     border-radius: 10px;
     flex: 1; 
     padding: 20px;
     border: 1px solid #318EA8;
-    background-color: #318EA8;
-    color: white;
-    font-size: calc((1.5vw + 1.5vh)/2);
-    font-family: Impact, sans-serif;
+    background-color: #318EA8; 
+    color: white !important;
     box-sizing: border-box;
-    width: 100%;
+    width: 100%; 
+    max-width: 100%;
 }
 
-.login-textfield::placeholder, .password-textfield::placeholder {
+.login-textfield::placeholder, .password-textfield::placeholder, .code-textfield::placeholder {
     font-size: calc((1.1vw + 1.1vh)/2);
     color: #ffffff;
     opacity: 0.5;
 }
 
-.login-textfield:focus, .password-textfield:focus {
+.login-textfield:focus, .password-textfield:focus, .code-textfield:focus {
     border: 1px solid darkorange;
     box-shadow: 0 0 5px darkorange;
-    outline: none;}
+    outline: none;
+}
 
 .enter-enterpage {
     width: 100%;
@@ -90,11 +90,42 @@
 .enter-enterpage:hover {
     background-color: #318EA8;
 }
-.enteraccerror-message {
 
+.enteraccerror-message {
     color: rgb(0, 0, 0);
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
+}
+
+.enteracc-info {
+    font-size: calc((1.1vw + 1.1vh) / 2);
+    color: #666666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.get-code-button {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 15px 25px;
+    font-size: calc((1.3vw + 1.3vh)/2);
+    border: none;
+    background-color: #FF8000;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.get-code-button:hover {
+    background-color: #318EA8;
+}
+
+.get-code-button.disabled-button {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed;
 }
 

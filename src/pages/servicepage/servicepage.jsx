@@ -12,12 +12,12 @@ function Servicepage(){
                 <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
             </div>
             <div className="buttons-containerservice">
-                <div className="wash-card" onClick={() => navigate("/service/washing")}>
+                <div className="wash-card" onClick={() => navigate("/washing")}>
                     <h2>МОЙКА</h2>
                     <img src="/src/icons/car-wash.png" alt="МОЙКА" className="service-image"/>
                 </div>
 
-                <div className="tyre-card" onClick={() => navigate("/service/installation")}>
+                <div className="tyre-card" onClick={() => navigate("/installation")}>
                     <h2>ШИНОМОНТАЖ</h2>
                     <img src="/src/icons/tyre.png" alt="ШИНОМОНТАЖ" className="service-image"/>
                 </div>

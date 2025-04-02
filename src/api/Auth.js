@@ -4,6 +4,7 @@ import { globalAPI } from "./config.js";
 const api = globalAPI;
 console.log(api); // "http://localhost:8080"
 //const api = "http://217.107.34.217:9919";
+
 export function registercustomer(surname,name,patronic,phone,addInfo,email){
     console.log(email)
     const body={

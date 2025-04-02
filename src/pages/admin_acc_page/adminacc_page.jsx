@@ -119,15 +119,15 @@ function AdminAcc_page() {
                 <div className="control">
                     <div className="controlitem">
                         <label>Заявки: </label>
-                        <button onClick={() => navigate("/org/forms")}>Перейти</button>
+                        <button onClick={() => navigate("/org_apps")}>Перейти</button>
                     </div>
                     <div className="controlitem">
                         <label>Пользователи: </label>
-                        <button onClick={() => navigate("/userstable_page")}>Перейти</button>
+                        <button onClick={() => navigate("/table_user")}>Перейти</button>
                     </div>
                     <div className="controlitem">
                         <label>Организации: </label>
-                        <button onClick={() => navigate("/orgtable_page")}>Перейти</button>
+                        <button onClick={() => navigate("/table_org")}>Перейти</button>
                     </div>
                 </div>
             </div>
