@@ -1,16 +1,18 @@
 import axios from "axios"
 
-const api = process.env.API
+const api = "http://localhost:8581";
 
-export function getCustomer(){
-    const headers={
-
+export function getCustomer(jwt){
+    const header={
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/customer`,headers)
-    .then(()=>{
-
+    axios.get(`${api}/api/customer`,{
+        Authorization: `Bearer ${jwt}`
     })
-    .catch(()=>{
+    .then((res)=>{
+        console.log(res)
+    })
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);

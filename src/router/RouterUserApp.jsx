@@ -1,7 +1,9 @@
+import UserAcc_page from "../pages/user_acc_page/useracc_page"
+
 export default function RouterUserApp(){
     const Userurl = [{
-        url: "/createaccpage",
-        Pages: <Createaccpage />
+        url: "/user",
+        Pages: <UserAcc_page />
     }, {
         url: "/org_loginpage",
         Pages: <Org_loginpage />
@@ -17,7 +19,7 @@ export default function RouterUserApp(){
     return(
         <Routes>
             {
-                pageurl.map((element)=>{
+                Userurl.map((element)=>{
                     return(
                         <Route path={element.url} element={element.Pages}/>
                     )

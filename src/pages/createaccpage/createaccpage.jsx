@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { registercustomer, sendcode } from "../../api/Auth";
 
 function Createaccpage() {
     const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function Createaccpage() {
     const [phone, setPhone] = useState("");
     const [code, setCode] = useState("");
     const [termsAccepted, setTermsAccepted] = useState(false);
+    
     const [errorMessage, setErrorMessage] = useState({
         email: "",
         surname: "",
@@ -84,7 +86,7 @@ function Createaccpage() {
         }));
     };
 
-    const handleCreateAccount = () => {
+    const handleCreateAccount = async () => {
         if (!email || !surname || !name || !phone || !code || !termsAccepted) {
             setErrorMessage((prev) => ({
                 ...prev,
@@ -92,9 +94,33 @@ function Createaccpage() {
             }));
             return;
         }
-        navigate("/user");
+        const success = await registercustomer(surname,name,phone,code,"",email);
+                if (success) {
+                    navigate("/");
+                } else {
+                    setErrorMessage("Перепроверьте код");
+                }
+
     };
 
+    const handleGetCode = async () => {
+            if (!email) {
+                setErrorMessage((prev) => ({
+                    ...prev,
+                    form: "Пожалуйста, заполните все поля и примите условия."
+                }));
+                return;
+            }
+            console.log("click")
+            const success = await sendcode(email);
+            if (success) {
+            } else {
+                setErrorMessage((prev) => ({
+                    ...prev,
+                    form: "Пожалуйста, заполните все поля и примите условия."
+                }));
+            }
+        };
     const getFirstError = () => {
         // Порядок проверки ошибок
         if (errorMessage.email) return errorMessage.email;
@@ -170,7 +196,7 @@ function Createaccpage() {
                 </div>
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
-                    <button className="createaccbutton" disabled={!isCodeEnabled}>ПОЛУЧИТЬ КОД</button>
+                    <button className="createaccbutton" onClick={handleGetCode}>ПОЛУЧИТЬ КОД</button>
                     <input className="inputcreateacc"
                            type="text"
                            placeholder="Введите код"

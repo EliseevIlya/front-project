@@ -52,11 +52,11 @@ export default function AllRouterrApp(props){
             Pages: <OrgInfo_page />
         },
         {
-            url: "/org_reg",
+            url: "/org/reg",
             Pages: <OrgReg_page />
         },
         {
-            url: "/org_statuscheck",
+            url: "/org/statuscheck",
             Pages: <OrgStatusCheck_page />
         },
         {
@@ -82,6 +82,10 @@ export default function AllRouterrApp(props){
         {
             url: "/table_user",
             Pages: <UsersTable_page />
+        },
+        {
+            url: "/user",
+            Pages: <UserAcc_page />
         },
     ]
     return(
