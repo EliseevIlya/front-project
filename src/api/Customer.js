@@ -38,11 +38,17 @@ export function getCustomerServiceTypeOrg(){
     })
 }
 
-export function getCustomerServiceRequest(){
+export function getCustomerServiceRequest(organizationIdgetCustomerServiceRequest, startDategetCustomerServiceRequest, fromDateServicegetCustomerServiceRequest, toDateServicegetCustomerServiceRequest){
     const headers={
 
     }
-    axios.get(`${api}/api/customer/service_requests`,headers)
+    const body={
+        organizationId:organizationIdgetCustomerServiceRequest,
+        startDate:startDategetCustomerServiceRequest,
+        fromDateService:fromDateServicegetCustomerServiceRequest,
+        toDateService:toDateServicegetCustomerServiceRequest
+    }
+    axios.get(`${api}/api/customer/service_requests`,headers,body)
     .then(()=>{
 
     })
@@ -56,9 +62,14 @@ export function getCustomerServiceRequest(){
     })
 }
 
-export function updateCustomer(){
+export function updateCustomer(emailupdateCustomer, surnameupdateCustomer, nameupdateCustomer, patronymicupdateCustomer, phoneNumberupdateCustomer, addInfoupdateCustomer){
     const body={
-
+    email:emailupdateCustomer,
+    surname:surnameupdateCustomer,
+    name:nameupdateCustomer,
+    patronymic:patronymicupdateCustomer,
+    phoneNumber:phoneNumberupdateCustomer,
+    addInfo:addInfoupdateCustomer
     }
     const headers={
 
@@ -80,10 +91,31 @@ export function deleteCustomer(){
     const headers={
 
     }
-    const body={
+    axios.delete(`${api}/api/organization/`,headers)
+    .then(()=>{
+
+    })
+    .catch(()=>{
+        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+        if (error.response) {
+            console.log(`Ошибка: ${error.response.data.message}`);
+        } else {
+            console.log('Произошла ошибка при подключении к серверу.');
+        }
+    })
+}
+
+export function RequestCreateCustomer(organizationIdRequestCreateCustomer, addInfoRequestCreateCustomer, serviceDetailIdsRequestCreateCustomer, dateServiceRequestCreateCustomer){
+    const headers={
 
     }
-    axios.delete(`${api}/api/organization/`,body,headers)
+    const body ={
+        organizationId:organizationIdRequestCreateCustomer,
+        addInfo:addInfoRequestCreateCustomer,
+        serviceDetailIds:serviceDetailIdsRequestCreateCustomer,
+        dateService:dateServiceRequestCreateCustomer
+      }
+    axios.delete(`${api}/api/customer/service_request/create`,headers, body)
     .then(()=>{
 
     })

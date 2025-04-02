@@ -3,13 +3,10 @@ import axios from "axios"
 const api = process.env.API
 
 export function deleteConnectionRequest(){
-    const body={
-
-    }
     const headers={
 
     }
-    axios.delete(`${api}/api/connection_request/delete`,body,headers)
+    axios.delete(`${api}/api/connection_request/delete`,headers)
     .then(()=>{
 
     })
@@ -23,11 +20,22 @@ export function deleteConnectionRequest(){
     })
 }
 
-export function getConnectionRequest(){
+export function getConnectionRequest(organizationIddeleteConnectionRequest, registrationNumberdeleteConnectionRequest, fromDateBegindeleteConnectionRequest, toDateBegindeleteConnectionRequest,
+    fromDateEnddeleteConnectionRequest, toDateEnddeleteConnectionRequest, statusdeleteConnectionRequest, sortBydeleteConnectionRequest){
     const headers={
 
     }
-    axios.get(`${api}/api/connection_request/by_status`,headers)
+    const body={
+        organizationId:organizationIddeleteConnectionRequest,
+        registrationNumber:registrationNumberdeleteConnectionRequest,
+        fromDateBegin:fromDateBegindeleteConnectionRequest,
+        toDateBegin:toDateBegindeleteConnectionRequest,
+        fromDateEnd:fromDateEnddeleteConnectionRequest,
+        toDateEnd:toDateEnddeleteConnectionRequest,
+        status:statusdeleteConnectionRequest,
+        sortBy:sortBydeleteConnectionRequest
+    }
+    axios.get(`${api}/api/connection_request/by_status`,headers, body)
     .then(()=>{
 
     })
