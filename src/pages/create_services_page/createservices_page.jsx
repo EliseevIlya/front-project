@@ -89,7 +89,7 @@ function CreateServices_page() {
     return (
         <>
             <div className="headerservices">
-                <button className="exitbutton" title="Вернуться к заявке" onClick={() => navigate("/")}>
+                <button className="exitbuttonservices" title="Вернуться к заявке" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <button className="homebutton" title="Вернуться на главную" onClick={() => navigate("/")}>

@@ -21,7 +21,7 @@ body {
     width: 5vw;
 }
 
-.exitbutton,
+.exitbuttonuser,
 .deletebutton {
     border: none;
     background: none;
@@ -30,7 +30,7 @@ body {
     border-radius: 5px;
 }
 
-.exitbutton:hover,
+.exitbuttonuser:hover,
 .deletebutton:hover{
     border: none;
     background: none;
@@ -40,15 +40,15 @@ body {
     border-radius: 5px;
 }
 
-.exitbutton {
-    margin-left: -1vw;
+.exitbuttonuser {
+    margin-top: -7vh;
 }
 
 .deletebutton {
     margin-top: -8vh;
 }
 
-.homebutton{
+.homebuttonuser{
     font-family: Impact, sans-serif;
     font-weight: lighter;
     display: flex;
@@ -61,7 +61,7 @@ body {
     border-radius: 5px;
 }
 
-.homesbutton:hover{
+.homebuttonuser:hover{
     opacity: 50%;
 }
 

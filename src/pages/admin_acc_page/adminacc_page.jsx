@@ -79,7 +79,7 @@ function AdminAcc_page() {
     return (
         <div>
             <div className="headeradmin">
-                <button className="exitbuttonadmin" title="Вернуться к заявке" onClick={() => navigate("/")}>
+                <button className="exitbuttonadmin" title="Выйти из аккаунта" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <button className="homebuttonadmin" title="Вернуться на главную" onClick={() => navigate("/")}>

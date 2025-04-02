@@ -72,13 +72,13 @@ function UserAcc_page() {
         <div>
             <div className="headers">
                 <div className="headexit">
-                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
+                    <button className="exitbuttonuser" title="Выйти из аккаунта" onClick={() => navigate("/")}>
                         <img src="/src/icons/exit.png" alt="Exit"/>
                     </button>
                 </div>
                 <div className="headtext">
                     <div className="headname">
-                        <button className="homesbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                        <button className="homebuttonuser" title="Вернуться на главную" onClick={() => navigate("/")}>
                             <h1>PIONEER</h1>
                             <img src="/src/icons/home.png" alt="Home"/>
                         </button>
