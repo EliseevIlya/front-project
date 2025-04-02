@@ -21,8 +21,8 @@ body {
         font-weight: lighter;
         font-size: calc((4vw + 4vh)/2);
         color: white;
-        margin-left: 35vw;
-        margin-top: -10vh;
+        margin-right: 40vw;
+        margin-top: -5vh;
     }
     .deletebuttonSC {
         border: none;
@@ -45,7 +45,7 @@ body {
         height: 5vh;
         border-radius: 20px;
     }
-    .exitbuttonSC {
+    .exitbuttonsc {
         border: none;
         background-color: rgba(255, 255, 255, 0);
         color: rgba(255, 255, 255, 0.5);
@@ -55,8 +55,9 @@ body {
         height: 5vh;
         border-radius: 5px;
         margin-bottom: 15vh;
+        margin-right: 35vw;
     }
-    .exitbuttonSC:hover {
+    .exitbuttonsc:hover {
         border: none;
         background-color: rgba(255, 255, 255, 0);
         color: white;
@@ -217,7 +218,6 @@ input[type="text"]:focus {
     background-color: darkorange;
     border: none;
     border-radius: 20px;
-    margin-top: 7vh;
     transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
