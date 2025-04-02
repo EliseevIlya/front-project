@@ -116,7 +116,35 @@ function Washingservice() {
 
     const handleSubmit = () => {
         if (isFormValid()) {
+            // Prepare data for submission
+            const todayDate = new Date();
+            const tomorrowDate = new Date();
+            tomorrowDate.setDate(todayDate.getDate() + 1);
+
+            const dataToSend = {
+                city: city.value,
+                org: org.value,
+                services: selectedServices.filter(service => service).map(service => service.value),
+                timeToday: selectedTimeToday ? `${todayDate.toISOString().split('T')[0]} ${selectedTimeToday}` : null,
+                timeTomorrow: selectedTimeTomorrow ? `${tomorrowDate.toISOString().split('T')[0]} ${selectedTimeTomorrow}` : null,
+            };
+
+            console.log(dataToSend); // Replace this with your API call
             setModalOpen(true);
+        }
+    };
+
+    const handleTimeTodayChange = (value) => {
+        setSelectedTimeToday(value);
+        if (value) {
+            setSelectedTimeTomorrow(""); // Сбрасываем время на завтра
+        }
+    };
+
+    const handleTimeTomorrowChange = (value) => {
+        setSelectedTimeTomorrow(value);
+        if (value) {
+            setSelectedTimeToday(""); // Сбрасываем время на сегодня
         }
     };
 
@@ -163,7 +191,7 @@ function Washingservice() {
                                         value={service ? service.value : ""}
                                         onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
                                     >
-                                        <option className="optionS" value="">Выберите услугу</option>
+                                        <option className="optionS" value="">Выберите</option>
                                         {services.map((serviceOption) => (
                                             <option className="optionS" key={serviceOption.value} value={serviceOption.value}>
                                                 {serviceOption.label}
@@ -182,8 +210,8 @@ function Washingservice() {
                     <div className="right-column">
                         <div className="servdiv">
                             <label className="choose">Сегодня:</label>
-                            <select className="washingselect" onChange={(e) => setSelectedTimeToday(e.target.value)}>
-                                <option value="">Выберите время</option>
+                            <select className="washingselect" value={selectedTimeToday} onChange={(e) => handleTimeTodayChange(e.target.value)}>
+                                <option value="">Выберите</option>
                                 {timeOptions.map((time) => (
                                     <option className="optionS" key={time} value={time}>
                                         {time}
@@ -193,8 +221,8 @@ function Washingservice() {
                         </div>
                         <div className="servdiv">
                             <label className="choose">Завтра:</label>
-                            <select className="washingselect" onChange={(e) => setSelectedTimeTomorrow(e.target.value)}>
-                                <option value="">Выберите время</option>
+                            <select className="washingselect" value={selectedTimeTomorrow} onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
+                                <option value="">Выберите</option>
                                 {timeOptions.map((time) => (
                                     <option className="optionS" key={time} value={time}>
                                         {time}
@@ -214,7 +242,7 @@ function Washingservice() {
                         onClick={handleSubmit}
                         disabled={!isFormValid()} // Блокируем кнопку, если форма не валидна
                     >
-                        Оставить заявку
+                        Записаться
                     </button>
                 </div>
             </div>

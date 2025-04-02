@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import Confirmationinstallationpage from "../confirmationinstallationpage/confirmationinstallationpage";
 import Select from "react-select";
-import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage.jsx";
 
 function Installationservice() {
     const [selectedServices, setSelectedServices] = useState([null]);
@@ -117,7 +116,34 @@ function Installationservice() {
 
     const handleSubmit = () => {
         if (isFormValid()) {
+            const todayDate = new Date();
+            const tomorrowDate = new Date();
+            tomorrowDate.setDate(todayDate.getDate() + 1);
+
+            const dataToSend = {
+                city: city.value,
+                org: org.value,
+                services : selectedServices.filter(service => service).map(service => service.value),
+                timeToday: selectedTimeToday ? `${todayDate.toISOString().split('T')[0]} ${selectedTimeToday}` : null,
+                timeTomorrow: selectedTimeTomorrow ? `${tomorrowDate.toISOString().split('T')[0]} ${selectedTimeTomorrow}` : null,
+            };
+
+            console.log(dataToSend); // Замените это на ваш API вызов
             setModalOpen(true);
+        }
+    };
+
+    const handleTimeTodayChange = (value) => {
+        setSelectedTimeToday(value);
+        if (value) {
+            setSelectedTimeTomorrow(""); // Сбрасываем время на завтра
+        }
+    };
+
+    const handleTimeTomorrowChange = (value) => {
+        setSelectedTimeTomorrow(value);
+        if (value) {
+            setSelectedTimeToday(""); // Сбрасываем время на сегодня
         }
     };
 
@@ -166,7 +192,8 @@ function Installationservice() {
                                     >
                                         <option className="optionS" value="">Выберите услугу</option>
                                         {services.map((serviceOption) => (
-                                            <option className="optionS" key={serviceOption.value} value={serviceOption.value}>
+                                            <option className="optionS" key={serviceOption.value}
+                                                    value={serviceOption.value}>
                                                 {serviceOption.label}
                                             </option>
                                         ))}
@@ -183,8 +210,9 @@ function Installationservice() {
                     <div className="right-column">
                         <div className="servdiv">
                             <label className="choose">Сегодня:</label>
-                            <select className="tyreselect" onChange={(e) => setSelectedTimeToday(e.target.value)}>
-                                <option value="">Выберите время</option>
+                            <select className="washingselect" value={selectedTimeToday}
+                                    onChange={(e) => handleTimeTodayChange(e.target.value)}>
+                                <option className="optionS" value="">Выберите</option>
                                 {timeOptions.map((time) => (
                                     <option className="optionS" key={time} value={time}>
                                         {time}
@@ -194,8 +222,9 @@ function Installationservice() {
                         </div>
                         <div className="servdiv">
                             <label className="choose">Завтра:</label>
-                            <select className="tyreselect" onChange={(e) => setSelectedTimeTomorrow(e.target.value)}>
-                                <option value="">Выберите время</option>
+                            <select className="washingselect" value={selectedTimeTomorrow}
+                                    onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
+                                <option className="optionS" value="">Выберите</option>
                                 {timeOptions.map((time) => (
                                     <option className="optionS" key={time} value={time}>
                                         {time}
@@ -208,18 +237,18 @@ function Installationservice() {
                 <div className="tyrebutton-container">
                     <div className="itog-container">
                         <label className="itog">ИТОГО:</label>
-                        <input className="summa" type="number" value={totalCost} disabled />
+                        <input className="summa" type="number" value={totalCost} disabled/>
                     </div>
                     <button
                         className="tyrebutton"
                         onClick={handleSubmit}
                         disabled={!isFormValid()} // Блокируем кнопку, если форма не валидна
                     >
-                        Оставить заявку
+                        Записаться
                     </button>
                 </div>
             </div>
-            <Confirmationinstallationpage isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+            <Confirmationinstallationpage isOpen={isModalOpen} onClose={() => setModalOpen(false)}/>
         </div>
     );
 }

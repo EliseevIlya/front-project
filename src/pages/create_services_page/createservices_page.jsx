@@ -92,8 +92,12 @@ function CreateServices_page() {
                 <button className="exitbutton" title="Вернуться к заявке" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
-                <h1 className="textServices">Личный кабинет</h1>
+                <button className="homebutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                    <h1>PIONEER</h1>
+                    <img src="/src/icons/home.png" alt="Home"/>
+                </button>
             </div>
+            <h2 className="textServices">Личный кабинет</h2>
             <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>
             <button className="infoButton" onClick={() => navigate("/org_info_page")}>Подробная информация</button>
             <div className="servicesTable">
@@ -176,11 +180,11 @@ function CreateServices_page() {
                                 <td>
                                     {editingService === service.id ? (
                                         <button className="editbuttonServices" onClick={stopEditing}>
-                                            <img src='/src/icons/save.png' alt='Save' />
+                                            <img src='/src/icons/save.png' alt='Save'/>
                                         </button>
                                     ) : (
                                         <button className="editbuttonServices" onClick={() => startEditing(service.id)}>
-                                            <img src='/src/icons/edit.png' alt='Edit' />
+                                            <img src='/src/icons/edit.png' alt='Edit'/>
                                         </button>
                                     )}
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./style_adminacc.css";
 import { useNavigate } from "react-router-dom";
 
@@ -78,27 +78,22 @@ function AdminAcc_page() {
 
     return (
         <div>
-            <div className="headersAdmin">
-                <div className="headexit">
-                    <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
-                        <img src="/src/icons/exit.png" alt="Exit" />
-                    </button>
-                </div>
-                <div className="headtextAdmin">
-                    <div className="headnameAdmin">
-                        <h1>АДМИНИСТРАТОР</h1>
-                    </div>
-                    <div className="headpodtextAdmin">
-                        <h2>ЛИЧНЫЙ КАБИНЕТ</h2>
-                    </div>
-                </div>
+            <div className="headeradmin">
+                <button className="exitbuttonadmin" title="Вернуться к заявке" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Exit"/>
+                </button>
+                <button className="homebuttonadmin" title="Вернуться на главную" onClick={() => navigate("/")}>
+                    <h1>Администратор</h1>
+                    <img src="/src/icons/home.png" alt="Home"/>
+                </button>
             </div>
+            <h2 className="textServices">Личный кабинет</h2>
 
             <div className="controlpanel">
                 <div className="info">
                     <div className="infoitem">
                         <label>Должность*:</label>
-                        <input type="text" placeholder="Администратор" disabled={!isEditing} />
+                        <input type="text" placeholder="Администратор" disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Фамилия*:</label>

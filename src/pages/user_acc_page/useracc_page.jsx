@@ -60,16 +60,10 @@ function UserAcc_page() {
 
     // Function to check if all required fields are filled and valid
     const areRequiredFieldsValid = () => {
-        const isEmailValid = validateEmail(email);
-        const isSurnameValid = validateSurname(surname);
-        const isNameValid = validateName(name);
-        const isPhoneValid = validatePhone(phone);
-
-        if (!isEmailValid || !isSurnameValid || !isNameValid || !isPhoneValid) {
+        if (!validateEmail(email) || !validateSurname(surname) || !validateName(name) || !validatePhone(phone)) {
             setErrorMessage("Заполните все обязательные поля корректно!");
             return false;
         }
-
         setErrorMessage("");
         return true;
     };
@@ -79,12 +73,15 @@ function UserAcc_page() {
             <div className="headers">
                 <div className="headexit">
                     <button className="exitbutton" title="Выйти из аккаунта" onClick={() => navigate("/")}>
-                        <img src="/src/icons/exit.png" alt="Exit" />
+                        <img src="/src/icons/exit.png" alt="Exit"/>
                     </button>
                 </div>
                 <div className="headtext">
                     <div className="headname">
-                        <h1>PIONEER</h1>
+                        <button className="homesbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                            <h1>PIONEER</h1>
+                            <img src="/src/icons/home.png" alt="Home"/>
+                        </button>
                     </div>
                     <div className="headpodtext">
                         <h2>ЛИЧНЫЙ КАБИНЕТ</h2>
@@ -92,7 +89,7 @@ function UserAcc_page() {
                 </div>
                 <div className="headdelete">
                     <button className="deletebutton" title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
-                        <img src="src/icons/close.png" alt="Delete" />
+                        <img src="src/icons/close.png" alt="Delete"/>
                     </button>
                 </div>
             </div>
@@ -121,7 +118,7 @@ function UserAcc_page() {
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing} />
+                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>НОМЕР ТЕЛ.*:</label>
@@ -151,31 +148,29 @@ function UserAcc_page() {
             </div>
 
             <div className="buttonplate">
-                <div className="editsave">
-                    <button
-                        className="editbutton"
-                        onClick={() => {
-                            if (isEditing) {
-                                // Save changes
-                                if (areRequiredFieldsValid()) {
-                                    setIsEditing(false);
-                                }
-                            } else {
-                                // Start editing
-                                setIsEditing(true);
-                            }
-                        }}
-                    >
-                        {isEditing ? "Сохранить" : "Изменить"}
-                    </button>
-                </div>
-                {errorMessage && <span className="error">{errorMessage}</span>}
-                <div className="applications">
-                    <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
-                </div>
+            {!isEditing ? (
+                <button className="editbutton" onClick={() => setIsEditing(true)}>
+                    Изменить
+                </button>
+            ) : (
+                <button
+                    className="editbutton"
+                    onClick={() => {
+                        if (areRequiredFieldsValid()) {
+                            setIsEditing(false);
+                        }
+                    }}
+                >
+                    Сохранить
+                </button>
+            )}
+            {errorMessage && <span className="error">{errorMessage}</span>}
+            <div className="applications">
+                <button className="viewbutton" onClick={() => navigate("/user/request")}>Заявки</button>
             </div>
+        </div>
 
-            {isDeleteModalOpen && <Deleteaccpage onClose={() => setIsDeleteModalOpen(false)} />}
+            {isDeleteModalOpen && <Deleteaccpage onClose={() => setIsDeleteModalOpen(false)}/>}
         </div>
     );
 }

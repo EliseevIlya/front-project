@@ -31,7 +31,7 @@ body {
 }
 
 .exitbutton:hover,
-.deletebutton:hover {
+.deletebutton:hover{
     border: none;
     background: none;
     color: rgb(255, 255, 255);
@@ -46,6 +46,23 @@ body {
 
 .deletebutton {
     margin-top: -8vh;
+}
+
+.homebutton{
+    font-family: Impact, sans-serif;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.homesbutton:hover{
+    opacity: 50%;
 }
 
 img {
