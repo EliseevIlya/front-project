@@ -12,7 +12,7 @@
 
 .headersform {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   width: 100%;
@@ -21,8 +21,8 @@
 
 .exitbutton{
   background: none;
-  margin-left: -25vw;
   margin-top: -5vh;
+  width: 5vw;
 }
 
 .exitbutton:hover {
@@ -30,12 +30,12 @@
 }
 
 .titleorgform {
-  font-size: 3vw;
-  color: white;
+  color: white !important;
   font-weight: lighter;
   text-align: center;
-  margin-right: 30vw;
   margin-top: -5vh;
+  margin-right: 25vw;
+  font-size: calc((3vw + 3vh) / 2);
 
 }
 

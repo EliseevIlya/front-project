@@ -1,27 +1,25 @@
 import "./style_apps.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Deleterequest from "../deleterequestpage/deleterequestpage";
-import { getCustomerServiceRequest,deleteServiceRequest } from "../../api/Customer";
+import { getCustomerServiceRequest, deleteServiceRequest } from "../../api/Customer";
 
 function Apps_page() {
     const [apps, setApps] = useState([]);
     const [selectedApp, setSelectedApp] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
     const [organizationId, setOrganizationId] = useState(null);
     const [startDate, setStartDate] = useState("");
     const [size, setSize] = useState(3);
 
-
     const fetchData = async () => {
         try {
             const jwt = localStorage.getItem("jwt"); // Получаем токен
-            const response = await getCustomerServiceRequest(jwt,  organizationId,startDate,size);
+            const response = await getCustomerServiceRequest(jwt, organizationId, startDate, size);
             console.log(response);
 
             // Преобразуем данные в нужный формат
-            return  response.map(item => ({
+            return response.map(item => ({
                 id: item.id,
                 date: item.dateService.split("T")[0], // Оставляем только дату
                 time: item.dateService.split("T")[1], // Время отдельно
@@ -37,12 +35,10 @@ function Apps_page() {
                 cost: item.serviceDetails.reduce((total, service) => total + service.cost, 0) // Считаем общую стоимость
             }));
 
-
         } catch (error) {
             console.error("Ошибка загрузки данных:", error);
             return [];
         }
-
     };
 
     useEffect(() => {
@@ -59,7 +55,6 @@ function Apps_page() {
         setSize(prevSize => prevSize + 3);
     };
 
-
     const closeModal = () => {
         setSelectedApp(null);
         setShowDeleteModal(false);
@@ -70,12 +65,10 @@ function Apps_page() {
     };
 
     const deleteApp = async () => {
-
         await deleteServiceRequest(localStorage.getItem("jwt"), selectedApp.id);
         closeModal();
         setSelectedApp(null);
-        window.location.reload()
-
+        window.location.reload();
     };
 
     const navigate = useNavigate();
@@ -93,17 +86,22 @@ function Apps_page() {
 
             <div className="apps-container">
                 <div className="cards-grid">
-                    {apps.map((app) => (
-                        <div key={app.id} className="card" onClick={() => setSelectedApp(app)}>
-                            <h2 className="cardhead">Заявка №{app.id}</h2>
-                            <p><strong className="carddata">Дата:</strong> {app.date}</p>
-                            <p><strong className="carddata">Организация:</strong> {app.organization}</p>
-                            <p><strong className="carddata">Стоимость:</strong> {app.cost}₽</p>
-                        </div>
-                    ))}
+                    {apps.length > 0 ? (
+                        apps.map((app) => (
+                            <div key={app.id} className="card" onClick={() => setSelectedApp(app)}>
+                                <h2 className="cardhead">Заявка №{app.id}</h2>
+                                <p><strong className="carddata">Дата:</strong> {app.date}</p>
+                                <p><strong className="carddata">Организация:</strong> {app.organization}</p>
+                                <p><strong className="carddata">Стоимость:</strong> {app.cost}₽</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="no-apps-message">У вас пока нет активных заявок!</p>
+                    )}
                 </div>
-                <div></div>
-                <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
+                {apps.length >= 3 && (
+                    <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
+                )}
             </div>
 
             {selectedApp && (
@@ -114,7 +112,7 @@ function Apps_page() {
 
                         <div className="datetime">
                             <label className="label-inline">
-                                <p ><strong>Дата:</strong> {selectedApp.date}</p>
+                                <p><strong>Дата:</strong> {selectedApp.date}</p>
                             </label>
                             <label className="label-inline">
                                 <p type="text"><strong>Время:</strong> {selectedApp.time}</p>
@@ -131,16 +129,14 @@ function Apps_page() {
                         </div>
 
                         <div className="services">
-
                             <label className="label-inline">
                                 <p><strong>Выбранные услуги:</strong></p>
                             </label>
-                                <ul>
-                                    {selectedApp.services.map((service, index) => (
-                                        <li key={index}>{service.name}: {service.cost}₽ - {service.duration} мин.</li>
-                                    ))}
-                                </ul>
-
+                            <ul>
+                                {selectedApp.services.map((service, index) => (
+                                    <li key={index}>{service.name}: {service.cost}₽ - {service.duration} мин.</li>
+                                ))}
+                            </ul>
                         </div>
                         <div className="pricedata">
                             <label className="label-inline">
