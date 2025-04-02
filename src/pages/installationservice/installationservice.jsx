@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import "./style.css";
 import Confirmationinstallationpage from "../confirmationinstallationpage/confirmationinstallationpage";
 import Select from "react-select";
@@ -14,9 +14,9 @@ function Installationservice() {
     const [selectedTimeTomorrow, setSelectedTimeTomorrow] = useState("");
 
     const services = [
-        { value: "Услуга 1 - 200 руб. (20 мин.)", label: "Услуга 1 - 200 руб. (20 мин.)", price: 200 },
-        { value: "Услуга 2 - 300 руб. (30 мин.)", label: "Услуга 2 - 300 руб. (30 мин.)", price: 300 },
-        { value: "Услуга 3 - 400 руб. (40 мин.)", label: "Услуга 3 - 400 руб. (40 мин.)", price: 400 }
+        {value: "Услуга 1 - 200 руб. (20 мин.)", label: "Услуга 1 - 200 руб. (20 мин.)", price: 200},
+        {value: "Услуга 2 - 300 руб. (30 мин.)", label: "Услуга 2 - 300 руб. (30 мин.)", price: 300},
+        {value: "Услуга 3 - 400 руб. (40 мин.)", label: "Услуга 3 - 400 руб. (40 мин.)", price: 400}
     ];
 
     const customStyles = {
@@ -63,11 +63,11 @@ function Installationservice() {
     };
 
     const cities = [
-        { value: 'samara', label: 'Самара' },
+        {value: 'samara', label: 'Самара'},
     ];
 
     const orgs = [
-        { value: 'avangard', label: 'АВАНГАРД ул. Пушкина 6' },
+        {value: 'avangard', label: 'АВАНГАРД ул. Пушкина 6'},
     ];
 
     const navigate = useNavigate();
@@ -123,7 +123,7 @@ function Installationservice() {
             const dataToSend = {
                 city: city.value,
                 org: org.value,
-                services : selectedServices.filter(service => service).map(service => service.value),
+                services: selectedServices.filter(service => service).map(service => service.value),
                 timeToday: selectedTimeToday ? `${todayDate.toISOString().split('T')[0]} ${selectedTimeToday}` : null,
                 timeTomorrow: selectedTimeTomorrow ? `${tomorrowDate.toISOString().split('T')[0]} ${selectedTimeTomorrow}` : null,
             };
@@ -182,29 +182,32 @@ function Installationservice() {
                     </div>
                     <div className="center-column">
                         <div className="servdiv">
-                            <label className="choose">Услуги:</label>
-                            {selectedServices.map((service, index) => (
-                                <div key={index} className="service-dropdown">
-                                    <select
-                                        className="tyreselect"
-                                        value={service ? service.value : ""}
-                                        onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
-                                    >
-                                        <option className="optionS" value="">Выберите услугу</option>
-                                        {services.map((serviceOption) => (
-                                            <option className="optionS" key={serviceOption.value}
-                                                    value={serviceOption.value}>
-                                                {serviceOption.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    {selectedServices.length > 1 && (
-                                        <button className="remove-button" onClick={() => handleRemoveService(index)}>
-                                            ✖
-                                        </button>
-                                    )}
-                                </div>
-                            ))}
+                            <div className="services-container">
+                                <label className="choose">Услуги:</label>
+                                {selectedServices.map((service, index) => (
+                                    <div key={index} className="service-dropdown">
+                                        <select
+                                            className="tyreselect"
+                                            value={service ? service.value : ""}
+                                            onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
+                                        >
+                                            <option className="optionS" value="">Выберите услугу</option>
+                                            {services.map((serviceOption) => (
+                                                <option className="optionS" key={serviceOption.value}
+                                                        value={serviceOption.value}>
+                                                    {serviceOption.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {selectedServices.length > 1 && (
+                                            <button className="remove-button"
+                                                    onClick={() => handleRemoveService(index)}>
+                                                ✖
+                                            </button>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <div className="right-column">

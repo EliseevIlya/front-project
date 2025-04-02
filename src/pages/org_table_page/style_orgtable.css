@@ -6,39 +6,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    margin-left: -35vw;
 }
 
 .textTable {
     margin-top: -5vh;
-    margin-right: 33vw;
     font-size: calc((4vw + 4vh)/2);
     color: #318ea8;
     font-weight: lighter;
-}
-
-.exitbuttonTable {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    color: rgb(49, 142, 168);
-    cursor: pointer;
-    font-size: 2vw;
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15vh;
-}
-
-.exitbuttonTable:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    color: #006075;
-    cursor: pointer;
-    font-size: 2vw;
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15vh;
 }
 
 .bodytable {

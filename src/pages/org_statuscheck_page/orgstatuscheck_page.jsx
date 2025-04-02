@@ -20,7 +20,7 @@ function OrgStatusCheck_page() {
     return (
         <>
             <div className="headersorgSC">
-                <button className="exitbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                <button className="exitbuttonsc" title="Вернуться на главную" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textSC">ПРОВЕРКА ЗАЯВКИ</h1>

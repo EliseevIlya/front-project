@@ -19,13 +19,14 @@
   padding: 10px;
 }
 
-.exitbutton {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.exitbutton{
   background: none;
-  border: none;
-  cursor: pointer;
+  margin-left: -25vw;
+  margin-top: -5vh;
+}
+
+.exitbutton:hover {
+  opacity: 0.5;
 }
 
 .titleorgform {
@@ -33,7 +34,8 @@
   color: white;
   font-weight: lighter;
   text-align: center;
-  margin: 0;
+  margin-right: 30vw;
+  margin-top: -5vh;
 
 }
 
