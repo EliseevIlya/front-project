@@ -1,13 +1,17 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./style.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { sendcode, authcustomer } from "../../api/Auth.js";
 
 function Enteraccpage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(true); // Добавлено состояние модального окна
+    const [code, setCode] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(true);
     const [loginError, setLoginError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [codeError, setCodeError] = useState("");
+    const [isCodeEnabled, setIsCodeEnabled] = useState(false);
     const navigate = useNavigate();
 
     const closeModal = () => {
@@ -16,7 +20,7 @@ function Enteraccpage() {
     };
 
     const validateLogin = (login) => {
-        const loginRegex = /[a-zA-Z]/; // проверка на наличие хотя бы одной буквы
+        const loginRegex = /[a-zA-Z]/;
         if (login.length < 5 || !loginRegex.test(login)) {
             setLoginError("Логин должен содержать минимум 5 символов, включая хотя бы одну букву.");
         } else {
@@ -25,7 +29,7 @@ function Enteraccpage() {
     };
 
     const validatePassword = (password) => {
-        const passwordRegex = /[a-zA-Z]/; // проверка на наличие хотя бы одной буквы
+        const passwordRegex = /[a-zA-Z]/;
         if (password.length < 5 || !passwordRegex.test(password)) {
             setPasswordError("Пароль должен содержать минимум 5 символов, включая хотя бы одну букву.");
         } else {
@@ -45,9 +49,39 @@ function Enteraccpage() {
         validatePassword(value);
     };
 
-    const handleSubmit = () => {
-        if (!loginError && !passwordError && login && password) {
-            navigate("/admin_acc_page");
+    const handleGetCode = async () => {
+        if (!login || loginError || isCodeEnabled) {
+            setCodeError("Введите корректный логин перед получением кода.");
+            return;
+        }
+    
+        try {
+            const success = await sendcode(login);
+            console.log("sendcode result:", success); 
+    
+            if (success) {
+                setIsCodeEnabled(true);
+                setCodeError("");
+            } else {
+                setCodeError("Ошибка при отправке кода. Попробуйте снова.");
+            }
+        } catch (error) {
+            console.error("Ошибка при отправке кода:", error);
+            setCodeError("Ошибка сети. Попробуйте снова.");
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (loginError || passwordError || codeError || !login || !password || !code) {
+            setCodeError("Пожалуйста, заполните все поля корректно.");
+            return;
+        }
+
+        const success = await authcustomer(login, code);
+        if (success) {
+            navigate("/adminacc");
+        } else {
+            setCodeError("Неверный код. Попробуйте снова.");
         }
     };
 
@@ -81,10 +115,25 @@ function Enteraccpage() {
                         onChange={handlePasswordChange}
                     />
                     {passwordError && <div className="enteraccerror-message">{passwordError}</div>}
+                    <button className="get-code-button" onClick={handleGetCode} disabled={!login}>ПОЛУЧИТЬ КОД</button>
 
+                    <h3 className="code-enterpage">КОД :</h3>
+                    <input
+                        className="code-textfield"
+                        type="text"
+                        placeholder="Введите код"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        disabled={!isCodeEnabled}
+                    />
+                    {codeError && <div className="enteraccerror-message">{codeError}</div>}
 
-                    <button className="enter-enterpage" onClick={handleSubmit}
-                            disabled={loginError || passwordError || !login || !password}>ВОЙТИ
+                    <button
+                        className="enter-enterpage"
+                        onClick={handleSubmit}
+                        disabled={loginError || passwordError || codeError || !login || !password || !code}
+                    >
+                        ВОЙТИ
                     </button>
                 </div>
             </div>

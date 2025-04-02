@@ -38,7 +38,7 @@ function PioneerForms() {
             <button
                 className="exitbutton"
                 title="Вернуться в кабинет"
-                onClick={() => navigate("/admin_acc_page")}
+                onClick={() => navigate("/adminacc")}
             >
               <img src="/src/icons/exit.png" alt="Exit" />
             </button>

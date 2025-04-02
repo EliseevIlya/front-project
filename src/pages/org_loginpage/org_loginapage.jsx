@@ -26,7 +26,7 @@ function OrgLoginPage() {
     };
 
     const handleGetCode = async () => {
-        if (!email || errorMessage || isCodeEnabled) {
+        if (!email ) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
@@ -46,7 +46,8 @@ const handleSubmit = async () => {
         }
          await authorg(email,code);
          localStorage.setItem("role","org");
-         navigate("/org/statuscheck");
+        setTimeout(() => {navigate("/org/statuscheck");}, 2000)
+
     };
 
 

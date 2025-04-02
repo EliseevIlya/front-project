@@ -46,7 +46,8 @@ function Loginpage() {
             return;
         }
          await authcustomer(email,code);
-         navigate("/user");
+        setTimeout(() => {navigate("/user_acc");}, 2000)
+
          localStorage.setItem("role","users");
     };
 

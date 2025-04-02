@@ -150,7 +150,7 @@ function Installationservice() {
     return (
         <div className="servicepage">
             <div className="headerS">
-                <button className="exitbuttonS" title="Выбор услуг" onClick={() => navigate("/")}>
+                <button className="exitbuttonS" title="Выбор услуг" onClick={() => navigate("/service")}>
                     <img src="/src/icons/exit.png" alt="Выбор услуг"/>
                 </button>
                 <h1 className="titleS">ВЫБЕРИТЕ УСЛУГИ</h1>

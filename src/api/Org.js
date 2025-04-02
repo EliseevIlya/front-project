@@ -1,12 +1,13 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = process.env.API
+const api = globalAPI;
 
-export function getOneOrganization(){
+export function getOneOrganization(jwt){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/organization/get_organization`,headers)
+    axios.get(`${api}/api/organization/get_organization`,{headers: headers})
     .then(()=>{
 
     })

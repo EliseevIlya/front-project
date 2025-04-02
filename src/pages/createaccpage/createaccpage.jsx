@@ -41,7 +41,7 @@ function Createaccpage() {
     };
 
     const validatePhone = (phoneValue) => {
-        const isValidPhone = /^(\8|7)\d{10}$/;
+        const isValidPhone = /^([87])\d{10}$/;
         return isValidPhone.test(phoneValue) ? "" : "Формат: 7XXXXXXXXXX или 8XXXXXXXXXX";
     };
 
