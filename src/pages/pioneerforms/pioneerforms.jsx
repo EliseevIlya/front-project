@@ -59,7 +59,7 @@ function PioneerForms() {
               </div>
             </div>
             <div className="table-containertableorgform">
-              <h2>Список форм в выбранном статусе</h2>
+              <h2 className="texth2">Список форм в выбранном статусе</h2>
               <table className="styled-tableorgform">
                 <thead>
                 <tr>

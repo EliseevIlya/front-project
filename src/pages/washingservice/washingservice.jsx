@@ -1,20 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
 import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
+import Select from "react-select";
 
 function Washingservice() {
-    const [selectedServices, setSelectedServices] = useState([""]);
+    const [selectedServices, setSelectedServices] = useState([null]);
     const [isModalOpen, setModalOpen] = useState(false);
-    const services = ["Услуга 1 - 200 руб. (20 мин.)", "Услуга 2 - 300 руб. (30 мин.)", "Услуга 3 - 400 руб. (40 мин.)"];
-    const navigate = useNavigate(); 
+    const [totalCost, setTotalCost] = useState(0);
+    const [city, setCity] = useState(null);
+    const [org, setOrg] = useState(null);
+    const [selectedTimeToday, setSelectedTimeToday] = useState("");
+    const [selectedTimeTomorrow, setSelectedTimeTomorrow] = useState("");
+
+    const services = [
+        { value: "Услуга 1 - 200 руб. (20 мин.)", label: "Услуга 1 - 200 руб. (20 мин.)", price: 200 },
+        { value: "Услуга 2 - 300 руб. (30 мин.)", label: "Услуга 2 - 300 руб. (30 мин.)", price: 300 },
+        { value: "Услуга 3 - 400 руб. (40 мин.)", label: "Услуга 3 - 400 руб. (40 мин.)", price: 400 }
+    ];
+
+    const customStyles = {
+        control: (provided) => ({
+            ...provided,
+            width: '15vw',
+            height: '5vh',
+            fontSize: '1.2vw',
+            backgroundColor: 'white',
+            color: 'black',
+            border: 'none',
+            borderRadius: '20px',
+            boxShadow: 'none',
+            '&:hover': {
+                borderColor: 'transparent',
+            },
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected ? '#f0f0f0' : 'white',
+            color: 'black',
+            fontSize: '1.2vw',
+            '&:hover': {
+                backgroundColor: '#f0f0f0',
+            },
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        }),
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'black',
+            fontSize: '1.2vw',
+        }),
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '20px',
+            marginTop: '5px',
+        }),
+        menuList: (provided) => ({
+            ...provided,
+            padding: 0,
+        }),
+    };
+
+    const cities = [
+        { value: 'samara', label: 'Самара' },
+    ];
+
+    const orgs = [
+        { value: 'avangard', label: 'АВАНГАРД ул. Пушкина 6' },
+    ];
+
+    const navigate = useNavigate();
 
     const handleServiceChange = (index, value) => {
         const newServices = [...selectedServices];
         newServices[index] = value;
 
-        if (index === selectedServices.length - 1 && value !== "") {
-            newServices.push("");
+        if (index === selectedServices.length - 1 && value) {
+            newServices.push(null);
         }
 
         setSelectedServices(newServices);
@@ -22,47 +85,116 @@ function Washingservice() {
 
     const handleRemoveService = (index) => {
         const newServices = selectedServices.filter((_, i) => i !== index);
-        setSelectedServices(newServices.length > 0 ? newServices : [""]);
+        setSelectedServices(newServices.length > 0 ? newServices : [null]);
+    };
+
+    useEffect(() => {
+        const cost = selectedServices.reduce((acc, service) => {
+            if (service) {
+                const selectedService = services.find(s => s.value === service.value);
+                return acc + (selectedService ? selectedService.price : 0);
+            }
+            return acc;
+        }, 0);
+        setTotalCost(cost);
+    }, [selectedServices]);
+
+    const generateTimeOptions = () => {
+        const times = [];
+        for (let hour = 10; hour <= 22; hour++) {
+            const time = `${hour.toString().padStart(2, '0')}:00`;
+            times.push(time);
+        }
+        return times;
+    };
+
+    const timeOptions = generateTimeOptions();
+
+    const isFormValid = () => {
+        return city && org && (selectedServices.length > 0 && selectedServices.some(service => service)) && (selectedTimeToday || selectedTimeTomorrow);
+    };
+
+    const handleSubmit = () => {
+        if (isFormValid()) {
+            // Prepare data for submission
+            const todayDate = new Date();
+            const tomorrowDate = new Date();
+            tomorrowDate.setDate(todayDate.getDate() + 1);
+
+            const dataToSend = {
+                city: city.value,
+                org: org.value,
+                services: selectedServices.filter(service => service).map(service => service.value),
+                timeToday: selectedTimeToday ? `${todayDate.toISOString().split('T')[0]} ${selectedTimeToday}` : null,
+                timeTomorrow: selectedTimeTomorrow ? `${tomorrowDate.toISOString().split('T')[0]} ${selectedTimeTomorrow}` : null,
+            };
+
+            console.log(dataToSend); // Replace this with your API call
+            setModalOpen(true);
+        }
+    };
+
+    const handleTimeTodayChange = (value) => {
+        setSelectedTimeToday(value);
+        if (value) {
+            setSelectedTimeTomorrow(""); // Сбрасываем время на завтра
+        }
+    };
+
+    const handleTimeTomorrowChange = (value) => {
+        setSelectedTimeTomorrow(value);
+        if (value) {
+            setSelectedTimeToday(""); // Сбрасываем время на сегодня
+        }
     };
 
     return (
         <div className="servicepage">
-            <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
+            <div className="headerS">
+                <button className="exitbuttonS" title="Выбор услуг" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Выбор услуг"/>
+                </button>
+                <h1 className="titleS">ВЫБЕРИТЕ УСЛУГИ</h1>
+            </div>
             <div className="washingmaindiv">
                 <h1 className="service-title">МОЙКА</h1>
                 <div className="washingservicediv">
                     <div className="left-column">
                         <div className="servdiv">
-                            <label className="choose-city">Выберите город:</label>
-                            <select className="washingselect">
-                                <option>Самара</option>
-                            </select>
+                            <label className="choose">Город:</label>
+                            <Select
+                                styles={customStyles}
+                                options={cities}
+                                className="washingselect"
+                                placeholder="Выберите"
+                                onChange={setCity}
+                            />
                         </div>
                         <div className="servdiv">
-                            <label className="choose-org">Организация:</label>
-                            <select className="washingselect">
-                                <option>АВАНГАРД ул. Пушкина 6</option>
-                            </select>
-                        </div>
-                        <div className="servdiv">
-                            <label className="cost">ИТОГО:</label>
-                            <input type="number" value="950" disabled />
+                            <label className="choose">Организация:</label>
+                            <Select
+                                styles={customStyles}
+                                options={orgs}
+                                className="washingselect"
+                                placeholder="Выберите"
+                                onChange={setOrg}
+                            />
                         </div>
                     </div>
                     <div className="center-column">
                         <div className="servdiv">
-                            <label className="choose-service">Выберите желаемые услуги:</label>
+                            <label className="choose">Услуги:</label>
                             {selectedServices.map((service, index) => (
                                 <div key={index} className="service-dropdown">
                                     <select
                                         className="washingselect"
-                                        value={service}
-                                        onChange={(e) => handleServiceChange(index, e.target.value)}
+                                        value={service ? service.value : ""}
+                                        onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
                                     >
-                                        <option value="">Выберите услугу</option>
-                                        {services.map((s, i) => (
-                                            <option key={i} value={s}>
-                                                {s}
+                                        <option className="optionS" value="">Выберите</option>
+                                        {services.map((serviceOption) => (
+                                            <option className="optionS" key={serviceOption.value} value={serviceOption.value}>
+                                                {serviceOption.label}
                                             </option>
                                         ))}
                                     </select>
@@ -77,22 +209,40 @@ function Washingservice() {
                     </div>
                     <div className="right-column">
                         <div className="servdiv">
-                            <label className="choose-time">Выберите время на сегодня:</label>
-                            <select className="washingselect">
-                                <option>10:00 - 11:40</option>
+                            <label className="choose">Сегодня:</label>
+                            <select className="washingselect" value={selectedTimeToday} onChange={(e) => handleTimeTodayChange(e.target.value)}>
+                                <option value="">Выберите</option>
+                                {timeOptions.map((time) => (
+                                    <option className="optionS" key={time} value={time}>
+                                        {time}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="servdiv">
-                            <label className="choose-time">Выберите время на завтра:</label>
-                            <select className="washingselect">
-                                <option>10:00 - 11:40</option>
+                            <label className="choose">Завтра:</label>
+                            <select className="washingselect" value={selectedTimeTomorrow} onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
+                                <option value="">Выберите</option>
+                                {timeOptions.map((time) => (
+                                    <option className="optionS" key={time} value={time}>
+                                        {time}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="washingbutton-container">
-                    <button className="washingbutton" onClick={() => setModalOpen(true)}>
-                        Оставить заявку
+                    <div className="itog-container">
+                        <label className="itog">ИТОГО:</label>
+                        <input className="summa" type="number" value={totalCost} disabled />
+                    </div>
+                    <button
+                        className="washingbutton"
+                        onClick={handleSubmit}
+                        disabled={!isFormValid()} // Блокируем кнопку, если форма не валидна
+                    >
+                        Записаться
                     </button>
                 </div>
             </div>

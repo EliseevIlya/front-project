@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import "./style_main.css";
 import Modal from 'react-modal';
 import LoginPage from "../loginpage/loginpage";
@@ -21,24 +21,27 @@ function MainPage() {
   
   return (
     <>
-      <div className="Main">
-        <h1 className="text">PIONEER</h1>
-        <h2 className="podtext">ПРЕДОСТАВЛЕНИЕ УСЛУГ ТРАНСПОРТНЫМ СРЕДСТВАМ</h2>
-        <div>
-          <p>
-            <button onClick={openLoginModal}>ВЛАДЕЛЬЦЫ ТРАНСПОРТНЫХ СРЕДСТВ</button>
-          </p>
-          <p>
-            <button onClick={openOrgModal}>ОРГАНИЗАЦИИ-ПАРТНЁРЫ</button>
-          </p>
-          <p>
-            <button onClick={openAdminModal}>АДМИНИСТРИРОВАНИЕ</button> 
-          </p>
+        <div className="Main">
+            <div className="headerContainer"> {/* Новый контейнер для заголовка и изображения */}
+                <h1 className="text">PIONEER</h1>
+                <img className="logo" src="/src/icons/home.png" alt="Home" />
+            </div>
+            <h2 className="podtext">ПРЕДОСТАВЛЕНИЕ УСЛУГ ТРАНСПОРТНЫМ СРЕДСТВАМ</h2>
+            <div>
+                <p>
+                    <button onClick={openLoginModal}>ВЛАДЕЛЬЦЫ ТРАНСПОРТНЫХ СРЕДСТВ</button>
+                </p>
+                <p>
+                    <button onClick={openOrgModal}>ОРГАНИЗАЦИИ-ПАРТНЁРЫ</button>
+                </p>
+                <p>
+                    <button onClick={openAdminModal}>АДМИНИСТРИРОВАНИЕ</button>
+                </p>
+            </div>
         </div>
-      </div>
 
-      <Modal
-        isOpen={modalLoginIsOpen}
+        <Modal
+            isOpen={modalLoginIsOpen}
         onRequestClose={closeLoginModal}
         className="modal-content"
         overlayClassName="modal-overlay"

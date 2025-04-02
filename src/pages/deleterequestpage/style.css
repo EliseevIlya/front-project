@@ -1,0 +1,45 @@
+.footer_deleteaccpage {
+    gap: 50px;
+}
+
+.deleteacc {
+    background-color: darkred;
+    width: 25vw;
+    height: 30vh;
+    border-radius: 20px;
+    color: white;
+    font-weight: lighter;
+}
+.delete-button {
+    padding: 12px;
+    background-color: white;
+    color: darkred;
+    border: none;
+    width: 75%;
+    border-radius: 10px;
+    font-size: calc((1.3vw + 1.3vh)/2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-out;
+}
+
+.delete-button:hover {
+    background-color: white;
+    color: darkred;
+}
+
+.cancel-button {
+    padding: 12px;
+    background-color: white;
+    color: darkred;
+    border: none;
+    width: 75%;
+    border-radius: 10px;
+    font-size: calc((1.3vw + 1.3vh)/2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease-out;
+}
+
+.cancel-button:hover {
+    background-color: white;
+    color: darkred;
+}

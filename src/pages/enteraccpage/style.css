@@ -39,12 +39,14 @@
 }
 
 .login-enterpage, .password-enterpage {
-    font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
     text-align: left;
     margin-bottom: 10px;           
     font-weight: lighter;
+}
 
+.password-enterpage{
+    margin-top: 1vh;
 }
 
 .login-textfield, .password-textfield {
@@ -52,10 +54,12 @@
     flex: 1; 
     padding: 20px;
     border: 1px solid #318EA8;
-    background-color: #318EA8; 
+    background-color: #318EA8;
+    color: white;
+    font-size: calc((1.5vw + 1.5vh)/2);
+    font-family: Impact, sans-serif;
     box-sizing: border-box;
-    width: 100%; 
-    max-width: 100%;
+    width: 100%;
 }
 
 .login-textfield::placeholder, .password-textfield::placeholder {
@@ -67,27 +71,7 @@
 .login-textfield:focus, .password-textfield:focus {
     border: 1px solid darkorange;
     box-shadow: 0 0 5px darkorange;
-    outline: none;
-    flex: 1;
-    padding: 20px;
-    border: 1px solid #318EA8;
-    background-color: #318EA8;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-}
-
-textarea {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 30vw;
-    height: 10vh;
-    outline: none;  
-    text-align: left;
-    padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-}
+    outline: none;}
 
 .enter-enterpage {
     width: 100%;
@@ -100,6 +84,7 @@ textarea {
     cursor: pointer;
     margin-top: 10px;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .enter-enterpage:hover {
