@@ -8,16 +8,20 @@ import { getCustomer } from "../../api/Customer";
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
     useEffect(()=>{
-        getCustomer(localStorage.getItem("jwt"));
+        getCustomer(localStorage.getItem("jwt"),setEmail,setSurname,setName,setPhone,setAddInfo,setPatronymic);
     })
+
 
     // State variables for form fields
     const [email, setEmail] = useState("");
     const [surname, setSurname] = useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
+    const [addInfo, setAddInfo] = useState("");
+    const [patronymic, setPatronymic] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    const navigate = useNavigate();
 
     // Validation functions
     const validateEmail = (emailValue) => {
@@ -60,6 +64,14 @@ import { getCustomer } from "../../api/Customer";
         const phoneValue = e.target.value.replace(/\D/g, "").slice(0, 11);
         setPhone(phoneValue);
     };
+
+    const handleAddInfoChange = (e) =>{
+        setAddInfo(e.target.value);
+    }
+
+    const handlePatronymicChange = (e) =>{
+        setPatronymic(e.target.value);
+    }
 
     // Function to check if all required fields are filled and valid
     const areRequiredFieldsValid = () => {
@@ -121,7 +133,10 @@ import { getCustomer } from "../../api/Customer";
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}/>
+                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}
+                        value={patronymic}
+                               onChange={handlePatronymicChange}
+                        />
                     </div>
                     <div className="infoitem">
                         <label>НОМЕР ТЕЛ.*:</label>
@@ -146,7 +161,9 @@ import { getCustomer } from "../../api/Customer";
                 </div>
                 <div className="dopinfoitem">
                     <label>ДОП. ИНФОРМАЦИЯ:</label>
-                    <textarea placeholder="Дополнительная информация..." disabled={!isEditing}></textarea>
+                    <textarea placeholder="Дополнительная информация..." disabled={!isEditing} value={addInfo}
+                    onChange={handleAddInfoChange}
+                    ></textarea>
                 </div>
             </div>
 

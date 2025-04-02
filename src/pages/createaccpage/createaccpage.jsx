@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { registercustomer, sendcode } from "../../api/Auth";
 
+
 function Createaccpage() {
     const [email, setEmail] = useState("");
     const [surname, setSurname] = useState("");
@@ -10,7 +11,7 @@ function Createaccpage() {
     const [phone, setPhone] = useState("");
     const [code, setCode] = useState("");
     const [termsAccepted, setTermsAccepted] = useState(false);
-
+    
     const [errorMessage, setErrorMessage] = useState({
         email: "",
         surname: "",
@@ -92,23 +93,18 @@ function Createaccpage() {
     };
 
     const handleGetCode = async () => {
-        if (!email || errorMessage.email) {
-            setErrorMessage((prev) => ({
-                ...prev,
-                form: "Введите корректный email перед получением кода."
-            }));
+        if (!email ) {
+            setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
 
         const success = await sendcode(email);
         if (success) {
-            setIsCodeInputEnabled(true); // Устанавливаем только если код успешно отправлен
+            setIsCodeEnabled(true); // Устанавливаем только если код успешно отправлен
         } else {
-            setErrorMessage((prev) => ({
-                ...prev,
-                form: "Ошибка при отправке кода. Попробуйте снова."
-            }));
+            setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
         }
+        setIsCodeInputEnabled(true)
     };
 
     const handleCreateAccount = async () => {
@@ -119,18 +115,18 @@ function Createaccpage() {
             }));
             return;
         }
-        const success = await registercustomer(surname, name, phone, code, "", email);
-        if (success) {
-            navigate("/");
-        } else {
-            setErrorMessage((prev) => ({
-                ...prev,
-                form: "Перепроверьте код"
-            }));
-        }
+        const success = await registercustomer(surname,name,"",phone,"",email);
+                console.log("SUCCESS",success);
+                if (success) {
+                    navigate("/");
+                } else {
+                    setErrorMessage("Перепроверьте код");
+                }
+
     };
 
     const getFirstError = () => {
+        // Порядок проверки ошибок
         if (errorMessage.email) return errorMessage.email;
         if (errorMessage.surname) return errorMessage.surname;
         if (errorMessage.name) return errorMessage.name;
@@ -192,19 +188,21 @@ function Createaccpage() {
                         onChange={(e) => {
                             setTermsAccepted(e.target.checked);
                             if (validateEmail(email) === "" && e.target.checked) {
-                                setIsCodeEnabled(true);
+                                setIsCodeEnabled(true); // Если email и условия корректны, активируем кнопку
                             } else {
                                 setIsCodeEnabled(false);
                             }
                         }}
                     />
                     <label htmlFor="terms" className="texthref">Я принимаю <a href="https://policies.google.com/privacy?hl=ru"
-                                                                              target="_blank" rel="noopener noreferrer">пользовательское
+                                                         target="_blank" rel="noopener noreferrer">пользовательское
                         соглашение</a></label>
                 </div>
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
-                    <button className="createaccbutton" onClick={handleGetCode}>ПОЛУЧИТЬ КОД</button>
+
+                    <button className="createaccbutton" onClick={handleGetCode} disabled={!isCodeEnabled}>ПОЛУЧИТЬ КОД</button>
+
                     <input className="inputcreateacc"
                            type="text"
                            placeholder="Введите код"
@@ -216,6 +214,7 @@ function Createaccpage() {
                 </div>
             </div>
         </div>
+
     );
 }
 
