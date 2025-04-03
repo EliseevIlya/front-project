@@ -2,21 +2,31 @@ import { useEffect, useState } from "react";
 import "./style_useracc.css";
 import { useNavigate } from "react-router-dom";
 import Deleteaccpage from "../deleteaccpage/deleteaccpage";
-import { getCustomer } from "../../api/Customer";
+import { getCustomer,updateCustomer } from "../../api/Customer";
 
  function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
-    useEffect(()=>{
-        getCustomer(localStorage.getItem("jwt"));
-    })
+
+
+     // Функция загрузки данных
+     const fetchCustomerData = () => {
+         getCustomer(localStorage.getItem("jwt"), setEmail, setSurname, setName, setPhone, setAddInfo, setPatronymic);
+     };
+
+     // useEffect с пустым массивом зависимостей — выполняется только при монтировании
+     useEffect(() => {
+         fetchCustomerData();
+     }, []);
 
 
     // State variables for form fields
     const [email, setEmail] = useState("");
     const [surname, setSurname] = useState("");
     const [name, setName] = useState("");
+    const [patronymic, setPatronymic] = useState("");
     const [phone, setPhone] = useState("");
+    const [addInfo, setAddInfo] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
@@ -25,6 +35,7 @@ import { getCustomer } from "../../api/Customer";
     const validateEmail = (emailValue) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
         return isValidEmail.test(emailValue);
+
     };
 
     const validateSurname = (surnameValue) => {
@@ -38,7 +49,7 @@ import { getCustomer } from "../../api/Customer";
     };
 
     const validatePhone = (phoneValue) => {
-        const isValidPhone = /^(\7|8)\d{10}$/;
+        const isValidPhone = /^([87])\d{10}$/;
         return isValidPhone.test(phoneValue);
     };
 
@@ -63,6 +74,14 @@ import { getCustomer } from "../../api/Customer";
         setPhone(phoneValue);
     };
 
+    const handleAddInfoChange = (e) =>{
+        setAddInfo(e.target.value);
+    }
+
+    const handlePatronymicChange = (e) =>{
+        setPatronymic(e.target.value);
+    }
+
     // Function to check if all required fields are filled and valid
     const areRequiredFieldsValid = () => {
         if (!validateEmail(email) || !validateSurname(surname) || !validateName(name) || !validatePhone(phone)) {
@@ -73,7 +92,45 @@ import { getCustomer } from "../../api/Customer";
         return true;
     };
 
-    return (
+    //функция кнопки СОХРАНИТЬ
+     const handleSaveChanges = async () => {
+         if (areRequiredFieldsValid()) {
+             try {
+                 const response = await updateCustomer(
+                     localStorage.getItem("jwt"),
+                     email,
+                     surname,
+                     name,
+                     patronymic,
+                     phone,
+                     addInfo
+                 );
+
+                 console.log("Успешное обновление:", response);
+
+                 // Обновляем состояние
+                 setEmail(response.email);
+                 setSurname(response.surname);
+                 setName(response.name);
+                 setPatronymic(response.patronymic);
+                 setPhone(response.phoneNumber);
+                 setAddInfo(response.addInfo);
+
+                 // Проверяем и обновляем jwtToken, если он пришел в ответе
+                 if (response.jwtToken) {
+                     localStorage.setItem("jwt", response.jwtToken);
+                     console.log("JWT обновлен");
+                 }
+
+                 setIsEditing(false);
+             } catch (error) {
+                 console.error("Ошибка обновления:", error);
+             }
+         }
+     };
+
+
+     return (
         <div>
             <div className="headers">
                 <div className="headexit">
@@ -123,7 +180,10 @@ import { getCustomer } from "../../api/Customer";
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}/>
+                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}
+                        value={patronymic}
+                               onChange={handlePatronymicChange}
+                        />
                     </div>
                     <div className="infoitem">
                         <label>НОМЕР ТЕЛ.*:</label>
@@ -148,7 +208,9 @@ import { getCustomer } from "../../api/Customer";
                 </div>
                 <div className="dopinfoitem">
                     <label>ДОП. ИНФОРМАЦИЯ:</label>
-                    <textarea placeholder="Дополнительная информация..." disabled={!isEditing}></textarea>
+                    <textarea placeholder="Дополнительная информация..." disabled={!isEditing} value={addInfo}
+                    onChange={handleAddInfoChange}
+                    ></textarea>
                 </div>
             </div>
 
@@ -160,11 +222,7 @@ import { getCustomer } from "../../api/Customer";
             ) : (
                 <button
                     className="editbutton"
-                    onClick={() => {
-                        if (areRequiredFieldsValid()) {
-                            setIsEditing(false);
-                        }
-                    }}
+                    onClick={handleSaveChanges}
                 >
                     Сохранить
                 </button>
