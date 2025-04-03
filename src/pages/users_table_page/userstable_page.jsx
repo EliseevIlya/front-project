@@ -22,7 +22,7 @@ function UsersTable_page() {
     return (
         <>
             <div className="headersTable">
-                <button className="exitbutton" title="Вернуться в кабинет" onClick={() => navigate("/adminacc")}>
+                <button className="exitbuttonTable" title="Вернуться в кабинет" onClick={() => navigate("/adminacc")}>
                     <img src="/src/icons/exitblack.png" alt="Exit"/>
                 </button>
                 <h1 className="textTable">СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h1>

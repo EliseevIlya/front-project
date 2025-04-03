@@ -1,3 +1,7 @@
+html {
+    overflow-y: hidden !important;
+}
+
 .servicepage {
     font-family: Impact, sans-serif;
     background-color: #318ea8;
