@@ -89,7 +89,7 @@ function CreateServices_page() {
     return (
         <>
             <div className="headerservices">
-                <button className="exitbuttonservices" title="Вернуться к заявке" onClick={() => navigate("/")}>
+                <button className="exitbuttonservices" title="Вернуться к заявке" onClick={() => navigate("/org/statuscheck")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <button className="homebutton" title="Вернуться на главную" onClick={() => navigate("/")}>
@@ -99,7 +99,7 @@ function CreateServices_page() {
             </div>
             <h2 className="textServices">Личный кабинет</h2>
             <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>
-            <button className="infoButton" onClick={() => navigate("/org_info_page")}>Подробная информация</button>
+            <button className="infoButton" onClick={() => navigate("/org_info")}>Подробная информация</button>
             <div className="servicesTable">
                 <table className="tableServ">
                     <thead>

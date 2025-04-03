@@ -7,9 +7,17 @@ import { getCustomer } from "../../api/Customer";
  function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Состояние для модального окна удаления
-    useEffect(()=>{
-        getCustomer(localStorage.getItem("jwt"),setEmail,setSurname,setName,setPhone,setAddInfo,setPatronymic);
-    })
+    useEffect(() => {
+        getCustomer(
+            localStorage.getItem("jwt"),
+            (email) => setEmail((prev) => prev || email),
+            (surname) => setSurname((prev) => prev || surname),
+            (name) => setName((prev) => prev || name),
+            (phone) => setPhone((prev) => prev || phone),
+            (addInfo) => setAddInfo((prev) => prev || addInfo),
+            (patronymic) => setPatronymic((prev) => prev || patronymic)
+        );
+    }, []);
 
 
     // State variables for form fields
@@ -133,7 +141,7 @@ import { getCustomer } from "../../api/Customer";
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" placeholder="ИВАНОВИЧ" disabled={!isEditing}
+                        <input type="text" placeholder="..." disabled={!isEditing}
                         value={patronymic}
                                onChange={handlePatronymicChange}
                         />
