@@ -75,7 +75,7 @@ function Apps_page() {
     return (
         <>
             <div className="headersApps">
-                <button className="accbuttonApps" title="Личный кабинет" onClick={() => navigate("/useracc")}>
+                <button className="accbuttonApps" title="Личный кабинет" onClick={() => navigate("/user_acc")}>
                     <img src="/src/icons/profile.png" alt="Личный кабинет" />
                 </button>
                 <h1 className="textApp">ЗАЯВКИ</h1>
