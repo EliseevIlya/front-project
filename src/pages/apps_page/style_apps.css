@@ -1,5 +1,5 @@
 html {
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
 }
 .headersApps {
     display: flex;
@@ -130,6 +130,13 @@ html {
     background-color: darkorange;
     border: none;
     border-radius: 20px;
+}
+
+.no-apps-message {
+    font-size: calc((7vw + 7vh)/2);
+    color: white;
+    margin-left: 20vw;
+    margin-top: -5vh;
 }
 
 .modalapp {

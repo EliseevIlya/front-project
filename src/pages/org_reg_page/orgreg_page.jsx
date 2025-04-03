@@ -152,7 +152,7 @@ function OrgReg_page() {
     return (
         <>
             <div className="headersorg">
-                <button className="exitbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
+                <button className="exitbuttonsc" title="Вернуться на главную" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit" />
                 </button>
                 <h1 className="textorg">СОЗДАНИЕ ЗАЯВКИ</h1>

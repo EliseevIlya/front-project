@@ -184,47 +184,53 @@ function Washingservice() {
                     <div className="center-column">
                         <div className="servdiv">
                             <label className="choose">Услуги:</label>
-                            {selectedServices.map((service, index) => (
-                                <div key={index} className="service-dropdown">
-                                    <select
-                                        className="washingselect"
-                                        value={service ? service.value : ""}
-                                        onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
-                                    >
-                                        <option className="optionS" value="">Выберите</option>
-                                        {services.map((serviceOption) => (
-                                            <option className="optionS" key={serviceOption.value} value={serviceOption.value}>
-                                                {serviceOption.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    {selectedServices.length > 1 && (
-                                        <button className="remove-button" onClick={() => handleRemoveService(index)}>
-                                            ✖
-                                        </button>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="right-column">
-                        <div className="servdiv">
-                            <label className="choose">Сегодня:</label>
-                            <select className="washingselect" value={selectedTimeToday} onChange={(e) => handleTimeTodayChange(e.target.value)}>
-                                <option value="">Выберите</option>
-                                {timeOptions.map((time) => (
-                                    <option className="optionS" key={time} value={time}>
-                                        {time}
-                                    </option>
+                            <div className="services-container"> {/* Новый контейнер для прокрутки */}
+                                {selectedServices.map((service, index) => (
+                                    <div key={index} className="service-dropdown">
+                                        <select
+                                            className="washingselect"
+                                            value={service ? service.value : ""}
+                                            onChange={(e) => handleServiceChange(index, services.find(s => s.value === e.target.value))}
+                                        >
+                                            <option className="optionS" value="">Выберите</option>
+                                            {services.map((serviceOption) => (
+                                                <option className="optionS" key={serviceOption.value}
+                                                        value={serviceOption.value}>
+                                                    {serviceOption.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {selectedServices.length > 1 && (
+                                            <button className="remove-button"
+                                                    onClick={() => handleRemoveService(index)}>
+                                                ✖
+                                            </button>
+                                        )}
+                                    </div>
                                 ))}
-                            </select>
-                        </div>
-                        <div className="servdiv">
-                            <label className="choose">Завтра:</label>
-                            <select className="washingselect" value={selectedTimeTomorrow} onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
-                                <option value="">Выберите</option>
-                                {timeOptions.map((time) => (
-                                    <option className="optionS" key={time} value={time}>
+                            </div>
+                    </div>
+                </div>
+                <div className="right-column">
+                    <div className="servdiv">
+                        <label className="choose">Сегодня:</label>
+                        <select className="washingselect" value={selectedTimeToday}
+                                onChange={(e) => handleTimeTodayChange(e.target.value)}>
+                            <option value="">Выберите</option>
+                            {timeOptions.map((time) => (
+                                <option className="optionS" key={time} value={time}>
+                                    {time}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="servdiv">
+                        <label className="choose">Завтра:</label>
+                        <select className="washingselect" value={selectedTimeTomorrow}
+                                onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
+                            <option value="">Выберите</option>
+                            {timeOptions.map((time) => (
+                                <option className="optionS" key={time} value={time}>
                                         {time}
                                     </option>
                                 ))}

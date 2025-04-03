@@ -52,11 +52,11 @@ export default function AllRouterrApp(props){
             Pages: <OrgInfo_page />
         },
         {
-            url: "/org/reg",
+            url: "/org_reg",
             Pages: <OrgReg_page />
         },
         {
-            url: "/org/statuscheck",
+            url: "/org_statuscheck",
             Pages: <OrgStatusCheck_page />
         },
         {
