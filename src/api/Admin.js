@@ -112,15 +112,16 @@ export function deleteAdminAgregator(){
     })
 }
 
-export function getAdminAgregator(){
+export function getAdminAgregator(jwt){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/aggregator/aggreagator`,headers)
-    .then(()=>{
-
+    return axios.get(`${api}/api/aggregator/aggreagator`, {headers: headers})
+    .then((res)=>{
+        console.log(res.data);
+        return res.data
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);

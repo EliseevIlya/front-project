@@ -216,12 +216,21 @@ export function authadmin(emailauthadmin, passwordauthadmin, codeauthadmin){
     password:passwordauthadmin,
     code:codeauthadmin
     }
-    const headers={
-
-    }
-    axios.post(`${api}/auth/sign_in/admin`,body,headers)
-    .then(()=>{
-
+    const headers = {
+        "Content-Type": "application/json"
+    };
+    return axios.post(`${api}/auth/sign_in/admin`,body,headers)
+    .then((res)=>{
+        if (res.status == 200) {
+            console.log('Код успешно отправлен');
+            console.log(res)
+            localStorage.setItem("jwt",res.data)
+            axios.defaults.headers.common["Authorization"] = `Bearer ${res.data}`;
+            return res.data; // Успешная отправка
+        } else {
+            console.error(`Ошибка: сервер вернул статус ${res.status}`);
+            return false; // Неуспешный статус
+        }
     })
     .catch(()=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
