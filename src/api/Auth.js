@@ -42,36 +42,35 @@ export function registercustomer(surname,name,patronic,phone,addInfo,email){
     })
 }
 
-export function registerorg(fullNameregisterorg, shortNameregisterorg, innregisterorg, kppregisterorg, ogrnregisterorg, responsiblePersonSurnameregisterorg, responsiblePersonNameregisterorg, responsiblePersonPatronymicregisterorg, responsiblePersonEmailregisterorg, responsiblePersonPhoneNumberregisterorg, addInforegisterorg,
-    subjectNameregisterorg, cityNameregisterorg, streetNameregisterorg, houseNumberregisterorg, addInfoadressregisterorg, addressTyperegisterorg, emailregisterorg){
-    const body={
-    fullName:fullNameregisterorg,
-    shortName:shortNameregisterorg,
-    inn:innregisterorg,
-    kpp:kppregisterorg,
-    ogrn:ogrnregisterorg,
-    responsiblePersonSurname:responsiblePersonSurnameregisterorg,
-    responsiblePersonName:responsiblePersonNameregisterorg,
-    responsiblePersonPatronymic:responsiblePersonPatronymicregisterorg,
-    responsiblePersonEmail:responsiblePersonEmailregisterorg,
-    responsiblePersonPhoneNumber:responsiblePersonPhoneNumberregisterorg,
-    addInfo:addInforegisterorg,
-    address: {
-    subjectName:subjectNameregisterorg,
-    cityName:cityNameregisterorg,
-    streetName:streetNameregisterorg,
-    houseNumber:houseNumberregisterorg,
-    addInfo:addInfoadressregisterorg,
-    addressType:addressTyperegisterorg
-    },
-    email:emailregisterorg
-    }
-    const headers={
-
-    }
-    axios.post(`${api}/auth/sign_up/organization`,body,headers)
-    .then(()=>{
-
+export function registerorg(data){
+    const body = {
+        fullName: data.fullName,
+        shortName: data.shortName,
+        inn: data.inn,
+        kpp: data.kpp,
+        ogrn: data.ogrn,
+        responsiblePersonSurname: data.lastName,
+        responsiblePersonName: data.firstName,
+        responsiblePersonPatronymic: data.patronymic,
+        responsiblePersonEmail: data.email,
+        responsiblePersonPhoneNumber: data.phone,
+        addInfo: data.address.addInfo,
+        address: {
+            subjectName: data.address.subjectName,
+            cityName: data.address.cityName,
+            streetName: data.address.streetName,
+            houseNumber: data.address.houseNumber,
+            addInfo: data.address.addInfo,
+            addressType: data.address.addressType
+        },
+        email: data.email
+    };
+    const headers = {
+        "Content-Type": "application/json"
+    };
+    return  axios.post(`${api}/auth/sign_up/organization`,body,{headers:headers})
+    .then((response)=>{
+        return response.data;
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
@@ -80,6 +79,7 @@ export function registerorg(fullNameregisterorg, shortNameregisterorg, innregist
         } else {
             console.log('Произошла ошибка при подключении к серверу.');
         }
+        return false; // Возвращаем false в случае ошибки
     })
 }
 
@@ -115,7 +115,6 @@ export function registeradmin(surnameregisteradmin, nameregisteradmin, patronymi
 
 export function sendcode(email) {
     const headers ={
-
         "Content-Type": "application/json"
     }
     return axios.post(`${api}/auth/sign_in/send_code?email=${email}`,
@@ -188,7 +187,7 @@ export function authorg(email,code){
     const headers={
 
     }
-    axios.post(`${api}/auth/sign_in/organization`,body,headers)
+    return  axios.post(`${api}/auth/sign_in/organization`,body,headers)
     .then((res)=>{
         if (res.status == 200) {
             console.log('Код успешно отправлен');
