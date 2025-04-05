@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./style_useracc.css";
 import { useNavigate } from "react-router-dom";
 import Deleteaccpage from "../deleteaccpage/deleteaccpage";
-import { getCustomer } from "../../api/Customer";
+import { getCustomer,updateCustomer } from "../../api/Customer";
 
  function UserAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
@@ -90,6 +90,42 @@ import { getCustomer } from "../../api/Customer";
         setErrorMessage("");
         return true;
     };
+
+     const handleSaveChanges = async () => {
+         if (areRequiredFieldsValid()) {
+             try {
+                 const response = await updateCustomer(
+                     localStorage.getItem("jwt"),
+                     email,
+                     surname,
+                     name,
+                     patronymic,
+                     phone,
+                     addInfo
+                 );
+
+                 console.log("Успешное обновление:", response);
+
+                 // Обновляем состояние
+                 setEmail(response.email);
+                 setSurname(response.surname);
+                 setName(response.name);
+                 setPatronymic(response.patronymic);
+                 setPhone(response.phoneNumber);
+                 setAddInfo(response.addInfo);
+
+                 // Проверяем и обновляем jwtToken, если он пришел в ответе
+                 if (response.jwtToken) {
+                     localStorage.setItem("jwt", response.jwtToken);
+                     console.log("JWT обновлен");
+                 }
+
+                 setIsEditing(false);
+             } catch (error) {
+                 console.error("Ошибка обновления:", error);
+             }
+         }
+     };
 
     return (
         <div>
@@ -183,11 +219,7 @@ import { getCustomer } from "../../api/Customer";
             ) : (
                 <button
                     className="editbutton"
-                    onClick={() => {
-                        if (areRequiredFieldsValid()) {
-                            setIsEditing(false);
-                        }
-                    }}
+                    onClick={handleSaveChanges}
                 >
                     Сохранить
                 </button>
