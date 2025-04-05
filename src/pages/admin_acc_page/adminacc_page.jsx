@@ -93,27 +93,27 @@ function AdminAcc_page() {
                 <div className="info">
                     <div className="infoitem">
                         <label>Должность*:</label>
-                        <input type="text" placeholder="Администратор" disabled={!isEditing}/>
+                        <input type="text" disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Фамилия*:</label>
-                        <input type="text" placeholder="Сидоров" value={surname} onChange={handleSurnameChange} disabled={!isEditing} />
+                        <input type="text" value={surname} onChange={handleSurnameChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Имя*:</label>
-                        <input type="text" placeholder="Сидр" value={name} onChange={handleNameChange} disabled={!isEditing} />
+                        <input type="text" value={name} onChange={handleNameChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Отчество:</label>
-                        <input type="text" placeholder="Сидорович" disabled={!isEditing} />
+                        <input type="text" disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Номер тел.*:</label>
-                        <input type="text" placeholder="799900000001" value={phone} onChange={handlePhoneChange} disabled={!isEditing} />
+                        <input type="text" value={phone} onChange={handlePhoneChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>E-mail*:</label>
-                        <input type="text" placeholder="sidorov@mail.ru" value={email} onChange={handleEmailChange} disabled={!isEditing} />
+                        <input type="text" value={email} onChange={handleEmailChange} disabled={!isEditing} />
                     </div>
                 </div>
                 <div className="control">
