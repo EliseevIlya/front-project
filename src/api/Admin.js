@@ -1,90 +1,98 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = process.env.API
+const api = globalAPI;
 
-export function deleteAdminCustomer(surnamedeleteAdminCustomer, namedeleteAdminCustomer, patronymicdeleteAdminCustomer, phoneNumberdeleteAdminCustomer, emaildeleteAdminCustomer){
+export function deleteAdminCustomer(jwt, customerId){
+    const headers = {
+        Authorization: `Bearer ${jwt}`
+    };
+    return  axios.delete(`${api}/api/aggregator/customers?customerId=${customerId}`, {headers: headers})
+        .then((res)=>{
+        console.log(res.data)
+        return res.data;
+    })
+    .catch((error)=>{
+        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+        if (error.response) {
+            console.log(`Ошибка: ${error.response.data.message}`);
+        } else {
+            console.log('Произошла ошибка при подключении к серверу.');
+        }
+    })
+}
+
+export function getAdminCustomer(jwt, data){
     const headers={
+        Authorization: `Bearer ${jwt}`
+    }
+    const body ={
+        surname:data.surname || "",
+        name:data.name || "",
+        patronymic:data.patronymic || "",
+        phoneNumber:data.phoneNumber || "",
+        email:data.email || "",
+        page: 0,
+        size: 15
+    }
+    return axios.post(`${api}/api/aggregator/customers`,body,{headers: headers})
+        .then((res)=>{
+            console.log(res.data)
+            return res.data;
+        })
+    .catch((error)=>{
+        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+        if (error.response) {
+            console.log(`Ошибка: ${error.response.data.message}`);
+        } else {
+            console.log('Произошла ошибка при подключении к серверу.');
+        }
+    })
+}
 
+export function deleteAdminOrg(jwt, organizationId){
+    const headers = {
+        Authorization: `Bearer ${jwt}`
+    };
+    return axios.delete(`${api}/api/aggregator/organization?organizationId=${organizationId}`, {headers:headers})
+    .then((res)=>{
+        console.log(res.data)
+        return res.data;
+    })
+    .catch((error)=>{
+        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+        if (error.response) {
+            console.log(`Ошибка: ${error.response.data.message}`);
+        } else {
+            console.log('Произошла ошибка при подключении к серверу.');
+        }
+    })
+}
+export function getAdminOrg(jwt, data){
+    const headers={
+        Authorization: `Bearer ${jwt}`
     }
     const body={
-        surname:surnamedeleteAdminCustomer,
-        name:namedeleteAdminCustomer,
-        patronymic:patronymicdeleteAdminCustomer,
-        phoneNumber:phoneNumberdeleteAdminCustomer,
-        email:emaildeleteAdminCustomer
+        fullName:data.fullName || "",
+        shortName:data.shortName || "",
+        inn:data.inn || "",
+        kpp:data.kpp || "",
+        ogrn:data.ogrn || "",
+        responsiblePersonSurname:data.responsiblePersonSurname || "",
+        responsiblePersonName:data.responsiblePersonName || "",
+        responsiblePersonPatronymic:data.responsiblePersonPatronymic || "",
+        responsiblePersonEmail:data.responsiblePersonEmail || "",
+        responsiblePersonPhoneNumber:data.responsiblePersonPhoneNumber || "",
+        typeOfServiceId:data.typeOfServiceId || "",
+        page: 0,
+        size: 15
     }
-    axios.delete(`${api}/api/aggregator/customers`,body,headers)
-    .then(()=>{
-
+    return axios.post(`${api}/api/aggregator/organization`, body,{headers:headers})
+    .then((res)=>{
+        console.log(res.data);
+        return res.data;
     })
-    .catch(()=>{
-        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
-        if (error.response) {
-            console.log(`Ошибка: ${error.response.data.message}`);
-        } else {
-            console.log('Произошла ошибка при подключении к серверу.');
-        }
-    })
-}
-
-export function getAdminCustomer(){
-    const headers={
-
-    }
-    axios.get(`${api}/api/aggregator/customers`,headers)
-    .then(()=>{
-
-    })
-    .catch(()=>{
-        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
-        if (error.response) {
-            console.log(`Ошибка: ${error.response.data.message}`);
-        } else {
-            console.log('Произошла ошибка при подключении к серверу.');
-        }
-    })
-}
-
-export function deleteAdminOrg(){
-    const headers={
-
-    }
-    axios.delete(`${api}/api/aggregator/organization`,headers)
-    .then(()=>{
-
-    })
-    .catch(()=>{
-        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
-        if (error.response) {
-            console.log(`Ошибка: ${error.response.data.message}`);
-        } else {
-            console.log('Произошла ошибка при подключении к серверу.');
-        }
-    })
-}
-export function getAdminOrg(fullNamedeleteAdminOrg, shortNamedeleteAdminOrg, inndeleteAdminOrg, kppdeleteAdminOrg, ogrndeleteAdminOrg, responsiblePersonSurnamedeleteAdminOrg, 
-    responsiblePersonNamedeleteAdminOrg, responsiblePersonPatronymicdeleteAdminOrg, responsiblePersonEmaildeleteAdminOrg, responsiblePersonPhoneNumberdeleteAdminOrg, typeOfServiceIddeleteAdminOrg){
-    const headers={
-
-    }
-    const body={
-        fullName:fullNamedeleteAdminOrg,
-        shortName:shortNamedeleteAdminOrg,
-        inn:inndeleteAdminOrg,
-        kpp:kppdeleteAdminOrg,
-        ogrn:ogrndeleteAdminOrg,
-        responsiblePersonSurname:responsiblePersonSurnamedeleteAdminOrg,
-        responsiblePersonName:responsiblePersonNamedeleteAdminOrg,
-        responsiblePersonPatronymic:responsiblePersonPatronymicdeleteAdminOrg,
-        responsiblePersonEmail:responsiblePersonEmaildeleteAdminOrg,
-        responsiblePersonPhoneNumber:responsiblePersonPhoneNumberdeleteAdminOrg,
-        typeOfServiceId:typeOfServiceIddeleteAdminOrg
-    }
-    axios.get(`${api}/api/aggregator/organization`,headers, body)
-    .then(()=>{
-
-    })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -102,7 +110,7 @@ export function deleteAdminAgregator(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -131,27 +139,27 @@ export function getAdminAgregator(jwt){
     })
 }
 
-export function putAdminAgregator(emailputAdminAgregator, surnameputAdminAgregator, nameputAdminAgregator, patronymicputAdminAgregator, departmentputAdminAgregator, positionputAdminAgregator,
-    phoneNumberputAdminAgregator, addInfoputAdminAgregator,  jwtTokenputAdminAgregator){
+export function putAdminAgregator(jwt, data){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
     const body={
-        email:emailputAdminAgregator,
-        surname:surnameputAdminAgregator,
-        name:nameputAdminAgregator,
-        patronymic:patronymicputAdminAgregator,
-        department:departmentputAdminAgregator,
-        position:positionputAdminAgregator,
-        phoneNumber:phoneNumberputAdminAgregator,
-        addInfo:addInfoputAdminAgregator,
-        jwtToken:jwtTokenputAdminAgregator
+        addInfo: data.addInfo || "",
+        department: data.department || "",
+        email: data.email || "",
+        jwtToken: data.jwtToken || "",
+        name: data.name || "",
+        patronymic: data.patronymic || "",
+        phoneNumber: data.phoneNumber || "",
+        position: data.position || "",
+        surname: data.surname || ""
     }
-    axios.put(`${api}/api/aggregator/aggreagator`,body,headers)
-    .then(()=>{
-
+    return axios.put(`${api}/api/aggregator/aggreagator`,body,{headers: headers})
+    .then((res)=>{
+        console.log(res.data);
+        return res.data
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -180,7 +188,7 @@ export function getAdminConnectionRequest(organizationIdgetAdminConnectionReques
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -202,7 +210,7 @@ export function putAdminConnectionRequest(idputAdminConnectionRequest, statusput
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);

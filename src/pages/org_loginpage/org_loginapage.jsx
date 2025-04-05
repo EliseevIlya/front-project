@@ -58,7 +58,7 @@ function OrgLoginPage() {
 
         const checkRequestStatus = () => {
             if (requestStatus == "COMPLETED") {
-                navigate("/org_info")
+                navigate("/create_services")
             }
             else if (requestStatus != "" ) {
                 navigate("/org_statuscheck")

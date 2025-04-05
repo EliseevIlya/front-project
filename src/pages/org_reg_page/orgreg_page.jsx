@@ -32,17 +32,6 @@ function OrgReg_page() {
     const [touched, setTouched] = useState({});
     const [codeRequested, setCodeRequested] = useState(false); // Новое состояние для отслеживания запроса кода
 
-   /* const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
-
-        if (touched[name] || value !== "") {
-            const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
-            setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
-        }
-    }; */
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
@@ -84,33 +73,6 @@ function OrgReg_page() {
 
     const navigate = useNavigate();
 
-    /*const validateField = (name, value) => {
-        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
-        switch (name) {
-            case "fullName":
-            case "shortName":
-            case "city":
-            case "address":
-            case "lastName":
-            case "firstName":
-                return /^[А-Яа-я]{2,}$/.test(value);
-            case "inn":
-                return /^\d{10}$/.test(value);
-            case "kpp":
-                return /^\d{9}$/.test(value);
-            case "ogrn":
-                return /^\d{13}$/.test(value);
-            case "email":
-                return isValidEmail.test(value);
-            case "phone":
-                return /^[78]\d{10}$/.test(value);
-            case "code":
-                return /^\d{6}$/.test(value);
-            default:
-                return true;
-        }
-    };*/
-
     const validateField = (name, value) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
         const isValidText = /^[А-Яа-яёЁ\s-]{2,}$/;
@@ -142,39 +104,6 @@ function OrgReg_page() {
                 return true;
         }
     };
-
-    /*const getErrorMessage = (name) => {
-        switch (name) {
-            case "fullName":
-                return "Полное название должно содержать минимум 2 русские буквы";
-            case "shortName":
-                return "Сокращенное название должно содержать минимум 2 русские буквы";
-            case "city":
-                return "Город должен содержать минимум 2 русские буквы";
-            case "address":
-                return "Адрес должен содержать минимум 2 русские буквы";
-            case "lastName":
-                return "Фамилия должна содержать минимум 2 русские буквы";
-            case "firstName":
-                return "Имя должно содержать минимум 2 русские буквы";
-            case "inn":
-                return "ИНН должен содержать ровно 10 цифр";
-            case "kpp":
-                return "КПП должен содержать ровно 9 цифр";
-            case "ogrn":
-                return "ОГРН должен содержать ровно 13 цифр";
-            case "email":
-                return "Введите корректный email";
-            case "phone":
-                return "Телефон должен начинаться с 7 или 8 и содержать 11 цифр";
-            case "code":
-                return "Код должен содержать ровно 6 цифр";
-            case "acceptedPolicy":
-                return "Необходимо принять условия";
-            default:
-                return "";
-        }
-    };*/
 
     const getErrorMessage = (name) => {
         switch (name) {
@@ -213,50 +142,6 @@ function OrgReg_page() {
         }
     };
 
- /*   const fieldOrder = [
-        "fullName",
-        "shortName",
-        "inn",
-        "kpp",
-        "ogrn",
-        "city",
-        "address",
-        "lastName",
-        "firstName",
-        "email",
-        "phone",
-        "code",
-        "acceptedPolicy",
-    ];
-
-    const getFirstError = () => {
-        for (const field of fieldOrder) {
-            if (touched[field]) {
-                if (field === "acceptedPolicy" && !formData[field]) {
-                    return getErrorMessage(field);
-                }
-                if (!validateField(field, formData[field])) {
-                    return getErrorMessage(field);
-                }
-            }
-        }
-        return "";
-    };
-
-    const isFormValid = fieldOrder.every((key) => {
-        if (key === "acceptedPolicy") {
-            return formData[key];
-        }
-        return validateField(key, formData[key]);
-    });
-
-    const handleKeyPress = (e) => {
-        const char = String.fromCharCode(e.which);
-        if (!/^\d$/.test(char)) {
-            e.preventDefault();
-        }
-    };*/
-
     const fieldOrder = [
         "fullName", "shortName", "inn", "kpp", "ogrn", "subjectName", "cityName", "streetName", "houseNumber",
         "lastName", "firstName", "email", "phone", "code", "acceptedPolicy"
@@ -280,7 +165,6 @@ function OrgReg_page() {
         if (key === "acceptedPolicy") {
             return formData[key];
         }
-        //return validateField(key, formData[key]);
         return true
     });
 
@@ -325,7 +209,6 @@ function OrgReg_page() {
             console.error("Ошибка при регистрации организации:", error);
         }
         setTimeout(() => { navigate("/");}, 1500)
-        //setTimeout(() => { navigate("/org_statuscheck")}, 1500)
 
     };
     return (
@@ -347,7 +230,6 @@ function OrgReg_page() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
-                            //placeholder="ООО Ромашка"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -359,7 +241,6 @@ function OrgReg_page() {
                             name="shortName"
                             value={formData.shortName}
                             onChange={handleInputChange}
-                            //placeholder="Ромашка"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -371,7 +252,6 @@ function OrgReg_page() {
                             name="inn"
                             value={formData.inn}
                             onChange={handleInputChange}
-                            //placeholder="1234567890"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -383,7 +263,6 @@ function OrgReg_page() {
                             name="kpp"
                             value={formData.kpp}
                             onChange={handleInputChange}
-                            //placeholder="123456789"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -395,7 +274,6 @@ function OrgReg_page() {
                             name="ogrn"
                             value={formData.ogrn}
                             onChange={handleInputChange}
-                            //placeholder="1234567890123"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -411,7 +289,6 @@ function OrgReg_page() {
                             name="subjectName"
                             value={formData.address.subjectName}
                             onChange={handleInputChange}
-                            //placeholder="Москва"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -421,7 +298,6 @@ function OrgReg_page() {
                             name="cityName"
                             value={formData.address.cityName}
                             onChange={handleInputChange}
-                            //placeholder="Москва"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -431,7 +307,6 @@ function OrgReg_page() {
                             name="streetName"
                             value={formData.address.streetName}
                             onChange={handleInputChange}
-                            //placeholder="ул. Ленина, д. 10"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -441,7 +316,6 @@ function OrgReg_page() {
                             name="houseNumber"
                             value={formData.address.houseNumber}
                             onChange={handleInputChange}
-                            //placeholder="ул. Ленина, д. 10"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -475,7 +349,6 @@ function OrgReg_page() {
                             name="addInfo"
                             value={formData.address.addInfo}
                             onChange={handleInputChange}
-                            //placeholder="ул. Ленина, д. 10"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -491,7 +364,6 @@ function OrgReg_page() {
                             name="lastName"
                             value={formData.lastName}
                             onChange={handleInputChange}
-                            //placeholder="Иванов"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -503,7 +375,6 @@ function OrgReg_page() {
                             name="firstName"
                             value={formData.firstName}
                             onChange={handleInputChange}
-                            //placeholder="Иван"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -515,7 +386,6 @@ function OrgReg_page() {
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            //placeholder="example@mail.com"
                             className="inputinfo"
                             autoComplete="off"
                         />
@@ -528,7 +398,6 @@ function OrgReg_page() {
                             value={formData.phone}
                             onChange={handleInputChange}
                             onKeyPress={handleKeyPress}
-                            //placeholder="71234567890"
                             className="inputinfo"
                             autoComplete="off"
                             maxLength="11"

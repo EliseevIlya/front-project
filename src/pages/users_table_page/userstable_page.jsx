@@ -1,20 +1,53 @@
 import { useState, useEffect } from "react";
 import "./style_userstable.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getAdminCustomer } from "../../api/Admin.js";
+import {deleteAdminCustomer} from "../../api/Admin.js";
 
 function UsersTable_page() {
     const [rows, setRows] = useState(5);
+    const [users, setUsers] = useState([]);
+    const [sortAsc, setSortAsc] = useState(true);
 
     useEffect(() => {
-        document.body.classList.add("usersTableBody");
-
-        return () => {
-            document.body.classList.remove("usersTableBody");
-        };
+        const jwt = localStorage.getItem("jwt");
+        if (jwt) {
+            getAdminCustomer(jwt, {
+                surname: "",
+                name: "",
+                patronymic: "",
+                phoneNumber: "",
+                email: ""
+            }).then(data => {
+                setUsers(data.content || []);
+            });
+        }
     }, []);
 
     const loadMoreRows = () => {
         setRows(prevRows => prevRows + 5);
+    };
+
+    const handleSortById = () => {
+        setSortAsc(!sortAsc);
+    };
+
+    const sortedUsers = [...users].sort((a, b) => {
+        return sortAsc
+            ? a.customerId - b.customerId
+            : b.customerId - a.customerId;
+    });
+
+    const handleDelete = (customerId) => {
+        const jwt = localStorage.getItem("jwt");
+        if (!jwt) return;
+
+        if (window.confirm("Вы уверены, что хотите удалить пользователя?")) {
+            deleteAdminCustomer(jwt, customerId)
+                .then(() => {
+                    setUsers(prev => prev.filter(user => user.customerId !== customerId));
+                })
+        }
     };
 
     const navigate = useNavigate();
@@ -23,16 +56,17 @@ function UsersTable_page() {
         <>
             <div className="headersTable">
                 <button className="exitbuttonTable" title="Вернуться в кабинет" onClick={() => navigate("/adminacc")}>
-                    <img src="/src/icons/exitblack.png" alt="Exit"/>
+                    <img src="/src/icons/exitblack.png" alt="Exit" />
                 </button>
                 <h1 className="textTable">СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h1>
             </div>
-
             <div className="bodytable">
                 <table className="usersTable">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th onClick={handleSortById} style={{ cursor: "pointer" }}>
+                            ID {sortAsc ? "▲" : "▼"}
+                        </th>
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Отчество</th>
@@ -43,20 +77,21 @@ function UsersTable_page() {
                     </tr>
                     </thead>
                     <tbody>
-                    {[...Array(rows)].map((_, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td><input type="text" className="utbitem" disabled/></td>
-                            <td>
-                                <button className="blockButton">X</button>
-                            </td>
-                        </tr>
-                    ))}
+                    {sortedUsers.map((user, index) => {
+                        if (index >= rows) return null;
+                        return (
+                            <tr key={user.customerId}>
+                                <td>{user.customerId}</td>
+                                <td><input type="text" className="utbitem" value={user.customerSurname || ""} disabled /></td>
+                                <td><input type="text" className="utbitem" value={user.customerName || ""} disabled /></td>
+                                <td><input type="text" className="utbitem" value={user.customerPatronymic || ""} disabled /></td>
+                                <td><input type="text" className="utbitem" value={user.customerEmail || ""} disabled /></td>
+                                <td><input type="text" className="utbitem" value={user.customerPhoneNumber || ""} disabled /></td>
+                                <td><input type="text" className="utbitem" value="" disabled /></td>
+                                <td><button className="blockButton" onClick={() => handleDelete(user.customerId)}>X</button></td>
+                            </tr>
+                        );
+                    })}
                     </tbody>
                 </table>
             </div>

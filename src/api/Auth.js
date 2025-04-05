@@ -5,7 +5,7 @@ const api = globalAPI;
 console.log(api); // "http://localhost:8080"
 //const api = "http://217.107.34.217:9919";
 
-export function registercustomer(surname,name,patronic,phone,addInfo,email){
+export function registercustomer(surname,name,patronic,phone,addInfo,email, code){
     console.log(email)
     const body={
             surname:surname,
@@ -13,12 +13,13 @@ export function registercustomer(surname,name,patronic,phone,addInfo,email){
             patronymic:patronic,
             phoneNumber:phone,
             addInfo:addInfo,
-            email:email
+            email:email,
+            code:code
     }
     const headers={
 
     }
-    return  axios.post(`${api}/auth/sign_up/customer`,body,headers)
+    return axios.post(`${api}/auth/sign_up/customer`,body,{headers:headers})
     .then((res)=>{
         if (res.status === 200) {
             console.log('Код успешно отправлен');
@@ -63,7 +64,8 @@ export function registerorg(data){
             addInfo: data.address.addInfo,
             addressType: data.address.addressType
         },
-        email: data.email
+        email: data.email,
+        code:data.code
     };
     const headers = {
         "Content-Type": "application/json"
@@ -232,7 +234,7 @@ export function authadmin(emailauthadmin, passwordauthadmin, codeauthadmin){
             return false; // Неуспешный статус
         }
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
