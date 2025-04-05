@@ -7,11 +7,12 @@ export function getOneOrganization(jwt){
     const headers={
         Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/organization/get_organization`,{headers: headers})
-    .then(()=>{
-
+    return  axios.get(`${api}/api/organization/get_organization`,{headers: headers})
+    .then((response)=>{
+        console.log(response.data);
+        return response.data;
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -31,7 +32,7 @@ export function deleteOrganization(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -50,7 +51,7 @@ export function getOrganizationServices(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -62,7 +63,7 @@ export function getOrganizationServices(){
 
 export function updateOrganization(fullNameupdateOrganization, shortNameupdateOrganization, innupdateOrganization, kppupdateOrganization, ogrnupdateOrganization, responsiblePersonSurnameupdateOrganization,
     responsiblePersonNameupdateOrganization, responsiblePersonPatronymicupdateOrganization, responsiblePersonEmailupdateOrganization, responsiblePersonPhoneNumberupdateOrganization,
-    addInfoupdateOrganization, subjectNameupdateOrganization, cityNameupdateOrganization, streetNameupdateOrganization, houseNumberupdateOrganization, addInfoupdateOrganization, 
+    addInfoupdateOrganization, subjectNameupdateOrganization, cityNameupdateOrganization, streetNameupdateOrganization, houseNumberupdateOrganization,
     addressTypeupdateOrganization, emailupdateOrganization){
     const body={
         fullName:fullNameupdateOrganization,
@@ -93,7 +94,7 @@ export function updateOrganization(fullNameupdateOrganization, shortNameupdateOr
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -111,7 +112,7 @@ export function getOrganizationServicesRequests(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
