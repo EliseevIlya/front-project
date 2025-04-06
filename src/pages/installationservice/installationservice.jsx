@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "./style.css";
-import Confirmationinstallationpage from "../confirmationinstallationpage/confirmationinstallationpage";
 import Select from "react-select";
 
 function Installationservice() {

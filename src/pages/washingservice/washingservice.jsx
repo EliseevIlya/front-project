@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
-import Confirmationwashingpage from "../confirmationwashingpage/confirmationwashingpage";
 import Select from "react-select";
 import { getCustomerServiceTypeOrg, requestCreateCustomer } from "../../api/Customer.js";
 import { getServiceDetail } from "../../api/ServiceDetail.js";
+import Modal from "react-modal";
 
 function Washingservice() {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -19,23 +19,18 @@ function Washingservice() {
     const [listCity, setListCity] = useState([]);
 
     const [selectedCity, setSelectedCity] = useState(null);
-
     const [filteredOrganizations, setFilteredOrganizations] = useState([]);
     const [selectedOrganizationId, setSelectedOrganizationId] = useState(null);
-
     const [addInfo, setAddInfo] = useState();
-
     const [postServiceToCustomer, setPostServiceToCustomer] = useState();
-
+    const [modalData, setModalData] = useState({});
     const [organizationServicesCriteria, setSelectedOrganizationServicesCriteria] = useState({
         organizationId: selectedOrganizationId,
         typeCode: localStorage.getItem("typeOfService"),
         page: 0,
         size: 1000
     });
-
     const [organizationServices, setOrganizationServices] = useState([]);
-
     const [selectedServices, setSelectedServices] = useState([null]);
 
     const customStyles = {
@@ -90,7 +85,6 @@ function Washingservice() {
             try {
                 const data = await getCustomerServiceTypeOrg();
                 const content = data?.content || [];
-
                 setOrganizationsByServiceType(content);
 
                 // Collect cities from addresses
@@ -144,7 +138,6 @@ function Washingservice() {
     useEffect(() => {
         if (selectedOrganizationId) {
             console.log("Selected organization ID:", selectedOrganizationId.value);
-
             setSelectedOrganizationServicesCriteria(prev => ({
                 ...prev,
                 organizationId: selectedOrganizationId.value
@@ -221,53 +214,62 @@ function Washingservice() {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form behavior
 
-    const handleSubmit = async () => {
-        console.log(organizationServices, "organizationServices");
-        console.log(selectedServices, "selectedServices");
-
-        // Проверяем, что хотя бы одно время выбрано
+        // Check if at least one time is selected
         if (!selectedTimeToday && !selectedTimeTomorrow) {
             alert("Выберите время для услуги!");
             return;
         }
-        console.log(selectedTimeToday,selectedTimeTomorrow,"TIME");
-        let dateService = ""; // Инициализируем переменную для даты
 
+        let dateService = ""; // Initialize variable for date
 
         if (selectedTimeToday) {
             const today = new Date();
             const [hours, minutes] = selectedTimeToday.split(":");
             today.setHours(hours, minutes, 0, 0);
-            dateService = formatLocalDate(today); // ✅ теперь локальное время
+            dateService = formatLocalDate(today); // Format local time
         } else if (selectedTimeTomorrow) {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             const [hours, minutes] = selectedTimeTomorrow.split(":");
             tomorrow.setHours(hours, minutes, 0, 0);
-            dateService = formatLocalDate(tomorrow); // ✅ теперь локальное время
-            console.log(tomorrow,"TOMORROW")
-            console.log(dateService,"dateService");
+            dateService = formatLocalDate(tomorrow); // Format local time
         }
 
-
         const postServiceData = {
-            organizationId: selectedOrganizationId.value, // Предполагается, что selectedOrganizationId имеет объект с value
-            addInfo: addInfo, // Дополнительная информация
-            serviceDetailIds: selectedServices.filter(service => service).map(service => service.id), // Получаем массив id услуг
-            dateService: dateService
+            organizationId: selectedOrganizationId.value, // ID of selected organization
+            addInfo: addInfo, // Additional information
+            serviceDetailIds: selectedServices.filter(service => service).map(service => service.id), // Array of service IDs
+            dateService: dateService // Date and time of service
         };
 
         console.log(postServiceData, "FINAL");
 
-        const success = await requestCreateCustomer(postServiceData);
+        try {
+            const success = await requestCreateCustomer(postServiceData);
 
-        if (success) {
-            navigate("/apps");
-        } else {
-            alert("Ошибка при отправке запроса. Проверьте данные и попробуйте ещё раз.");
+            if (success) {
+                // Pass data to modal
+                setModalData({
+                    time: selectedTimeToday || selectedTimeTomorrow,
+                    day: selectedTimeToday ? "Сегодня" : "Завтра",
+                    address: selectedOrganizationId ? `${selectedOrganizationId.label}` : "Не указано"
+                });
+                setModalOpen(true); // Open modal
+            } else {
+                alert("Ошибка при отправке запроса. Проверьте данные и попробуйте ещё раз.");
+            }
+        } catch (error) {
+            console.error("Ошибка при отправке данных:", error);
+            alert("Произошла ошибка. Пожалуйста, попробуйте еще раз.");
         }
+    };
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        navigate("/apps"); // Navigate to apps page after closing modal
     };
 
     const handleTimeTodayChange = (value) => {
@@ -409,7 +411,23 @@ function Washingservice() {
                     </button>
                 </div>
             </div>
-            <Confirmationwashingpage isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+
+            <Modal
+                isOpen={isModalOpen}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+                ariaHideApp={false}
+            >
+                <div className="modal-overlayconfirm">
+                    <div className="modal-contentconfirm">
+                        <h1>ПОДТВЕРЖДЕНИЕ ЗАПИСИ</h1>
+                        <h3 className="confirmationwashing-text">
+                            ЖДЕМ ВАС {modalData.day} В {modalData.time} ПО АДРЕСУ: {modalData.address}
+                        </h3>
+                        <button className="confirmation-buttonwashing" onClick={handleCloseModal}>ОК</button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }
