@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { authadmin, sendcode} from "../../api/Auth.js";
-
 
 function Enteraccpage() {
     const [login, setLogin] = useState("");
@@ -55,7 +54,6 @@ function Enteraccpage() {
             setCodeError("Введите корректный логин перед получением кода.");
             return;
         }
-    
         try {
             const success = await sendcode(login);
             console.log("sendcode result:", success); 
@@ -72,16 +70,13 @@ function Enteraccpage() {
         }
     };
 
-
-
     const handleSubmit = async () => {
         if (loginError || passwordError || codeError || !login || !password || !code) {
             setCodeError("Пожалуйста, заполните все поля корректно.");
             return;
         }
-
-        const success = await authadmin(login, password, code);
-        if (success) {
+        const token = await authadmin(login, password, code);
+        if (token) {
             navigate("/adminacc");
         } else {
             setCodeError("Неверный код. Попробуйте снова.");

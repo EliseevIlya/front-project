@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./style_adminacc.css";
 import { useNavigate } from "react-router-dom";
+import {getAdminAgregator, putAdminAgregator} from "../../api/Admin.js";
 
 function AdminAcc_page() {
     const [isEditing, setIsEditing] = useState(false);
-    const [email, setEmail] = useState("");
-    const [surname, setSurname] = useState("");
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [agregatorData, setAgregatorData] = useState({
+        addInfo: "",
+        department: "",
+        email: "",
+        jwtToken: "",
+        name: "",
+        patronymic: "",
+        phoneNumber: "",
+        position: "",
+        surname: ""
+    });
+
 
     const navigate = useNavigate();
 
@@ -16,13 +25,36 @@ function AdminAcc_page() {
         setIsEditing((prev) => !prev);
     };
 
-    const saveChanges = () => {
-        if (areRequiredFieldsValid()) {
-            // Save changes logic here
-            console.log("Changes saved");
-            setIsEditing(false); // Exit edit mode after saving
+    const saveChanges = async () => {
+        try {
+            const updatedData = await putAdminAgregator(localStorage.getItem("jwt"), agregatorData);
+
+            if (updatedData) {
+                setAgregatorData({
+                    addInfo: updatedData.addInfo || "",
+                    department: updatedData.department || "",
+                    email: updatedData.email || "",
+                    jwtToken: updatedData.jwtToken || "",
+                    name: updatedData.name || "",
+                    patronymic: updatedData.patronymic || "",
+                    phoneNumber: updatedData.phoneNumber || "",
+                    position: updatedData.position || "",
+                    surname: updatedData.surname || ""
+                });
+
+                const currentJwt = localStorage.getItem("jwt");
+                if (updatedData.jwtToken && updatedData.jwtToken !== currentJwt) {
+                    localStorage.setItem("jwt", updatedData.jwtToken);
+                    console.log("JWT token был обновлён");
+                }
+
+                setIsEditing(false); // Выход из режима редактирования
+            }
+        } catch (error) {
+            console.error("Ошибка при сохранении данных:", error);
         }
     };
+
 
     const validateEmail = (emailValue) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
@@ -44,23 +76,6 @@ function AdminAcc_page() {
         return isValidPhone.test(phoneValue);
     };
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleSurnameChange = (e) => {
-        setSurname(e.target.value);
-    };
-
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
-
-    const handlePhoneChange = (e) => {
-        const phoneValue = e.target.value.replace(/\D/g, "").slice(0, 11);
-        setPhone(phoneValue);
-    };
-
     const areRequiredFieldsValid = () => {
         const isEmailValid = validateEmail(email);
         const isSurnameValid = validateSurname(surname);
@@ -75,6 +90,36 @@ function AdminAcc_page() {
         setErrorMessage("");
         return true;
     };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setAgregatorData({ ...agregatorData, [name]: value });
+    };
+
+    useEffect(() => {
+        const getAdminAccPage = async () => {
+            try {
+                const data = await getAdminAgregator(localStorage.getItem("jwt"));
+                if (data) {
+                    setAgregatorData({
+                        addInfo: data.addInfo || "",
+                        department: data.department || "",
+                        email: data.email || "",
+                        jwtToken: data.jwtToken || "",
+                        name: data.name || "",
+                        patronymic: data.patronymic || "",
+                        phoneNumber: data.phoneNumber || "",
+                        position: data.position || "",
+                        surname: data.surname || ""
+                    });
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        getAdminAccPage();
+        }, []);
 
     return (
         <div>
@@ -93,27 +138,35 @@ function AdminAcc_page() {
                 <div className="info">
                     <div className="infoitem">
                         <label>Должность*:</label>
-                        <input type="text" disabled={!isEditing}/>
+                        <input type="text" name = "position" value={agregatorData?.position || ""} onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Фамилия*:</label>
-                        <input type="text" value={surname} onChange={handleSurnameChange} disabled={!isEditing} />
+                        <input type="text" name = "surname" value={agregatorData?.surname || ""} onChange={handleInputChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Имя*:</label>
-                        <input type="text" value={name} onChange={handleNameChange} disabled={!isEditing} />
+                        <input type="text" name = "name" value={agregatorData?.name || ""} onChange={handleInputChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Отчество:</label>
-                        <input type="text" disabled={!isEditing} />
+                        <input type="text" name = "patronymic" value={agregatorData?.patronymic || ""} onChange={handleInputChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>Номер тел.*:</label>
-                        <input type="text" value={phone} onChange={handlePhoneChange} disabled={!isEditing} />
+                        <input type="text" name = "phoneNumber" value={agregatorData?.phoneNumber || ""} onChange={handleInputChange} disabled={!isEditing} />
                     </div>
                     <div className="infoitem">
                         <label>E-mail*:</label>
-                        <input type="text" value={email} onChange={handleEmailChange} disabled={!isEditing} />
+                        <input type="text" name = "email" value={agregatorData?.email || ""} onChange={handleInputChange} disabled={!isEditing} />
+                    </div>
+                    <div className="infoitem">
+                        <label>Департамент:</label>
+                        <input type="text" name ="department" value={agregatorData?.department || ""} onChange={handleInputChange} disabled={!isEditing} />
+                    </div>
+                    <div className="infoitem">
+                        <label>Доп. Инфо:</label>
+                        <input type="text" name ="addInfo" value={agregatorData?.addInfo || ""} onChange={handleInputChange} disabled={!isEditing} />
                     </div>
                 </div>
                 <div className="control">

@@ -56,6 +56,7 @@ function OrgReg_page() {
         });
 
         setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+
     };
 
     const handleNext = () => {
@@ -67,6 +68,124 @@ function OrgReg_page() {
     const handlePrev = () => {
         if (currentStep > 0) {
             setCurrentStep(currentStep - 1);
+
+
+        if (touched[name] || value !== "") {
+            const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
+            setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+        }
+    };
+
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, acceptedPolicy: e.target.checked });
+        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            acceptedPolicy: e.target.checked ? "" : "Необходимо принять условия",
+        }));
+    };
+
+    const navigate = useNavigate();
+
+    const validateField = (name, value) => {
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
+        const isValidText = /^[А-Яа-яёЁ\s-]{2,}$/;
+
+        switch (name) {
+            case "fullName":
+            case "shortName":
+            case "subjectName":
+            case "cityName":
+            case "streetName":
+            case "lastName":
+            case "firstName":
+                return isValidText.test(value);
+            case "inn":
+                return /^\d{10}$/.test(value);
+            case "kpp":
+                return /^\d{9}$/.test(value);
+            case "ogrn":
+                return /^\d{13}$/.test(value);
+            case "email":
+                return isValidEmail.test(value);
+            case "phone":
+                return /^[78]\d{10}$/.test(value);
+            case "code":
+                return /^\d{6}$/.test(value);
+            case "houseNumber":
+                return /^[\dА-Яа-я\-\\/]{1,10}$/.test(value);
+            default:
+                return true;
+        }
+    };
+
+    const getErrorMessage = (name) => {
+        switch (name) {
+            case "fullName":
+                return "Полное название должно содержать минимум 2 русские буквы";
+            case "shortName":
+                return "Сокращенное название должно содержать минимум 2 русские буквы";
+            case "subjectName":
+                return "Название субъекта РФ должно содержать минимум 2 русские буквы";
+            case "cityName":
+                return "Город должен содержать минимум 2 русские буквы";
+            case "streetName":
+                return "Улица должна содержать минимум 2 русские буквы";
+            case "houseNumber":
+                return "Дом должен содержать цифры или буквы (до 10 символов)";
+            case "lastName":
+                return "Фамилия должна содержать минимум 2 русские буквы";
+            case "firstName":
+                return "Имя должно содержать минимум 2 русские буквы";
+            case "inn":
+                return "ИНН должен содержать ровно 10 цифр";
+            case "kpp":
+                return "КПП должен содержать ровно 9 цифр";
+            case "ogrn":
+                return "ОГРН должен содержать ровно 13 цифр";
+            case "email":
+                return "Введите корректный email";
+            case "phone":
+                return "Телефон должен начинаться с 7 или 8 и содержать 11 цифр";
+            case "code":
+                return "Код должен содержать ровно 6 цифр";
+            case "acceptedPolicy":
+                return "Необходимо принять условия";
+            default:
+                return "";
+        }
+    };
+
+    const fieldOrder = [
+        "fullName", "shortName", "inn", "kpp", "ogrn", "subjectName", "cityName", "streetName", "houseNumber",
+        "lastName", "firstName", "email", "phone", "code", "acceptedPolicy"
+    ];
+
+    const getFirstError = () => {
+        for (const field of fieldOrder) {
+            if (touched[field]) {
+                if (field === "acceptedPolicy" && !formData[field]) {
+                    return getErrorMessage(field);
+                }
+                if (!validateField(field, formData[field])) {
+                    return getErrorMessage(field);
+                }
+            }
+        }
+        return "";
+    };
+
+    const isFormValid = fieldOrder.every((key) => {
+        if (key === "acceptedPolicy") {
+            return formData[key];
+        }
+        return true
+    });
+
+    const handleKeyPress = (e) => {
+        if (!/\d/.test(e.key)) {
+            e.preventDefault();
         }
     };
 
@@ -103,6 +222,7 @@ function OrgReg_page() {
             console.error("Ошибка при регистрации организации:", error);
         }
         setTimeout(() => { navigate("/"); }, 1500);
+
     };
 
     return (
@@ -177,6 +297,7 @@ function OrgReg_page() {
                     {/* Progress Bar */}
                     <div className="progress-bar">
                         <div className="progress-fill" style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
+
                     </div>
 
                     {currentStep < 2 ? (
@@ -184,10 +305,12 @@ function OrgReg_page() {
                     ) : null}
                 </div>
 
+
                 {/* Confirmation Button placed outside the navigation div */}
                 {currentStep === 2 && (
                     <div className="confirm-button-container">
                         <button className="confirmbutton" onClick={handleCreateOrganization}>Подать заявку</button>
+
                     </div>
                 )}
                 </div>

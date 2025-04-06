@@ -22,6 +22,16 @@ function PioneerForms() {
 
   const [selectedStatus, setSelectedStatus] = useState("new");
 
+  const [connectionRequestGet, setConnectionRequestGet] = useState({
+
+  })
+  const [connectionRequestPut, setConnectionRequestPut] = useState({
+    organizationId:"",
+    registrationNumber:"",
+    status:"",
+    size: 10,
+    id: 0
+  })
 
   const navigate = useNavigate();
 

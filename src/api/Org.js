@@ -61,38 +61,40 @@ export function getOrganizationServices(){
     })
 }
 
-export function updateOrganization(fullNameupdateOrganization, shortNameupdateOrganization, innupdateOrganization, kppupdateOrganization, ogrnupdateOrganization, responsiblePersonSurnameupdateOrganization,
-    responsiblePersonNameupdateOrganization, responsiblePersonPatronymicupdateOrganization, responsiblePersonEmailupdateOrganization, responsiblePersonPhoneNumberupdateOrganization,
-    addInfoupdateOrganization, subjectNameupdateOrganization, cityNameupdateOrganization, streetNameupdateOrganization, houseNumberupdateOrganization,
-    addressTypeupdateOrganization, emailupdateOrganization){
-    const body={
-        fullName:fullNameupdateOrganization,
-        shortName:shortNameupdateOrganization,
-        inn:innupdateOrganization,
-        kpp:kppupdateOrganization,
-        ogrn:ogrnupdateOrganization,
-        responsiblePersonSurname:responsiblePersonSurnameupdateOrganization,
-        responsiblePersonName:responsiblePersonNameupdateOrganization,
-        responsiblePersonPatronymic:responsiblePersonPatronymicupdateOrganization,
-        responsiblePersonEmail:responsiblePersonEmailupdateOrganization,
-        responsiblePersonPhoneNumber:responsiblePersonPhoneNumberupdateOrganization,
-        addInfo:addInfoupdateOrganization,
-        address:{
-            subjectName:subjectNameupdateOrganization,
-            cityName:cityNameupdateOrganization,
-            streetName:streetNameupdateOrganization,
-            houseNumber:houseNumberupdateOrganization,
-            addInfo:addInfoupdateOrganization,
-            addressType:addressTypeupdateOrganization
-            },
-        email:emailupdateOrganization
-        }
+export function updateOrganization(jwt, data){
+    const body = {
+        fullName: data.fullName,
+        shortName: data.shortName,
+        inn: data.inn,
+        kpp: data.kpp,
+        ogrn: data.ogrn,
+        responsiblePersonSurname: data.responsiblePersonSurname,
+        responsiblePersonName: data.responsiblePersonName,
+        responsiblePersonPatronymic: data.responsiblePersonPatronymic,
+        responsiblePersonEmail: data.responsiblePersonEmail,
+        responsiblePersonPhoneNumber: data.responsiblePersonPhoneNumber,
+        addInfo: data.addInfo,
+        email: data.email,
+        // Извлечение данных из массива addresses и сохранение в массиве
+        addresses: data.addresses.length > 0 ? [{
+            id: data.addresses[0].id,
+            subjectName: data.addresses[0].subjectName,
+            cityName: data.addresses[0].cityName,
+            streetName: data.addresses[0].streetName,
+            houseNumber: data.addresses[0].houseNumber,
+            addInfo: data.addresses[0].addInfo,
+            addressType: data.addresses[0].addressType
+        }] : []  // Если массив пустой, сохраняем пустой массив
+    };
+
+    console.log(body, "safsadfas");
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.put(`${api}/api/organization/update/organization`,body,headers)
-    .then(()=>{
-
+    return axios.put(`${api}/api/organization/update/organization`,body, {headers:headers})
+    .then((res)=>{
+        console.log(res.data)
+        return res.data
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
