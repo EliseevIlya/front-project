@@ -71,11 +71,11 @@
 }
 
 .wash-card {
-    background-color: #3141a8;
+    background-color: darkblue;
 }
 
 .tyre-card {
-    background-color: #bf7c25;
+    background-color: darkgoldenrod;
 }
 
 .wash-card:hover,

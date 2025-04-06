@@ -114,25 +114,25 @@ function Apps_page() {
 
                         <div className="datetime">
                             <label className="label-inline">
-                                <p><strong>Дата:</strong> {selectedApp.date}</p>
+                                <strong className="infoapp">Дата:</strong> {selectedApp.date}
                             </label>
                             <label className="label-inline">
-                                <p type="text"><strong>Время:</strong> {selectedApp.time}</p>
+                                <strong className="infoapp">Время:</strong> {selectedApp.time}
                             </label>
                         </div>
 
                         <div className="orgdata">
                             <label className="label-inline">
-                                <p><strong>Организация:</strong> {selectedApp.organization}</p>
+                                <strong className="infoapp">Организация:</strong> {selectedApp.organization}
                             </label>
                             <label className="label-inline">
-                                <p><strong>Адрес:</strong> {selectedApp.address}</p>
+                                <strong className="infoapp">Адрес:</strong> {selectedApp.address}
                             </label>
                         </div>
 
                         <div className="services">
                             <label className="label-inline">
-                                <p><strong>Выбранные услуги:</strong></p>
+                                <strong className="infoapp">Выбранные услуги:</strong>
                             </label>
                             <ul>
                                 {selectedApp.services.map((service, index) => (
@@ -142,7 +142,7 @@ function Apps_page() {
                         </div>
                         <div className="pricedata">
                             <label className="label-inline">
-                                <p><strong>Итоговая стоимость:</strong> {selectedApp.cost}₽</p>
+                                <strong className="infoapp">Итоговая стоимость:</strong> {selectedApp.cost}₽
                             </label>
                         </div>
                         <div className="modal-buttons">

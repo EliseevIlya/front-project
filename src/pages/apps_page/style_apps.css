@@ -241,6 +241,15 @@ html {
     align-items: center;
 }
 
+.infoapp {
+    font-weight: lighter;
+    color: dimgrey;
+}
+
+ul {
+    font-size: calc((1.5vw + 3vh)/2);
+    overflow-y: auto;
+}
 
 .modal-buttons {
     display: flex;
