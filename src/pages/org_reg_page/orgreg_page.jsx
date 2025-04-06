@@ -37,7 +37,7 @@ function OrgReg_page() {
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         setFormData((prevFormData) => {
             if (Object.prototype.hasOwnProperty.call(prevFormData.address, name)) {
@@ -56,11 +56,21 @@ function OrgReg_page() {
             };
         });
 
-        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+        setTouched((prevTouched) => ({...prevTouched, [name]: true}));
 
         // Validate field on change
         const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
-        setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+        setErrors((prevErrors) => ({...prevErrors, [name]: errorMessage}));
+    };
+
+    const handleCheckboxChange = (e) => {
+        const isChecked = e.target.checked;
+        setFormData({ ...formData, acceptedPolicy: isChecked });
+        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            acceptedPolicy: isChecked ? "" : "Необходимо принять условия",
+        }));
     };
 
     const validateField = (name, value) => {
@@ -208,17 +218,22 @@ function OrgReg_page() {
                 {currentStep === 0 && (
                     <div className="orginfo">
                         <h2>Информация об организации:</h2>
-                        <input type="text" className="inputinfo" name="fullName" autoComplete="off" placeholder="Полное название"
+                        <input type="text" className="inputinfo" name="fullName" autoComplete="off"
+                               placeholder="Полное название"
                                value={formData.fullName}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="shortName" autoComplete="off" placeholder="Сокращенное"
+                        <input type="text" className="inputinfo" name="shortName" autoComplete="off"
+                               placeholder="Сокращенное"
                                value={formData.shortName}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="inn" maxLength="10" autoComplete="off" placeholder="ИНН" value={formData.inn}
+                        <input type="text" className="inputinfo" name="inn" maxLength="10" autoComplete="off"
+                               placeholder="ИНН" value={formData.inn}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="kpp" maxLength="9" autoComplete="off" placeholder="КПП" value={formData.kpp}
+                        <input type="text" className="inputinfo" name="kpp" maxLength="9" autoComplete="off"
+                               placeholder="КПП" value={formData.kpp}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="ogrn" maxLength="13" autoComplete="off" placeholder="ОГРН"
+                        <input type="text" className="inputinfo" name="ogrn" maxLength="13" autoComplete="off"
+                               placeholder="ОГРН"
                                value={formData.ogrn}
                                onChange={handleInputChange}/>
                     </div>
@@ -227,11 +242,13 @@ function OrgReg_page() {
                 {currentStep === 1 && (
                     <div className="addressinfo">
                         <h2>Адрес:</h2>
-                        <input type="text" className="inputinfo" name="subjectName" autoComplete="off" placeholder="Регион"
+                        <input type="text" className="inputinfo" name="subjectName" autoComplete="off"
+                               placeholder="Регион"
                                value={formData.address.subjectName} onChange={handleInputChange}/>
                         <input type="text" className="inputinfo" name="cityName" autoComplete="off" placeholder="Город"
                                value={formData.address.cityName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="streetName" autoComplete="off" placeholder="Улица"
+                        <input type="text" className="inputinfo" name="streetName" autoComplete="off"
+                               placeholder="Улица"
                                value={formData.address.streetName} onChange={handleInputChange}/>
                         <input type="text" className="inputinfo" name="houseNumber" autoComplete="off" placeholder="Дом"
                                value={formData.address.houseNumber} onChange={handleInputChange}/>
@@ -244,21 +261,35 @@ function OrgReg_page() {
                 {currentStep === 2 && (
                     <div className="contactinfo">
                         <h2>Контактное лицо:</h2>
-                        <input type="text" className="inputinfo" name="lastName" autoComplete="off" placeholder="Фамилия"
+                        <input type="text" className="inputinfo" name="lastName" autoComplete="off"
+                               placeholder="Фамилия"
                                value={formData.lastName} onChange={handleInputChange}/>
                         <input type="text" className="inputinfo" name="firstName" autoComplete="off" placeholder="Имя"
                                value={formData.firstName} onChange={handleInputChange}/>
                         <input type="text" className="inputinfo" name="email" autoComplete="off" placeholder="Email"
                                value={formData.email}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="phone" autoComplete="off" maxLength="11" placeholder="Номер тел."
+                        <input type="text" className="inputinfo" name="phone" autoComplete="off" maxLength="11"
+                               placeholder="Номер тел."
                                value={formData.phone} onChange={handleInputChange}/>
+                        <p>
+                            <input
+                                type="checkbox"
+                                checked={formData.acceptedPolicy}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label className="confirmlabel">
+                                Я принимаю <a href="https://policies.google.com/terms?hl=ru">пользовательское
+                                соглашение</a>
+                            </label>
+                        </p>
                         <p>
                             <button className="getcode_button" onClick={handleGetCode}
                                     disabled={!formData.email}>Получить код
                             </button>
                         </p>
-                        <input type="text" className="inputcode" name="code" autoComplete="off" placeholder="Код" value={formData.code}
+                        <input type="text" className="inputcode" name="code" autoComplete="off" placeholder="Код"
+                               value={formData.code}
                                onChange={handleInputChange} disabled={!codeRequested}/>
                     </div>
                 )}
@@ -270,7 +301,7 @@ function OrgReg_page() {
                     {/* Progress Bar */}
                     <div className="progress-bar">
                         <div className="progress-fill"
-                             style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
+                             style={{width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%`}}></div>
                     </div>
 
                     {currentStep < 2 ? (

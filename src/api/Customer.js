@@ -140,6 +140,7 @@ export function requestCreateCustomer( data){
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json"
     };
+    console.log(data,"DATA requestCreateCustomer")
 
     const body ={
         organizationId:data.organizationId,
@@ -168,8 +169,10 @@ export function deleteServiceRequest(jwt,serviceRequestId){
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json"
     };
-    axios.delete(`${api}/api/customer/delete/request?serviceRequestId=${serviceRequestId}`,{headers:headers})
-        .then(() =>{})
+    return  axios.delete(`${api}/api/customer/delete/request?serviceRequestId=${serviceRequestId}`,{headers:headers})
+        .then(() =>{
+            return true
+        })
         .catch((error)=>{
             console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
             if (error.response) {
@@ -177,5 +180,6 @@ export function deleteServiceRequest(jwt,serviceRequestId){
             } else {
                 console.log('Произошла ошибка при подключении к серверу.');
             }
+            return false
         })
 }
