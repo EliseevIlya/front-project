@@ -10,7 +10,7 @@ function OrgReg_page() {
         streetName: "",
         houseNumber: "",
         addInfo: "",
-        addressType: ""
+        addressType: ""  // Поле для типа адреса
     });
 
     const [formData, setFormData] = useState({
@@ -37,7 +37,7 @@ function OrgReg_page() {
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         setFormData((prevFormData) => {
             if (Object.prototype.hasOwnProperty.call(prevFormData.address, name)) {
@@ -56,11 +56,11 @@ function OrgReg_page() {
             };
         });
 
-        setTouched((prevTouched) => ({...prevTouched, [name]: true}));
+        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
 
         // Validate field on change
         const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
-        setErrors((prevErrors) => ({...prevErrors, [name]: errorMessage}));
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
     };
 
     const handleCheckboxChange = (e) => {
@@ -100,6 +100,8 @@ function OrgReg_page() {
                 return /^\d{6}$/.test(value);
             case "houseNumber":
                 return /^[\dА-Яа-я\-\\/]{1,10}$/.test(value);
+            case "addressType":
+                return value !== "";  // Проверка на выбор типа адреса
             default:
                 return true;
         }
@@ -125,7 +127,7 @@ function OrgReg_page() {
                 return "Имя должно содержать минимум 2 русские буквы";
             case "inn":
                 return "ИНН должен содержать ровно 10 цифр";
-            case "kpp ":
+            case "kpp":
                 return "КПП должен содержать ровно 9 цифр";
             case "ogrn":
                 return "ОГРН должен содержать ровно 13 цифр";
@@ -137,6 +139,8 @@ function OrgReg_page() {
                 return "Код должен содержать ровно 6 цифр";
             case "acceptedPolicy":
                 return "Необходимо принять условия";
+            case "addressType":
+                return "Необходимо выбрать тип адреса";  // Сообщение об ошибке для типа адреса
             default:
                 return "";
         }
@@ -242,6 +246,16 @@ function OrgReg_page() {
                 {currentStep === 1 && (
                     <div className="addressinfo">
                         <h2>Адрес:</h2>
+                        <select
+                            name="addressType"
+                            value={formData.address.addressType}
+                            onChange={handleInputChange}
+                            className="selectinfo"
+                        >
+                            <option className="optioninfo" value="" disabled hidden>Выберите тип адреса</option>
+                            <option className="optioninfo" value="INDIVIDUAL">Физический</option>
+                            <option className="optioninfo" value="LEGAL">Юридический</option>
+                        </select>
                         <input type="text" className="inputinfo" name="subjectName" autoComplete="off"
                                placeholder="Регион"
                                value={formData.address.subjectName} onChange={handleInputChange}/>
@@ -252,7 +266,7 @@ function OrgReg_page() {
                                value={formData.address.streetName} onChange={handleInputChange}/>
                         <input type="text" className="inputinfo" name="houseNumber" autoComplete="off" placeholder="Дом"
                                value={formData.address.houseNumber} onChange={handleInputChange}/>
-                        <input type=" text" className="inputinfo" name="addInfo" autoComplete="off"
+                        <input type="text" className="inputinfo" name="addInfo" autoComplete="off"
                                placeholder="Дополнительная информация"
                                value={formData.address.addInfo} onChange={handleInputChange}/>
                     </div>
@@ -301,7 +315,7 @@ function OrgReg_page() {
                     {/* Progress Bar */}
                     <div className="progress-bar">
                         <div className="progress-fill"
-                             style={{width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%`}}></div>
+                             style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
                     </div>
 
                     {currentStep < 2 ? (
