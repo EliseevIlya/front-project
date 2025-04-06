@@ -115,7 +115,7 @@ function Createaccpage() {
             }));
             return;
         }
-        const success = await registercustomer(surname,name,"",phone,"",email);
+        const success = await registercustomer(surname,name,"",phone,"",email, code);
                 console.log("SUCCESS",success);
                 if (success) {
                     navigate("/");

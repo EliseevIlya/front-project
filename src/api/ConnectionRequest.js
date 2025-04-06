@@ -10,7 +10,7 @@ export function deleteConnectionRequest(){
     .then(()=>{
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -20,26 +20,26 @@ export function deleteConnectionRequest(){
     })
 }
 
-export function getConnectionRequest(organizationIddeleteConnectionRequest, registrationNumberdeleteConnectionRequest, fromDateBegindeleteConnectionRequest, toDateBegindeleteConnectionRequest,
-    fromDateEnddeleteConnectionRequest, toDateEnddeleteConnectionRequest, statusdeleteConnectionRequest, sortBydeleteConnectionRequest){
+export function getConnectionRequest(data, jwt){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
     const body={
-        organizationId:organizationIddeleteConnectionRequest,
-        registrationNumber:registrationNumberdeleteConnectionRequest,
-        fromDateBegin:fromDateBegindeleteConnectionRequest,
-        toDateBegin:toDateBegindeleteConnectionRequest,
-        fromDateEnd:fromDateEnddeleteConnectionRequest,
-        toDateEnd:toDateEnddeleteConnectionRequest,
-        status:statusdeleteConnectionRequest,
-        sortBy:sortBydeleteConnectionRequest
+        organizationId:data.organizationId,
+        registrationNumber:data.registrationNumber,
+        fromDateBegin:data.fromDateBegin,
+        toDateBegin:data.toDateBegin,
+        fromDateEnd:data,
+        toDateEnd:data.toDateEnd,
+        status:data.status,
+        sortBy:data.sortBy,
     }
-    axios.get(`${api}/api/connection_request/by_status`,headers, body)
-    .then(()=>{
-
+    axios.post(`${api}/api/connection_request/by_status`,{headers:headers}, body)
+    .then((res)=>{
+        console.log(res.data);
+        return res.data
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);

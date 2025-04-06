@@ -1,6 +1,7 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = process.env.API
+const api = globalAPI;
 
 export function postServiceDetail(){
     const body={
@@ -23,15 +24,33 @@ export function postServiceDetail(){
     })
 }
 
-export function getServiceDetail(){
+export function getServiceDetail(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/service_detail/get_all_services`,headers)
-    .then(()=>{
+    const body = {
+        organizationId: data?.organizationId ?? null,
+        typeId: data?.typeId ?? null,
+        code: data?.code ?? null,
+        name: data?.name ?? null,
+        cost: data?.cost ?? null,
+        duration: data?.duration ?? null,
+        typeName: data?.typeName ?? null,
+        typeCode: data?.typeCode ?? null,
+        page: data?.page ?? null,
+        size: data?.size ?? null,
+        sortBy: data?.sortBy ?? null
+    };
+    console.log("DATA",data);
+    console.log("BODY",body)
+
+    return axios.post(`${api}/api/service_detail/get_all_services`,body,{headers:headers})
+    .then((res)=>{
+        return res.data;
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);

@@ -1,8 +1,10 @@
 import axios from "axios"
 import { globalAPI } from "./config.js";
 
+
 const api = globalAPI;
 console.log("API",api); // "http://localhost:8080"
+
 
 
 export function getCustomer(jwt,setEmail,setSurname,setName,setPhone,setAddInfo,setPatronymic){
@@ -34,12 +36,16 @@ export function getCustomer(jwt,setEmail,setSurname,setName,setPhone,setAddInfo,
 }
 
 export function getCustomerServiceTypeOrg(){
+    const jwt = localStorage.getItem('jwt')
+    const typeOfServiceCode = localStorage.getItem('typeOfService');
+    const page = 0;
+    const size = 1000;
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/customer/service_type/organizations`,headers)
-    .then(()=>{
-
+    return  axios.get(`${api}/api/customer/service_type/organizations?typeOfServiceCode=${typeOfServiceCode}&page=${page}&size=${size}`,{headers:headers})
+    .then((res)=>{
+            return res.data;
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
@@ -127,28 +133,34 @@ export function deleteCustomer(jwt){
     })
 }
 
-export function requestCreateCustomer(organizationIdRequestCreateCustomer, addInfoRequestCreateCustomer, serviceDetailIdsRequestCreateCustomer, dateServiceRequestCreateCustomer){
-    const headers={
+export function requestCreateCustomer( data){
 
-    }
+    const jwt = localStorage.getItem('jwt')
+    const headers = {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json"
+    };
+
     const body ={
-        organizationId:organizationIdRequestCreateCustomer,
-        addInfo:addInfoRequestCreateCustomer,
-        serviceDetailIds:serviceDetailIdsRequestCreateCustomer,
-        dateService:dateServiceRequestCreateCustomer
+        organizationId:data.organizationId,
+        addInfo:data.addInfo,
+        serviceDetailIds:data.serviceDetailIds,
+        dateService:data.dateService
       }
-    axios.delete(`${api}/api/customer/service_request/create`,headers, body)
-    .then(()=>{
-
-    })
-    .catch((error)=>{
-        console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
-        if (error.response) {
-            console.log(`Ошибка: ${error.response.data.message}`);
-        } else {
-            console.log('Произошла ошибка при подключении к серверу.');
-        }
-    })
+    return axios.post(`${api}/api/customer/service_request/create`, body, { headers })
+        .then((res) => {
+            console.log(res.data, "requestCreateCustomer");
+            return true;
+        })
+        .catch((error) => {
+            console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
+            if (error.response) {
+                console.log(`Ошибка: ${error.response.data.message}`);
+            } else {
+                console.log('Произошла ошибка при подключении к серверу.');
+            }
+            return false;
+        });
 }
 
 export function deleteServiceRequest(jwt,serviceRequestId){
