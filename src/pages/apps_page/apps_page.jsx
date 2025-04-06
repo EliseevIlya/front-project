@@ -65,10 +65,12 @@ function Apps_page() {
     };
 
     const deleteApp = async () => {
-        await deleteServiceRequest(localStorage.getItem("jwt"), selectedApp.id);
-        closeModal();
-        setSelectedApp(null);
-        window.location.reload();
+        const isDeleted = await deleteServiceRequest(localStorage.getItem("jwt"), selectedApp.id);
+        if (isDeleted) {
+            closeModal();
+            setSelectedApp(null);
+            window.location.reload();
+        }
     };
 
     const navigate = useNavigate();

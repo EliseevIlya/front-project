@@ -56,12 +56,7 @@ h2 {
     display: flex;
     flex-direction: column;
     margin-bottom: 1vh;
-}
-
-label {
-    font-size: calc((2vw + 2vh) / 2);
-    margin-bottom: 5px;
-    color: white;
+    margin-left: 2vw !important;
 }
 
 .inputinfo {
@@ -157,8 +152,13 @@ label {
     box-shadow: 0 0 15px darkorange;
 }
 
+.confirmlabel {
+    color: white;
+    font-size: calc((1vw + 1vh) / 2) !important;
+}
+
 a {
-    color: rgba(255, 255, 255, 0.5);
+    color: white !important;
     text-decoration: underline;
     font-weight: lighter;
     margin-left: 0.1vw;

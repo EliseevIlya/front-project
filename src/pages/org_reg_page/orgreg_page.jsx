@@ -30,13 +30,14 @@ function OrgReg_page() {
     });
 
     const [currentStep, setCurrentStep] = useState(0);
-    const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
+    const [errors, setErrors] = useState({});
     const [codeRequested, setCodeRequested] = useState(false);
+
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         setFormData((prevFormData) => {
             if (Object.prototype.hasOwnProperty.call(prevFormData.address, name)) {
@@ -55,38 +56,22 @@ function OrgReg_page() {
             };
         });
 
-        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+        setTouched((prevTouched) => ({...prevTouched, [name]: true}));
 
+        // Validate field on change
+        const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
+        setErrors((prevErrors) => ({...prevErrors, [name]: errorMessage}));
     };
-
-    const handleNext = () => {
-        if (currentStep < 2) {
-            setCurrentStep(currentStep + 1);
-        }
-    };
-
-    const handlePrev = () => {
-        if (currentStep > 0) {
-            setCurrentStep(currentStep - 1);
-
-
-        if (touched[name] || value !== "") {
-            const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
-            setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
-        }
-    };
-
 
     const handleCheckboxChange = (e) => {
-        setFormData({ ...formData, acceptedPolicy: e.target.checked });
+        const isChecked = e.target.checked;
+        setFormData({ ...formData, acceptedPolicy: isChecked });
         setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
         setErrors((prevErrors) => ({
             ...prevErrors,
-            acceptedPolicy: e.target.checked ? "" : "Необходимо принять условия",
+            acceptedPolicy: isChecked ? "" : "Необходимо принять условия",
         }));
     };
-
-    const navigate = useNavigate();
 
     const validateField = (name, value) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
@@ -140,7 +125,7 @@ function OrgReg_page() {
                 return "Имя должно содержать минимум 2 русские буквы";
             case "inn":
                 return "ИНН должен содержать ровно 10 цифр";
-            case "kpp":
+            case "kpp ":
                 return "КПП должен содержать ровно 9 цифр";
             case "ogrn":
                 return "ОГРН должен содержать ровно 13 цифр";
@@ -157,35 +142,20 @@ function OrgReg_page() {
         }
     };
 
-    const fieldOrder = [
-        "fullName", "shortName", "inn", "kpp", "ogrn", "subjectName", "cityName", "streetName", "houseNumber",
-        "lastName", "firstName", "email", "phone", "code", "acceptedPolicy"
-    ];
-
-    const getFirstError = () => {
-        for (const field of fieldOrder) {
-            if (touched[field]) {
-                if (field === "acceptedPolicy" && !formData[field]) {
-                    return getErrorMessage(field);
-                }
-                if (!validateField(field, formData[field])) {
-                    return getErrorMessage(field);
-                }
-            }
+    const handleNext = () => {
+        const firstError = getFirstError();
+        if (firstError) {
+            console.log(firstError);
+            return; // Prevent moving to the next step if there are errors
         }
-        return "";
+        if (currentStep < 2) {
+            setCurrentStep(currentStep + 1);
+        }
     };
 
-    const isFormValid = fieldOrder.every((key) => {
-        if (key === "acceptedPolicy") {
-            return formData[key];
-        }
-        return true
-    });
-
-    const handleKeyPress = (e) => {
-        if (!/\d/.test(e.key)) {
-            e.preventDefault();
+    const handlePrev = () => {
+        if (currentStep > 0) {
+            setCurrentStep(currentStep - 1);
         }
     };
 
@@ -221,15 +191,25 @@ function OrgReg_page() {
         } catch (error) {
             console.error("Ошибка при регистрации организации:", error);
         }
-        setTimeout(() => { navigate("/"); }, 1500);
+        setTimeout(() => {
+            navigate("/");
+        }, 1500);
+    };
 
+    const getFirstError = () => {
+        for (const field in formData) {
+            if (touched[field] && !validateField(field, formData[field])) {
+                return getErrorMessage(field);
+            }
+        }
+        return "";
     };
 
     return (
         <>
             <div className="headersorg">
                 <button className="exitbuttonsc" title="Вернуться на главную" onClick={() => navigate("/")}>
-                    <img src="/src/icons/exit.png" alt="Exit" />
+                    <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textorg">СОЗДАНИЕ ЗАЯВКИ</h1>
             </div>
@@ -238,17 +218,23 @@ function OrgReg_page() {
                 {currentStep === 0 && (
                     <div className="orginfo">
                         <h2>Информация об организации:</h2>
-                        <input type="text" className="inputinfo" name="fullName" placeholder="Полное название"
+                        <input type="text" className="inputinfo" name="fullName" autoComplete="off"
+                               placeholder="Полное название"
                                value={formData.fullName}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="shortName" placeholder="Сокращенное"
+                        <input type="text" className="inputinfo" name="shortName" autoComplete="off"
+                               placeholder="Сокращенное"
                                value={formData.shortName}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="inn" placeholder="ИНН" value={formData.inn}
+                        <input type="text" className="inputinfo" name="inn" maxLength="10" autoComplete="off"
+                               placeholder="ИНН" value={formData.inn}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="kpp" placeholder="КПП" value={formData.kpp}
+                        <input type="text" className="inputinfo" name="kpp" maxLength="9" autoComplete="off"
+                               placeholder="КПП" value={formData.kpp}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="ogrn" placeholder="ОГРН" value={formData.ogrn}
+                        <input type="text" className="inputinfo" name="ogrn" maxLength="13" autoComplete="off"
+                               placeholder="ОГРН"
+                               value={formData.ogrn}
                                onChange={handleInputChange}/>
                     </div>
                 )}
@@ -256,15 +242,18 @@ function OrgReg_page() {
                 {currentStep === 1 && (
                     <div className="addressinfo">
                         <h2>Адрес:</h2>
-                        <input type="text" className="inputinfo" name="subjectName" placeholder="Регион"
+                        <input type="text" className="inputinfo" name="subjectName" autoComplete="off"
+                               placeholder="Регион"
                                value={formData.address.subjectName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="cityName" placeholder="Город"
+                        <input type="text" className="inputinfo" name="cityName" autoComplete="off" placeholder="Город"
                                value={formData.address.cityName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="streetName" placeholder="Улица"
+                        <input type="text" className="inputinfo" name="streetName" autoComplete="off"
+                               placeholder="Улица"
                                value={formData.address.streetName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="houseNumber" placeholder="Дом"
+                        <input type="text" className="inputinfo" name="houseNumber" autoComplete="off" placeholder="Дом"
                                value={formData.address.houseNumber} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="addInfo" placeholder="Дополнительная информация"
+                        <input type=" text" className="inputinfo" name="addInfo" autoComplete="off"
+                               placeholder="Дополнительная информация"
                                value={formData.address.addInfo} onChange={handleInputChange}/>
                     </div>
                 )}
@@ -272,20 +261,35 @@ function OrgReg_page() {
                 {currentStep === 2 && (
                     <div className="contactinfo">
                         <h2>Контактное лицо:</h2>
-                        <input type="text" className="inputinfo" name="lastName" placeholder="Фамилия"
+                        <input type="text" className="inputinfo" name="lastName" autoComplete="off"
+                               placeholder="Фамилия"
                                value={formData.lastName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="firstName" placeholder="Имя"
+                        <input type="text" className="inputinfo" name="firstName" autoComplete="off" placeholder="Имя"
                                value={formData.firstName} onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="email" placeholder="Email" value={formData.email}
+                        <input type="text" className="inputinfo" name="email" autoComplete="off" placeholder="Email"
+                               value={formData.email}
                                onChange={handleInputChange}/>
-                        <input type="text" className="inputinfo" name="phone" placeholder="Номер тел."
+                        <input type="text" className="inputinfo" name="phone" autoComplete="off" maxLength="11"
+                               placeholder="Номер тел."
                                value={formData.phone} onChange={handleInputChange}/>
+                        <p>
+                            <input
+                                type="checkbox"
+                                checked={formData.acceptedPolicy}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label className="confirmlabel">
+                                Я принимаю <a href="https://policies.google.com/terms?hl=ru">пользовательское
+                                соглашение</a>
+                            </label>
+                        </p>
                         <p>
                             <button className="getcode_button" onClick={handleGetCode}
                                     disabled={!formData.email}>Получить код
                             </button>
                         </p>
-                        <input type="text" className="inputcode" name="code" placeholder="Код" value={formData.code}
+                        <input type="text" className="inputcode" name="code" autoComplete="off" placeholder="Код"
+                               value={formData.code}
                                onChange={handleInputChange} disabled={!codeRequested}/>
                     </div>
                 )}
@@ -296,8 +300,8 @@ function OrgReg_page() {
 
                     {/* Progress Bar */}
                     <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
-
+                        <div className="progress-fill"
+                             style={{width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%`}}></div>
                     </div>
 
                     {currentStep < 2 ? (
@@ -305,15 +309,18 @@ function OrgReg_page() {
                     ) : null}
                 </div>
 
+                {/* Error Message Display */}
+                <div className="error-message">
+                    {getFirstError() && <p className="error-text">{getFirstError()}</p>}
+                </div>
 
                 {/* Confirmation Button placed outside the navigation div */}
                 {currentStep === 2 && (
                     <div className="confirm-button-container">
                         <button className="confirmbutton" onClick={handleCreateOrganization}>Подать заявку</button>
-
                     </div>
                 )}
-                </div>
+            </div>
         </>
     );
 }
