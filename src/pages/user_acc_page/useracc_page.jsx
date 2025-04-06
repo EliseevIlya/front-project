@@ -129,24 +129,20 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
 
     return (
         <div>
-            <div className="headers">
-                <div className="headexit">
+            <div class="headers">
+                <div class="headexit">
                     <button className="exitbuttonuser" title="Выйти из аккаунта" onClick={() => navigate("/")}>
                         <img src="/src/icons/exit.png" alt="Exit"/>
                     </button>
                 </div>
-                <div className="headtext">
-                    <div className="headname">
-                        <button className="homebuttonuser" title="Вернуться на главную" onClick={() => navigate("/")}>
-                            <h1>PIONEER</h1>
-                            <img src="/src/icons/home.png" alt="Home"/>
-                        </button>
-                    </div>
-                    <div className="headpodtext">
-                        <h2>ЛИЧНЫЙ КАБИНЕТ</h2>
-                    </div>
+
+                <div class="headtext">
+                    <button className="homebuttonuser" title="Вернуться на главную" onClick={() => navigate("/")}>
+                        <h1>PIONEER</h1> <img src="/src/icons/home.png" alt="Home"/></button>
+                    <div class="headpodtext"><h2>ЛИЧНЫЙ КАБИНЕТ</h2></div>
                 </div>
-                <div className="headdelete">
+
+                <div class="headdelete">
                     <button className="deletebutton" title="Удалить аккаунт" onClick={() => setIsDeleteModalOpen(true)}>
                         <img src="src/icons/close.png" alt="Delete"/>
                     </button>

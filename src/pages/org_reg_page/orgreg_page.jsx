@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import "./style_orgreg.css";
 import { useNavigate } from "react-router-dom";
-import { registerorg, sendcode} from "../../api/Auth.js";
+import { registerorg, sendcode } from "../../api/Auth.js";
 
 function OrgReg_page() {
     const [formAddress, setFormAddress] = useState({
-        subjectName:"",
-        cityName:"",
-        streetName:"",
-        houseNumber:"",
-        addInfo:"",
-        addressType:""
+        subjectName: "",
+        cityName: "",
+        streetName: "",
+        houseNumber: "",
+        addInfo: "",
+        addressType: ""
     });
+
     const [formData, setFormData] = useState({
         fullName: "",
         shortName: "",
@@ -21,22 +22,23 @@ function OrgReg_page() {
         address: formAddress,
         lastName: "",
         firstName: "",
-        patronymic:"",
+        patronymic: "",
         email: "",
         phone: "",
         code: "",
         acceptedPolicy: false,
     });
 
+    const [currentStep, setCurrentStep] = useState(0);
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
-    const [codeRequested, setCodeRequested] = useState(false); // Новое состояние для отслеживания запроса кода
+    const [codeRequested, setCodeRequested] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
         setFormData((prevFormData) => {
-            // Проверяем, является ли поле частью адреса
             if (Object.prototype.hasOwnProperty.call(prevFormData.address, name)) {
                 return {
                     ...prevFormData,
@@ -54,6 +56,19 @@ function OrgReg_page() {
         });
 
         setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+
+    };
+
+    const handleNext = () => {
+        if (currentStep < 2) {
+            setCurrentStep(currentStep + 1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentStep > 0) {
+            setCurrentStep(currentStep - 1);
+
 
         if (touched[name] || value !== "") {
             const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
@@ -175,17 +190,15 @@ function OrgReg_page() {
     };
 
     const handleGetCode = async () => {
-        if (!formData.email ) {
+        if (!formData.email) {
             console.log("Введите корректный email перед получением кода.");
             return;
         }
 
-
         const success = await sendcode(formData.email);
         if (success) {
             console.log("Код отправлен на почту", formData.email);
-            setCodeRequested(true); // Устанавливаем состояние, что код был запрошен
-            console.log(formData);
+            setCodeRequested(true);
         } else {
             console.log("Ошибка при отправке кода. Попробуйте снова.");
         }
@@ -208,9 +221,10 @@ function OrgReg_page() {
         } catch (error) {
             console.error("Ошибка при регистрации организации:", error);
         }
-        setTimeout(() => { navigate("/");}, 1500)
+        setTimeout(() => { navigate("/"); }, 1500);
 
     };
+
     return (
         <>
             <div className="headersorg">
@@ -220,236 +234,86 @@ function OrgReg_page() {
                 <h1 className="textorg">СОЗДАНИЕ ЗАЯВКИ</h1>
             </div>
 
-            <div className="registration">
-                <div className="orginfo">
-                    <h2>Информация об организации:</h2>
-                    <div className="orginfoitem">
-                        <label>Полное название:</label>
-                        <input
-                            type="text"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
+            <div className="registration-card">
+                {currentStep === 0 && (
+                    <div className="orginfo">
+                        <h2>Информация об организации:</h2>
+                        <input type="text" className="inputinfo" name="fullName" placeholder="Полное название"
+                               value={formData.fullName}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="shortName" placeholder="Сокращенное"
+                               value={formData.shortName}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="inn" placeholder="ИНН" value={formData.inn}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="kpp" placeholder="КПП" value={formData.kpp}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="ogrn" placeholder="ОГРН" value={formData.ogrn}
+                               onChange={handleInputChange}/>
                     </div>
-                    <div className="orginfoitem">
-                        <label>Сокращенное:</label>
-                        <input
-                            type="text"
-                            name="shortName"
-                            value={formData.shortName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
+                )}
+
+                {currentStep === 1 && (
+                    <div className="addressinfo">
+                        <h2>Адрес:</h2>
+                        <input type="text" className="inputinfo" name="subjectName" placeholder="Регион"
+                               value={formData.address.subjectName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="cityName" placeholder="Город"
+                               value={formData.address.cityName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="streetName" placeholder="Улица"
+                               value={formData.address.streetName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="houseNumber" placeholder="Дом"
+                               value={formData.address.houseNumber} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="addInfo" placeholder="Дополнительная информация"
+                               value={formData.address.addInfo} onChange={handleInputChange}/>
                     </div>
-                    <div className="orginfoitem">
-                        <label>ИНН:</label>
-                        <input
-                            type="text"
-                            name="inn"
-                            value={formData.inn}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
+                )}
+
+                {currentStep === 2 && (
+                    <div className="contactinfo">
+                        <h2>Контактное лицо:</h2>
+                        <input type="text" className="inputinfo" name="lastName" placeholder="Фамилия"
+                               value={formData.lastName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="firstName" placeholder="Имя"
+                               value={formData.firstName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="email" placeholder="Email" value={formData.email}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="phone" placeholder="Номер тел."
+                               value={formData.phone} onChange={handleInputChange}/>
+                        <p>
+                            <button className="getcode_button" onClick={handleGetCode}
+                                    disabled={!formData.email}>Получить код
+                            </button>
+                        </p>
+                        <input type="text" className="inputcode" name="code" placeholder="Код" value={formData.code}
+                               onChange={handleInputChange} disabled={!codeRequested}/>
                     </div>
-                    <div className="orginfoitem">
-                        <label>КПП:</label>
-                        <input
-                            type="text"
-                            name="kpp"
-                            value={formData.kpp}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>ОГРН:</label>
-                        <input
-                            type="text"
-                            name="ogrn"
-                            value={formData.ogrn}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
+                )}
+
+                {/* Navigation Buttons and Progress Bar */}
+                <div className="navigation-buttons">
+                    {currentStep > 0 && <button onClick={handlePrev}>←</button>}
+
+                    {/* Progress Bar */}
+                    <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
 
                     </div>
-                    <div className="orginfoitem">
-                        <h2>Адрес</h2>
-                        <label>Субъект РФ:</label>
-                        <input
-                            type="text"
-                            name="subjectName"
-                            value={formData.address.subjectName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                        <label>Город:</label>
-                        <input
-                            type="text"
-                            name="cityName"
-                            value={formData.address.cityName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                        <label>Улица:</label>
-                        <input
-                            type="text"
-                            name="streetName"
-                            value={formData.address.streetName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                        <label>Дом</label>
-                        <input
-                            type="text"
-                            name="houseNumber"
-                            value={formData.address.houseNumber}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                        <label>Тип Адреса</label>
-                        <select
-                            name="addressType"
-                            value={formData.address.addressType}
-                            onChange={(event) => {
-                                const {name, value} = event.target; // Достаем name и value из события
-                                console.log(name, value)
-                                setFormData((prevFormData) => ({
-                                    ...prevFormData,
-                                    address: {
-                                        ...prevFormData.address,
-                                        [name]: value
-                                    }
-                                }));
-                                console.log(formData.address);
-                            }}
-                            className="inputinfo"
-                        >
-                            <option value="" disabled selected hidden>Выберите тип адреса</option>
-                            <option value="INDIVIDUAL">Физический</option>
-                            <option value="LEGAL">Юридический</option>
-                        </select>
 
-
-                        <label>Дополнительная информация</label>
-                        <input
-                            type="text"
-                            name="addInfo"
-                            value={formData.address.addInfo}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
+                    {currentStep < 2 ? (
+                        <button className="next-button" onClick={handleNext}>→</button>
+                    ) : null}
                 </div>
 
-                <div className="contactinfo">
-                    <h2>Контактное лицо:</h2>
-                    <div className="contactinfoitem">
-                        <label>Фамилия:</label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
+
+                {/* Confirmation Button placed outside the navigation div */}
+                {currentStep === 2 && (
+                    <div className="confirm-button-container">
+                        <button className="confirmbutton" onClick={handleCreateOrganization}>Подать заявку</button>
+
                     </div>
-                    <div className="contactinfoitem">
-                        <label>Имя:</label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Номер тел.:</label>
-                        <input
-                            type="text"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            onKeyPress={handleKeyPress}
-                            className="inputinfo"
-                            autoComplete="off"
-                            maxLength="11"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <button
-                            className="getCodeButton"
-                            onClick={handleGetCode}
-                            disabled={!validateField("email", formData.email)} // Блокировка кнопки, если email некорректный
-                        >
-                            Получить код
-                        </button>
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Код:</label>
-                        <input
-                            type="text"
-                            name="code"
-                            value={formData.code}
-                            onChange={handleInputChange}
-                            onKeyPress={handleKeyPress}
-                            placeholder="Введите код"
-                            className="inputcode"
-                            autoComplete="off"
-                            disabled={!codeRequested} // Блокировка поля, если код не был запрошен
-                        />
-                    </div>
-                    <div className="confirmplate">
-                        <label>
-                            Принимаю
-                            <a href="https://policies.google.com/privacy?hl=ru" target="_blank" rel="noopener noreferrer">
-                                условия политики конфиденциальности
-                            </a>
-                            <input
-                                type="checkbox"
-                                className="custom"
-                                checked={formData.acceptedPolicy}
-                                onChange={handleCheckboxChange}
-                            />
-                        </label>
-                        {getFirstError() && <span className="error">{getFirstError()}</span>}
-                        <button
-                            className="crappbutton"
-                            onClick={handleCreateOrganization}
-                            disabled={!isFormValid}
-                        >
-                            Подать заявку
-                        </button>
-                    </div>
+                )}
                 </div>
-            </div>
         </>
     );
 }

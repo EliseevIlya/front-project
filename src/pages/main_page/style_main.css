@@ -17,10 +17,9 @@ body {
 }
 
 .headerContainer {
-    display: flex; /* Используем Flexbox для расположения элементов в одну строку */
-    align-items: center; /* Выравниваем элементы по центру по вертикали */
-    gap: 10px; /* Добавляем отступ между заголовком и изображением */
-    margin-top: -5vh;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .text {
