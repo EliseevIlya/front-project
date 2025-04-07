@@ -21,7 +21,6 @@ body {
 }
 
 .info_textorg {
-    margin-right: 40vw;
     font-size: calc((4vw + 4vh)/2);
     color: white;
     margin-top: -5vh;
@@ -30,10 +29,8 @@ body {
 
 .info_exitbutton {
     border: none;
-    background-color: rgba(255, 255, 255, 0);
-    color: rgba(255, 255, 255, 0.5);
+    background: none;
     cursor: pointer;
-    font-size: calc((3vw + 3vh)/2);
     width: 10vw;
     height: 5vh;
     border-radius: 5px;
@@ -42,21 +39,11 @@ body {
 }
 
 .info_exitbutton:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
     opacity: 0.5;
-    color: white;
-    cursor: pointer;
-    font-size: calc((3vw + 3vh)/2);
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-left: 2vw;
 }
 
 .info_exitbutton:disabled {
-    background: none;
-    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.3;
 }
 
 .info_exitbutton:disabled:hover {
@@ -64,154 +51,68 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.info_registration {
-    display: grid;
-    grid-template-columns: 50vw 50vw;
-    margin-top: -5vh;
+.info_exitbutton:disabled {
+    background: none;
+    opacity: 0.1;
 }
 
-.info_orginfo, .info_contactinfo {
-    background: #318ea8;
+.info_deletebutton {
     border: none;
-    color: rgba(255, 255, 255, 0.49);
-    text-align: left;
+    background: none;
+    cursor: pointer;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 5px;
+    margin-bottom: 10vh;
+    margin-right: 2vw;
 }
 
-.info_contactinfoitem {
-    margin-left: 5vw;
+.info_deletebutton:hover {
+    opacity: 0.5;
 }
 
-.info_orginfo {
-    margin-left: 10vw;
+.info_deletebutton:disabled {
+    background: none;
+    opacity: 0.1;
 }
 
-.info_contactinfo {
-    margin-left: 5vw;
+.info_deletebutton:disabled:hover {
+    background: none;
 }
 
-.info_contactinfo h2 {
-    margin-left: 5vw;
+.disabled-card {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
 }
 
-h2 {
-    margin-bottom: 2vh;
-    font-size: calc((3vw + 3vh)/2);
+.infoinput{
+    color: black !important;
 }
 
-.info_orginfoitem, .info_contactinfo > div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1vh;
+.infoinput:focus {
+    width: 90% !important;
 }
 
-label {
-    font-size: calc((2vw + 2vh)/2);
-    margin-bottom: 5px;
-}
-
-input[type="text"] {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 25vw;
-    height: 4vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
+.infoselect{
+    background-color: white !important;
     color: black;
-    font-size: calc((2vw + 2vh)/2);
-    margin-top: 0.5vh;
+    border: 1px solid black;
+    margin-left: 6vw;
 }
 
-.cardsContainer {
-    display: flex; /* Используем flex для размещения карточек в ряд */
-    justify-content: space-between; /* Распределение карточек по горизонтали */
+.infoselect:disabled{
+    background-color: darkgrey;
 }
 
-.card {
-    background: white; /* Цвет фона карточки */
-    border: 20px solid black;
-    color: rgba(0, 0, 0, 0.5);
-    border-radius: 20px; /* Закругленные углы */
-    padding: 10px; /* Внутренние отступы */
-    width: 28%; /* Уменьшенная ширина карточки */
-    margin: 0 1%; /* Отступы между карточками */
-}
-
-h2 {
-    margin-bottom: 1vh; /* Уменьшенный отступ */
-    font-size: calc((2vw + 2vh) / 2);
-    font-weight: lighter;
-    color: rgba(0, 0, 0, 0.8);
-    text-align: center;
-}
-
-.orginfoitemSC, .contactinfoitemSC > div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1vh;
-}
-
-label {
-    font-size: calc((2vw + 2vh) / 2);
-    margin-bottom: 5px;
-    font-weight: lighter;
-}
-
-input[type="text"] {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    width: 25vw;
-    height: 4vh;
-    outline: none;
-    text-align: left;
-    padding-left: 1vw;
+.infoselectoption{
+    background-color: white;
     color: black;
-    font-size: calc((2vw + 2vh) / 2);
-    margin-top: 0.5vh;
 }
 
 .info_confirmplate {
-    text-align: left;
-    grid-template-columns: 30% 70%;
-    width: 30vw;
-    height: 5vh;
-    gap: 1vh;
-    margin-left: 7.5vw;
-    margin-top: 18vh;
-}
-
-.info_confirmplate label {
-    font-size: calc((1.5vw + 1.5vh)/2);
-}
-
-.info_confirmplate .info_custom {
-    margin-left: 0.5vw;
-    width: 1vw;
-    height: 1vw;
-    border-radius: 2px;
-    border: none;
-}
-
-.info_confirmplate .info_custom:hover {
-    margin-left: 0.5vw;
-    width: 1vw;
-    height: 1vw;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-    box-shadow: 0 0 15px darkorange;
-}
-
-.info_confirmplate a {
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: underline;
-    font-weight: lighter;
-    margin-left: 0.1vw;
-}
-
-.info_confirmplate a:hover {
-    text-decoration: underline;
-    color: darkorange;
+    text-align: center;
+    margin-top: 5vh;
 }
 
 .info_editbutton {
@@ -223,19 +124,12 @@ input[type="text"] {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 12.5vw;
-    margin-top: -10vh;
     transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .info_editbutton:hover {
     background-color: white;
     color: darkorange;
-}
-
-.info_editbutton:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease-in;
 }
 
 .info_savebutton {
@@ -247,8 +141,6 @@ input[type="text"] {
     cursor: pointer;
     width: 15vw;
     height: 6vh;
-    margin-left: 12.5vw;
-    margin-top: -10vh;
     transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
@@ -269,9 +161,4 @@ input[type="text"] {
     color: white !important;
     border-radius: 15px;
     border: white 1px solid !important;
-}
-
-.info_savebutton:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease-in;
 }
