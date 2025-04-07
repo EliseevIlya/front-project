@@ -10,6 +10,8 @@ function UsersTable_page() {
     const [sortAsc, setSortAsc] = useState(true);
 
     useEffect(() => {
+        document.body.style.backgroundColor = '#f0f0f0';
+
         const jwt = localStorage.getItem("jwt");
         if (jwt) {
             getAdminCustomer(jwt, {
@@ -17,11 +19,15 @@ function UsersTable_page() {
                 name: "",
                 patronymic: "",
                 phoneNumber: "",
-                email: ""
+                email: "",
+                size: 15
             }).then(data => {
                 setUsers(data.content || []);
             });
         }
+        return () => {
+            document.body.style.backgroundColor = '';
+        };
     }, []);
 
     const loadMoreRows = () => {
@@ -95,7 +101,9 @@ function UsersTable_page() {
                     </tbody>
                 </table>
             </div>
-            <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
+            {users.length >= 0 && (
+                <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
+            )}
         </>
     );
 }

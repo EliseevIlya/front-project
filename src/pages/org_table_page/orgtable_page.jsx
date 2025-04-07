@@ -10,6 +10,8 @@ function OrgTable_page() {
     const [sortAsc, setSortAsc] = useState(true);
 
     useEffect(() => {
+        document.body.style.backgroundColor = '#f0f0f0';
+
         const jwt = localStorage.getItem("jwt");
         if (jwt) {
             getAdminOrg(jwt, {
@@ -30,6 +32,9 @@ function OrgTable_page() {
                 setOrg(data.content || []);
             });
         }
+        return () => {
+            document.body.style.backgroundColor = '';
+        };
     }, []);
 
     const loadMoreRows = () => {
@@ -63,7 +68,7 @@ function OrgTable_page() {
     const navigate = useNavigate();
 
     return (
-        <>
+            <>
             <div className="headersTable">
                 <button className="exitbuttonTable" title="Вернуться в кабинет" onClick={() => navigate("/adminacc")}>
                     <img src="/src/icons/exitblack.png" alt="Exit" />
@@ -118,8 +123,10 @@ function OrgTable_page() {
                     </tbody>
                 </table>
             </div>
-            <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
-        </>
+                {org.length >= 15 && (
+                    <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
+                )}
+            </>
     );
 }
 
