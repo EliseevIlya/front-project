@@ -200,15 +200,24 @@ export function getAdminConnectionRequest(organizationIdgetAdminConnectionReques
 
 export function putAdminConnectionRequest(idputAdminConnectionRequest, statusputAdminConnectionRequest){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
     const body={
         id:idputAdminConnectionRequest,
         status:statusputAdminConnectionRequest
     }
-    axios.put(`${api}/api/aggregator/connectionRequest`,body,headers)
+    axios.put(`${api}/api/aggregator/connectionRequest`,body,{headers:headers})
     .then(()=>{
-
+        if (res.status == 200) {
+            console.log('Код успешно отправлен');
+            console.log(res)
+            localStorage.setItem("jwt",res.data)
+            axios.defaults.headers.common["Authorization"] = `Bearer ${res.data}`;
+            return res.data; // Успешная отправка
+        } else {
+            console.error(`Ошибка: сервер вернул статус ${res.status}`);
+            return false; // Неуспешный статус
+        }
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
