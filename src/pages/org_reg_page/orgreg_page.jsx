@@ -1,60 +1,91 @@
 import React, { useState } from "react";
 import "./style_orgreg.css";
 import { useNavigate } from "react-router-dom";
+import { registerorg, sendcode } from "../../api/Auth.js";
 
 function OrgReg_page() {
+    const [formAddress, setFormAddress] = useState({
+        subjectName: "",
+        cityName: "",
+        streetName: "",
+        houseNumber: "",
+        addInfo: "",
+        addressType: ""  // Поле для типа адреса
+    });
+
     const [formData, setFormData] = useState({
         fullName: "",
         shortName: "",
         inn: "",
         kpp: "",
         ogrn: "",
-        city: "",
-        address: "",
+        address: formAddress,
         lastName: "",
         firstName: "",
+        patronymic: "",
         email: "",
         phone: "",
         code: "",
         acceptedPolicy: false,
     });
 
-    const [errors, setErrors] = useState({});
+    const [currentStep, setCurrentStep] = useState(0);
     const [touched, setTouched] = useState({});
-    const [codeRequested, setCodeRequested] = useState(false); // Новое состояние для отслеживания запроса кода
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
-
-        if (touched[name] || value !== "") {
-            const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
-            setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
-        }
-    };
-
-    const handleCheckboxChange = (e) => {
-        setFormData({ ...formData, acceptedPolicy: e.target.checked });
-        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            acceptedPolicy: e.target.checked ? "" : "Необходимо принять условия",
-        }));
-    };
+    const [errors, setErrors] = useState({});
+    const [codeRequested, setCodeRequested] = useState(false);
 
     const navigate = useNavigate();
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormData((prevFormData) => {
+            if (Object.prototype.hasOwnProperty.call(prevFormData.address, name)) {
+                return {
+                    ...prevFormData,
+                    address: {
+                        ...prevFormData.address,
+                        [name]: value,
+                    },
+                };
+            }
+
+            return {
+                ...prevFormData,
+                [name]: value,
+            };
+        });
+
+        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+
+        // Validate field on change
+        const errorMessage = validateField(name, value) ? "" : getErrorMessage(name);
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
+    };
+
+    const handleCheckboxChange = (e) => {
+        const isChecked = e.target.checked;
+        setFormData({ ...formData, acceptedPolicy: isChecked });
+        setTouched((prevTouched) => ({ ...prevTouched, acceptedPolicy: true }));
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            acceptedPolicy: isChecked ? "" : "Необходимо принять условия",
+        }));
+    };
+
     const validateField = (name, value) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
+        const isValidText = /^[А-Яа-яёЁ\s-]{2,}$/;
+
         switch (name) {
             case "fullName":
             case "shortName":
-            case "city":
-            case "address":
+            case "subjectName":
+            case "cityName":
+            case "streetName":
             case "lastName":
             case "firstName":
-                return /^[А-Яа-я]{2,}$/.test(value);
+                return isValidText.test(value);
             case "inn":
                 return /^\d{10}$/.test(value);
             case "kpp":
@@ -67,6 +98,10 @@ function OrgReg_page() {
                 return /^[78]\d{10}$/.test(value);
             case "code":
                 return /^\d{6}$/.test(value);
+            case "houseNumber":
+                return /^[\dА-Яа-я\-\\/]{1,10}$/.test(value);
+            case "addressType":
+                return value !== "";  // Проверка на выбор типа адреса
             default:
                 return true;
         }
@@ -78,10 +113,14 @@ function OrgReg_page() {
                 return "Полное название должно содержать минимум 2 русские буквы";
             case "shortName":
                 return "Сокращенное название должно содержать минимум 2 русские буквы";
-            case "city":
+            case "subjectName":
+                return "Название субъекта РФ должно содержать минимум 2 русские буквы";
+            case "cityName":
                 return "Город должен содержать минимум 2 русские буквы";
-            case "address":
-                return "Адрес должен содержать минимум 2 русские буквы";
+            case "streetName":
+                return "Улица должна содержать минимум 2 русские буквы";
+            case "houseNumber":
+                return "Дом должен содержать цифры или буквы (до 10 символов)";
             case "lastName":
                 return "Фамилия должна содержать минимум 2 русские буквы";
             case "firstName":
@@ -100,254 +139,201 @@ function OrgReg_page() {
                 return "Код должен содержать ровно 6 цифр";
             case "acceptedPolicy":
                 return "Необходимо принять условия";
+            case "addressType":
+                return "Необходимо выбрать тип адреса";  // Сообщение об ошибке для типа адреса
             default:
                 return "";
         }
     };
 
-    const fieldOrder = [
-        "fullName",
-        "shortName",
-        "inn",
-        "kpp",
-        "ogrn",
-        "city",
-        "address",
-        "lastName",
-        "firstName",
-        "email",
-        "phone",
-        "code",
-        "acceptedPolicy",
-    ];
+    const handleNext = () => {
+        const firstError = getFirstError();
+        if (firstError) {
+            console.log(firstError);
+            return; // Prevent moving to the next step if there are errors
+        }
+        if (currentStep < 2) {
+            setCurrentStep(currentStep + 1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentStep > 0) {
+            setCurrentStep(currentStep - 1);
+        }
+    };
+
+    const handleGetCode = async () => {
+        if (!formData.email) {
+            console.log("Введите корректный email перед получением кода.");
+            return;
+        }
+
+        const success = await sendcode(formData.email);
+        if (success) {
+            console.log("Код отправлен на почту", formData.email);
+            setCodeRequested(true);
+        } else {
+            console.log("Ошибка при отправке кода. Попробуйте снова.");
+        }
+    };
+
+    const handleCreateOrganization = async () => {
+        if (!formData.acceptedPolicy) {
+            console.log("Примите условия");
+            return;
+        }
+
+        try {
+            const success = await registerorg(formData);
+            console.log("SUCCESS", success);
+            if (!success) {
+                console.log("ВСЕ ОК");
+            } else {
+                console.log("ВСЕ НЕ ОК");
+            }
+        } catch (error) {
+            console.error("Ошибка при регистрации организации:", error);
+        }
+        setTimeout(() => {
+            navigate("/");
+        }, 1500);
+    };
 
     const getFirstError = () => {
-        for (const field of fieldOrder) {
-            if (touched[field]) {
-                if (field === "acceptedPolicy" && !formData[field]) {
-                    return getErrorMessage(field);
-                }
-                if (!validateField(field, formData[field])) {
-                    return getErrorMessage(field);
-                }
+        for (const field in formData) {
+            if (touched[field] && !validateField(field, formData[field])) {
+                return getErrorMessage(field);
             }
         }
         return "";
     };
 
-    const isFormValid = fieldOrder.every((key) => {
-        if (key === "acceptedPolicy") {
-            return formData[key];
-        }
-        return validateField(key, formData[key]);
-    });
-
-    const handleKeyPress = (e) => {
-        const char = String.fromCharCode(e.which);
-        if (!/^\d$/.test(char)) {
-            e.preventDefault();
-        }
-    };
-
     return (
         <>
             <div className="headersorg">
-                <button className="exitbutton" title="Вернуться на главную" onClick={() => navigate("/")}>
-                    <img src="/src/icons/exit.png" alt="Exit" />
+                <button className="exitbuttonsc" title="Вернуться на главную" onClick={() => navigate("/")}>
+                    <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textorg">СОЗДАНИЕ ЗАЯВКИ</h1>
             </div>
 
-            <div className="registration">
-                <div className="orginfo">
-                    <h2>Информация об организации:</h2>
-                    <div className="orginfoitem">
-                        <label>Полное название:</label>
-                        <input
-                            type="text"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleInputChange}
-                            placeholder="ООО Ромашка"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
+            <div className="registration-card">
+                {currentStep === 0 && (
+                    <div className="orginfo">
+                        <h2>Информация об организации:</h2>
+                        <input type="text" className="inputinfo" name="fullName" autoComplete="off"
+                               placeholder="Полное название"
+                               value={formData.fullName}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="shortName" autoComplete="off"
+                               placeholder="Сокращенное"
+                               value={formData.shortName}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="inn" maxLength="10" autoComplete="off"
+                               placeholder="ИНН" value={formData.inn}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="kpp" maxLength="9" autoComplete="off"
+                               placeholder="КПП" value={formData.kpp}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="ogrn" maxLength="13" autoComplete="off"
+                               placeholder="ОГРН"
+                               value={formData.ogrn}
+                               onChange={handleInputChange}/>
                     </div>
-                    <div className="orginfoitem">
-                        <label>Сокращенное:</label>
-                        <input
-                            type="text"
-                            name="shortName"
-                            value={formData.shortName}
-                            onChange={handleInputChange}
-                            placeholder="Ромашка"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>ИНН:</label>
-                        <input
-                            type="text"
-                            name="inn"
-                            value={formData.inn}
-                            onChange={handleInputChange}
-                            placeholder="1234567890"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>КПП:</label>
-                        <input
-                            type="text"
-                            name="kpp"
-                            value={formData.kpp}
-                            onChange={handleInputChange}
-                            placeholder="123456789"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>ОГРН:</label>
-                        <input
-                            type="text"
-                            name="ogrn"
-                            value={formData.ogrn}
-                            onChange={handleInputChange}
-                            placeholder="1234567890123"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>Город:</label>
-                        <input
-                            type="text"
-                            name="city"
-                            value={formData.city}
-                            onChange={handleInputChange}
-                            placeholder="Москва"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="orginfoitem">
-                        <label>Адрес:</label>
-                        <input
-                            type="text"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleInputChange}
-                            placeholder="ул. Ленина, д. 10"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                </div>
+                )}
 
-                <div className="contactinfo">
-                    <h2>Контактное лицо:</h2>
-                    <div className="contactinfoitem">
-                        <label>Фамилия:</label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
+                {currentStep === 1 && (
+                    <div className="addressinfo">
+                        <h2>Адрес:</h2>
+                        <select
+                            name="addressType"
+                            value={formData.address.addressType}
                             onChange={handleInputChange}
-                            placeholder="Иванов"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Имя:</label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleInputChange}
-                            placeholder="Иван"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="example@mail.com"
-                            className="inputinfo"
-                            autoComplete="off"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <label>Номер тел.:</label>
-                        <input
-                            type="text"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            onKeyPress={handleKeyPress}
-                            placeholder="71234567890"
-                            className="inputinfo"
-                            autoComplete="off"
-                            maxLength="11"
-                        />
-                    </div>
-                    <div className="contactinfoitem">
-                        <button
-                            className="getCodeButton"
-                            onClick={() => {
-                                console.log("Код отправлен на номер:", formData.phone);
-                                setCodeRequested(true); // Устанавливаем состояние, что код был запрошен
-                            }}
-                            disabled={!validateField("email", formData.email)} // Блокировка кнопки, если email некорректный
+                            className="selectinfo"
                         >
-                            Получить код
-                        </button>
+                            <option className="optioninfo" value="" disabled hidden>Выберите тип адреса</option>
+                            <option className="optioninfo" value="INDIVIDUAL">Физический</option>
+                            <option className="optioninfo" value="LEGAL">Юридический</option>
+                        </select>
+                        <input type="text" className="inputinfo" name="subjectName" autoComplete="off"
+                               placeholder="Регион"
+                               value={formData.address.subjectName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="cityName" autoComplete="off" placeholder="Город"
+                               value={formData.address.cityName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="streetName" autoComplete="off"
+                               placeholder="Улица"
+                               value={formData.address.streetName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="houseNumber" autoComplete="off" placeholder="Дом"
+                               value={formData.address.houseNumber} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="addInfo" autoComplete="off"
+                               placeholder="Дополнительная информация"
+                               value={formData.address.addInfo} onChange={handleInputChange}/>
                     </div>
-                    <div className="contactinfoitem">
-                        <label>Код:</label>
-                        <input
-                            type="text"
-                            name="code"
-                            value={formData.code}
-                            onChange={handleInputChange}
-                            onKeyPress={handleKeyPress}
-                            placeholder="Введите код"
-                            className="inputcode"
-                            autoComplete="off"
-                            disabled={!codeRequested} // Блокировка поля, если код не был запрошен
-                        />
-                    </div>
-                    <div className="confirmplate">
-                        <label>
-                            Принимаю
-                            <a href="https://policies.google.com/privacy?hl=ru" target="_blank" rel="noopener noreferrer">
-                                условия политики конфиденциальности
-                            </a>
+                )}
+
+                {currentStep === 2 && (
+                    <div className="contactinfo">
+                        <h2>Контактное лицо:</h2>
+                        <input type="text" className="inputinfo" name="lastName" autoComplete="off"
+                               placeholder="Фамилия"
+                               value={formData.lastName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="firstName" autoComplete="off" placeholder="Имя"
+                               value={formData.firstName} onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="email" autoComplete="off" placeholder="Email"
+                               value={formData.email}
+                               onChange={handleInputChange}/>
+                        <input type="text" className="inputinfo" name="phone" autoComplete="off" maxLength="11"
+                               placeholder="Номер тел."
+                               value={formData.phone} onChange={handleInputChange}/>
+                        <p>
                             <input
                                 type="checkbox"
-                                className="custom"
                                 checked={formData.acceptedPolicy}
                                 onChange={handleCheckboxChange}
                             />
-                        </label>
-                        {getFirstError() && <span className="error">{getFirstError()}</span>}
-                        <button
-                            className="crappbutton"
-                            onClick={() => navigate("/org/statuscheck")}
-                            disabled={!isFormValid}
-                        >
-                            Подать заявку
-                        </button>
+                            <label className="confirmlabel">
+                                Я принимаю <a href="https://policies.google.com/terms?hl=ru">пользовательское
+                                соглашение</a>
+                            </label>
+                        </p>
+                        <p>
+                            <button className="getcode_button" onClick={handleGetCode}
+                                    disabled={!formData.email}>Получить код
+                            </button>
+                        </p>
+                        <input type="text" className="inputcode" name="code" autoComplete="off" placeholder="Код"
+                               value={formData.code}
+                               onChange={handleInputChange} disabled={!codeRequested}/>
                     </div>
+                )}
+
+                {/* Navigation Buttons and Progress Bar */}
+                <div className="navigation-buttons">
+                    {currentStep > 0 && <button onClick={handlePrev}>←</button>}
+
+                    {/* Progress Bar */}
+                    <div className="progress-bar">
+                        <div className="progress-fill"
+                             style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
+                    </div>
+
+                    {currentStep < 2 ? (
+                        <button className="next-button" onClick={handleNext}>→</button>
+                    ) : null}
                 </div>
+
+                {/* Error Message Display */}
+                <div className="error-message">
+                    {getFirstError() && <p className="error-text">{getFirstError()}</p>}
+                </div>
+
+                {/* Confirmation Button placed outside the navigation div */}
+                {currentStep === 2 && (
+                    <div className="confirm-button-container">
+                        <button className="confirmbutton" onClick={handleCreateOrganization}>Подать заявку</button>
+                    </div>
+                )}
             </div>
         </>
     );

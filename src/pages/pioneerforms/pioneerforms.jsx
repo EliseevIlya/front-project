@@ -22,6 +22,16 @@ function PioneerForms() {
 
   const [selectedStatus, setSelectedStatus] = useState("new");
 
+  const [connectionRequestGet, setConnectionRequestGet] = useState({
+
+  })
+  const [connectionRequestPut, setConnectionRequestPut] = useState({
+    organizationId:"",
+    registrationNumber:"",
+    status:"",
+    size: 10,
+    id: 0
+  })
 
   const navigate = useNavigate();
 
@@ -38,7 +48,7 @@ function PioneerForms() {
             <button
                 className="exitbutton"
                 title="Вернуться в кабинет"
-                onClick={() => navigate("/admin_acc_page")}
+                onClick={() => navigate("/adminacc")}
             >
               <img src="/src/icons/exit.png" alt="Exit" />
             </button>
@@ -59,7 +69,7 @@ function PioneerForms() {
               </div>
             </div>
             <div className="table-containertableorgform">
-              <h2>Список форм в выбранном статусе</h2>
+              <h2 className="texth2">Список форм в выбранном статусе</h2>
               <table className="styled-tableorgform">
                 <thead>
                 <tr>

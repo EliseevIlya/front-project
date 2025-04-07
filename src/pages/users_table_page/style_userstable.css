@@ -9,8 +9,8 @@
     width: 100%;
     height: 30%;
     margin-top: 5vh;
-    margin-left: 35vw;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
+    margin-left: -35vw;
 }
 
 .textTable h1 {
@@ -19,34 +19,22 @@
     font-weight: lighter;
 }
 
-.exitbuttonTable {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    color: rgb(49, 142, 168);
-    cursor: pointer;
-    font-size: 2vw;
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15vh;
-}
-
-.exitbuttonTable:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    color: #006075;
-    cursor: pointer;
-    font-size: 2vw;
-    width: 10vw;
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15vh;
-}
-
 .bodytable {
     display: flex;
     justify-content: center;
     margin-top: -5vh;
+}
+
+.exitbuttonTable {
+    background: none;
+    cursor: pointer;
+    width: 5vw;
+    margin-left: 35vw;
+    margin-top: -5vh;
+}
+
+.exitbuttonTable:hover {
+    opacity: 0.5;
 }
 
 .usersTable {

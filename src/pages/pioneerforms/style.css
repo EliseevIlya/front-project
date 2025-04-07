@@ -12,31 +12,36 @@
 
 .headersform {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   width: 100%;
   padding: 10px;
 }
 
-.exitbutton {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.exitbutton{
   background: none;
-  border: none;
-  cursor: pointer;
+  margin-top: -5vh;
+  width: 5vw;
+}
+
+.exitbutton:hover {
+  opacity: 0.5;
 }
 
 .titleorgform {
-  font-size: 3vw;
-  color: white;
+  color: white !important;
   font-weight: lighter;
   text-align: center;
-  margin: 0;
+  margin-top: -5vh;
+  margin-right: 25vw;
+  font-size: calc((3vw + 3vh) / 2);
 
 }
 
+.texth2 {
+  color: white;
+}
 
 .contentorgform {
   display: flex;

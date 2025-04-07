@@ -1,3 +1,6 @@
+html {
+    overflow-y: auto !important;
+}
 .headersApps {
     display: flex;
     justify-content: space-between;
@@ -115,6 +118,7 @@
     border: none;
     border-radius: 20px;
     margin: 40px;
+    transition: background-color 0.3s, transform 0.1s ease-out;
 }
 
 .load-more:hover {
@@ -126,6 +130,13 @@
     background-color: darkorange;
     border: none;
     border-radius: 20px;
+}
+
+.no-apps-message {
+    font-size: calc((7vw + 7vh)/2);
+    color: white;
+    margin-left: 20vw;
+    margin-top: -5vh;
 }
 
 .modalapp {
@@ -230,6 +241,15 @@
     align-items: center;
 }
 
+.infoapp {
+    font-weight: lighter;
+    color: dimgrey;
+}
+
+ul {
+    font-size: calc((1.5vw + 3vh)/2);
+    overflow-y: auto;
+}
 
 .modal-buttons {
     display: flex;
@@ -243,16 +263,12 @@
         border-radius: 20px;
         color: white;
         background-color: darkred;
+        transition: background-color 0.3s, transform 0.1s ease-out;
     }
     .deleteappbutton:hover{
-        font-family: Impact, sans-serif;
-        font-size: 2vw;
-        width: 20vw;
-        height: 3vw;
-        border: none;
-        border-radius: 20px;
+
         color: darkred;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: white;
     }
 }
 

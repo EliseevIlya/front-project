@@ -41,7 +41,7 @@ function Createaccpage() {
     };
 
     const validatePhone = (phoneValue) => {
-        const isValidPhone = /^(\8|7)\d{10}$/;
+        const isValidPhone = /^([87])\d{10}$/;
         return isValidPhone.test(phoneValue) ? "" : "Формат: 7XXXXXXXXXX или 8XXXXXXXXXX";
     };
 
@@ -93,7 +93,7 @@ function Createaccpage() {
     };
 
     const handleGetCode = async () => {
-        if (!email || errorMessage || isCodeEnabled) {
+        if (!email ) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
@@ -104,6 +104,7 @@ function Createaccpage() {
         } else {
             setErrorMessage("Ошибка при отправке кода. Попробуйте снова.");
         }
+        setIsCodeInputEnabled(true)
     };
 
     const handleCreateAccount = async () => {
@@ -114,7 +115,8 @@ function Createaccpage() {
             }));
             return;
         }
-        const success = await registercustomer(surname,name,phone,code,"",email);
+        const success = await registercustomer(surname,name,"",phone,"",email, code);
+                console.log("SUCCESS",success);
                 if (success) {
                     navigate("/");
                 } else {
@@ -123,24 +125,6 @@ function Createaccpage() {
 
     };
 
-    const handleGetCode = async () => {
-            if (!email) {
-                setErrorMessage((prev) => ({
-                    ...prev,
-                    form: "Пожалуйста, заполните все поля и примите условия."
-                }));
-                return;
-            }
-            console.log("click")
-            const success = await sendcode(email);
-            if (success) {
-            } else {
-                setErrorMessage((prev) => ({
-                    ...prev,
-                    form: "Пожалуйста, заполните все поля и примите условия."
-                }));
-            }
-        };
     const getFirstError = () => {
         // Порядок проверки ошибок
         if (errorMessage.email) return errorMessage.email;
@@ -217,7 +201,7 @@ function Createaccpage() {
                 {getFirstError() && <div className="createaccerror-message">{getFirstError()}</div>}
                 <div className="footercreateacc">
 
-                    <button className="createaccbutton" onClick={handleGetCode}>ПОЛУЧИТЬ КОД</button>
+                    <button className="createaccbutton" onClick={handleGetCode} disabled={!isCodeEnabled}>ПОЛУЧИТЬ КОД</button>
 
                     <input className="inputcreateacc"
                            type="text"

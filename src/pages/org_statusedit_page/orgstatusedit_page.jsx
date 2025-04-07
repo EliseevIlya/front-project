@@ -52,7 +52,7 @@ function OrgStatusEdit_page() {
     return (
         <>
             <div className="headersorgSC">
-                <button className="exitbuttonSC" title="Вернуться к заявкам" onClick={() => navigate("/org/forms")}>
+                <button className="exitbuttonsc" title="Вернуться к заявкам" onClick={() => navigate("/org_apps")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
                 <h1 className="textorgSE">РАССМОТРЕНИЕ ЗАЯВКИ</h1>

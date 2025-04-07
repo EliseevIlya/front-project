@@ -1,49 +1,49 @@
 html {
-    overflow-y: hidden !important;
+    overflow: hidden !important;
 }
 
-.servicepage {
+.selectservicepage {
     font-family: Impact, sans-serif;
-    background-color: #318ea8;
+    background-color: #318ea8; /* Default background color */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
+    width: 100vw !important;
+    height: 50vh !important;
     padding: 20px;
-    overflow: hidden;
 }
 
-.tyremaindiv {
+.main_div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #bf7c25;
     border-radius: 10px;
     width: 50vw;
+    height: 40vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     padding: 3%;
-    margin: auto;
-    margin-top: 1vh;
+    margin-top: 5vh;
 }
 
-.headerS {
+.header {
     display: grid;
     grid-template-columns: 10vw 90vw;
     padding: 10px;
+    margin-top: 10vh;
 }
 
-.exitbuttonS {
+.exitbutton {
     background: none;
     margin-right: 80vw;
+    margin-top: 1vh;
 }
 
-.exitbuttonS:hover {
+.exitbutton:hover {
     opacity: 0.5;
 }
 
-.titleS {
+.title {
     font-size: calc((4vw + 4vh) / 2);
     color: white;
     font-weight: lighter;
@@ -58,11 +58,15 @@ html {
     font-weight: lighter;
 }
 
-.choose{
+.servicediv {
+    margin-top: 3vh;
+}
+
+.choose {
     color: white;
 }
 
-.tyreservicediv {
+.service-selection-div {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -77,8 +81,8 @@ html {
     margin-right: 0;
 }
 
-.servdiv {
-    margin-bottom: 15px;
+.center-column {
+    margin-top: -1vh;
 }
 
 .service-dropdown {
@@ -87,7 +91,7 @@ html {
 }
 
 .remove-button {
-    margin-left: 10px; /* Отступ между выпадающим списком и кнопкой удаления */
+    margin-left: 10px;
     background: none;
     border: none;
     color: red;
@@ -98,11 +102,11 @@ html {
     font-weight: bold;
 }
 
-.tyrebutton-container {
+.button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;/
+    margin-top: 20px;
 }
 
 .services-container {
@@ -113,30 +117,30 @@ html {
     border-radius: 20px;
 }
 
-.itog-container {
+.total-container {
     display: flex;
     align-items: center;
     margin-right: 20vw;
 }
 
-.itog {
+.total {
     margin-right: 1vw;
-    color:white;
+    color: white;
     font-size: 2vw;
 }
 
-.summa {
-    border: none;
+.total-amount {
     background: none;
+    border: none;
     color: white;
     font-weight: lighter;
     font-size: 2vw;
-    width: 6vw;
+    width: 7vw !important;
 }
 
-.tyrebutton {
+.submit-button {
     padding: 10px 20px;
-    background-color: darkbluerk;
+    background-color: darkorange; /* Default button color */
     color: white;
     width: 10vw;
     height: 5vh;
@@ -147,19 +151,42 @@ html {
     margin-left: 5vw;
 }
 
-.tyrebutton:hover {
+.submit-button:hover {
     background-color: white;
-    color:darkblue;
+    color: darkorange;
 }
 
-.tyrebutton:disabled,
-.tyrebutton:disabled:hover {
-    background-color: grey;
+.submit-button:disabled,
+.submit-button:disabled:hover {
+    background-color: grey !important;
     color: white;
 }
 
+.dopinfoserv {
+    color: white ;
+    margin-top: 1vh;
+}
+
+.dopinfotextserv {
+    color: white;
+    display: block;
+    margin-bottom: 0.5vh;
+    margin-right: 35vw;
+}
+
+.dopinfoitemserv{
+    width: 30vw;
+    height: 4vh;
+    overflow-y: auto !important;
+    margin-right: 17vw;
+}
+
+.dopinfoitemserv:focus{
+    height: 4vh;
+}
+
 @media (max-width: 768px) {
-    .tyreservicediv {
+    .service-selection-div {
         flex-direction: column;
         align-items: center;
         gap: 10px;
@@ -196,7 +223,7 @@ html {
     }
 }
 
-.tyreselect {
+.select {
     width: 15vw;
     height: 5vh !important;
     background-color: white;
@@ -205,12 +232,76 @@ html {
     border-radius: 20px;
 }
 
-.tyreselect:focus {
+.select:focus {
     background-color: white;
     color: black !important;
 }
 
-.optionS {
+.option {
     background-color: white;
     color: black !important;
+}
+
+.modal-overlay-confirm {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-confirm {
+    font-weight: lighter;
+    font-family: Impact, sans-serif;
+    font-size: calc((1.2vw + 1.2vh)/2);
+    background: white !important;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: black !important;
+}
+
+.modal-content-confirm h1 {
+    font-weight: lighter;
+    color: #318ea8; /* Default color for modal title */
+}
+
+.confirmation-text {
+    font-weight: lighter;
+    color: black;
+}
+
+.confirmation-button {
+    width: 10vw;
+    background-color: darkblue; /* Default button color for modal */
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.confirmation-button:hover {
+    opacity: 0.8;
+}
+
+/* Specific styles for washing service */
+.washing .main-div {
+    background-color: #1d3085; /* Dark blue for washing */
+}
+
+.washing .modal-content-confirm h1 {
+    color: #1d3085; /* Dark blue for modal title */
+}
+
+/* Specific styles for tire service */
+.tire .main-div {
+    background-color: darkorange; /* Dark orange for tire service */
+}
+
+.tire .modal-content-confirm h1 {
+    color: darkorange; /* Dark orange for modal title */
 }

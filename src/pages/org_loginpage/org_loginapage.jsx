@@ -1,8 +1,9 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import "./style.css";
 import { useNavigate } from "react-router";
 import { authorg } from "../../api/Auth";
 import { sendcode} from "../../api/Auth.js";
+import {getOneOrganization} from "../../api/Org.js";
 
 function OrgLoginPage() {
     const [email, setEmail] = useState("");
@@ -10,6 +11,9 @@ function OrgLoginPage() {
     const [errorMessage, setErrorMessage] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [isCodeEnabled, setIsCodeEnabled] = useState(false);
+    const [responseStatus, setResponseStatus] = useState(false);
+    const [requestStatus, setRequestStatus] = useState("");
+    const [jwtToken, setJwtToken] = useState(localStorage.getItem("jwt") || null);
     const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
@@ -26,7 +30,7 @@ function OrgLoginPage() {
     };
 
     const handleGetCode = async () => {
-        if (!email || errorMessage || isCodeEnabled) {
+        if (!email ) {
             setErrorMessage("Введите корректный email перед получением кода.");
             return;
         }
@@ -39,15 +43,52 @@ function OrgLoginPage() {
         }
     };
 
+    useEffect(() => {
+        const getOrganization = async () => {
+            if ( jwtToken) {
+                try {
+                    const response = await getOneOrganization(jwtToken);
+                    setRequestStatus(response.connectionRequestStatus);
+                    console.log("Статус запроса:", response.connectionRequestStatus);
+                } catch (error) {
+                    console.error("Ошибка при получении статуса организации:", error);
+                }
+            }
+        };
+
+        const checkRequestStatus = () => {
+            if (requestStatus == "COMPLETED") {
+                navigate("/create_services")
+            }
+            else if (requestStatus != "" ) {
+                navigate("/org_statuscheck")
+            }
+        }
+
+        getOrganization();
+        checkRequestStatus();
+    }, [jwtToken,requestStatus]);
+
 const handleSubmit = async () => {
         if (errorMessage || !email || !code) {
             setErrorMessage("Пожалуйста, заполните все поля корректно.");
             return;
         }
-         await authorg(email,code);
-         localStorage.setItem("role","org");
-         navigate("/org/statuscheck");
-    };
+
+    try {
+        const token = await authorg(email, code); // Ждём получения токена
+
+        if (token) {
+            setJwtToken(token); // Обновляем состояние (запускает useEffect)
+            localStorage.setItem("role", "org");
+        } else {
+            setErrorMessage("Ошибка авторизации. Проверьте данные.");
+        }
+    } catch (error) {
+        console.error("Ошибка авторизации:", error);
+        setErrorMessage("Ошибка авторизации. Попробуйте снова.");
+    }
+};
 
 
     const handleCloseModal = () => {
@@ -102,7 +143,7 @@ const handleSubmit = async () => {
                 </div>
                 {errorMessage && <div className="loginpageerror-message">{errorMessage}</div>}
                 <div className="footerloginpage">
-                    <h6 onClick={() => navigate("/org/reg")}>СТАТЬ ПАРТНЕРОМ</h6>
+                    <h6 onClick={() => navigate("/org_reg")}>СТАТЬ ПАРТНЕРОМ</h6>
                     <button className="loginpagebutton" onClick={handleSubmit}>ВОЙТИ</button>
                 </div>
             </div>

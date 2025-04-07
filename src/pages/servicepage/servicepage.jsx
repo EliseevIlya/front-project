@@ -1,29 +1,36 @@
-import "./style.css"
-import { useNavigate } from "react-router"
+import "./style.css";
+import { useNavigate } from "react-router";
 
-function Servicepage(){
-    const navigate = useNavigate()
+function Servicepage() {
+    const navigate = useNavigate();
+
     return (
         <div className="maindiv">
             <div className="headersservice">
                 <button className="accbuttonApps" title="Личный кабинет" onClick={() => navigate("/user")}>
-                    <img src="/src/icons/profile.png" alt="Личный кабинет"/>
+                    <img src="/src/icons/profile.png" alt="Личный кабинет" />
                 </button>
                 <h1 className="title">ВЫБЕРИТЕ УСЛУГУ</h1>
             </div>
             <div className="buttons-containerservice">
-                <div className="wash-card" onClick={() => navigate("/service/washing")}>
+                <div className="wash-card" onClick={() => {
+                    localStorage.setItem("typeOfService", "washing");
+                    navigate("/select_service");
+                }}>
                     <h2>МОЙКА</h2>
-                    <img src="/src/icons/car-wash.png" alt="МОЙКА" className="service-image"/>
+                    <img src="/src/icons/car-wash.png" alt="МОЙКА" className="service-image" />
                 </div>
 
-                <div className="tyre-card" onClick={() => navigate("/service/installation")}>
+                <div className="tyre-card" onClick={() => {
+                    localStorage.setItem("typeOfService", "tire");
+                    navigate("/select_service");
+                }}>
                     <h2>ШИНОМОНТАЖ</h2>
-                    <img src="/src/icons/tyre.png" alt="ШИНОМОНТАЖ" className="service-image"/>
+                    <img src="/src/icons/tyre.png" alt="ШИНОМОНТАЖ" className="service-image" />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Servicepage;

@@ -1,5 +1,9 @@
-html{
-    overflow-y: hidden;
+html {
+    overflow-x: hidden;
+    img {
+        width: 2vw;
+        height: 2vw;
+    }
 }
 
 body {
@@ -108,27 +112,62 @@ label {
 input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 20px;
-    width: 30vw;
+    width: 25vw;
     height: 4vh;
     outline: none;
     text-align: left;
     padding-left: 1vw;
-    color: darkorange;
+    color: black;
     font-size: calc((2vw + 2vh)/2);
+    margin-top: 0.5vh;
 }
 
-input[type="text"]:focus {
+.cardsContainer {
+    display: flex; /* Используем flex для размещения карточек в ряд */
+    justify-content: space-between; /* Распределение карточек по горизонтали */
+}
+
+.card {
+    background: white; /* Цвет фона карточки */
+    border: 20px solid black;
+    color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px; /* Закругленные углы */
+    padding: 10px; /* Внутренние отступы */
+    width: 28%; /* Уменьшенная ширина карточки */
+    margin: 0 1%; /* Отступы между карточками */
+}
+
+h2 {
+    margin-bottom: 1vh; /* Уменьшенный отступ */
+    font-size: calc((2vw + 2vh) / 2);
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.orginfoitemSC, .contactinfoitemSC > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+
+label {
+    font-size: calc((2vw + 2vh) / 2);
+    margin-bottom: 5px;
+    font-weight: lighter;
+}
+
+input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 20px;
-    width: 30vw;
+    width: 25vw;
     height: 4vh;
     outline: none;
     text-align: left;
     padding-left: 1vw;
-    color: darkorange;
-    font-size: calc((2vw + 2vh)/2);
-    border: 1px solid darkorange;
-    box-shadow: 0 0 5px darkorange;
+    color: black;
+    font-size: calc((2vw + 2vh) / 2);
+    margin-top: 0.5vh;
 }
 
 .info_confirmplate {
@@ -198,7 +237,6 @@ input[type="text"]:focus {
     transform: scale(0.95);
     transition: transform 0.1s ease-in;
 }
-
 
 .info_savebutton {
     border: none;

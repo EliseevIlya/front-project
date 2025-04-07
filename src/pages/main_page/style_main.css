@@ -4,16 +4,41 @@ body {
     background: #318ea8;
 }
 
-.Main .text {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+@keyframes bubble {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1); /* Увеличиваем размер на 10% */
+    }
+    100% {
+        transform: scale(1); /* Возвращаем к исходному размеру */
+    }
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.text {
     color: white;
-    font-size: calc((10vw + 10vh)/2);
+    font-size: calc((6vw + 6vh) / 2);
+    font-family: Impact, sans-serif;
+    font-weight: lighter;
+    margin-left: 40vw;
+}
+
+.logo {
+    width: 6vw !important;
+    height: 6vw !important;
+    animation: bubble 1.5s infinite; /* Применяем анимацию */
 }
 
 .Main .podtext {
-    margin-top: 1vh;
-    margin-bottom: 10vh;
+    margin-top: -2vh;
+    margin-bottom: 5vh;
     color: white;
     font-size: calc((3vw + 3vh)/2);
 }

@@ -17,16 +17,28 @@
     background-color: #ffffff;
     border-radius: 8px;
     padding: 15px;
-    width: 400px;
+    width: 90vw;
+    max-width: 500px;
+    height: 95vh;
+    max-height: 90vh;
+    overflow-y: auto;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
+
 
 .headcreatepage {
     background-color: #ffffff;
     color: #318EA8;
     text-align: center;
     font-size: calc((3vw + 3vh) / 2);
+    margin-top: -3vh;
+    margin-bottom: -3vh;
+}
+
+.input-container {
+
 }
 
 .input-group {
@@ -38,7 +50,6 @@
 .input-group h4 {
     font-size: calc((1.3vw + 1.3vh)/2);
     color: #318EA8;
-    margin-bottom: 5px;
     font-weight: lighter;
 }
 
@@ -48,10 +59,10 @@
     outline: none;
     flex: 1;
     padding: 15px;
-    border: 1px solid #318EA8;
     background-color: #318EA8;
     box-sizing: border-box;
     width: 100%;
+    height: 5vh !important;
     max-width: 100%;
     color: white;
 }
@@ -62,7 +73,6 @@
     outline: none;
     flex: 1;
     padding: 15px;
-    border: 1px solid #318EA8;
     background-color: #318EA8;
     box-sizing: border-box;
     width: 100%;
@@ -80,6 +90,15 @@
     text-align: left;
     margin-left: 1vw;
     font-size: calc((1.2vw + 1.2vh)/2) !important;
+    color: #318EA8 !important;
+}
+
+a {
+    color: #318EA8 !important;
+}
+
+a:hover {
+    color: darkorange !important;
 }
 
 input[type=checkbox] {
@@ -103,7 +122,7 @@ button {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    margin-top: 10px;
+    margin-top: 1vh;
 }
 
 .terms-container label {
@@ -115,19 +134,20 @@ button {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: 2vh;
 }
 
 .createaccbutton {
     margin-bottom: 15px;
     border-radius: 10px;
     padding: 15px 25px;
-    font-size: calc((1.3vw + 1.3vh)/2);
+    font-size: 1.3vw;
     border: none;
     background-color: #FF8000;
     color: white;
     cursor: pointer;
     width: 100%;
+    height: 6vh;
     box-sizing: border-box;
     transition: background-color 0.3s, transform 0.1s ease-out;
 }
@@ -138,11 +158,6 @@ button {
 
 .createaccbutton:disabled {
     background-color: darkgrey;
-}
-
-.createaccbutton:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease-in;
 }
 
 .header-container {
@@ -162,14 +177,15 @@ button {
     font-size: calc((1.3vw + 1.3vh)/2);
     margin-bottom: 15px;
     text-align: center;
-
 }
 
 .createaccclosebutton {
-    background: none !important;
+    background-color: #184754 !important;
+    width: 1.5vw !important;
+    height: 1.5vw !important;
     color: white;
-    font-size: 1.5vw;
-    margin-top: 1vw!important;
+    font-size: 1.3vw !important;
+    margin-top: 5vh!important;
     margin-left: 80vw !important;
     margin-right: 2vw !important;
     margin-bottom: 80vh !important;
@@ -186,4 +202,29 @@ button:disabled:hover {
 
 .inputcreateacc:disabled {
     background-color: grey;
+}
+
+
+@media (max-width: 480px) {
+    .headcreatepage {
+        font-size: 6vw;
+    }
+
+    .inputcreateacc[type="text"] {
+        height: 6vh !important;
+        font-size: 4vw;
+    }
+
+    .texthref, .terms-container label {
+        font-size: 3.5vw !important;
+    }
+
+    button {
+        font-size: 4vw;
+    }
+
+    .createaccbutton {
+        font-size: 4vw;
+        padding: 10px 15px;
+    }
 }
