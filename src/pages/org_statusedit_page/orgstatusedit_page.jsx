@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style_orgstatusedit.css";
 import { useNavigate } from "react-router-dom";
+import { getOneOrganization } from "../../api/Org";
 
 function OrgStatusEdit_page() {
     const [status, setStatus] = useState("Новая");
@@ -8,6 +9,23 @@ function OrgStatusEdit_page() {
     const [reason, setReason] = useState("");
     const [reviewDate, setReviewDate] = useState(""); // состояние для даты рассмотрения
     const navigate = useNavigate();
+    const [oranizationData, setOranizationData] = useState({
+            fullName: "",
+            shortName: "",
+            inn: "",
+            kpp: "",
+            ogrn: "",
+            responsiblePersonSurname: "",
+            responsiblePersonName: "",
+            responsiblePersonEmail: "",
+            responsiblePersonPhoneNumber: "",
+            addInfo: "",
+            email: "",
+            addresses: [],
+            connectionRequestStatus: "",
+            connectionRequestAddInfo: "",
+            jwtToken: ""
+        });
 
     // Функция для получения текущей даты в нужном формате
     const getCurrentDate = () => {
@@ -20,6 +38,36 @@ function OrgStatusEdit_page() {
 
     // При монтировании компонента установим текущую дату
     useEffect(() => {
+        const getOrganizationData = async () => {
+            try {
+                const data = await getOneOrganization(localStorage.getItem("jwt"));
+
+                if (data) {
+                    setOranizationData({
+                        fullName: data.fullName || "",
+                        shortName: data.shortName || "",
+                        inn: data.inn || "",
+                        kpp: data.kpp || "",
+                        ogrn: data.ogrn || "",
+                        responsiblePersonSurname: data.responsiblePersonSurname || "",
+                        responsiblePersonName: data.responsiblePersonName || "",
+                        responsiblePersonEmail: data.responsiblePersonEmail || "",
+                        responsiblePersonPhoneNumber: data.responsiblePersonPhoneNumber || "",
+                        addInfo: data.addInfo || "",
+                        email: data.email || "",
+                        addresses: data.addresses || [],
+                        connectionRequestStatus: data.connectionRequestStatus || "",
+                        connectionRequestAddInfo: data.connectionRequestAddInfo || "",
+                        jwtToken: data.jwtToken || ""
+                    });
+                }
+            } catch (error) {
+                console.error("Ошибка получения данных организации:", error);
+            }
+        };
+
+        getOrganizationData();
+
         setReviewDate(getCurrentDate());
     }, []);
 
@@ -27,18 +75,21 @@ function OrgStatusEdit_page() {
         setStatus(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (status === "Отклонена") {
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Отклонена")
             setShowPopup(true);
         } else if (status === "Исполнена") {
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Исполнения")
             navigate("/org/forms");
         } else {
             alert("Заявка отправлена!");
         }
     };
 
-    const handlePopupSubmit = () => {
+    const handlePopupSubmit = async () => {
         if (reason.length >= 10) {
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Отклонена")
             setShowPopup(false); // Закрываем модальное окно
             navigate("/org/forms"); // Переходим на страницу форм заявок
         }
@@ -88,22 +139,74 @@ function OrgStatusEdit_page() {
 
             <div className="registrationSC">
                 <div className="orginfoSC">
-                    <h2>Информация об организации:</h2>
-                    {['Полное название', 'Сокращенное', 'ИНН', 'КПП', 'ОГРН', 'Город', 'Адрес'].map((label, index) => (
-                        <div className="orginfoitemSC" key={index}>
-                            <label>{label}:</label>
-                            <input type="text" disabled />
-                        </div>
-                    ))}
+                     <h2>Информация об организации</h2>
+                    <div className="orginfoitemSC">
+                        <label>Полное название:</label>
+                        <input type="text" value={oranizationData.fullName} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>Сокращенное название:</label>
+                        <input type="text" value={oranizationData.shortName} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>ИНН:</label>
+                        <input type="text" value={oranizationData.inn} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>КПП:</label>
+                        <input type="text" value={oranizationData.kpp} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>ОГРН:</label>
+                        <input type="text" value={oranizationData.ogrn} disabled />
+                    </div>
+                    <h2>Адрес</h2>
+                    <div className="orginfoitemSC">
+                        <label>Тип адреса:</label>
+                        <input
+                            type="text"
+                            value={oranizationData.addresses?.[0]?.addressType === "LEGAL" ? "Юридический" : "Физический"}
+                            disabled
+                        />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>Регион:</label>
+                        <input type="text" value={oranizationData.addresses?.[0]?.subjectName || ""} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>Город:</label>
+                        <input type="text" value={oranizationData.addresses?.[0]?.cityName || ""} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>Улица:</label>
+                        <input type="text" value={oranizationData.addresses?.[0]?.streetName || ""} disabled />
+                    </div>
+                    <div className="orginfoitemSC">
+                        <label>Дом:</label>
+                        <input type="text" value={oranizationData.addresses?.[0]?.houseNumber || ""} disabled />
+                    </div>
+                    <h2>Контактное лицо</h2>
+                    <div className="contactinfoitemSC">
+                        <label>Фамилия:</label>
+                        <input type="text" value={oranizationData.responsiblePersonSurname} disabled />
+                    </div>
+                    <div className="contactinfoitemSC">
+                        <label>Имя:</label>
+                        <input type="text" value={oranizationData.responsiblePersonName} disabled />
+                    </div>
+                    <div className="contactinfoitemSC">
+                        <label>Email:</label>
+                        <input type="text" value={oranizationData.responsiblePersonEmail} disabled />
+                    </div>
+                    <div className="contactinfoitemSC">
+                        <label>Номер телефона:</label>
+                        <input type="text" value={oranizationData.responsiblePersonPhoneNumber} disabled />
+                    </div>
+                    <div className="contactinfoitemSC">
+                        <label>Доп. информация:</label>
+                        <input type="text" value={oranizationData.addresses?.[0]?.addInfo || ""} disabled />
+                    </div>
                 </div>
-                <div className="contactinfoSC">
-                    <h2>Контактное лицо:</h2>
-                    {['Фамилия', 'Имя', 'Email', 'Номер тел.'].map((label, index) => (
-                        <div className="contactinfoitemSC" key={index}>
-                            <label>{label}:</label>
-                            <input type="text" disabled />
-                        </div>
-                    ))}
                     <div className="buttonplateSC">
                         <button
                             className="accbuttonSC"
@@ -114,7 +217,6 @@ function OrgStatusEdit_page() {
                         </button>
                     </div>
                 </div>
-            </div>
 
             {showPopup && (
                 <div className="popup">

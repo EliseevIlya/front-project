@@ -44,12 +44,12 @@ export function deleteOrganization(){
 
 export function getOrganizationServices(){
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
     
-    axios.get(`${api}/api/organization/get_organization_service`,headers)
-    .then(()=>{
-
+    axios.get(`${api}/api/organization/get_organization_service`,{headers: headers})
+    .then((req)=>{
+        return (req.content)
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);

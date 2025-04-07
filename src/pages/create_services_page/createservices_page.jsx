@@ -1,8 +1,13 @@
 import "./style_createservices.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { getOrganizationServices } from "../../api/Org";
+import { putServiceDetail } from "../../api/ServiceDetail";
 
 function CreateServices_page() {
+    useEffect(async ()=>{
+        await setServices(await getOrganizationServices(localStorage.getItem("jwt")));
+    },[])
     const [services, setServices] = useState([]);
     const [newService, setNewService] = useState({
         sphere: 'Мойка',
@@ -73,7 +78,8 @@ function CreateServices_page() {
         setEditingService(id); // Устанавливаем ID редактируемой услуги
     };
 
-    const stopEditing = () => {
+    const stopEditing = async () => {
+        await putServiceDetail()
         setEditingService(null); // Завершаем редактирование
     };
 
