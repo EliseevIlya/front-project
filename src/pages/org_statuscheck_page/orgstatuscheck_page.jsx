@@ -7,6 +7,7 @@ import { getOneOrganization } from "../../api/Org.js";
 function OrgStatusCheck_page() {
     const [showReasonForm, setShowReasonForm] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const [oranizationData, setOranizationData] = useState({
         fullName: "",
         shortName: "",
@@ -72,6 +73,28 @@ function OrgStatusCheck_page() {
         setShowReasonForm(!showReasonForm);
     };
 
+    const [cardOrder, setCardOrder] = useState([0, 1, 2]); // Порядок карточек
+
+    const handleCardClick = (index) => {
+        if (index === cardOrder[1] || isTransitioning) return;
+
+        setIsTransitioning(true);
+
+        const newOrder = [...cardOrder];
+        const centerIndex = newOrder[1];
+        const clickedIndexInOrder = newOrder.indexOf(index);
+
+        newOrder[1] = index;
+        newOrder[clickedIndexInOrder] = centerIndex;
+
+        setCardOrder(newOrder);
+
+        setTimeout(() => {
+            setIsTransitioning(false);
+        }, 300); // зависит от transition-duration в CSS
+    };
+
+
     return (
         <>
             <div className="headersorgSC">
@@ -87,88 +110,114 @@ function OrgStatusCheck_page() {
             <div className="statusplate">
                 <div className="status">
                     <label>Текущий статус: <input type="text" value={currentStatus} disabled /></label>
-                    {currentStatus === "Отклонена" && (
+                    {oranizationData.connectionRequestStatus === "REJECTED" && (
                         <button className="reasonbutton" onClick={toggleReasonForm}>Причина</button>
                     )}
                 </div>
             </div>
 
             <div className="cardsContainer">
-                <div className="card">
-                    <h2>Информация об организации</h2>
-                    <div className="orginfoitemSC">
-                        <label>Полное название:</label>
-                        <input type="text" value={oranizationData.fullName} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>Сокращенное название:</label>
-                        <input type="text" value={oranizationData.shortName} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>ИНН:</label>
-                        <input type="text" value={oranizationData.inn} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>КПП:</label>
-                        <input type="text" value={oranizationData.kpp} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>ОГРН:</label>
-                        <input type="text" value={oranizationData.ogrn} disabled />
-                    </div>
-                </div>
+                {cardOrder.map((cardIndex) => {
+                    const cardData = [
+                        {
+                            title: "Адрес",
+                            content: (
+                                <>
+                                    <div className="orginfoitemSC">
+                                        <label>Тип адреса:</label>
+                                        <input
+                                            type="text"
+                                            value={oranizationData.addresses?.[0]?.addressType === "LEGAL" ? "Юридический" : "Физический"}
+                                            disabled
+                                        />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>Регион:</label>
+                                        <input type="text" value={oranizationData.addresses?.[0]?.subjectName || ""} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>Город:</label>
+                                        <input type="text" value={oranizationData.addresses?.[0]?.cityName || ""} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>Улица:</label>
+                                        <input type="text" value={oranizationData.addresses?.[0]?.streetName || ""} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>Дом:</label>
+                                        <input type="text" value={oranizationData.addresses?.[0]?.houseNumber || ""} disabled />
+                                    </div>
+                                </>
+                            )
+                        },
+                        {
+                            title: "Информация об организации",
+                            content: (
+                                <>
+                                    <div className="orginfoitemSC">
+                                        <label>Полное название:</label>
+                                        <input type="text" value={oranizationData.fullName} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>Сокращенное название:</label>
+                                        <input type="text" value={oranizationData.shortName} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>ИНН:</label>
+                                        <input type="text" value={oranizationData.inn} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>КПП:</label>
+                                        <input type="text" value={oranizationData.kpp} disabled />
+                                    </div>
+                                    <div className="orginfoitemSC">
+                                        <label>ОГРН:</label>
+                                        <input type="text" value={oranizationData.ogrn} disabled />
+                                    </div>
+                                </>
+                            )
 
-                <div className="card">
-                    <h2>Адрес</h2>
-                    <div className="orginfoitemSC">
-                        <label>Тип адреса:</label>
-                        <input
-                            type="text"
-                            value={oranizationData.addresses?.[0]?.addressType === "LEGAL" ? "Юридический" : "Физический"}
-                            disabled
-                        />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>Регион:</label>
-                        <input type="text" value={oranizationData.addresses?.[0]?.subjectName || ""} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>Город:</label>
-                        <input type="text" value={oranizationData.addresses?.[0]?.cityName || ""} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>Улица:</label>
-                        <input type="text" value={oranizationData.addresses?.[0]?.streetName || ""} disabled />
-                    </div>
-                    <div className="orginfoitemSC">
-                        <label>Дом:</label>
-                        <input type="text" value={oranizationData.addresses?.[0]?.houseNumber || ""} disabled />
-                    </div>
-                </div>
+                        },
+                        {
+                            title: "Контактное лицо",
+                            content: (
+                                <>
+                                    <div className="contactinfoitemSC">
+                                        <label>Фамилия:</label>
+                                        <input type="text" value={oranizationData.responsiblePersonSurname} disabled />
+                                    </div>
+                                    <div className="contactinfoitemSC">
+                                        <label>Имя:</label>
+                                        <input type="text" value={oranizationData.responsiblePersonName} disabled />
+                                    </div>
+                                    <div className="contactinfoitemSC">
+                                        <label>Email:</label>
+                                        <input type="text" value={oranizationData.responsiblePersonEmail} disabled />
+                                    </div>
+                                    <div className="contactinfoitemSC">
+                                        <label>Номер телефона:</label>
+                                        <input type="text" value={oranizationData.responsiblePersonPhoneNumber} disabled />
+                                    </div>
+                                    <div className="contactinfoitemSC">
+                                        <label>Доп. информация:</label>
+                                        <input type="text" value={oranizationData.addresses?.[0]?.addInfo || ""} disabled />
+                                    </div>
+                                </>
+                            )
+                        }
+                    ][cardIndex];
 
-                <div className="card">
-                    <h2>Контактное лицо</h2>
-                    <div className="contactinfoitemSC">
-                        <label>Фамилия:</label>
-                        <input type="text" value={oranizationData.responsiblePersonSurname} disabled />
-                    </div>
-                    <div className="contactinfoitemSC">
-                        <label>Имя:</label>
-                        <input type="text" value={oranizationData.responsiblePersonName} disabled />
-                    </div>
-                    <div className="contactinfoitemSC">
-                        <label>Email:</label>
-                        <input type="text" value={oranizationData.responsiblePersonEmail} disabled />
-                    </div>
-                    <div className="contactinfoitemSC">
-                        <label>Номер телефона:</label>
-                        <input type="text" value={oranizationData.responsiblePersonPhoneNumber} disabled />
-                    </div>
-                    <div className="contactinfoitemSC">
-                        <label>Доп. информация:</label>
-                        <input type="text" value={oranizationData.addresses?.[0]?.addInfo || ""} disabled />
-                    </div>
-                </div>
+                    return (
+                        <div
+                            key={cardIndex}
+                            className={`card ${cardOrder.indexOf(cardIndex) === 1 ? 'center' : cardOrder.indexOf(cardIndex) === 0 ? 'left' : 'right'}`}
+                            onClick={() => handleCardClick(cardIndex)}
+                        >
+                            <h2>{cardData.title}</h2>
+                            {cardData.content}
+                        </div>
+                    );
+                })}
             </div>
 
             {showReasonForm && (

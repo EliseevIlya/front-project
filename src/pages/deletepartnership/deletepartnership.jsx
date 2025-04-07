@@ -13,8 +13,8 @@ function Deleteparthpage({ onClose }) {
                     </h3>
                 </div>
                 <div className="footer_deleteaccpage">
-                    <button className="cancel-button" onClick={onClose}>ОСТАТЬСЯ</button>
-                    <button className="delete-button">ОТКАЗАТЬСЯ</button>
+                    <button className="cancel-button" >ДА</button>
+                    <button className="delete-button" onClick={onClose}>НЕТ</button>
                 </div>
             </div>
         </div>

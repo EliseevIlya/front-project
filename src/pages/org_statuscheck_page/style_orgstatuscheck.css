@@ -102,31 +102,48 @@ body {
 }
 
 .cardsContainer {
-    display: flex; /* Используем flex для размещения карточек в ряд */
-    justify-content: space-between; /* Распределение карточек по горизонтали */
-
+    display: flex;
+    justify-content: center; /* Центрируем карточки */
+    position: relative; /* Для позиционирования карточек */
 }
 
 .card {
-    background: white; /* Цвет фона карточки */
+    background: white;
     border: 10px solid black;
     color: rgba(0, 0, 0, 0.5);
-    border-radius: 20px; /* Закругленные углы */
-    padding: 10px; /* Внутренние отступы */
-    width: 28%; /* Уменьшенная ширина карточки */
-    margin: 0 1%; /* Отступы между карточками */
+    border-radius: 20px;
+    padding: 10px;
+    width: 28%;
+    margin: 0 1%;
+    transition: transform 0.3s ease-in-out, opacity 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    will-change: transform, opacity, box-shadow;
 }
 
+.card.left,
+.card.right {
+    opacity: 0.6;
+    transform: scale(0.9);
+}
+
+.card.center {
+    opacity: 1;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+
+
+
 h2 {
-    margin-bottom: 1vh; /* Уменьшенный отступ */
+    margin-bottom: 1vh;
     font-size: calc((2vw + 2vh) / 2);
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.8);
     text-align: center;
-
 }
 
-.orginfoitemSC, .contactinfoitemSC > div {
+.orginfoitemSC {
     display: flex;
     flex-direction: column;
     margin-bottom: 1vh;
