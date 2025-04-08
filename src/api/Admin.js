@@ -199,17 +199,19 @@ export function getAdminConnectionRequest(data){
     })
 }
 
-export function putAdminConnectionRequest(idputAdminConnectionRequest, statusputAdminConnectionRequest){
+export function putAdminConnectionRequest(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
+    console.log(data)
     const body={
-        id:idputAdminConnectionRequest,
-        status:statusputAdminConnectionRequest
+        id:data.id,
+        status:data.status
     }
-    axios.put(`${api}/api/aggregator/connectionRequest`,body,headers)
+    axios.put(`${api}/api/aggregator/connectionRequest`,body,{headers:headers})
     .then(()=>{
-
+        return "OK"
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);

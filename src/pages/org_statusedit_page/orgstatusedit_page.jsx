@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style_orgstatusedit.css";
 import { useNavigate } from "react-router-dom";
-import { getOneOrganization } from "../../api/Org.js";
+import { getConnectionRequest } from "../../api/ConnectionRequest";
 import {putAdminConnectionRequest} from "../../api/Admin.js";
 
 function OrgStatusEdit_page() {
@@ -11,6 +11,7 @@ function OrgStatusEdit_page() {
     const [reviewDate, setReviewDate] = useState("");
     const [isTransitioning, setIsTransitioning] = useState(false);
     const navigate = useNavigate();
+
     const [oranizationData, setOranizationData] = useState({
         fullName: "",
         shortName: "",
@@ -28,7 +29,10 @@ function OrgStatusEdit_page() {
         connectionRequestAddInfo: "",
         jwtToken: ""
     });
+        const data2 = {
+            id: localStorage.getItem("connectionRequestId")
 
+        }
     // Функция для получения текущей даты в нужном формате
     const getCurrentDate = () => {
         const date = new Date();
@@ -42,25 +46,25 @@ function OrgStatusEdit_page() {
     useEffect(() => {
         const getOrganizationData = async () => {
             try {
-                const data = await getOneOrganization(localStorage.getItem("jwt"));
+                const data = await getConnectionRequest(data2);
 
                 if (data) {
                     setOranizationData({
-                        fullName: data.fullName || "",
-                        shortName: data.shortName || "",
-                        inn: data.inn || "",
-                        kpp: data.kpp || "",
-                        ogrn: data.ogrn || "",
-                        responsiblePersonSurname: data.responsiblePersonSurname || "",
-                        responsiblePersonName: data.responsiblePersonName || "",
-                        responsiblePersonEmail: data.responsiblePersonEmail || "",
-                        responsiblePersonPhoneNumber: data.responsiblePersonPhoneNumber || "",
-                        addInfo: data.addInfo || "",
-                        email: data.email || "",
-                        addresses: data.addresses || [],
-                        connectionRequestStatus: data.connectionRequestStatus || "",
-                        connectionRequestAddInfo: data.connectionRequestAddInfo || "",
-                        jwtToken: data.jwtToken || ""
+                        fullName: data.content[0].organization.fullName || "",
+                        shortName: data.content[0].organization.shortName || "",
+                        inn: data.content[0].organization.inn || "",
+                        kpp: data.content[0].organization.kpp || "",
+                        ogrn: data.content[0].organization.ogrn || "",
+                        responsiblePersonSurname: data.content[0].organization.responsiblePersonSurname || "",
+                        responsiblePersonName: data.content[0].organization.responsiblePersonName || "",
+                        responsiblePersonEmail: data.content[0].organization.responsiblePersonEmail || "",
+                        responsiblePersonPhoneNumber: data.content[0].organization.responsiblePersonPhoneNumber || "",
+                        addInfo: data.content[0].organization.addInfo || "",
+                        email: data.content[0].organization.email || "",
+                        addresses: data.content[0].organization.addresses || [],
+                        connectionRequestStatus: data.content[0].organization.connectionRequestStatus || "",
+                        connectionRequestAddInfo: data.content[0].organization.connectionRequestAddInfo || "",
+                        jwtToken: data.content[0].organization.jwtToken || ""
                     });
                 }
             } catch (error) {
@@ -70,6 +74,7 @@ function OrgStatusEdit_page() {
 
         getOrganizationData();
         setReviewDate(getCurrentDate());
+        console.log(oranizationData)
     }, []);
 
     const [cardOrder, setCardOrder] = useState([0, 1, 2]);
@@ -99,10 +104,18 @@ function OrgStatusEdit_page() {
 
     const handleSubmit = async () => {
         if (status === "Отклонена") {
-            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"), "Отклонена");
-            setShowPopup(true);
+            const data = {
+                id:localStorage.getItem("connectionRequestId"),
+                status: "REJECTED"
+            }
+            await putAdminConnectionRequest(data);
+            navigate("/org_apps");
         } else if (status === "Исполнена") {
-            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"), "Исполнения");
+            const data = {
+                id:localStorage.getItem("connectionRequestId"),
+                status: "COMPLETED"
+            }
+            await putAdminConnectionRequest(data);
             navigate("/org_apps");
         } else {
             alert("Заявка отправлена!");
@@ -137,7 +150,6 @@ function OrgStatusEdit_page() {
                         Текущий статус:
                         <select value={status} onChange={handleStatusChange}>
                             <option value="Новая">Новая</option>
-                            <option value="В работе">В работе</option>
                             <option value="Исполнена">Исполнена</option>
                             <option value="Отклонена">Отклонена</option>
                         </select>

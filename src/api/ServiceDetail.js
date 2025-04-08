@@ -3,24 +3,34 @@ import { globalAPI } from "./config.js";
 
 const api = globalAPI;
 
-export function postServiceDetail(){
-    const body={
-
-    }
+export function postServiceDetail(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.post(`${api}/api/service_detail/`,body,headers)
-    .then(()=>{
-
+    const body={
+        code : data.code,
+        name: data.name,
+        cost: data.cost,
+        duration: data.duration,
+        addInfo: data.addInfo,
+        typeOfService:  data.typeOfServiceName
+    }
+    console.log(body)
+    axios.post(`${api}/api/service_detail`,body,{headers:headers})
+    .then((res)=>{
+        console.log(res)
+        return true
     })
-    .catch(()=>{
+    .catch((error)=>{
+;
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
         } else {
             console.log('Произошла ошибка при подключении к серверу.');
         }
+        return false;
     })
 }
 
@@ -47,6 +57,7 @@ export function getServiceDetail(data){
 
     return axios.post(`${api}/api/service_detail/get_all_services`,body,{headers:headers})
     .then((res)=>{
+        console.log(res)
         return res.data;
 
     })
@@ -61,13 +72,14 @@ export function getServiceDetail(data){
 }
 
 export function putServiceDetail(){
+    const jwt = localStorage.getItem('jwt')
+    const headers={
+        Authorization: `Bearer ${jwt}`
+    }
     const body={
 
     }
-    const headers={
-
-    }
-    axios.put(`${api}/api/service_detail/`,body,headers)
+    axios.put(`${api}/api/service_detail/`,body,{headers:headers})
     .then(()=>{
 
     })
@@ -81,23 +93,23 @@ export function putServiceDetail(){
     })
 }
 
-export function deleteServiceDetail(){
-    const body={
+export function deleteServiceDetail(id){
 
-    }
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.delete(`${api}/api/service_detail/`,body,headers)
+    axios.delete(`${api}/api/service_detail?serviceId=${id}`,{headers: headers})
     .then(()=>{
-
+        return true;
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
         } else {
             console.log('Произошла ошибка при подключении к серверу.');
         }
+        return false;
     })
 }

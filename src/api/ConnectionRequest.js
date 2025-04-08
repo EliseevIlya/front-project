@@ -27,6 +27,7 @@ export function getConnectionRequest(data){
         Authorization: `Bearer ${jwt}`
     }
     const body={
+        id: data?.id?? null,
         organizationId:data?.organizationId ?? null,
         registrationNumber:data?.registrationNumber ?? null ,
         fromDateBegin:data?.fromDateBegin ?? null,
