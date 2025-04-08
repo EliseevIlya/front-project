@@ -1,16 +1,18 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import "./style.css";
 
 import { useNavigate } from "react-router";
+import {getConnectionRequest} from "../../api/ConnectionRequest.js";
+import {getAdminConnectionRequest} from "../../api/Admin.js";
 
 
 
 function PioneerForms() {
   const statuses = [
-    { id: "new", label: "Новая" },
-    { id: "in_progress", label: "В работе" },
-    { id: "completed", label: "Исполнена" },
-    { id: "rejected", label: "Отклонена" }
+    { id: "NEW", label: "Новая" },
+    //{ id: "IN_PROGRESS", label: "В работе" },
+    { id: "COMPLETED", label: "Исполнена" },
+    { id: "REJECTED", label: "Отклонена" }
   ];
 
   const forms = [
@@ -20,25 +22,66 @@ function PioneerForms() {
     { id: 4, status: "rejected", date: "02.03.2025", org: "Компания D" },
   ];
 
-  const [selectedStatus, setSelectedStatus] = useState("new");
+  const [selectedStatus, setSelectedStatus] = useState("NEW");
 
   const [connectionRequestGet, setConnectionRequestGet] = useState({
 
   })
   const [connectionRequestPut, setConnectionRequestPut] = useState({
-    organizationId:"",
-    registrationNumber:"",
-    status:"",
     size: 10,
-    id: 0
+    page: 0,
+    status: selectedStatus
   })
 
   const navigate = useNavigate();
 
   // Функция для перехода на страницу организации
-  const handleRowClick = () => {
+  const handleRowClick = (id) => {
+    localStorage.setItem("connectionRequestId",id);
     navigate(`/org_statusedit`); // Переход на страницу организации
   };
+
+
+  const loadConnectionRequest = async () => {
+
+    if (selectedStatus === "NEW") {
+      setConnectionRequestGet(await getConnectionRequest(connectionRequestPut))
+
+    } else {
+      setConnectionRequestGet(await getAdminConnectionRequest(connectionRequestPut))
+    }
+    console.log(selectedStatus)
+  }
+
+  useEffect(() => {
+
+
+        loadConnectionRequest();
+      },
+      [selectedStatus, connectionRequestPut])
+
+  useEffect(() => {
+    console.log(connectionRequestGet,"connectionRequestGet")
+  }, [connectionRequestGet]);
+
+  const loadMoreApps = () => {
+    setConnectionRequestPut(prev => ({
+      ...prev,
+      size: prev.size + 5
+    }));
+
+  };
+
+  const changeStatus = (event) => {
+    const newStatus = event.target.value;
+    setSelectedStatus(newStatus);
+
+    setConnectionRequestPut(prev => ({
+      ...prev,
+      status: newStatus
+    }));
+  };
+
 
   return (
 
@@ -60,8 +103,9 @@ function PioneerForms() {
                 {statuses.map(({ id, label }) => (
                     <button
                         key={id}
+                        value={id}
                         className={`filter-buttonorgform ${selectedStatus === id ? "active" : ""}`}
-                        onClick={() => setSelectedStatus(id)}
+                        onClick={changeStatus}
                     >
                       {label}
                     </button>
@@ -75,24 +119,22 @@ function PioneerForms() {
                 <tr>
                   <th>№ Заявки</th>
                   <th>Дата Создания</th>
-                  <th>Краткое наим-е организации</th>
+                  <th>Наименование организации</th>
                 </tr>
                 </thead>
                 <tbody>
-                {forms.filter(f => f.status === selectedStatus).length > 0 ? (
-                    forms
-                        .filter(f => f.status === selectedStatus)
-                        .map(f => (
-                            <tr
-                                key={f.id}
-                                onClick={() => handleRowClick(f.org)}
-                                style={{ cursor: "pointer" }}
-                            >
-                              <td>{f.id}</td>
-                              <td>{f.date}</td>
-                              <td>{f.org}</td>
-                            </tr>
-                        ))
+                {connectionRequestGet?.content?.length > 0 ? (
+                    connectionRequestGet.content.map(f => (
+                        <tr
+                            key={f.id}
+                            onClick={() => handleRowClick(f.id)}
+                            style={{ cursor: "pointer" }}
+                        >
+                          <td>{f.id}</td>
+                          <td>{f.dateBegin}</td>
+                          <td>{f.organization.fullName}</td>
+                        </tr>
+                    ))
                 ) : (
                     <tr>
                       <td colSpan="3" className="no-data">Нет данных</td>
@@ -100,8 +142,16 @@ function PioneerForms() {
                 )}
                 </tbody>
               </table>
+              <div>
+
+
+              <button className="load-more" onClick={loadMoreApps}>Загрузить еще</button>
+
+
+              </div>
             </div>
           </div>
+
         </div>
       </div>
   );

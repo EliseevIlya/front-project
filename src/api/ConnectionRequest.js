@@ -1,6 +1,7 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = process.env.API
+const api = globalAPI;
 
 export function deleteConnectionRequest(){
     const headers={
@@ -20,21 +21,25 @@ export function deleteConnectionRequest(){
     })
 }
 
-export function getConnectionRequest(data, jwt){
+export function getConnectionRequest(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
         Authorization: `Bearer ${jwt}`
     }
     const body={
-        organizationId:data.organizationId,
-        registrationNumber:data.registrationNumber,
-        fromDateBegin:data.fromDateBegin,
-        toDateBegin:data.toDateBegin,
-        fromDateEnd:data,
-        toDateEnd:data.toDateEnd,
-        status:data.status,
-        sortBy:data.sortBy,
+        organizationId:data?.organizationId ?? null,
+        registrationNumber:data?.registrationNumber ?? null ,
+        fromDateBegin:data?.fromDateBegin ?? null,
+        toDateBegin:data?.toDateBegin ?? null,
+        fromDateEnd:data?.fromDateEnd ?? null,
+        toDateEnd:data?.toDateEnd ?? null,
+        status:data?.status ?? null,
+        page: data?.page ?? 0,
+        size: data?.size ?? 10,
+        sortBy:data?.sortBy ?? null
+
     }
-    axios.post(`${api}/api/connection_request/by_status`,{headers:headers}, body)
+    return  axios.post(`${api}/api/connection_request/by_status`,body,{headers:headers} )
     .then((res)=>{
         console.log(res.data);
         return res.data

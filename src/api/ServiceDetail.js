@@ -38,8 +38,8 @@ export function getServiceDetail(data){
         duration: data?.duration ?? null,
         typeName: data?.typeName ?? null,
         typeCode: data?.typeCode ?? null,
-        page: data?.page ?? null,
-        size: data?.size ?? null,
+        page: data?.page ?? 0,
+        size: data?.size ?? 10,
         sortBy: data?.sortBy ?? null
     };
     console.log("DATA",data);
