@@ -88,13 +88,10 @@ function OrgTable_page() {
                         <th>ИНН</th>
                         <th>КПП</th>
                         <th>ОГРН</th>
-                        <th>Город</th>
-                        <th>Адрес</th>
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Email</th>
                         <th>Номер тел.</th>
-                        <th>Доп.инф.</th>
                         <th>Блокировка</th>
                     </tr>
                     </thead>
@@ -106,16 +103,13 @@ function OrgTable_page() {
                                 <td>{org.organizationId}</td>
                                 <td><input type="text" className="otbitem" value={org.organizationFullName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.organizationShortName || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.organizationInn || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.organizationKpp || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.organizationOgrn || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.organizationCity || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.organizationAddress || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.inn || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.kpp || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.ogrn || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonSurname || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonEmail || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.responsiblePersonPhoneNumber || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value="" disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.responsiblePersonPhone || ""} disabled /></td>
                                 <td><button className="blockButton" onClick={() => handleDelete(org.organizationId)}>X</button></td>
                             </tr>
                         );
