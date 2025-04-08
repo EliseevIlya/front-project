@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./style_adminacc.css";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {getAdminAgregator, putAdminAgregator} from "../../api/Admin.js";
 
 function AdminAcc_page() {
@@ -92,8 +92,8 @@ function AdminAcc_page() {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setAgregatorData({ ...agregatorData, [name]: value });
+        const {name, value} = e.target;
+        setAgregatorData({...agregatorData, [name]: value});
     };
 
     useEffect(() => {
@@ -113,13 +113,12 @@ function AdminAcc_page() {
                         surname: data.surname || ""
                     });
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
             }
         }
         getAdminAccPage();
-        }, []);
+    }, []);
 
     return (
         <div>
@@ -127,46 +126,57 @@ function AdminAcc_page() {
                 <button className="exitbuttonadmin" title="Выйти из аккаунта" onClick={() => navigate("/")}>
                     <img src="/src/icons/exit.png" alt="Exit"/>
                 </button>
+                <div className="headeradmintext">
                 <button className="homebuttonadmin" title="Вернуться на главную" onClick={() => navigate("/")}>
-                    <h1>Администратор</h1>
+                    <h1 className="textAdmin">Администратор</h1>
                     <img src="/src/icons/home.png" alt="Home"/>
                 </button>
+                    <p className="padmin">
+                        <h2 className="podtextAdmin">Личный кабинет</h2>
+                    </p>
+                </div>
             </div>
-            <h2 className="textServices">Личный кабинет</h2>
-
             <div className="controlpanel">
                 <div className="info">
                     <div className="infoitem">
                         <label>Должность*:</label>
-                        <input type="text" name = "position" value={agregatorData?.position || ""} onChange={handleInputChange} disabled={!isEditing}/>
+                        <input type="text" name="position" value={agregatorData?.position || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Фамилия*:</label>
-                        <input type="text" name = "surname" value={agregatorData?.surname || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="surname" value={agregatorData?.surname || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Имя*:</label>
-                        <input type="text" name = "name" value={agregatorData?.name || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="name" value={agregatorData?.name || ""} onChange={handleInputChange}
+                               disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Отчество:</label>
-                        <input type="text" name = "patronymic" value={agregatorData?.patronymic || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="patronymic" value={agregatorData?.patronymic || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Номер тел.*:</label>
-                        <input type="text" name = "phoneNumber" value={agregatorData?.phoneNumber || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="phoneNumber" value={agregatorData?.phoneNumber || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>E-mail*:</label>
-                        <input type="text" name = "email" value={agregatorData?.email || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="email" value={agregatorData?.email || ""} onChange={handleInputChange}
+                               disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Департамент:</label>
-                        <input type="text" name ="department" value={agregatorData?.department || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="department" value={agregatorData?.department || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                     <div className="infoitem">
                         <label>Доп. Инфо:</label>
-                        <input type="text" name ="addInfo" value={agregatorData?.addInfo || ""} onChange={handleInputChange} disabled={!isEditing} />
+                        <input type="text" name="addInfo" value={agregatorData?.addInfo || ""}
+                               onChange={handleInputChange} disabled={!isEditing}/>
                     </div>
                 </div>
                 <div className="control">

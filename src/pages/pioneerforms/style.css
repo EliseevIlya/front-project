@@ -19,13 +19,12 @@
   padding: 10px;
 }
 
-.exitbutton{
+.exitbuttonform{
   background: none;
-  margin-top: -5vh;
   width: 5vw;
 }
 
-.exitbutton:hover {
+.exitbuttonform:hover {
   opacity: 0.5;
 }
 
@@ -33,10 +32,8 @@
   color: white !important;
   font-weight: lighter;
   text-align: center;
-  margin-top: -5vh;
   margin-right: 25vw;
   font-size: calc((3vw + 3vh) / 2);
-
 }
 
 .texth2 {
