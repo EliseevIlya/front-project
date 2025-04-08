@@ -194,7 +194,7 @@ function Createaccpage() {
                             }
                         }}
                     />
-                    <label htmlFor="terms" className="texthref">Я принимаю <a href="https://policies.google.com/privacy?hl=ru"
+                    <label htmlFor="terms" className="texthref">Я принимаю <a className="areg" href="https://policies.google.com/privacy?hl=ru"
                                                          target="_blank" rel="noopener noreferrer">пользовательское
                         соглашение</a></label>
                 </div>

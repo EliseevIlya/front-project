@@ -135,7 +135,6 @@ html {
 .no-apps-message {
     font-size: calc((7vw + 7vh)/2);
     color: white;
-    margin-left: 20vw;
     margin-top: -5vh;
 }
 
