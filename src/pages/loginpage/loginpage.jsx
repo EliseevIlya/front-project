@@ -38,8 +38,6 @@ function Loginpage() {
         }
     };
 
-
-
     const handleSubmit = async () => {
         if (errorMessage || !email || !code) {
             setErrorMessage("Пожалуйста, заполните все поля корректно.");

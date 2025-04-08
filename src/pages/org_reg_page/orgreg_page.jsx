@@ -75,7 +75,7 @@ function OrgReg_page() {
 
     const validateField = (name, value) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
-        const isValidText = /^[А-Яа-яёЁ\s-]{2,}$/;
+        const isValidText = /^[А-Яа-яёЁa-zA-Z0-9\s\-\"\'_]+$/;
 
         switch (name) {
             case "fullName":
@@ -110,21 +110,21 @@ function OrgReg_page() {
     const getErrorMessage = (name) => {
         switch (name) {
             case "fullName":
-                return "Полное название должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "shortName":
-                return "Сокращенное название должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "subjectName":
-                return "Название субъекта РФ должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "cityName":
-                return "Город должен содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "streetName":
-                return "Улица должна содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "houseNumber":
                 return "Дом должен содержать цифры или буквы (до 10 символов)";
             case "lastName":
-                return "Фамилия должна содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "firstName":
-                return "Имя должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "inn":
                 return "ИНН должен содержать ровно 10 цифр";
             case "kpp":

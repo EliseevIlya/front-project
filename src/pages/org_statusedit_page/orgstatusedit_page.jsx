@@ -264,7 +264,7 @@ function OrgStatusEdit_page() {
                             className={`card ${cardOrder.indexOf(cardIndex) === 1 ? 'center' : cardOrder.indexOf(cardIndex) === 0 ? 'left' : 'right'}`}
                             onClick={() => handleCardClick(cardIndex)}
                         >
-                            <h2>{cardData.title}</h2>
+                            <h2 className="titleorgcard">{cardData.title}</h2>
                             {cardData.content}
                         </div>
                     );
