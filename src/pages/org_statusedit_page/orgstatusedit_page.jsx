@@ -27,6 +27,23 @@ function OrgStatusEdit_page() {
         jwtToken: ""
     });
     const navigate = useNavigate();
+    const [oranizationData, setOranizationData] = useState({
+            fullName: "",
+            shortName: "",
+            inn: "",
+            kpp: "",
+            ogrn: "",
+            responsiblePersonSurname: "",
+            responsiblePersonName: "",
+            responsiblePersonEmail: "",
+            responsiblePersonPhoneNumber: "",
+            addInfo: "",
+            email: "",
+            addresses: [],
+            connectionRequestStatus: "",
+            connectionRequestAddInfo: "",
+            jwtToken: ""
+        });
 
     // Функция для получения текущей даты в нужном формате
     const getCurrentDate = () => {
@@ -39,6 +56,36 @@ function OrgStatusEdit_page() {
 
     // При монтировании компонента установим текущую дату
     useEffect(() => {
+        const getOrganizationData = async () => {
+            try {
+                const data = await getOneOrganization(localStorage.getItem("jwt"));
+
+                if (data) {
+                    setOranizationData({
+                        fullName: data.fullName || "",
+                        shortName: data.shortName || "",
+                        inn: data.inn || "",
+                        kpp: data.kpp || "",
+                        ogrn: data.ogrn || "",
+                        responsiblePersonSurname: data.responsiblePersonSurname || "",
+                        responsiblePersonName: data.responsiblePersonName || "",
+                        responsiblePersonEmail: data.responsiblePersonEmail || "",
+                        responsiblePersonPhoneNumber: data.responsiblePersonPhoneNumber || "",
+                        addInfo: data.addInfo || "",
+                        email: data.email || "",
+                        addresses: data.addresses || [],
+                        connectionRequestStatus: data.connectionRequestStatus || "",
+                        connectionRequestAddInfo: data.connectionRequestAddInfo || "",
+                        jwtToken: data.jwtToken || ""
+                    });
+                }
+            } catch (error) {
+                console.error("Ошибка получения данных организации:", error);
+            }
+        };
+
+        getOrganizationData();
+
         setReviewDate(getCurrentDate());
 
         const getOrganizationData = async () => {
@@ -97,20 +144,26 @@ function OrgStatusEdit_page() {
         setStatus(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (status === "Отклонена") {
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Отклонена")
             setShowPopup(true);
         } else if (status === "Исполнена") {
-            navigate("/org_apps");
+
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Исполнения")
+           navigate("/org_apps");
+
         } else {
             alert("Заявка отправлена!");
         }
     };
 
-    const handlePopupSubmit = () => {
+    const handlePopupSubmit = async () => {
         if (reason.length >= 10) {
-            setShowPopup(false);
-            navigate("/org_apps");
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"),"Отклонена")
+            setShowPopup(false); // Закрываем модальное окно
+            navigate("/org_apps"); // Переходим на страницу форм заявок
+
         }
     };
 
@@ -283,6 +336,7 @@ function OrgStatusEdit_page() {
                         placeholder="Введите причину..."
                     />
                     <div className="popup-buttons">
+
                         <button
                             onClick={handlePopupSubmit}
                             disabled={reason.length < 10}
@@ -291,12 +345,32 @@ function OrgStatusEdit_page() {
                         </button>
                     </div>
                 </div>
-            </div>
-        )
-    }
-</>
-)
-    ;
+
+
+
+            {showPopup && (
+                <div className="popup">
+                    <div className="popup-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <h2>Причина отклонения</h2>
+                        <textarea
+                            value={reason}
+                            onChange={(e) => setReason(e.target.value)}
+                            placeholder="Введите причину..."
+                        />
+                        <div className="popup-buttons">
+                            <button
+                                onClick={handlePopupSubmit}
+                                disabled={reason.length < 10}
+                            >
+                                Отправить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
+    );
 }
 
 export default OrgStatusEdit_page;
