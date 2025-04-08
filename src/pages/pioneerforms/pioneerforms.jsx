@@ -15,13 +15,6 @@ function PioneerForms() {
     { id: "REJECTED", label: "Отклонена" }
   ];
 
-  const forms = [
-    { id: 1, status: "new", date: "10.03.2025", org: "Компания A" },
-    { id: 2, status: "in_progress", date: "08.03.2025", org: "Компания B" },
-    { id: 3, status: "completed", date: "05.03.2025", org: "Компания C" },
-    { id: 4, status: "rejected", date: "02.03.2025", org: "Компания D" },
-  ];
-
   const [selectedStatus, setSelectedStatus] = useState("NEW");
 
   const [connectionRequestGet, setConnectionRequestGet] = useState({
@@ -84,12 +77,10 @@ function PioneerForms() {
 
 
   return (
-
-      <div className="background-container">
-        <div className="maindivorgform">
+        <>
           <div className="headersform">
             <button
-                className="exitbutton"
+                className="exitbuttonform"
                 title="Вернуться в кабинет"
                 onClick={() => navigate("/adminacc")}
             >
@@ -151,10 +142,9 @@ function PioneerForms() {
               </div>
             </div>
           </div>
-
-        </div>
-      </div>
-  );
-}
+          
+</>
+          )}
+      
 
 export default PioneerForms;

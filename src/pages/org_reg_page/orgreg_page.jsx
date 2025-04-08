@@ -188,9 +188,9 @@ function OrgReg_page() {
             const success = await registerorg(formData);
             console.log("SUCCESS", success);
             if (!success) {
-                console.log("ВСЕ ОК");
-            } else {
                 console.log("ВСЕ НЕ ОК");
+            } else {
+                console.log("ВСЕ ОК");
             }
         } catch (error) {
             console.error("Ошибка при регистрации организации:", error);
