@@ -7,39 +7,6 @@ import { getTypeService } from "../../api/TypeService";
 
 function CreateServices_page() {
     const [Sphere, setSphere] = useState([]);
-    const getTypeServices = async () => {
-
-        const data = await getTypeService();
-        const formattedServices = data.map((element) => ({
-                id: element.id,
-                code: element.code,
-                name: element.name
-            
-        })
-        )
-        setSphere(formattedServices)
-    }
-
-    const GetServiceDetail = async () => {
-        const data = await getServiceDetail(localStorage.getItem("jwt"));
-        console.log(data)
-        data.content.map((element) => {
-            const oneservice = {
-                id: element.id,
-                sphere: element.typeOfServiceName,
-                name: element.name,
-                cost: element.cost,
-                time: element.duration
-            }
-            setServices((prev) => [...prev, oneservice])
-        })
-    };
-
-    useEffect(() => {
-        getTypeServices();
-        GetServiceDetail();
-    }, [])
-
     const [services, setServices] = useState([]);
     const [newService, setNewService] = useState({
         sphere: 0,
@@ -47,12 +14,45 @@ function CreateServices_page() {
         cost: '',
         time: ''
     });
-    const [editingService, setEditingService] = useState([]); // Состояние для редактируемой услуги
+
+    const [editingService, setEditingService] = useState(null); // Состояние для редактируемой услуги
     const [errors, setErrors] = useState({
         name: '',
         cost: '',
         time: ''
     });
+
+
+    const getTypeServices = async () => {
+
+        const data = await getTypeService();
+        const formattedServices = data.map((element) => ({
+                id: element.id,
+                code: element.code,
+                name: element.name
+        })
+        )
+        setSphere(formattedServices)
+    }
+
+    const GetServiceDetail = async () => {
+        const data = await getServiceDetail(localStorage.getItem("jwt"));
+        const formattedServices = data.content.map((element) => ({
+            id: element.id,
+            sphere: element.typeOfServiceName,
+            name: element.name,
+            cost: element.cost,
+            time: element.duration  
+    })
+    )
+    setServices(formattedServices)
+    };
+
+    useEffect(() => {
+        getTypeServices();
+        GetServiceDetail();
+    }, [])
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -108,9 +108,9 @@ function CreateServices_page() {
             console.log(data)
             const data2 = await postServiceDetail(data);
             if (data2 == true) {
-                window.reload();
+                window.location.reload();
             } else {
-                window.reload();
+                window.location.reload();
             }
 
             setNewService({ sphere: 'Мойка', name: '', cost: '', time: '' }); // сброс полей
@@ -120,9 +120,9 @@ function CreateServices_page() {
     const deleteService = async (id) => {
         const data = await deleteServiceDetail(id);
         if (data == true) {
-            window.reload();
+            window.location.reload();
         } else {
-            alert("Ошибка сервиса! Перезагрузите страницу!")
+            window.location.reload();
         }
 
     };
@@ -278,7 +278,6 @@ function CreateServices_page() {
                     <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
 
                         {Sphere.map((element) => {
-                            console.log(element)
                             return (
                                 <option value={element.id}>{element.name}</option>
                             )
