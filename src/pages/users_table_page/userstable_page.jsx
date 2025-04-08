@@ -78,7 +78,6 @@ function UsersTable_page() {
                         <th>Отчество</th>
                         <th>E-mail</th>
                         <th>Номер телефона</th>
-                        <th>Доп информация</th>
                         <th>Блокировка</th>
                     </tr>
                     </thead>
@@ -93,7 +92,6 @@ function UsersTable_page() {
                                 <td><input type="text" className="utbitem" value={user.customerPatronymic || ""} disabled /></td>
                                 <td><input type="text" className="utbitem" value={user.customerEmail || ""} disabled /></td>
                                 <td><input type="text" className="utbitem" value={user.customerPhoneNumber || ""} disabled /></td>
-                                <td><input type="text" className="utbitem" value="" disabled /></td>
                                 <td><button className="blockButton" onClick={() => handleDelete(user.customerId)}>X</button></td>
                             </tr>
                         );
