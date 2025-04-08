@@ -41,12 +41,10 @@ function PioneerForms() {
   };
 
   return (
-
-      <div className="background-container">
-        <div className="maindivorgform">
+        <>
           <div className="headersform">
             <button
-                className="exitbutton"
+                className="exitbuttonform"
                 title="Вернуться в кабинет"
                 onClick={() => navigate("/adminacc")}
             >
@@ -102,8 +100,7 @@ function PioneerForms() {
               </table>
             </div>
           </div>
-        </div>
-      </div>
+        </>
   );
 }
 
