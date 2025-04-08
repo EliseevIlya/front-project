@@ -16,10 +16,8 @@ export function postServiceDetail(data){
         addInfo: data.addInfo,
         typeOfService:  data.typeOfServiceName
     }
-    console.log(body)
     axios.post(`${api}/api/service_detail`,body,{headers:headers})
     .then((res)=>{
-        console.log(res)
         return true
     })
     .catch((error)=>{
@@ -52,12 +50,8 @@ export function getServiceDetail(data){
         size: data?.size ?? 10,
         sortBy: data?.sortBy ?? null
     };
-    console.log("DATA",data);
-    console.log("BODY",body)
-
     return axios.post(`${api}/api/service_detail/get_all_services`,body,{headers:headers})
     .then((res)=>{
-        console.log(res)
         return res.data;
 
     })

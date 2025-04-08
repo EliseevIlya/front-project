@@ -33,7 +33,6 @@ export function getTypeService(){
     }
     return axios.get(`${api}/api/type_of_service/get`, {headers:headers})
     .then((res)=>{
-        console.log(res.data)
         return res.data
     })
     .catch((error)=>{
