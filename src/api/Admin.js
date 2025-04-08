@@ -168,25 +168,26 @@ export function putAdminAgregator(jwt, data){
         }
     })
 }
-export function getAdminConnectionRequest(organizationIdgetAdminConnectionRequest, registrationNumbergetAdminConnectionRequest, fromDateBegingetAdminConnectionRequest, toDateBegingetAdminConnectionRequest,
-    fromDateEndgetAdminConnectionRequest, toDateEndgetAdminConnectionRequest, statusgetAdminConnectionRequest, sortBygetAdminConnectionRequest){
+export function getAdminConnectionRequest(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
     const body={
-        organizationId:organizationIdgetAdminConnectionRequest,
-        registrationNumber:registrationNumbergetAdminConnectionRequest,
-        fromDateBegin:fromDateBegingetAdminConnectionRequest,
-        toDateBegin:toDateBegingetAdminConnectionRequest,
-        fromDateEnd:fromDateEndgetAdminConnectionRequest,
-        toDateEnd:toDateEndgetAdminConnectionRequest,
-        status:statusgetAdminConnectionRequest,
-        sortBy:sortBygetAdminConnectionRequest
+        organizationId:data.organizationId ?? null,
+        registrationNumber:data.registrationNumber ?? null ,
+        fromDateBegin:data.fromDateBegin ?? null,
+        toDateBegin:data.toDateBegin ?? null,
+        fromDateEnd:data.fromDateEnd ?? null,
+        toDateEnd:data.toDateEnd ?? null,
+        status:data.status ?? null,
+        sortBy:data.sortBy ?? null
     }
 
-    axios.get(`${api}/api/aggregator/connectionRequest`,headers, body)
-    .then(()=>{
 
+    return  axios.post(`${api}/api/aggregator/connectionRequest`,body,{headers:headers})
+    .then((res)=>{
+        return res.data
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
@@ -198,26 +199,19 @@ export function getAdminConnectionRequest(organizationIdgetAdminConnectionReques
     })
 }
 
-export function putAdminConnectionRequest(idputAdminConnectionRequest, statusputAdminConnectionRequest){
+export function putAdminConnectionRequest(data){
+    const jwt = localStorage.getItem('jwt')
     const headers={
         Authorization: `Bearer ${jwt}`
     }
+    console.log(data)
     const body={
-        id:idputAdminConnectionRequest,
-        status:statusputAdminConnectionRequest
+        id:data.id,
+        status:data.status
     }
     axios.put(`${api}/api/aggregator/connectionRequest`,body,{headers:headers})
     .then(()=>{
-        if (res.status == 200) {
-            console.log('Код успешно отправлен');
-            console.log(res)
-            localStorage.setItem("jwt",res.data)
-            axios.defaults.headers.common["Authorization"] = `Bearer ${res.data}`;
-            return res.data; // Успешная отправка
-        } else {
-            console.error(`Ошибка: сервер вернул статус ${res.status}`);
-            return false; // Неуспешный статус
-        }
+        return "OK"
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
