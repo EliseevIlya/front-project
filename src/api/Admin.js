@@ -83,6 +83,7 @@ export function getAdminOrg(jwt, data){
         responsiblePersonPatronymic:data.responsiblePersonPatronymic || "",
         responsiblePersonEmail:data.responsiblePersonEmail || "",
         responsiblePersonPhoneNumber:data.responsiblePersonPhoneNumber || "",
+        addresses:data.addresses || [],
         typeOfServiceId:data.typeOfServiceId || "",
         page: 0,
         size: 15

@@ -27,6 +27,7 @@ function OrgTable_page() {
                 responsiblePersonPatronymic: "",
                 responsiblePersonEmail: "",
                 responsiblePersonPhoneNumber: "",
+                addresses: [],
                 typeOfServiceId: "",
                 page: 0,
                 size: 15
@@ -98,9 +99,10 @@ function OrgTable_page() {
                             ID {sortAsc ? "▲" : "▼"}
                         </th>
                         <th>Название</th>
-                        <th>Город</th>
                         <th>Фамилия</th>
+                        <th>Имя</th>
                         <th>Email</th>
+                        <th>Номер телефона</th>
                         <th>Блокировка</th>
                     </tr>
                     </thead>
@@ -111,13 +113,15 @@ function OrgTable_page() {
                             <tr key={org.organizationId} onClick={() => handleRowClick(org)}>
                                 <td>{org.organizationId}</td>
                                 <td><input type="text" className="otbitem" value={org.organizationShortName || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.city || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonSurname || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.responsiblePersonName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonEmail || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.responsiblePersonPhone || ""} disabled /></td>
                                 <td><button className="blockButton" onClick={() => handleDelete(org .organizationId)}>X</button></td>
                             </tr>
                         );
                     })}
+
                     </tbody>
                 </table>
             </div>

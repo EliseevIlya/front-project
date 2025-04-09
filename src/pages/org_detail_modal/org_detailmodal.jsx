@@ -20,19 +20,18 @@ const OrgDetailModal = ({ org, onClose, onBlock }) => {
                     </div>
                     <div className="modalColumn">
                         <h3>Адрес</h3>
-                        <p>Тип: {org.typeOfServiceId}</p>
-                        <p>Регион: {org.region}</p>
-                        <p>Город: {org.city}</p>
-                        <p>Улица: {org.street}</p>
-                        <p>Дом: {org.house}</p>
+                        <p>Тип: {org.addresses?.[0]?.addressType === "LEGAL" ? "Юридический" : "Физический"}</p>
+                        <p>Регион: {org.addresses?.[0]?.subjectName || ""}</p>
+                        <p>Город: {org.addresses?.[0]?.cityName || ""}</p>
+                        <p>Улица: {org.addresses?.[0]?.streetName || ""}</p>
+                        <p>Дом: {org.addresses?.[0]?.houseNumber || ""}</p>
                     </div>
                     <div className="modalColumn">
                         <h3>Контактная информация</h3>
                         <p>Фамилия: {org.responsiblePersonSurname}</p>
                         <p>Имя: {org.responsiblePersonName}</p>
                         <p>Email: {org.responsiblePersonEmail}</p>
-                        <p>Номер телефона: {org.responsiblePersonPhoneNumber}</p>
-                        <p>Доп информация: {org.additionalInfo}</p>
+                        <p>Номер телефона: {org.responsiblePersonPhone}</p>
                     </div>
                 </div>
                 <button className="blockButton" onClick={() => onBlock(org.organizationId)}>Заблокировать</button>
