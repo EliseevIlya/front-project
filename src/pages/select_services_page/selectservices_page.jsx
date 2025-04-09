@@ -285,8 +285,8 @@ function SelectServices_Page() {
                 <h1 className="title">ВЫБЕРИТЕ УСЛУГИ</h1>
             </div>
             <div className="main_div"
-                 style={{backgroundColor: serviceType === 'washing' ? 'darkblue' : 'darkgoldenrod'}}>
-                <h1 className="service-title">{serviceType === 'washing' ? 'МОЙКА' : 'ШИНОМОНТАЖ'}</h1>
+                 style={{backgroundColor: serviceType === '1' ? 'darkblue' : 'darkgoldenrod'}}>
+                <h1 className="service-title">{serviceType === '1' ? 'МОЙКА' : 'ШИНОМОНТАЖ'}</h1>
                 <div className="service-selection-div">
                     <div className="left-column">
                         <div className="servdiv">
@@ -396,7 +396,7 @@ function SelectServices_Page() {
                         className="submit-button"
                         onClick={handleSubmit}
                         disabled={isSubmitDisabled}
-                        style={{backgroundColor: serviceType === 'washing' ? 'darkgoldenrod' : 'darkblue'}}
+                        style={{backgroundColor: serviceType === '1' ? 'darkgoldenrod' : 'darkblue'}}
                     >
                         Записаться
                     </button>

@@ -14,7 +14,7 @@ function Servicepage() {
             </div>
             <div className="buttons-containerservice">
                 <div className="wash-card" onClick={() => {
-                    localStorage.setItem("typeOfService", "washing");
+                    localStorage.setItem("typeOfService", "1");
                     navigate("/select_service");
                 }}>
                     <h2>МОЙКА</h2>
@@ -22,7 +22,7 @@ function Servicepage() {
                 </div>
 
                 <div className="tyre-card" onClick={() => {
-                    localStorage.setItem("typeOfService", "tire");
+                    localStorage.setItem("typeOfService", "2");
                     navigate("/select_service");
                 }}>
                     <h2>ШИНОМОНТАЖ</h2>

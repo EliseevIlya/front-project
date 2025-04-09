@@ -35,6 +35,7 @@ const OrgDetailModal = ({ org, onClose, onBlock }) => {
                         <p className="infoModalTable">Отчество: {org.responsiblePersonName}</p>
                         <p className="infoModalTable">Email: {org.responsiblePersonEmail}</p>
                         <p className="infoModalTable">Номер телефона: {org.responsiblePersonPhoneNumber}</p>
+
                     </div>
                 </div>
                 <button className="blockButtonModalTable" onClick={() => onBlock(org.organizationId)}>Заблокировать
