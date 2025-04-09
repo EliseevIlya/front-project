@@ -116,8 +116,8 @@ function OrgTable_page() {
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonSurname || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonEmail || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.responsiblePersonPhone || ""} disabled /></td>
-                                <td><button className="blockButton" onClick={() => handleDelete(org .organizationId)}>X</button></td>
+                                <td><button className="blockButtonTable" onClick={() => handleDelete(org .organizationId)}>X</button></td>
+
                             </tr>
                         );
                     })}

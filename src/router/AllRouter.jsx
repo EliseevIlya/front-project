@@ -18,6 +18,7 @@ import SelectServices_Page from "../pages/select_services_page/selectservices_pa
 import Washingservice from "../pages/washingservice/washingservice.jsx";
 import NotFoundPage from "../pages/404erorr_page/404_page.jsx";
 import OrgDetailModal from "../pages/org_detail_modal/org_detailmodal.jsx";
+import OrgApps_page from "../pages/org_apps_page/orgapps_page.jsx";
 export default function AllRouterrApp(props){
     console.log(props.auth)
     const AllUrl = [
@@ -52,6 +53,10 @@ export default function AllRouterrApp(props){
         {
             url: "/org_info",
             Pages: <OrgInfo_page />
+        },
+        {
+            url: "/org_apps",
+            Pages: <OrgApps_page />
         },
         {
             url: "/org_reg",

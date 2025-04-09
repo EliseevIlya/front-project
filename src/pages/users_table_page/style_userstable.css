@@ -75,28 +75,6 @@ td {
     width: 10vw;
 }
 
-.blockButton {
-    background-color: darkred;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 50px;
-    width: 3vw;
-    height: 3vw;
-    font-size: 2vw;
-}
-
-.blockButton:hover {
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 50px;
-    width: 3vw;
-    height: 3vw;
-    font-size: 2vw;
-}
-
 .loadMoreButton {
     width: 25%;
     height: 10%;

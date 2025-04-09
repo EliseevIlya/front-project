@@ -95,7 +95,7 @@ function Enteraccpage() {
                     <button className="loginpageclosebutton" onClick={closeModal}>×</button>
                 </div>
                 <div className="input-group">
-                    <h3 className="login-enterpage">ЛОГИН :</h3>
+                    <h3 className="login-enterpage">E-Mail:</h3>
                     <input
                         className="login-textfield"
                         placeholder="Введите логин"
