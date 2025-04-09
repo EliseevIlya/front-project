@@ -42,7 +42,7 @@ export function deleteOrganization(){
     })
 }
 
-export function getOrganizationServices(){
+export function getOrganizationServices(jwt){
     const headers={
         Authorization: `Bearer ${jwt}`
     }

@@ -1,17 +1,19 @@
 import axios from "axios"
+import { globalAPI } from "./config.js";
 
-const api = process.env.API
+const api = globalAPI;
 
-export function postTypeService(){
+export function postTypeService(data){
     const body={
 
     }
+    const jwt = localStorage.getItem('jwt')
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.post(`${api}/api/type_of_service`,body,headers)
+    axios.post(`${api}/api/type_of_service`,body,{headers:headers})
     .then(()=>{
-
+        window.reload();
     })
     .catch(()=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
@@ -24,14 +26,16 @@ export function postTypeService(){
 }
 
 export function getTypeService(){
+    const jwt = localStorage.getItem('jwt');
+    
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/type_of_service`,headers)
-    .then(()=>{
-
+    return axios.get(`${api}/api/type_of_service/get`, {headers:headers})
+    .then((res)=>{
+        return res.data
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
@@ -50,7 +54,7 @@ export function putTypeService(){
     }
     axios.put(`${api}/api/type_of_service`,body,headers)
     .then(()=>{
-
+        window.reload();
     })
     .catch(()=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
@@ -71,7 +75,7 @@ export function deleteTypeService(){
     }
     axios.delete(`${api}/api/type_of_service`,body,headers)
     .then(()=>{
-
+        window.reload();
     })
     .catch(()=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
