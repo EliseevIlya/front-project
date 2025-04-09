@@ -70,3 +70,12 @@ body {
     transform: scale(0.95);
     transition: transform 0.1s ease-in;
 }
+
+.mainwheel-image {
+    position: fixed;
+    bottom: -5vw;
+    right: -5vw;
+    width: 20vw !important;
+    height: 20vw !important;
+    opacity: 0.8;
+}

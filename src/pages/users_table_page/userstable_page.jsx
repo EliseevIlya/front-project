@@ -99,7 +99,7 @@ function UsersTable_page() {
                     </tbody>
                 </table>
             </div>
-            {users.length >= 0 && (
+            {users.length >= 15 && (
                 <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
             )}
         </>

@@ -12,6 +12,7 @@
     cursor: pointer;
     width: 5vw;
     margin-left: 5vw;
+    margin-top: 7vh;
 }
 
 .exitbuttonadmin:hover {
@@ -20,11 +21,11 @@
 
 .headeradmintext {
     margin-right: 35vw;
+    margin-bottom: -5vh;
 }
 
 .padmin {
-    margin-top: -5vh;
-    margin-bottom: -3vh;
+    margin-top: -10vh;
 }
 
 .homebuttonadmin {

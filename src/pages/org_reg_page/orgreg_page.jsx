@@ -101,7 +101,7 @@ function OrgReg_page() {
             case "houseNumber":
                 return /^[\dА-Яа-я\-\\/]{1,10}$/.test(value);
             case "addressType":
-                return value !== "";  // Проверка на выбор типа адреса
+                return value !== "";  
             default:
                 return true;
         }
