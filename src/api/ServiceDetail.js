@@ -65,25 +65,34 @@ export function getServiceDetail(data){
     })
 }
 
-export function putServiceDetail(){
+export function putServiceDetail(data){
     const jwt = localStorage.getItem('jwt')
     const headers={
         Authorization: `Bearer ${jwt}`
     }
     const body={
-
+            id: data.id,
+            code: data.code,
+            name:data.name ,
+            cost: data.cost ,
+            duration:data.duration ,
+            addInfo: data.addInfo           
     }
-    axios.put(`${api}/api/service_detail/`,body,{headers:headers})
-    .then(()=>{
+    return axios.put(`${api}/api/service_detail`,body,{headers:headers})
+    .then((res)=>{
+        console.log(res);
+        window.location.reload();
+        return true
 
     })
-    .catch(()=>{
+    .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
         if (error.response) {
             console.log(`Ошибка: ${error.response.data.message}`);
         } else {
             console.log('Произошла ошибка при подключении к серверу.');
         }
+        return false
     })
 }
 

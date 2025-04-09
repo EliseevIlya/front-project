@@ -15,7 +15,13 @@ function CreateServices_page() {
         time: ''
     });
 
-    const [editingService, setEditingService] = useState(null); // Состояние для редактируемой услуги
+    const [editingService, setEditingService] = useState({
+        id:-1,
+        sphere: 1,
+        name: '',
+        cost: '',
+        time: ''
+    }); // Состояние для редактируемой услуги
     const [errors, setErrors] = useState({
         name: '',
         cost: '',
@@ -56,11 +62,16 @@ function CreateServices_page() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (editingService !== null) {
+        if (editingService.id !== -1) {
             const updatedServices = services.map(service =>
-                service.id === editingService ? { ...service, [name]: value } : service
+                service.id === editingService.id ? { ...service, [name]: value } : service
             );
             setServices(updatedServices);
+            setEditingService({
+                ...editingService,
+                [name]: value
+            });
+            console.log(editingService)
         } else {
             setNewService({
                 ...newService,
@@ -68,6 +79,7 @@ function CreateServices_page() {
             });
         }
     };
+
 
     const validateService = () => {
         const errors = {};
@@ -128,23 +140,25 @@ function CreateServices_page() {
     };
 
     const startEditing = (id) => {
-        setEditingService(id); // Устанавливаем ID редактируемой услуги
+        setEditingService({id: id}); // Устанавливаем ID редактируемой услуги
+        console.log(editingService)
     };
 
-    const stopEditing = async (id) => {
+    const stopEditing = async (service) => {
         const data = {
             id: editingService.id,
             code: "SRV-011",
-            name: editingService.name,
-            cost: editingService.cost,
-            duration: editingService.time,
+            name: editingService.name || service.name ,
+            cost: editingService.cost || service.cost,
+            duration: editingService.time || service.time,
             addInfo: "Гарантия 1 год",
-            typeOfServiceName: editingService.sphere
+            typeOfServiceName: editingService.sphere || service.sphere
         }
         console.log(data)
-      //  const data2 = await putServiceDetail(data);
+        const data2 = await putServiceDetail(data);
+        console.log(data2)
 
-        setEditingService(null); // Завершаем редактирование
+        setEditingService(-1); // Завершаем редактирование
     };
 
     const navigate = useNavigate();
@@ -195,27 +209,11 @@ function CreateServices_page() {
                                 <tr key={service.id}>
                                     <td>{service.id}</td>
                                     <td className="tdsphere">
-                                        {editingService === service.id ? (
-                                            <select
-                                                name="sphere"
-                                                value={service.sphere}
-                                                onChange={handleInputChange}
-                                                className="tableselect"
-                                            >
-
-                                                {Sphere.map((element) => {
-                                                    console.log(element)
-                                                    return (
-                                                        <option value={element.id}>{element.name}</option>
-                                                    )
-                                                })}
-                                            </select>
-                                        ) : (
-                                            service.sphere
-                                        )}
+                                    
+                                           {service.sphere}
                                     </td>
                                     <td>
-                                        {editingService === service.id ? (
+                                        {editingService.id === service.id ? (
                                             <input
                                                 type="text"
                                                 name="name"
@@ -228,7 +226,7 @@ function CreateServices_page() {
                                         )}
                                     </td>
                                     <td>
-                                        {editingService === service.id ? (
+                                        {editingService.id === service.id ? (
                                             <input
                                                 type="text"
                                                 name="cost"
@@ -242,7 +240,7 @@ function CreateServices_page() {
                                         )}
                                     </td>
                                     <td>
-                                        {editingService === service.id ? (
+                                        {editingService.id === service.id ? (
                                             <input
                                                 type="text"
                                                 name="time"
@@ -256,8 +254,8 @@ function CreateServices_page() {
                                         )}
                                     </td>
                                     <td>
-                                        {editingService === service.id ? (
-                                            <button className="editbuttonServices" onClick={()=>{stopEditing(service.id)}}>
+                                        {editingService.id === service.id ? (
+                                            <button className="editbuttonServices" onClick={()=>{stopEditing(service)}}>
                                                 <img src='/src/icons/save.png' alt='Save' />
                                             </button>
                                         ) : (
