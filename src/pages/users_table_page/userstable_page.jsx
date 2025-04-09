@@ -92,7 +92,7 @@ function UsersTable_page() {
                                 <td><input type="text" className="utbitem" value={user.customerPatronymic || ""} disabled /></td>
                                 <td><input type="text" className="utbitem" value={user.customerEmail || ""} disabled /></td>
                                 <td><input type="text" className="utbitem" value={user.customerPhoneNumber || ""} disabled /></td>
-                                <td><button className="blockButton" onClick={() => handleDelete(user.customerId)}>X</button></td>
+                                <td><button className="blockButtonTable" onClick={() => handleDelete(user.customerId)}>X</button></td>
                             </tr>
                         );
                     })}

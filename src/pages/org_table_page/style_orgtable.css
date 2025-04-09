@@ -63,26 +63,19 @@ td {
     width: 6vw;
 }
 
-.blockButton {
+.blockButtonTable {
     background-color: darkred;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 30px;
-    width: 2vw;
-    height: 2vw;
-    font-size: 1vw;
+    border-radius: 30px !important;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2vw;
 }
 
-.blockButton:hover {
+.blockButtonTable:hover {
     background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 30px;
-    width: 2vw;
-    height: 2vw;
-    font-size: 1vw;
 }
 
 .loadMoreButton {

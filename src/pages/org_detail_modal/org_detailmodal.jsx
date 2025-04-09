@@ -5,37 +5,40 @@ const OrgDetailModal = ({ org, onClose, onBlock }) => {
     if (!org) return null;
 
     return (
-        <div className="modalOverlay">
-            <div className="modalContent">
-                <button className="closeButton" onClick={onClose}>✖</button>
-                <h2>ID: {org.organizationId}</h2>
-                <div className="modalBody">
+        <div className="modalOverlayTable">
+            <div className="modalContentTable">
+                <div className="modalHeader">
+                    <h2 className="textModalTable">ID Организации: {org.organizationId}</h2>
+                    <button className="closeButtonModalTable" onClick={onClose}>✖</button>
+                </div>
+                <div className="modalBodyTable">
                     <div className="modalColumn">
-                        <h3>Информация</h3>
-                        <p>Полное название: {org.organizationFullName}</p>
-                        <p>Краткое название: {org.organizationShortName}</p>
-                        <p>ИНН: {org.inn}</p>
-                        <p>КПП: {org.kpp}</p>
-                        <p>ОГРН: {org.ogrn}</p>
+                        <h3 className="podtextModalTable">Информация</h3>
+                        <p className="infoModalTable">Полное название: {org.organizationFullName}</p>
+                        <p className="infoModalTable">Краткое название: {org.organizationShortName}</p>
+                        <p className="infoModalTable">ИНН: {org.inn}</p>
+                        <p className="infoModalTable">КПП: {org.kpp}</p>
+                        <p className="infoModalTable">ОГРН: {org.ogrn}</p>
                     </div>
                     <div className="modalColumn">
-                        <h3>Адрес</h3>
-                        <p>Тип: {org.typeOfServiceId}</p>
-                        <p>Регион: {org.region}</p>
-                        <p>Город: {org.city}</p>
-                        <p>Улица: {org.street}</p>
-                        <p>Дом: {org.house}</p>
+                        <h3 className="podtextModalTable">Адрес</h3>
+                        <p className="infoModalTable">Тип: {org.typeOfServiceId}</p>
+                        <p className="infoModalTable">Регион: {org.region}</p>
+                        <p className="infoModalTable">Город: {org.city}</p>
+                        <p className="infoModalTable">Улица: {org.street}</p>
+                        <p className="infoModalTable">Дом: {org.house}</p>
                     </div>
                     <div className="modalColumn">
-                        <h3>Контактная информация</h3>
-                        <p>Фамилия: {org.responsiblePersonSurname}</p>
-                        <p>Имя: {org.responsiblePersonName}</p>
-                        <p>Email: {org.responsiblePersonEmail}</p>
-                        <p>Номер телефона: {org.responsiblePersonPhoneNumber}</p>
-                        <p>Доп информация: {org.additionalInfo}</p>
+                        <h3 className="podtextModalTable">Контактная информация</h3>
+                        <p className="infoModalTable">Фамилия: {org.responsiblePersonSurname}</p>
+                        <p className="infoModalTable">Имя: {org.responsiblePersonName}</p>
+                        <p className="infoModalTable">Отчество: {org.responsiblePersonName}</p>
+                        <p className="infoModalTable">Email: {org.responsiblePersonEmail}</p>
+                        <p className="infoModalTable">Номер телефона: {org.responsiblePersonPhoneNumber}</p>
                     </div>
                 </div>
-                <button className="blockButton" onClick={() => onBlock(org.organizationId)}>Заблокировать</button>
+                <button className="blockButtonModalTable" onClick={() => onBlock(org.organizationId)}>Заблокировать
+                </button>
             </div>
         </div>
     );

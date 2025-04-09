@@ -1,4 +1,4 @@
-.modalOverlay {
+.modalOverlayTable {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,51 +12,94 @@
     overflow: auto !important;
 }
 
-.modalContent {
-    background-color: white;
-    border-radius: 8px;
+.modalContentTable {
+    background-color: #318ea8;
+    border-radius: 20px;
     padding: 20px;
-    width: 80%;
-    max-width: 600px; /* Максимальная ширина модального окна */
+    width: 100%;
+    height: 50vh;
+    max-width: 75vw; /* Максимальная ширина модального окна */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative; /* Для позиционирования кнопки закрытия */
+    position: relative;
 }
 
-.closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.modalHeader {
+    display: grid;
+    grid-template-columns: 80% auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textModalTable {
+   margin-top: 0vh;
+    margin-bottom: 1vh;
+    margin-left: 15vw;
+}
+
+.closeButtonModalTable {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    margin-top: -3vh;
 }
 
-.modalBody {
+.closeButtonModalTable:hover {
+    opacity: 0.8;
+}
+
+.modalBodyTable {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .modalColumn {
     flex: 1; /* Каждая колонка занимает равное пространство */
     margin-right: 10px; /* Отступ между колонками */
+    background-color: white;
+    border-radius: 20px;
+    border: 3px solid black;
+    text-align: left;
+}
+
+.podtextModalTable{
+    font-family: Impact, sans-serif;
+    font-size: calc((2vw + 2vh)/2);
+    font-weight: lighter;
+    text-align: center;
+}
+
+.infoModalTable{
+    margin-left: 1vw;
+    font-size: calc((1.5vw + 1.5vh)/2);
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    font-weight: lighter;
+    width: 90%;
+    padding-left: 0.5vw;
 }
 
 .modalColumn:last-child {
     margin-right: 0; /* Убираем отступ у последней колонки */
 }
 
-.blockButton {
-    background-color: #ff4d4d; /* Цвет кнопки блокировки */
+.blockButtonModalTable {
+    background-color: red; /* Цвет кнопки блокировки */
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 2vh;
+    width: 25%;
+    transition: 0.3s ease-in-out;
 }
 
-.blockButton:hover {
-    background-color: #ff1a1a; /* Цвет кнопки при наведении */
+.blockButtonModalTable:hover {
+    background-color: white; /* Цвет кнопки при наведении */
+    width: 30%;
+    color: red;
+    border: 1px solid red;
 }
