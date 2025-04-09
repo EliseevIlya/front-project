@@ -13,7 +13,7 @@
 
 .h1_deleteaccpage {
     color: #726F6F;
-    font-size: calc((2vw + vh)/2);
+    font-size: calc((2vw + 2vh)/2);
     margin-bottom: 10px;
 }
 
