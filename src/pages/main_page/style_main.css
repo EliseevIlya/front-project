@@ -3,6 +3,9 @@ body {
     text-align: center;
     background: #318ea8;
 }
+body {
+    overflow: auto !important;
+}
 
 @keyframes bubble {
     0% {

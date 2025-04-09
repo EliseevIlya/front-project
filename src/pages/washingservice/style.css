@@ -1,3 +1,7 @@
+body {
+    overflow: auto !important;
+}
+
 .servicepage {
     font-family: Impact, sans-serif;
     background-color: #318ea8;
@@ -6,9 +10,8 @@
     align-items: center;
     justify-content: center;
     height: 50vh;
-    width: 100vw;
+    width: 100v
     padding: 20px;
-    overflow: hidden;
 }
 
 .washingmaindiv {

@@ -1,6 +1,7 @@
-html {
-    overflow-y: auto !important;
+body {
+    overflow: auto !important;
 }
+
 .headersApps {
     display: flex;
     justify-content: space-between;
