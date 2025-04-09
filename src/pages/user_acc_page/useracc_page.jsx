@@ -48,7 +48,7 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
     };
 
     const validatePhone = (phoneValue) => {
-        const isValidPhone = /^(\7|8)\d{10}$/;
+        const isValidPhone = /^(\8|7)\d{10}$/;
         return isValidPhone.test(phoneValue);
     };
 
