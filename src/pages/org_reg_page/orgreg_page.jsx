@@ -221,7 +221,7 @@ function OrgReg_page() {
             <div className="registration-card">
                 {currentStep === 0 && (
                     <div className="orginfo">
-                        <h2>Информация об организации</h2>
+                        <h2 className="textheaderreg">Информация об организации</h2>
                         <input type="text" className="inputinfo" name="fullName" autoComplete="off"
                                placeholder="Полное название"
                                value={formData.fullName}
@@ -245,7 +245,7 @@ function OrgReg_page() {
 
                 {currentStep === 1 && (
                     <div className="addressinfo">
-                        <h2>Адрес</h2>
+                        <h2 className="textheaderreg">Адрес</h2>
                         <select
                             name="addressType"
                             value={formData.address.addressType}
@@ -274,7 +274,7 @@ function OrgReg_page() {
 
                 {currentStep === 2 && (
                     <div className="contactinfo">
-                        <h2>Контактное лицо</h2>
+                        <h2 className="textheaderreg">Контактное лицо</h2>
                         <input type="text" className="inputinfo" name="lastName" autoComplete="off"
                                placeholder="Фамилия"
                                value={formData.lastName} onChange={handleInputChange}/>
