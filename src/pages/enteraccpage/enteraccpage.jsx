@@ -117,7 +117,7 @@ function Enteraccpage() {
 
                     <h3 className="code-enterpage">КОД :</h3>
                     <input
-                        className="code-textfield"
+                        className="inputloginpage"
                         type="text"
                         placeholder="Введите код"
                         value={code}

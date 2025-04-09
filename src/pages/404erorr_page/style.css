@@ -27,9 +27,9 @@
 }
 
 /* Заголовок с анимацией */
-.not-found-content h2 {
+.notfounderrortext {
     font-size: 2vw;
-    color: #333;
+    color: #333 !important;
     animation: textPop 1s ease-in-out;
 }
 
@@ -48,7 +48,7 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 1vw;
+    font-size: 2vw;
     animation: bounce 1.5s infinite;
 }
 
@@ -110,7 +110,11 @@
 .ghost-icon {
     vertical-align: middle;
     animation: ghostAnimation 2s ease-in-out infinite;
+    width: 20vw !important;
+    height: 20vw !important;
+    margin-bottom: -2vw !important;
 }
+
 
 @keyframes ghostAnimation {
     0% {
@@ -123,3 +127,4 @@
         opacity: 0.5;
     }
 }
+
