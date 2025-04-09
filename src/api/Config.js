@@ -1,2 +1,2 @@
 // config.js
-export const globalAPI = "http://localhost:8581";
+export const globalAPI = "http://localhost:8080";
