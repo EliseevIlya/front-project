@@ -1,8 +1,12 @@
+body {
+    overflow: auto !important;
+}
+
 .headersservice {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Позволяет адаптироваться при сужении */
+    flex-wrap: wrap;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -16,7 +20,6 @@
         text-align: center;
         flex: 1;
     }
-
     .accbuttonApps {
         border: none;
         background: none;
@@ -41,6 +44,12 @@
     .accbuttonApps:hover {
         opacity: 50%;
     }
+}
+
+h2 {
+    color: white !important;
+    font-size: calc((3vw + 3vh)/2) !important;
+    font-weight: lighter;
 }
 
 .buttons-containerservice {

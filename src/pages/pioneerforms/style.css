@@ -1,3 +1,7 @@
+body {
+  overflow: auto !important;
+}
+
 .maindivorgform {
   font-family: Impact, sans-serif;
   height: 100vh;

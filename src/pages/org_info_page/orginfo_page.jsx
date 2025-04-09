@@ -134,7 +134,7 @@ function OrgInfo_page() {
                     className={`card ${activeCard !== "org" ? "disabled-card" : ""}`}
                     onClick={() => handleCardClick("org")}
                 >
-                    <h2>Информация об организации</h2>
+                    <h2 className="titleorgcard">Информация об организации</h2>
                     <div className="orginfoitemSC">
                         <label>Полное название:</label>
                         <input
@@ -207,7 +207,7 @@ function OrgInfo_page() {
                     className={`card ${activeCard !== "address" ? "disabled-card" : ""}`}
                     onClick={() => handleCardClick("address")}
                 >
-                    <h2>Адрес</h2>
+                    <h2 className="titleorgcard">Адрес</h2>
                     <div className="orginfoitemSC">
                         <label>Тип адреса:</label>
                         <select
@@ -277,7 +277,7 @@ function OrgInfo_page() {
                     className={`card ${activeCard !== "contact" ? "disabled-card" : ""}`}
                     onClick={() => handleCardClick("contact")}
                 >
-                    <h2>Контактное лицо</h2>
+                    <h2 className="titleorgcard">Контактное лицо</h2>
                     <div className="contactinfoitemSC">
                         <label>Фамилия:</label>
                         <input

@@ -1,3 +1,7 @@
+body {
+    overflow: auto !important;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -21,10 +25,10 @@
     max-width: 500px;
     height: 95vh;
     max-height: 90vh;
-    overflow-y: auto;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    overflow: auto !important;
 }
 
 
@@ -37,9 +41,6 @@
     margin-bottom: -3vh;
 }
 
-.input-container {
-
-}
 
 .input-group {
     display: flex;
@@ -93,11 +94,11 @@
     color: #318EA8 !important;
 }
 
-a {
+.areg {
     color: #318EA8 !important;
 }
 
-a:hover {
+.areg:hover {
     color: darkorange !important;
 }
 
@@ -138,7 +139,6 @@ button {
 }
 
 .createaccbutton {
-    margin-bottom: 15px;
     border-radius: 10px;
     padding: 15px 25px;
     font-size: 1.3vw;

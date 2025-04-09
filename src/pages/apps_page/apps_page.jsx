@@ -98,7 +98,7 @@ function Apps_page() {
                             </div>
                         ))
                     ) : (
-                        <p className="no-apps-message">У вас пока нет активных заявок!</p>
+                        <div className="no-apps-message">У вас пока нет активных заявок!</div>
                     )}
                 </div>
                 {apps.length >= 3 && (

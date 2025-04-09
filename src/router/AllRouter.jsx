@@ -17,6 +17,7 @@ import PioneerForms from "../pages/pioneerforms/pioneerforms.jsx";
 import SelectServices_Page from "../pages/select_services_page/selectservices_page.jsx";
 import Washingservice from "../pages/washingservice/washingservice.jsx";
 import NotFoundPage from "../pages/404erorr_page/404_page.jsx";
+import OrgDetailModal from "../pages/org_detail_modal/org_detailmodal.jsx";
 export default function AllRouterrApp(props){
     console.log(props.auth)
     const AllUrl = [
@@ -84,6 +85,7 @@ export default function AllRouterrApp(props){
             url: "/table_user",
             Pages: <UsersTable_page />
         },
+
         {
             url: "/user",
             Pages: <UserAcc_page />

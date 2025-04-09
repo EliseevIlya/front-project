@@ -1,6 +1,7 @@
-html {
-    overflow-y: auto !important;
+body {
+    overflow: auto !important;
 }
+
 .headersApps {
     display: flex;
     justify-content: space-between;
@@ -66,46 +67,58 @@ html {
     }
 }
 
-
 .apps-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-}
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5vw;
-    justify-items: center;
-}
-
-.card {
-    width: 100%;
-    max-width: 30vw;
-    background: darkorange;
-    padding: 20px;
-    border-radius: 10px;
-    min-height: 25vh;
     display: flex;
     flex-direction: column;
-    text-align: left;
-    .carddata{
+    align-items: center;
+
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5vw;
+        justify-items: center;
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 30vw;
+        background: darkorange;
+        padding: 20px;
+        border-radius: 10px;
+        min-height: 25vh;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .carddata {
         color: rgb(255, 255, 255);
         font-size: 1.5vw;
         font-family: Impact, sans-serif;
         font-weight: lighter;
     }
+
     .cardhead {
         text-align: center;
         font-family: Impact, sans-serif;
         color: black;
     }
-}
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .no-apps-message {
+        position: absolute;
+        text-align: center;
+        color: white;
+        font-size: calc((5vw + 5vh)/2);
+    }
 }
 
 .load-more {
@@ -130,13 +143,6 @@ html {
     background-color: darkorange;
     border: none;
     border-radius: 20px;
-}
-
-.no-apps-message {
-    font-size: calc((7vw + 7vh)/2);
-    color: white;
-    margin-left: 20vw;
-    margin-top: -5vh;
 }
 
 .modalapp {
@@ -254,7 +260,8 @@ ul {
 .modal-buttons {
     display: flex;
     justify-content: center;
-    .deleteappbutton{
+
+    .deleteappbutton {
         font-family: Impact, sans-serif;
         font-size: 2vw;
         width: 20vw;
@@ -265,7 +272,8 @@ ul {
         background-color: darkred;
         transition: background-color 0.3s, transform 0.1s ease-out;
     }
-    .deleteappbutton:hover{
+
+    .deleteappbutton:hover {
 
         color: darkred;
         background-color: white;

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import "./style_orgtable.css";
 import { useNavigate } from "react-router-dom";
-import {getAdminOrg} from "../../api/Admin.js";
-import {deleteAdminOrg} from "../../api/Admin.js";
+import { getAdminOrg, deleteAdminOrg } from "../../api/Admin.js";
+import OrgDetailModal from "../org_detail_modal/org_detailmodal.jsx";
 
 function OrgTable_page() {
     const [rows, setRows] = useState(5);
     const [org, setOrg] = useState([]);
     const [sortAsc, setSortAsc] = useState(true);
+    const [selectedOrg, setSelectedOrg] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         document.body.style.backgroundColor = '#f0f0f0';
@@ -46,11 +48,7 @@ function OrgTable_page() {
     };
 
     const sortedOrg = [...org].sort((a, b) => {
-        if (sortAsc) {
-            return a.organizationId - b.organizationId;
-        } else {
-            return b.organizationId - a.organizationId;
-        }
+        return sortAsc ? a.organizationId - b.organizationId : b.organizationId - a.organizationId;
     });
 
     const handleDelete = (organizationId) => {
@@ -61,14 +59,30 @@ function OrgTable_page() {
             deleteAdminOrg(jwt, organizationId)
                 .then(() => {
                     setOrg(prev => prev.filter(org => org.organizationId !== organizationId));
-                })
+                });
         }
+    };
+
+    const handleRowClick = (org) => {
+        setSelectedOrg(org);
+        setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setSelectedOrg(null);
+    };
+
+    const handleBlock = (organizationId) => {
+        // Implement the block functionality here
+        alert(`Заблокировать организацию с ID: ${organizationId}`);
+        handleCloseModal();
     };
 
     const navigate = useNavigate();
 
     return (
-            <>
+        <>
             <div className="headersTable">
                 <button className="exitbuttonTable" title="Вернуться в кабинет" onClick={() => navigate("/adminacc")}>
                     <img src="/src/icons/exitblack.png" alt="Exit" />
@@ -83,15 +97,10 @@ function OrgTable_page() {
                         <th onClick={handleSortById} style={{ cursor: "pointer" }}>
                             ID {sortAsc ? "▲" : "▼"}
                         </th>
-                        <th>Полное</th>
-                        <th>Краткое</th>
-                        <th>ИНН</th>
-                        <th>КПП</th>
-                        <th>ОГРН</th>
+                        <th>Название</th>
+                        <th>Город</th>
                         <th>Фамилия</th>
-                        <th>Имя</th>
                         <th>Email</th>
-                        <th>Номер тел.</th>
                         <th>Блокировка</th>
                     </tr>
                     </thead>
@@ -99,28 +108,30 @@ function OrgTable_page() {
                     {sortedOrg.map((org, index) => {
                         if (index >= rows) return null;
                         return (
-                            <tr key={org.organizationId}>
+                            <tr key={org.organizationId} onClick={() => handleRowClick(org)}>
                                 <td>{org.organizationId}</td>
-                                <td><input type="text" className="otbitem" value={org.organizationFullName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.organizationShortName || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.inn || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.kpp || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.ogrn || ""} disabled /></td>
+                                <td><input type="text" className="otbitem" value={org.city || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonSurname || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.responsiblePersonName || ""} disabled /></td>
                                 <td><input type="text" className="otbitem" value={org.responsiblePersonEmail || ""} disabled /></td>
-                                <td><input type="text" className="otbitem" value={org.responsiblePersonPhone || ""} disabled /></td>
-                                <td><button className="blockButton" onClick={() => handleDelete(org.organizationId)}>X</button></td>
+                                <td><button className="blockButton" onClick={() => handleDelete(org .organizationId)}>X</button></td>
                             </tr>
                         );
                     })}
                     </tbody>
                 </table>
             </div>
-                {org.length >= 15 && (
-                    <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
-                )}
-            </>
+            {org.length >= 15 && (
+                <button className="loadMoreButton" onClick={loadMoreRows}>Загрузить еще</button>
+            )}
+            {modalOpen && (
+                <OrgDetailModal
+                    org={selectedOrg}
+                    onClose={handleCloseModal}
+                    onBlock={handleBlock}
+                />
+            )}
+        </>
     );
 }
 

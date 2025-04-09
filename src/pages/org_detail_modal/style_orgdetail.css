@@ -1,0 +1,62 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Убедитесь, что модальное окно выше других элементов */
+    overflow: auto !important;
+}
+
+.modalContent {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px; /* Максимальная ширина модального окна */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* Для позиционирования кнопки закрытия */
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modalBody {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modalColumn {
+    flex: 1; /* Каждая колонка занимает равное пространство */
+    margin-right: 10px; /* Отступ между колонками */
+}
+
+.modalColumn:last-child {
+    margin-right: 0; /* Убираем отступ у последней колонки */
+}
+
+.blockButton {
+    background-color: #ff4d4d; /* Цвет кнопки блокировки */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.blockButton:hover {
+    background-color: #ff1a1a; /* Цвет кнопки при наведении */
+}

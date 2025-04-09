@@ -1,5 +1,5 @@
-.usersTableBody {
-    background-color: rgba(190, 228, 253, 0.5);
+body {
+    overflow: auto !important;
 }
 
 .headersTable {

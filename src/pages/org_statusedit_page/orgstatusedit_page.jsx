@@ -11,7 +11,6 @@ function OrgStatusEdit_page() {
     const [reviewDate, setReviewDate] = useState("");
     const [isTransitioning, setIsTransitioning] = useState(false);
     const navigate = useNavigate();
-
     const [oranizationData, setOranizationData] = useState({
         fullName: "",
         shortName: "",
@@ -29,8 +28,10 @@ function OrgStatusEdit_page() {
         connectionRequestAddInfo: "",
         jwtToken: ""
     });
+
         const data2 = {
             id: localStorage.getItem("connectionRequestId")
+
 
         }
     // Функция для получения текущей даты в нужном формате
@@ -104,6 +105,7 @@ function OrgStatusEdit_page() {
 
     const handleSubmit = async () => {
         if (status === "Отклонена") {
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"), "Исполнения");
             const data = {
                 id:localStorage.getItem("connectionRequestId"),
                 status: "REJECTED"
@@ -276,7 +278,7 @@ function OrgStatusEdit_page() {
                             className={`card ${cardOrder.indexOf(cardIndex) === 1 ? 'center' : cardOrder.indexOf(cardIndex) === 0 ? 'left' : 'right'}`}
                             onClick={() => handleCardClick(cardIndex)}
                         >
-                            <h2>{cardData.title}</h2>
+                            <h2 className="titleorgcard">{cardData.title}</h2>
                             {cardData.content}
                         </div>
                     );

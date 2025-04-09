@@ -75,7 +75,7 @@ function OrgReg_page() {
 
     const validateField = (name, value) => {
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
-        const isValidText = /^[А-Яа-яёЁ\s-]{2,}$/;
+        const isValidText = /^[А-Яа-яёЁa-zA-Z0-9\s\-\"\'_]+$/;
 
         switch (name) {
             case "fullName":
@@ -101,7 +101,7 @@ function OrgReg_page() {
             case "houseNumber":
                 return /^[\dА-Яа-я\-\\/]{1,10}$/.test(value);
             case "addressType":
-                return value !== "";  // Проверка на выбор типа адреса
+                return value !== "";  
             default:
                 return true;
         }
@@ -110,21 +110,21 @@ function OrgReg_page() {
     const getErrorMessage = (name) => {
         switch (name) {
             case "fullName":
-                return "Полное название должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "shortName":
-                return "Сокращенное название должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "subjectName":
-                return "Название субъекта РФ должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "cityName":
-                return "Город должен содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "streetName":
-                return "Улица должна содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "houseNumber":
                 return "Дом должен содержать цифры или буквы (до 10 символов)";
             case "lastName":
-                return "Фамилия должна содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "firstName":
-                return "Имя должно содержать минимум 2 русские буквы";
+                return "Проверьте, заполнены ли все поля!";
             case "inn":
                 return "ИНН должен содержать ровно 10 цифр";
             case "kpp":
@@ -221,7 +221,7 @@ function OrgReg_page() {
             <div className="registration-card">
                 {currentStep === 0 && (
                     <div className="orginfo">
-                        <h2>Информация об организации:</h2>
+                        <h2 className="textheaderreg">Информация об организации</h2>
                         <input type="text" className="inputinfo" name="fullName" autoComplete="off"
                                placeholder="Полное название"
                                value={formData.fullName}
@@ -245,7 +245,7 @@ function OrgReg_page() {
 
                 {currentStep === 1 && (
                     <div className="addressinfo">
-                        <h2>Адрес:</h2>
+                        <h2 className="textheaderreg">Адрес</h2>
                         <select
                             name="addressType"
                             value={formData.address.addressType}
@@ -274,7 +274,7 @@ function OrgReg_page() {
 
                 {currentStep === 2 && (
                     <div className="contactinfo">
-                        <h2>Контактное лицо:</h2>
+                        <h2 className="textheaderreg">Контактное лицо</h2>
                         <input type="text" className="inputinfo" name="lastName" autoComplete="off"
                                placeholder="Фамилия"
                                value={formData.lastName} onChange={handleInputChange}/>

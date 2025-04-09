@@ -1,15 +1,8 @@
-html {
-    overflow-x: hidden;
-    img {
-        width: 2vw;
-        height: 2vw;
-    }
-}
-
 body {
     font-family: Impact, sans-serif;
     text-align: center;
     background: #318ea8;
+    overflow: auto !important;
 }
 
 .headersorgSC {
@@ -110,7 +103,7 @@ body {
 .card {
     background: white;
     border: 10px solid black;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5) !important;
     border-radius: 20px;
     padding: 10px;
     width: 28%;
@@ -132,11 +125,11 @@ body {
     z-index: 2;
 }
 
-h2 {
+.titleorgcard {
     margin-bottom: 1vh;
-    font-size: calc((2vw + 2vh) / 2);
+    font-size: calc((2vw + 2vh) / 2) !important;
     font-weight: lighter;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8) !important;
     text-align: center;
 }
 

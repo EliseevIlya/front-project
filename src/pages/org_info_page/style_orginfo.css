@@ -1,15 +1,8 @@
-html {
-    overflow-x: hidden;
-    img {
-        width: 2vw;
-        height: 2vw;
-    }
-}
-
 body {
     font-family: Impact, sans-serif;
     text-align: center;
     background: #318ea8;
+        overflow: auto !important;
 }
 
 .info_headersorg {

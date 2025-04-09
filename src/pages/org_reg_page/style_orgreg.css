@@ -1,11 +1,8 @@
-html {
-    overflow-y: scroll !important;
-}
-
 body {
     font-family: Impact, sans-serif;
     text-align: center;
     background: #318ea8;
+    overflow: auto !important;
 }
 
 .headersorg {
@@ -46,10 +43,12 @@ body {
     border-radius: 10px;
 }
 
-h2 {
+.textheaderreg {
+    margin-top: 0vh;
     margin-bottom: 2vh;
     font-size: calc((3vw + 3vh) / 2);
     color: white;
+    text-align: center;
 }
 
 .orginfoitem, .contactinfo > div, .addressinfo > div {
@@ -174,8 +173,9 @@ h2 {
 }
 
 .confirmlabel {
+    font-weight: lighter;
     color: white;
-    font-size: calc((1vw + 1vh) / 2) !important;
+    font-size: calc((1.5vw + 1.5vh) / 2) !important;
 }
 
 a {
