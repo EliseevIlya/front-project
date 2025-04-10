@@ -14,11 +14,15 @@ body {
     height: 20%;
 }
 
+.headerservtext {
+    text-align: center !important;
+}
+
 .textServices {
-    margin-right: 3vw;
-    margin-top: -5vh;
+    margin-top: -7vh;
     font-weight: lighter;
-    font-size: 4vw;
+    font-size: 2vw !important;
+    margin-left: -1vw;
     color: white;
 }
 
@@ -49,7 +53,6 @@ body {
     color: rgb(255, 255, 255);
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 35vw;
     font-size: calc((2vw + 2vh)/2);
     margin-top: -5vh;
 }

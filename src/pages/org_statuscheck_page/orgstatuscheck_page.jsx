@@ -102,9 +102,6 @@ function OrgStatusCheck_page() {
                     <img src="/src/icons/exit.png" alt="Exit" />
                 </button>
                 <h1 className="textSC">ПРОВЕРКА ЗАЯВКИ</h1>
-                <button className="deletebuttonSC" title="Удалить заявку" onClick={() => setShowDeleteModal(true)}>
-                    <img src="/src/icons/close.png" alt="Delete" />
-                </button>
             </div>
 
             <div className="statusplate">

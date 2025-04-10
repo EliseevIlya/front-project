@@ -4,6 +4,8 @@ import './style_orgdetail.css';
 const OrgDetailModal = ({ org, onClose, onBlock }) => {
     if (!org) return null;
 
+    console.log(org)
+    
     return (
         <div className="modalOverlayTable">
             <div className="modalContentTable">
@@ -32,7 +34,7 @@ const OrgDetailModal = ({ org, onClose, onBlock }) => {
                         <h3 className="podtextModalTable">Контактная информация</h3>
                         <p className="infoModalTable">Фамилия: {org.responsiblePersonSurname}</p>
                         <p className="infoModalTable">Имя: {org.responsiblePersonName}</p>
-                        <p className="infoModalTable">Отчество: {org.responsiblePersonName}</p>
+                        <p className="infoModalTable">Отчество: {org.responsiblePersonPatronymic}</p>
                         <p className="infoModalTable">Email: {org.responsiblePersonEmail}</p>
                         <p className="infoModalTable">Номер телефона: {org.responsiblePersonPhone}</p>
 

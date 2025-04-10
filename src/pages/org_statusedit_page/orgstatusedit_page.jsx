@@ -105,20 +105,21 @@ function OrgStatusEdit_page() {
 
     const handleSubmit = async () => {
         if (status === "Отклонена") {
-            await putAdminConnectionRequest(localStorage.getItem("connectionRequestid"), "Исполнения");
+            await putAdminConnectionRequest(localStorage.getItem("connectionRequestId"), "Исполнения");
             const data = {
-                id:localStorage.getItem("connectionRequestId"),
+                id: localStorage.getItem("connectionRequestId"),
                 status: "REJECTED"
-            }
+            };
             await putAdminConnectionRequest(data);
-            navigate("/org_apps");
+            // Перенаправляем на страницу apps_check сразу
+            navigate("/apps_check");
         } else if (status === "Исполнена") {
             const data = {
-                id:localStorage.getItem("connectionRequestId"),
+                id: localStorage.getItem("connectionRequestId"),
                 status: "COMPLETED"
-            }
+            };
             await putAdminConnectionRequest(data);
-            navigate("/org_apps");
+            navigate("/apps_check");
         } else {
             alert("Заявка отправлена!");
         }

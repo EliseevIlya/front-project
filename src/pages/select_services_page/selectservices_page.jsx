@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "./style_selectservices.css";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 import Select from "react-select";
-import { getCustomerServiceTypeOrg, requestCreateCustomer } from "../../api/Customer.js";
-import { getServiceDetail } from "../../api/ServiceDetail.js";
+import {getCustomerServiceTypeOrg, requestCreateCustomer} from "../../api/Customer.js";
+import {getServiceDetail} from "../../api/ServiceDetail.js";
 import Modal from "react-modal";
 
 function SelectServices_Page() {
@@ -180,16 +180,38 @@ function SelectServices_Page() {
         setTotalCost(cost);
     }, [selectedServices]);
 
-    const generateTimeOptions = () => {
+    const generateTodayTimeOptions = () => {
         const times = [];
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+
         for (let hour = 10; hour <= 22; hour++) {
             const time = `${hour.toString().padStart(2, '0')}:00`;
+
+            // Проверяем только для сегодняшней даты
+            if (now.getDate() === new Date().getDate()) {
+                // Если это сегодня и время уже прошло, пропускаем
+                if (hour < currentHour || (hour === currentHour && currentMinute >= 0)) {
+                    continue;
+                }
+            }
+
             times.push(time);
         }
         return times;
     };
 
-    const timeOptions = generateTimeOptions();
+    const generateTomorrowTimeOptions = () => {
+        const times = [];
+        for (let hour = 10; hour <= 22; hour++) {
+            times.push(`${hour.toString().padStart(2, '0')}:00`);
+        }
+        return times;
+    };
+
+    const timeOptionsToday = generateTodayTimeOptions();
+    const timeOptionsTomorrow = generateTomorrowTimeOptions();
 
     function formatLocalDate(date) {
         const pad = num => String(num).padStart(2, '0');
@@ -280,7 +302,7 @@ function SelectServices_Page() {
         <div className="selectservicepage">
             <div className="header">
                 <button className="exitbutton " title="Выбор услуг" onClick={() => navigate("/service")}>
-                    <img src="/src/icons/exit.png" alt="Выбор услуг" />
+                    <img src="/src/icons/exit.png" alt="Выбор услуг"/>
                 </button>
                 <h1 className="title">ВЫБЕРИТЕ УСЛУГИ</h1>
             </div>
@@ -358,19 +380,17 @@ function SelectServices_Page() {
                             <select className="select" value={selectedTimeToday}
                                     onChange={(e) => handleTimeTodayChange(e.target.value)}>
                                 <option className="option" value="">Выберите</option>
-                                {timeOptions.map((time) => (
+                                {timeOptionsToday.map((time) => (
                                     <option className="option" key={time} value={time}>
                                         {time}
                                     </option>
                                 ))}
                             </select>
-                        </div>
-                        <div className="servicediv">
                             <label className="choose">Завтра:</label>
                             <select className="select" value={selectedTimeTomorrow}
                                     onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
                                 <option className="option" value="">Выберите</option>
-                                {timeOptions.map((time) => (
+                                {timeOptionsTomorrow.map((time) => (
                                     <option className="option" key={time} value={time}>
                                         {time}
                                     </option>
@@ -387,7 +407,7 @@ function SelectServices_Page() {
                     ></textarea>
                 </div>
 
-                <div className="button-container">
+                <div className="button-containerserv">
                     <div className="total-container">
                         <label className="total">ИТОГО:</label>
                         <input className="total-amount" type="number" value={totalCost} disabled/>
@@ -396,7 +416,6 @@ function SelectServices_Page() {
                         className="submit-button"
                         onClick={handleSubmit}
                         disabled={isSubmitDisabled}
-                        style={{backgroundColor: serviceType === '1' ? 'darkgoldenrod' : 'darkblue'}}
                     >
                         Записаться
                     </button>
@@ -405,16 +424,23 @@ function SelectServices_Page() {
 
             <Modal
                 isOpen={isModalOpen}
-                className="modal-content"
-                overlayClassName="modal-overlay"
+                className="modal-content-confirm"
+                overlayClassName="modal-overlay-confirm"
                 ariaHideApp={false}
             >
                 <div className="modal-overlay-confirm">
                     <div className="modal-content-confirm">
                         <h1>ПОДТВЕРЖДЕНИЕ ЗАПИСИ</h1>
-                        <h3 className="confirmation-text">
-                            ЖДЕМ ВАС {selectedTimeToday ? "Сегодня" : "Завтра"} В {selectedTimeToday || selectedTimeTomorrow} ПО АДРЕСУ: {selectedOrganizationId ? `${selectedOrganizationId.label}` : "Не указано"}
-                        </h3>
+                        <div className="confirmation-text">
+                            <p className="confirmation-infotext">
+                                ЖДЕМ
+                                ВАС {selectedTimeToday ? "Сегодня" : "Завтра"} В {selectedTimeToday || selectedTimeTomorrow}
+                            </p>
+                            <p className="confirmation-infotext">
+                                ПО
+                                АДРЕСУ: {selectedOrganizationId ? `${selectedOrganizationId.label}` : "Не указано"}
+                            </p>
+                        </div>
                         <button className="confirmation-button" onClick={handleCloseModal}>ОК</button>
                     </div>
                 </div>

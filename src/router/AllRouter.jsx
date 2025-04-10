@@ -15,7 +15,6 @@ import OrgTable_page from "../pages/org_table_page/orgtable_page.jsx";
 import UsersTable_page from "../pages/users_table_page/userstable_page.jsx";
 import PioneerForms from "../pages/pioneerforms/pioneerforms.jsx";
 import SelectServices_Page from "../pages/select_services_page/selectservices_page.jsx";
-import Washingservice from "../pages/washingservice/washingservice.jsx";
 import NotFoundPage from "../pages/404erorr_page/404_page.jsx";
 import OrgDetailModal from "../pages/org_detail_modal/org_detailmodal.jsx";
 import OrgApps_page from "../pages/org_apps_page/orgapps_page.jsx";
@@ -47,10 +46,6 @@ export default function AllRouterrApp(props){
             Pages: <SelectServices_Page />
         },
         {
-            url: "/washing",
-            Pages: <Washingservice />
-        },
-        {
             url: "/org_info",
             Pages: <OrgInfo_page />
         },
@@ -75,7 +70,7 @@ export default function AllRouterrApp(props){
             Pages: <AdminAcc_page />
         },
         {
-            url: "/org_apps",
+            url: "/apps_check",
             Pages: <PioneerForms />
         },
         {

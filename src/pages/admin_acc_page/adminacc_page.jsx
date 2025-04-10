@@ -182,7 +182,7 @@ function AdminAcc_page() {
                 <div className="control">
                     <div className="controlitem">
                         <label>Заявки: </label>
-                        <button onClick={() => navigate("/org_apps")}>Перейти</button>
+                        <button onClick={() => navigate("/apps_check")}>Перейти</button>
                     </div>
                     <div className="controlitem">
                         <label>Пользователи: </label>

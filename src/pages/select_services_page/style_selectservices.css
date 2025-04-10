@@ -1,5 +1,5 @@
 body {
-    overflow: auto !important;
+
 }
 
 .selectservicepage {
@@ -9,9 +9,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw !important;
-    height: 50vh !important;
     padding: 20px;
+    overflow-x: hidden !important;
 }
 
 .main_div {
@@ -20,17 +19,17 @@ body {
     align-items: center;
     border-radius: 10px;
     width: 50vw;
-    height: 40vh;
+    height: 50vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     padding: 3%;
     margin-top: 5vh;
+    overflow-y: auto;
 }
 
 .header {
     display: grid;
     grid-template-columns: 10vw 90vw;
     padding: 10px;
-    margin-top: 10vh;
 }
 
 .exitbutton {
@@ -102,25 +101,31 @@ body {
     font-weight: bold;
 }
 
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
 .services-container {
     max-height: 150px;
     overflow-y: auto;
+    overflow-x: auto !important;
     border: none;
     padding: 10px;
     border-radius: 20px;
+}
+
+.button-containerserv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 3px solid white;
+    padding-top: 3vh;
+    width: auto;
+    height: 5vh;
+    margin-top: 3vh;
 }
 
 .total-container {
     display: flex;
     align-items: center;
     margin-right: 20vw;
+    margin-top: 1vh;
 }
 
 .total {
@@ -140,21 +145,22 @@ body {
 
 .submit-button {
     padding: 10px 20px;
-    background-color: darkorange; /* Default button color */
-    color: white;
+    background-color: whitesmoke;
+    color: darkcyan;
     width: 10vw;
     height: 5vh;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: 0.3s;
-    margin-left: 5vw;
+    transition: 0.3s ease-in-out;
 }
 
 .submit-button:hover {
-    background-color: white;
-    color: darkorange;
+    background-color: darkcyan;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
 }
+
 
 .submit-button:disabled,
 .submit-button:disabled:hover {
@@ -165,6 +171,7 @@ body {
 .dopinfoserv {
     color: white ;
     margin-top: 1vh;
+    text-align: left;
 }
 
 .dopinfotextserv {
@@ -175,14 +182,16 @@ body {
 }
 
 .dopinfoitemserv{
-    width: 30vw;
-    height: 4vh;
-    overflow-y: auto !important;
-    margin-right: 17vw;
+    width: 20vw;
+    height: 5vh;
+    font-size: calc((1.5vw + 1.5vh)/2);
+    border-radius: 10px;
+    overflow-y: auto;
+    resize: none;
 }
 
 .dopinfoitemserv:focus{
-    height: 4vh;
+    height: 5vh;
 }
 
 @media (max-width: 768px) {
@@ -243,24 +252,30 @@ body {
 }
 
 .modal-overlay-confirm {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed; /* Use fixed positioning */
+    top: 0; /* Cover the entire viewport */
+    left: 0; /* Cover the entire viewport */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensure it overlays other content */
 }
 
 .modal-content-confirm {
     font-weight: lighter;
     font-family: Impact, sans-serif;
-    font-size: calc((1.2vw + 1.2vh)/2);
-    background: white !important;
+    font-size: calc((1.2vw + 1.2vh) / 2);
+    background: white; /* No need for !important if you set it correctly */
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    color: black !important;
+    color: black;
+    width: 30vw; /* Width of the modal */
+    max-width: 500px; /* Optional: max width for larger screens */
 }
 
 .modal-content-confirm h1 {
@@ -273,35 +288,27 @@ body {
     color: black;
 }
 
+.confirmation-infotext {
+    background-color: whitesmoke;
+    border: 1px solid darkcyan;
+    border-radius: 10px;
+    padding: 10px; /* Add some padding for better appearance */
+}
+
 .confirmation-button {
     width: 10vw;
-    background-color: darkblue; /* Default button color for modal */
+    background-color: darkcyan; /* Default button color for modal */
     border: none;
     padding: 10px 20px;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
 }
 
 .confirmation-button:hover {
-    opacity: 0.8;
-}
-
-/* Specific styles for washing service */
-.washing .main-div {
-    background-color: #1d3085; /* Dark blue for washing */
-}
-
-.washing .modal-content-confirm h1 {
-    color: #1d3085; /* Dark blue for modal title */
-}
-
-/* Specific styles for tire service */
-.tire .main-div {
-    background-color: darkorange; /* Dark orange for tire service */
-}
-
-.tire .modal-content-confirm h1 {
-    color: darkorange; /* Dark orange for modal title */
+    background-color: white;
+    color: darkcyan;
+    border: 1px solid darkcyan;
+    width: 15vw; /* Optional: change width on hover */
 }
