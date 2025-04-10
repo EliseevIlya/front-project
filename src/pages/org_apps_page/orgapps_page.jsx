@@ -2,39 +2,36 @@ import "./style_orgapps.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Deleterequest from "../deleterequestpage/deleterequestpage";
-import { getCustomerServiceRequest, deleteServiceRequest } from "../../api/Customer";
+import { getOrganizationServicesRequests } from "../../api/Org.js";
 
 function OrgApps_page() {
     const [apps, setApps] = useState([]);
     const [selectedApp, setSelectedApp] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [organizationId, setOrganizationId] = useState(null);
-    const [startDate, setStartDate] = useState("");
     const [size, setSize] = useState(3);
 
     const fetchData = async () => {
         try {
-            const jwt = localStorage.getItem("jwt"); // Получаем токен
-            const response = await getCustomerServiceRequest(jwt, organizationId, startDate, size);
+            const response = await getOrganizationServicesRequests();
             console.log(response);
 
-            // Преобразуем данные в нужный формат
-            return response.map(item => ({
-                id: item.id,
-                date: item.dateService.split("T")[0], // Оставляем только дату
-                time: item.dateService.split("T")[1], // Время отдельно
-                organization: item.organization.fullName,
-                address: item.organization.addresses.length > 0
-                    ? `${item.organization.addresses[0].cityName}, ${item.organization.addresses[0].streetName}, ${item.organization.addresses[0].houseNumber}`
-                    : "Адрес не указан",
-                services: item.serviceDetails.map(service => ({
-                    name: service.name,
-                    cost: service.cost,
-                    duration: service.duration
-                })),
-                cost: item.serviceDetails.reduce((total, service) => total + service.cost, 0) // Считаем общую стоимость
-            }));
+            return response.map(item => {
+                const [date, duration] = item.dateService.split(" ");
 
+                return {
+                    userid: item.customerOrganizationResponseDTO.id,
+                    surname: item.customerOrganizationResponseDTO.surname,
+                    name: item.customerOrganizationResponseDTO.name,
+                    patronymic: item.customerOrganizationResponseDTO.patronymic,
+                    phoneNumber: item.customerOrganizationResponseDTO.phoneNumber,
+                    dateService: date,
+                    time: duration,
+                    id: item.id,
+                    addInfo: item.addInfo ?? "Доп. информация отсутствует",
+                    serviceDetails: item.serviceDetails,
+                    cost: item.serviceDetails.reduce((total, service) => total + service.cost, 0)
+                };
+            });
         } catch (error) {
             console.error("Ошибка загрузки данных:", error);
             return [];
@@ -44,12 +41,12 @@ function OrgApps_page() {
     useEffect(() => {
         const fetchNewData = async () => {
             const newData = await fetchData();
-            setApps(newData);
+            setApps(newData.slice(0, size));
             console.log("Заявки обновлены");
         };
 
         fetchNewData();
-    }, [size]); // Теперь fetchData() вызывается после обновления size
+    }, [size]);
 
     const loadMoreApps = () => {
         setSize(prevSize => prevSize + 3);
@@ -60,20 +57,8 @@ function OrgApps_page() {
         setShowDeleteModal(false);
     };
 
-    const handleDeleteClick = () => {
-        setShowDeleteModal(true);
-    };
-
-    const deleteApp = async () => {
-        const isDeleted = await deleteServiceRequest(localStorage.getItem("jwt"), selectedApp.id);
-        if (isDeleted) {
-            closeModal();
-            setSelectedApp(null);
-            window.location.reload();
-        }
-    };
-
     const navigate = useNavigate();
+
     return (
         <>
             <div className="headersApps">
@@ -89,8 +74,8 @@ function OrgApps_page() {
                         apps.map((app) => (
                             <div key={app.id} className="cardApps" onClick={() => setSelectedApp(app)}>
                                 <h2 className="cardAppshead">Заявка №{app.id}</h2>
-                                <p className="pAppsinfo"><strong className="cardAppsdata">Дата:</strong> {app.date}</p>
-                                <p className="pAppsinfo"><strong className="cardAppsdata">Тип услуги:</strong> {app.organization}</p>
+                               <p className="pAppsinfo"><strong className="cardAppsdata">Дата:</strong> {app.dateService}</p>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Клиент:</strong> {app.surname} {app.name}</p>
                                 <p className="pAppsinfo"><strong className="cardAppsdata">Стоимость:</strong> {app.cost}₽</p>
                             </div>
                         ))
@@ -111,19 +96,19 @@ function OrgApps_page() {
 
                         <div className="datetime">
                             <label className="label-inline">
-                                <strong className="infoapp">Дата:</strong> {selectedApp.date}
+                                <strong className="infoapp">Дата:</strong> {selectedApp.dateService}
                             </label>
                             <label className="label-inline">
                                 <strong className="infoapp">Время:</strong> {selectedApp.time}
                             </label>
                         </div>
 
-                        <div className="orgdata">
+                        <div className="clientdata">
                             <label className="label-inline">
-                                <strong className="infoapp">Организация:</strong> {selectedApp.organization}
+                                <strong className="infoapp">Клиент:</strong> {selectedApp.surname} {selectedApp.name} {selectedApp.patronymic}
                             </label>
                             <label className="label-inline">
-                                <strong className="infoapp">Адрес:</strong> {selectedApp.address}
+                                <strong className="infoapp">Телефон:</strong> {selectedApp.phoneNumber}
                             </label>
                         </div>
 
@@ -132,18 +117,19 @@ function OrgApps_page() {
                                 <strong className="infoapp">Выбранные услуги:</strong>
                             </label>
                             <ul>
-                                {selectedApp.services.map((service, index) => (
+                                {selectedApp.serviceDetails.map((service, index) => (
                                     <li key={index}>{service.name}: {service.cost}₽ - {service.duration} мин.</li>
                                 ))}
                             </ul>
                         </div>
+
                         <div className="pricedata">
+                            <label className="label-inline">
+                                <strong className="infoapp">Доп. информация:</strong> {selectedApp.addInfo}
+                            </label>
                             <label className="label-inline">
                                 <strong className="infoapp">Итоговая стоимость:</strong> {selectedApp.cost}₽
                             </label>
-                        </div>
-                        <div className="modal-buttons">
-                            <button className="deleteappbutton" onClick={handleDeleteClick}>Удалить заявку</button>
                         </div>
                     </div>
                 </div>
@@ -152,7 +138,7 @@ function OrgApps_page() {
             {showDeleteModal && (
                 <Deleterequest
                     onClose={closeModal}
-                    onDelete={deleteApp}
+                    onDelete={() => console.log("Заявка удалена (заглушка)")}
                 />
             )}
         </>

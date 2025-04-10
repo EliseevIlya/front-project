@@ -102,7 +102,7 @@ export function deleteServiceDetail(id){
     const headers={
         Authorization: `Bearer ${jwt}`
     }
-    axios.delete(`${api}/api/service_detail?serviceId=${id}`,{headers: headers})
+     return axios.delete(`${api}/api/service_detail?serviceId=${id}`,{headers: headers})
     .then(()=>{
         return true;
     })
