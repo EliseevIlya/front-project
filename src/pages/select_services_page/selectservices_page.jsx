@@ -180,7 +180,7 @@ function SelectServices_Page() {
         setTotalCost(cost);
     }, [selectedServices]);
 
-    const generateTimeOptions = () => {
+    const generateTodayTimeOptions = () => {
         const times = [];
         const now = new Date();
         const currentHour = now.getHours();
@@ -188,20 +188,30 @@ function SelectServices_Page() {
 
         for (let hour = 10; hour <= 22; hour++) {
             const time = `${hour.toString().padStart(2, '0')}:00`;
-            // Если это сегодня и время уже прошло, пропускаем
-            if (now.getDate() === new Date().getDate() && hour < currentHour) {
-                continue;
+
+            // Проверяем только для сегодняшней даты
+            if (now.getDate() === new Date().getDate()) {
+                // Если это сегодня и время уже прошло, пропускаем
+                if (hour < currentHour || (hour === currentHour && currentMinute >= 0)) {
+                    continue;
+                }
             }
-            // Если это сегодня и час равен текущему часу, проверяем минуты
-            if (now.getDate() === new Date().getDate() && hour === currentHour && currentMinute >= 0) {
-                continue;
-            }
+
             times.push(time);
         }
         return times;
     };
 
-    const timeOptions = generateTimeOptions();
+    const generateTomorrowTimeOptions = () => {
+        const times = [];
+        for (let hour = 10; hour <= 22; hour++) {
+            times.push(`${hour.toString().padStart(2, '0')}:00`);
+        }
+        return times;
+    };
+
+    const timeOptionsToday = generateTodayTimeOptions();
+    const timeOptionsTomorrow = generateTomorrowTimeOptions();
 
     function formatLocalDate(date) {
         const pad = num => String(num).padStart(2, '0');
@@ -370,19 +380,17 @@ function SelectServices_Page() {
                             <select className="select" value={selectedTimeToday}
                                     onChange={(e) => handleTimeTodayChange(e.target.value)}>
                                 <option className="option" value="">Выберите</option>
-                                {timeOptions.map((time) => (
+                                {timeOptionsToday.map((time) => (
                                     <option className="option" key={time} value={time}>
                                         {time}
                                     </option>
                                 ))}
                             </select>
-                        </div>
-                        <div className="servicediv">
                             <label className="choose">Завтра:</label>
                             <select className="select" value={selectedTimeTomorrow}
                                     onChange={(e) => handleTimeTomorrowChange(e.target.value)}>
                                 <option className="option" value="">Выберите</option>
-                                {timeOptions.map((time) => (
+                                {timeOptionsTomorrow.map((time) => (
                                     <option className="option" key={time} value={time}>
                                         {time}
                                     </option>
@@ -399,7 +407,7 @@ function SelectServices_Page() {
                     ></textarea>
                 </div>
 
-                <div className="button-container">
+                <div className="button-containerserv">
                     <div className="total-container">
                         <label className="total">ИТОГО:</label>
                         <input className="total-amount" type="number" value={totalCost} disabled/>

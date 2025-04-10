@@ -131,6 +131,7 @@ body {
     font-weight: lighter;
     color: rgba(0, 0, 0, 0.8) !important;
     text-align: center;
+    border-bottom: 1px solid black;
 }
 
 .orginfoitemSC {
