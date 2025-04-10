@@ -70,7 +70,7 @@ export default function AllRouterrApp(props){
             Pages: <AdminAcc_page />
         },
         {
-            url: "/org_apps",
+            url: "/apps_check",
             Pages: <PioneerForms />
         },
         {

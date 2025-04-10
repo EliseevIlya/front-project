@@ -102,7 +102,6 @@ function OrgTable_page() {
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Email</th>
-                        <th>Номер телефона</th>
                         <th>Блокировка</th>
                     </tr>
                     </thead>
