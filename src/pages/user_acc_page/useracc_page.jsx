@@ -155,7 +155,6 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
                         <label>ФАМИЛИЯ*:</label>
                         <input
                             type="text"
-                            placeholder="ИВАНОВ"
                             disabled={!isEditing}
                             value={surname}
                             onChange={handleSurnameChange}
@@ -165,7 +164,6 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
                         <label>ИМЯ*:</label>
                         <input
                             type="text"
-                            placeholder="ИВАН"
                             disabled={!isEditing}
                             value={name}
                             onChange={handleNameChange}
@@ -173,7 +171,7 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
                     </div>
                     <div className="infoitem">
                         <label>ОТЧЕСТВО:</label>
-                        <input type="text" placeholder="..." disabled={!isEditing}
+                        <input type="text" disabled={!isEditing}
                         value={patronymic}
                                onChange={handlePatronymicChange}
                         />
@@ -182,7 +180,7 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
                         <label>НОМЕР ТЕЛ.*:</label>
                         <input
                             type="text"
-                            placeholder="79990001110"
+                            placeholder="79000000001"
                             disabled={!isEditing}
                             value={phone}
                             onChange={handlePhoneChange}
@@ -192,7 +190,7 @@ import { getCustomer,updateCustomer } from "../../api/Customer";
                         <label>EMAIL*:</label>
                         <input
                             type="text"
-                            placeholder="ivanov@mail.ru"
+                            placeholder="mail@mail.ru"
                             disabled={!isEditing}
                             value={email}
                             onChange={handleEmailChange}

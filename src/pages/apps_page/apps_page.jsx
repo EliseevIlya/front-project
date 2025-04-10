@@ -90,11 +90,11 @@ function Apps_page() {
                 <div className="cards-grid">
                     {apps.length > 0 ? (
                         apps.map((app) => (
-                            <div key={app.id} className="card" onClick={() => setSelectedApp(app)}>
-                                <h2 className="cardhead">Заявка №{app.id}</h2>
-                                <p><strong className="carddata">Дата:</strong> {app.date}</p>
-                                <p><strong className="carddata">Организация:</strong> {app.organization}</p>
-                                <p><strong className="carddata">Стоимость:</strong> {app.cost}₽</p>
+                            <div key={app.id} className="cardApps" onClick={() => setSelectedApp(app)}>
+                                <h2 className="cardAppshead">Заявка №{app.id}</h2>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Дата:</strong> {app.date}</p>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Организация:</strong> {app.organization}</p>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Стоимость:</strong> {app.cost}₽</p>
                             </div>
                         ))
                     ) : (
@@ -107,10 +107,10 @@ function Apps_page() {
             </div>
 
             {selectedApp && (
-                <div className="modalapp">
-                    <div className="modalapp-content">
-                        <span className="closemodalapp" onClick={() => setSelectedApp(null)}>&times;</span>
-                        <h2 className="textmodalapp">Заявка №{selectedApp.id}</h2>
+                <div className="modalApp">
+                    <div className="modalApp-content">
+                        <span className="closemodalApp" onClick={() => setSelectedApp(null)}>&times;</span>
+                        <h2 className="textmodalApp">Заявка №{selectedApp.id}</h2>
 
                         <div className="datetime">
                             <label className="label-inline">
@@ -146,7 +146,7 @@ function Apps_page() {
                             </label>
                         </div>
                         <div className="modal-buttons">
-                            <button className="deleteappbutton" onClick={handleDeleteClick}>Удалить заявку</button>
+                            <button className="deleteappbuttonApps" onClick={handleDeleteClick}>Удалить</button>
                         </div>
                     </div>
                 </div>

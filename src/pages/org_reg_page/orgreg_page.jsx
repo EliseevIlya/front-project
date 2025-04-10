@@ -36,6 +36,29 @@ function OrgReg_page() {
 
     const navigate = useNavigate();
 
+    const calculateProgress = () => {
+        const totalFields = 16; // Общее количество полей для заполнения (12 полей + 1 чекбокс + 4 поля адреса)
+        let filledFields = 0;
+        for (const field in formData) {
+            if (touched[field] && validateField(field, formData[field])) {
+                filledFields++;
+            }
+        }
+        if (formData.acceptedPolicy) {
+            filledFields++;
+        }
+        if (formData.address.addressType) {
+            filledFields++;
+        }
+        const addressFields = ['subjectName', 'cityName', 'streetName', 'houseNumber'];
+        addressFields.forEach(field => {
+            if (touched[field] && validateField(field, formData.address[field])) {
+                filledFields++;
+            }
+        });
+        return (filledFields / totalFields) * 100;
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
@@ -315,7 +338,7 @@ function OrgReg_page() {
                     {/* Progress Bar */}
                     <div className="progress-bar">
                         <div className="progress-fill"
-                             style={{ width: currentStep === 0 ? '0%' : `${(currentStep) * 33.33}%` }}></div>
+                             style={{ width: `${calculateProgress()}%` }}></div>
                     </div>
 
                     {currentStep < 2 ? (

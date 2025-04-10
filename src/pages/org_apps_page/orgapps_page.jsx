@@ -80,18 +80,18 @@ function OrgApps_page() {
                 <button className="accbuttonApps" title="Личный кабинет" onClick={() => navigate("/create_services")}>
                     <img src="/src/icons/orgprofile.png" alt="Личный кабинет" />
                 </button>
-                <h1 className="textOrgApp">ЗАЯВКИ</h1>
+                <h1 className="textOrgApp">АКТИВНЫЕ ЗАЯВКИ</h1>
             </div>
 
             <div className="apps-container">
                 <div className="cards-grid">
                     {apps.length > 0 ? (
                         apps.map((app) => (
-                            <div key={app.id} className="card" onClick={() => setSelectedApp(app)}>
-                                <h2 className="cardhead">Заявка №{app.id}</h2>
-                                <p><strong className="carddata">Дата:</strong> {app.date}</p>
-                                <p><strong className="carddata">Тип услуги:</strong> {app.organization}</p>
-                                <p><strong className="carddata">Стоимость:</strong> {app.cost}₽</p>
+                            <div key={app.id} className="cardApps" onClick={() => setSelectedApp(app)}>
+                                <h2 className="cardAppshead">Заявка №{app.id}</h2>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Дата:</strong> {app.date}</p>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Тип услуги:</strong> {app.organization}</p>
+                                <p className="pAppsinfo"><strong className="cardAppsdata">Стоимость:</strong> {app.cost}₽</p>
                             </div>
                         ))
                     ) : (
@@ -104,10 +104,10 @@ function OrgApps_page() {
             </div>
 
             {selectedApp && (
-                <div className="modalapp">
-                    <div className="modalapp-content">
-                        <span className="closemodalapp" onClick={() => setSelectedApp(null)}>&times;</span>
-                        <h2 className="textmodalapp">Заявка №{selectedApp.id}</h2>
+                <div className="modalApp">
+                    <div className="modalАpp-content">
+                        <span className="closemodalАpp" onClick={() => setSelectedApp(null)}>&times;</span>
+                        <h2 className="textmodalАpp">Заявка №{selectedApp.id}</h2>
 
                         <div className="datetime">
                             <label className="label-inline">
