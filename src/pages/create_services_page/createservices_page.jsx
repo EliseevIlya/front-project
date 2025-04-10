@@ -133,10 +133,10 @@ function CreateServices_page() {
         const data = await deleteServiceDetail(id);
         if (data == true) {
             window.location.reload();
-        } else {
+        }
+        else {
             window.location.reload();
         }
-
     };
 
     const startEditing = (id) => {
@@ -185,7 +185,7 @@ function CreateServices_page() {
                 </button>
             </div>
             <h2 className="textServices">Личный кабинет</h2>
-            <input type="text" className="companyinfo" disabled value="Авангард г.Самара ул.Пушкина 6"/>
+            <input type="text" className="companyinfo" disabled/>
             <button className="infoButton" onClick={() => navigate("/org_info")}>Подробная информация</button>
             <div className="servicesTable">
                 <table className="tableServ">
@@ -276,14 +276,18 @@ function CreateServices_page() {
                 </table>
 
                 <div className="newServiceForm">
-                    <select name="sphere" value={newService.sphere} onChange={handleInputChange}>
-
+                    <select name="sphere" value={newService.sphere || ""} onChange={handleInputChange}>
+                        <option value="" disabled>Выберите</option>
                         {Sphere.map((element) => {
                             return (
-                                <option value={element.id}>{element.name}</option>
+                                <option key={element.id} value={element.id}>
+                                    {element.name}
+                                </option>
                             )
                         })}
                     </select>
+
+
                     <div className="input-group">
                         <input
                             className="inputserviceinfo"

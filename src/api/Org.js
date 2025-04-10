@@ -107,12 +107,15 @@ export function updateOrganization(jwt, data){
 }
 
 export function getOrganizationServicesRequests(){
+    const jwt = localStorage.getItem("jwt");
     const headers={
-
+        Authorization: `Bearer ${jwt}`
     }
-    axios.get(`${api}/api/organization/get_organization_services_requests`,headers)
-    .then(()=>{
 
+     return axios.get(`${api}/api/organization/get_organization_services_requests`,{headers:headers})
+    .then((res)=>{
+        console.log(res.data)
+        return res.data.content
     })
     .catch((error)=>{
         console.error('Ошибка при отправке запроса:', error.response ? error.response.data : error.message);
